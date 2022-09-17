@@ -1,5 +1,4 @@
-Microsoft (R) Macro Assembler Version 5.10                  9/2/22 19:42:42
-
+Microsoft (R) Macro Assembler Version 5.10                  9/15/22 16:16:41
                                                              Page     1-1
 
 
@@ -40,14 +39,14 @@
 				; Начало сегмента данных
  0000				Greeting  LABEL  BYTE                          
 				; Текст  приветствия
- 0000  82 A0 E1 20 AF E0	   DB 'Вас приветствует ст.гр.4350 - Иванов И.И
+ 0000  82 A0 E1 20 AF E0	   DB 'Вас приветствует ст.гр.1304 - Шаврин А.П
 				.',13,10,'$'
        A8 A2 A5 E2 E1 E2	
        A2 E3 A5 E2 20 E1	
-       E2 2E A3 E0 2E 34	
-       33 35 30 20 2D 20	
-       88 A2 A0 AD AE A2	
-       20 88 2E 88 2E 0D	
+       E2 2E A3 E0 2E 31	
+       33 30 34 20 2D 20	
+       98 A0 A2 E0 A8 AD	
+       20 80 2E 8F 2E 0D	
        0A 24			
 				   .CODE                                ; Начал
 				о сегмента кода
@@ -57,8 +56,7 @@
 				нта данных
  0005  BA 0000 R		   mov  dx,OFFSET Greeting              ; Загру
 				зка в dx смещения
-Microsoft (R) Macro Assembler Version 5.10                  9/2/22 19:42:42
-
+Microsoft (R) Macro Assembler Version 5.10                  9/15/22 16:16:41
                                                              Page     1-2
 
 
@@ -74,8 +72,7 @@
  000E  CD 21			   int  21h                             ; завер
 				шение программы и выход в ДОС
 				   END
-Microsoft (R) Macro Assembler Version 5.10                  9/2/22 19:42:42
-
+Microsoft (R) Macro Assembler Version 5.10                  9/15/22 16:16:41
                                                              Symbols-1
 
 
@@ -108,7 +105,7 @@ GREETING . . . . . . . . . . . .  	L BYTE	0000	_DATA
      33 Total   Lines
      19 Symbols
 
-  48006 + 461301 Bytes symbol space free
+  47994 + 461313 Bytes symbol space free
 
       0 Warning Errors
       0 Severe  Errors
