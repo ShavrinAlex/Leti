@@ -1,4 +1,5 @@
 #include "Map.h"
+#include <iostream>
 #define WIDTH 10
 #define HEIGHT 10
 
@@ -15,23 +16,26 @@ Map::Map(int width, int height){
 };
 
 //create map
-CellMatrix Map::create_map(){
-    map.reserve(height);
+CellMatrix* Map::create_map(){
+    map = new CellMatrix;
+    map->reserve(height);
     for (int i = 0; i < height; i++){
-        map.push_back(std::vector <Cell*> (width));
+        std::vector <Cell*> *line = new std::vector <Cell*>[width];
+        map->push_back(line);
         for (int j = 0; j < width; j++){
             //create cell
-            Cell *cl = new Cell(j, i, 10.0, false);
-            map.back().emplace_back(cl);
+            Cell *cl = new Cell(j, i, 50.0, false);
+            map->back()->push_back(cl);
         }
     }
+    std::cout<<"map was created\n";
     return map;
 };
 
 //draw map
 void Map::draw(sf::RenderWindow *window){
-    for (auto row: map){
-        for (auto cell: row){
+    for (auto row: *map){
+        for (auto cell: *row){
             cell->draw(window);
         }
     }

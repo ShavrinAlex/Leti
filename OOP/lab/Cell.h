@@ -6,7 +6,7 @@ class Cell{
         float pos_x, pos_y, side;
         sf::Color color;
         bool is_bussy;
-        sf::RectangleShape *cell;
+        sf::RectangleShape* cell;
     public:
         //initialization
         Cell(int num_x, int num_y, float side, bool is_bussy);

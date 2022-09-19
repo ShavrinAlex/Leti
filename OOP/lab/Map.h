@@ -2,16 +2,16 @@
 #include "Cell.h"
 #include <vector>
 
-typedef std::vector < std::vector <Cell*> > CellMatrix;
+typedef std::vector < std::vector <Cell*>* > CellMatrix;
 
 class Map{
     private:
         int width, height;
-        CellMatrix map;
+        CellMatrix *map;
     public:
         Map();
         Map(int width, int height); 
-        CellMatrix create_map();
+        CellMatrix* create_map();
         void draw(sf::RenderWindow *window);
         ~Map();
 };

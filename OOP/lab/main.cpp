@@ -1,9 +1,10 @@
 #include "Map.h"
 
 
+
 int main(){
-    sf::RenderWindow window(sf::VideoMode(640, 480), "My game");
-    Map mp;
+    sf::RenderWindow window(sf::VideoMode(500, 500), "My game");
+    Map mp = Map();
     
     while (window.isOpen()){
         sf::Event event;

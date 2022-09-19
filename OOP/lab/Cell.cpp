@@ -1,4 +1,5 @@
 #include "Cell.h"
+#include <iostream>
 
 //initialization
 Cell::Cell(int num_x, int num_y, float side, bool is_bussy){
@@ -15,7 +16,7 @@ sf::RectangleShape* Cell::create_cell(){
     sf::RectangleShape *cell = new sf::RectangleShape(sf::Vector2f(side, side));
     cell->setPosition(pos_x, pos_y);
     cell->setFillColor(color);
-    cell->setOutlineThickness(1);
+    cell->setOutlineThickness(-1);
     cell->setOutlineColor(sf::Color::Red);
     return cell;
 };
