@@ -5,11 +5,11 @@ class Cell{
     private:
         float pos_x, pos_y, side;
         sf::Color color;
-        bool is_bussy;
+        bool is_busy;
         sf::RectangleShape* cell;
     public:
         //initialization
-        Cell(int num_x, int num_y, float side, bool is_bussy);
+        Cell(int num_x, int num_y, float side, bool is_busy);
 
         //create cell
         sf::RectangleShape* create_cell();
@@ -25,7 +25,7 @@ class Cell{
 
         //side
         float get_side();
-        /*
+        
         //check hero is here
         bool hero_is_here(Player *hero);
         
@@ -33,8 +33,11 @@ class Cell{
         bool is_busy_cell();
 
         //reaction on hero
-        void reaction_on_hero(Player *hero);
-        */
+        void reaction_on_hero();
+
+        //update
+        void update(Player *hero);
+
         //destructor
         ~Cell(){};
 };

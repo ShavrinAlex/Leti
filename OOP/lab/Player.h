@@ -38,7 +38,7 @@ class Player{
         
         //speed
         int get_speed();
-        void set_speed(int speed);
+        void set_speed(float speed);
 
         //direction
         int get_direction();
@@ -46,6 +46,9 @@ class Player{
 
         //update
         void update(float time);
+
+        //draw hero
+        void draw(sf::RenderWindow *window);
         
         //destructor
         ~Player(){};

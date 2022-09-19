@@ -1,7 +1,8 @@
 #include "Map.h"
 #include <iostream>
-#define WIDTH 10
-#define HEIGHT 10
+#define WIDTH 5
+#define HEIGHT 5
+#define SIDE 98.f
 
 //initialization
 Map::Map(){
@@ -24,11 +25,10 @@ CellMatrix* Map::create_map(){
         map->push_back(line);
         for (int j = 0; j < width; j++){
             //create cell
-            Cell *cl = new Cell(j, i, 50.0, false);
+            Cell *cl = new Cell(j, i, SIDE, false);
             map->back()->push_back(cl);
         }
     }
-    std::cout<<"map was created\n";
     return map;
 };
 
@@ -37,6 +37,15 @@ void Map::draw(sf::RenderWindow *window){
     for (auto row: *map){
         for (auto cell: *row){
             cell->draw(window);
+        }
+    }
+};
+
+//update
+void Map::update(Player *hero){
+    for (auto row: *map){
+        for (auto cell: *row){
+            cell->update(hero);
         }
     }
 };
