@@ -1,6 +1,12 @@
+#pragma once
 #include "Position.h"
+#include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "Map.h"
+#include "Drawer.h"
+#include "CommandReader.h"
 
-class App{
+class MainLoop{
     private:
         int map_height;
         int map_width;
@@ -13,5 +19,5 @@ class App{
         void setMapSize(int h, int w);
 
         //executor main loop
-        int executor();
+        int executor(sf::RenderWindow * window);
 };

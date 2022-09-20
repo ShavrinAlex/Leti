@@ -1,17 +1,20 @@
 #include "CommandReader.h"
 
 //read kyboard
-std::string CommandReader::getPressedKey(){
+int CommandReader::getPressedKey(){
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))){
-        return "Right";
+        return 'D';
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))){
-        return "Left";
+        return 'A';
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))){
-        return "Up";
+        return 'W';
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))){
-        return "Down";
+        return 'S';
+    }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))){
+        return 'Q';
     }
 };

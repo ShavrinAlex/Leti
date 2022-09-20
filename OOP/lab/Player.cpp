@@ -2,9 +2,7 @@
 #include <iostream>
 
 //initialization
-Player::Player(sf::String file_image, int pos_x, int pos_y, float width, float height){
-    this->pos_x = pos_x;
-    this->pos_y = pos_y;
+Player::Player(sf::String file_image, float width, float height){
     this->width = width;
     this->height = height;
     this->file_image;
@@ -16,31 +14,136 @@ Player::Player(sf::String file_image, int pos_x, int pos_y, float width, float h
     sprite.setTextureRect(sf::IntRect(this->width, this->height, this->width, this->height));
 };
 
+//get draw object
+sf::Sprite* Player::getDrawObject(){
+    return &sprite;
+};
+
+ //set controller
+ void Player::setController(Controller *controller){
+    this->controller = controller;
+ };
+
+//move player
+void Player::move(int direction){
+    //std::cout<<"player move\n";
+    controller->movePlayer(direction);
+};
+
 //health
-int Player::get_health(){
+int Player::getHealth(){
     return health;
 };
-void Player::set_health(int health){
+void Player::setHealth(int health){
     this->health = health;
 };
 
 //armor
-int Player::get_armor(){
+int Player::getArmor(){
     return armor;
 };
-void Player::set_armor(int armor){
+void Player::setArmor(int armor){
     this->armor = armor;
 };
 
 //ammunition
-int Player::get_ammunition(){
+int Player::getAmmunition(){
     return ammunition;
 };
-void Player::set_ammunition(int ammunition){
+void Player::setAmmunition(int ammunition){
     this->ammunition = ammunition;
 };
 
+//width and height
+float Player::getWidth(){
+    return width;
+};
+float Player::getHeight(){
+    return height;
+};
+
+//speed
+int Player::getSpeed(){
+    return speed;
+};
+void Player::setSpeed(float speed){
+    this->speed = speed;
+};
+
+//direction
+int Player::getDirection(){
+    return direction;
+};
+void Player::setDirection(int direction){
+    this->direction = direction;
+};
+
+//delta
+int Player::getDeltaX(){
+    return delta_x;
+};
+int Player::getDeltaY(){
+    return delta_y;
+};
+void Player::setDeltaX(int delta_x){
+    this->delta_x = delta_x;
+};
+void Player::setDeltaY(int delta_y){
+    this->delta_y = delta_y;
+};
+
+//draw hero
+void Player::draw(sf::RenderWindow *window){
+    window->draw(sprite);
+};
+
+ /*
+//update
+void Player::update(float time, Map* M){
+   
+    //std::cout<<"update\n";
+    switch (direction){
+        case 0:
+            //std::cout<<"case 0"<<'\n';
+            delta_x = speed;
+            //std::cout<<speed<<'\n';
+            delta_y = 0;
+            break;
+        case 1:
+            //std::cout<<"case 1"<<'\n';
+            delta_x = -speed;
+            delta_y = 0;
+            break;
+        case 2:
+            //std::cout<<"case 2"<<'\n';
+            delta_x = 0;
+            delta_y = speed;
+            break;
+        case 3:
+            //std::cout<<"case 3"<<'\n';
+            delta_x = 0;
+            delta_y = -speed;
+            break;
+    }
+    float new_pos_x = pos_x + delta_x * time;
+    float new_pos_y = pos_y + delta_y * time;
+
+    if (check_ability_to_move(new_pos_x, new_pos_y, M)){
+        pos_x += delta_x * time;
+        pos_y += delta_y * time;
+    }
+    //std::cout<<"time = "<<time<<" dx = "<<delta_x<<" dy = "<<delta_y<<'\n';
+    
+    //std::cout<<pos_x<<' '<<pos_y<<'\n';
+
+    speed = 0;
+    sprite.setPosition(pos_x, pos_y);
+   
+};
+ */
+
 //position x and y
+/*
 float Player::get_position_x(){
     return pos_x;
 };
@@ -53,37 +156,9 @@ void Player::set_position_x(float pos_x){
 void Player::set_position_y(float pos_y){
     this->pos_y = pos_y;
 };
-
-//width and height
-float Player::get_width(){
-    return width;
-};
-float Player::get_height(){
-    return height;
-};
-
-//speed
-int Player::get_speed(){
-    return speed;
-};
-void Player::set_speed(float speed){
-    this->speed = speed;
-};
-
-//direction
-int Player::get_direction(){
-    return direction;
-};
-void Player::set_direction(int direction){
-    this->direction = direction;
-};
-
-//draw hero
-void Player::draw(sf::RenderWindow *window){
-    window->draw(sprite);
-};
-
+*/
 //check ability to move
+/*
 bool Player::check_ability_to_move(float new_pos_x, float new_pos_y, Map *M){
     bool ability = true;
     switch (direction){
@@ -150,44 +225,4 @@ bool Player::check_ability_to_move(float new_pos_x, float new_pos_y, Map *M){
     }
     return ability;
 };
-
-//update
-void Player::update(float time, Map* M){
-    //std::cout<<"update\n";
-    switch (direction){
-        case 0:
-            //std::cout<<"case 0"<<'\n';
-            delta_x = speed;
-            //std::cout<<speed<<'\n';
-            delta_y = 0;
-            break;
-        case 1:
-            //std::cout<<"case 1"<<'\n';
-            delta_x = -speed;
-            delta_y = 0;
-            break;
-        case 2:
-            //std::cout<<"case 2"<<'\n';
-            delta_x = 0;
-            delta_y = speed;
-            break;
-        case 3:
-            //std::cout<<"case 3"<<'\n';
-            delta_x = 0;
-            delta_y = -speed;
-            break;
-    }
-    float new_pos_x = pos_x + delta_x * time;
-    float new_pos_y = pos_y + delta_y * time;
-
-    if (check_ability_to_move(new_pos_x, new_pos_y, M)){
-        pos_x += delta_x * time;
-        pos_y += delta_y * time;
-    }
-    //std::cout<<"time = "<<time<<" dx = "<<delta_x<<" dy = "<<delta_y<<'\n';
-    
-    //std::cout<<pos_x<<' '<<pos_y<<'\n';
-
-    speed = 0;
-    sprite.setPosition(pos_x, pos_y);
-};
+*/

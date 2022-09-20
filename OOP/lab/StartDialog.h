@@ -1,3 +1,4 @@
+#pragma once
 #include "Position.h"
 
 class StartDialog{
@@ -12,6 +13,9 @@ class StartDialog{
         //initialization
         StartDialog();
 
+        //executor
+        void executor();
+
         //map
         bool isSizeSet();
         int getHeight();
@@ -20,7 +24,4 @@ class StartDialog{
         //player
         bool isPlayerPositionSet();
         Position getPlayerPosition();
-        
-        //destructor
-        ~StartDialog(){};
 };

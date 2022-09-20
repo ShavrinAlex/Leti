@@ -2,51 +2,70 @@
 #include <iostream>
 
 //initialization
-Cell::Cell(int num_x, int num_y, float side, bool is_busy){
-    this->pos_x = float(num_x * side);
-    this->pos_y = float(num_y * side);
+Cell::Cell(float side, bool is_busy, bool hero_is_here){
     this->side = side;
     this->color = sf::Color::Yellow;
     this->is_busy = is_busy;
+    this->hero_is_here = hero_is_here;
     cell = create_cell();
 };
 
 //create cell
 sf::RectangleShape* Cell::create_cell(){
     sf::RectangleShape *cell = new sf::RectangleShape(sf::Vector2f(side, side));
-    cell->setPosition(pos_x, pos_y);
+    cell->setPosition(sf::Vector2f(100.f, 100.f));
     cell->setFillColor(color);
     cell->setOutlineThickness(-1);
     cell->setOutlineColor(sf::Color::Red);
+    
     return cell;
 };
 
+//get cell obj for draw
+sf::RectangleShape* Cell::getDrawObject(){
+    return cell;
+};
+
+//get side
+float Cell::getSide(){
+    return side;
+};
+
+//check is bussy cell
+bool Cell::is_busy_cell(){
+    return is_busy;
+};
+
+//set hero
+void Cell::setHero(bool is_here){
+    //std::cout<<"is_here\n";
+    this->hero_is_here = is_here;
+};
+
+//reaction on hero
+void Cell::reaction_on_hero(){
+    if (hero_is_here){
+        cell->setFillColor(sf::Color::Green);
+    } else{
+        cell->setFillColor(sf::Color::Yellow);
+    }
+    
+};
+
+/*
 //draw cell
 void Cell::draw(sf::RenderWindow *window){
     window->draw(*cell);
 };
-
-//position x and y
-/*
-float Cell::get_position_x(){
-    return pos_x;
-};
-float Cell::get_position_y(){
-    return pos_y;
-};
 */
-void Cell::set_position_x(float pos_x){
-    this->pos_x = pos_x;
-};
-void Cell::set_position_y(float pos_y){
-    this->pos_y = pos_y;
+
+
+//update
+void Cell::update(){
+    reaction_on_hero();
 };
 
-//side
-float Cell::get_side(){
-    return side;
-};
-
+/*
 //check hero is here
 bool Cell::hero_is_here(Player *hero){
     float hero_x = hero->get_position_x() + hero->get_width()/2;
@@ -58,22 +77,21 @@ bool Cell::hero_is_here(Player *hero){
         return false;
     }
 };
+*/
 
-//check is bussy cell
-bool Cell::is_busy_cell(){
-    return is_busy;
+//position x and y
+/*
+float Cell::get_position_x(){
+    return pos_x;
+};
+float Cell::get_position_y(){
+    return pos_y;
 };
 
-//reaction on hero
-void Cell::reaction_on_hero(){
-    cell->setFillColor(sf::Color::Green);
+void Cell::set_position_x(float pos_x){
+    this->pos_x = pos_x;
 };
-
-//update
-void Cell::update(Player *hero){
-    if (hero_is_here(hero)){
-        reaction_on_hero();
-    } else{
-        cell->setFillColor(sf::Color::Yellow);
-    }
+void Cell::set_position_y(float pos_y){
+    this->pos_y = pos_y;
 };
+*/

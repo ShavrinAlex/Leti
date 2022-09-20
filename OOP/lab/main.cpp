@@ -1,8 +1,27 @@
-#include "Map.h"
-#include <iostream>
+#include "StartDialog.h"
+#include "MainLoop.h"
+#include <SFML/Graphics.hpp>
+#define SIZE_CELL 98
 
 
 int main(){
+    StartDialog sd = StartDialog();
+    sf::RenderWindow window(sf::VideoMode(sd.getHeight()*SIZE_CELL , sd.getWidth()*SIZE_CELL ), "My game");
+    window.setFramerateLimit(60);
+
+    MainLoop ml = MainLoop();
+    ml.setPlayerPosition(sd.getPlayerPosition());
+
+    float CurrentFrame = 0;
+    sf::Clock clock;
+
+    ml.setMapSize(sd.getHeight(), sd.getWidth());
+    ml.executor(&window);
+    
+    return 0;
+};
+
+ /*
     //start dialog
     int n, m;
     std::cout<<"Введите размеры поля (n на m клеток):\n";
@@ -60,5 +79,4 @@ int main(){
         window.display();
     }
     //end app
-    return 0;
-};
+    */
