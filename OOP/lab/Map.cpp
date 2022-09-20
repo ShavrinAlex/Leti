@@ -32,6 +32,11 @@ CellMatrix* Map::create_map(){
     return map;
 };
 
+//get map
+CellMatrix* Map::get_map(){
+    return map;
+};
+
 //draw map
 void Map::draw(sf::RenderWindow *window){
     for (auto row: *map){

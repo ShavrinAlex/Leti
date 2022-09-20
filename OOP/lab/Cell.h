@@ -1,5 +1,7 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#pragma end
 
 class Cell{
     private:

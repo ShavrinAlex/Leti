@@ -3,6 +3,7 @@
 
 
 int main(){
+    //start dialog
     int n, m;
     std::cout<<"Введите размеры поля (n на m клеток):\n";
     std::cout<<"Высота: ";
@@ -10,6 +11,7 @@ int main(){
     std::cout<<"Ширина: ";
     std::cin>>m;
 
+    //App
     sf::RenderWindow window(sf::VideoMode(m*98, n*98), "My game");
     window.setFramerateLimit(60);
 
@@ -33,36 +35,30 @@ int main(){
         if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))){
             p.set_direction(0);
             p.set_speed(0.1f);
-            std::cout<<"r ";
-            std::cout<<p.get_direction()<<'\n';
         }
         if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))){
             p.set_direction(1);
             p.set_speed(0.1);
-            std::cout<<"l ";
-            std::cout<<p.get_direction()<<'\n';
-        }
-        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))){
-            p.set_direction(3);
-            p.set_speed(0.1);
-            std::cout<<"u ";
-            std::cout<<p.get_direction()<<'\n';
         }
         if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))){
             p.set_direction(2);
             p.set_speed(0.1);
-            std::cout<<"d ";
-            std::cout<<p.get_direction()<<'\n';
         }
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))){
+            p.set_direction(3);
+            p.set_speed(0.1);
+        }
+        
             
         
 
         window.clear();
-        p.update(time);
+        p.update(time, &mp);
         mp.update(&p);
         mp.draw(&window);
         p.draw(&window);
         window.display();
     }
+    //end app
     return 0;
 };

@@ -32,12 +32,12 @@ void Player::set_armor(int armor){
     this->armor = armor;
 };
 
-//mana
-int Player::get_mana(){
-    return mana;
+//ammunition
+int Player::get_ammunition(){
+    return ammunition;
 };
-void Player::set_mana(int mana){
-    this->mana = mana;
+void Player::set_ammunition(int ammunition){
+    this->ammunition = ammunition;
 };
 
 //position x and y
@@ -83,36 +83,110 @@ void Player::draw(sf::RenderWindow *window){
     window->draw(sprite);
 };
 
-//update
-void Player::update(float time){
-    std::cout<<"update\n";
+//check ability to move
+bool Player::check_ability_to_move(float new_pos_x, float new_pos_y, Map *M){
+    bool ability = true;
     switch (direction){
         case 0:
-            std::cout<<"case 0"<<'\n';
+            float right_x = new_pos_x + width;
+            float lower_y = new_pos_y + height;
+            float upper_y = new_pos_y;
+            int ind_x = right_x / 98; //получаем индекс клетки по х в мап
+            int ind_l_y = lower_y / 98; //получаем индекс клетки по y в мап
+            int ind_u_y = upper_y / 98; //получаем индекс клетки по y в мап
+
+            if ((M->get_map()->at(ind_l_y)->at(ind_x))->is_busy_cell()){
+                ability = false;
+            }
+            if ((M->get_map()->at(ind_u_y)->at(ind_x))->is_busy_cell()){
+                ability = false;
+            }
+            break;
+        case 1:
+            float left_x = new_pos_x;
+            float lower_y = new_pos_y + height;
+            float upper_y = new_pos_y;
+            int ind_x = left_x / 98; //получаем индекс клетки по х в мап
+            int ind_l_y = lower_y / 98; //получаем индекс клетки по y в мап
+            int ind_u_y = upper_y / 98; //получаем индекс клетки по y в мап
+
+            if ((M->get_map()->at(ind_l_y)->at(ind_x))->is_busy_cell()){
+                ability = false;
+            }
+            if ((M->get_map()->at(ind_u_y)->at(ind_x))->is_busy_cell()){
+                ability = false;
+            }
+            break;
+        case 2:
+            float left_x = new_pos_x;
+            float right_x = new_pos_x + width;
+            float lower_y = new_pos_y + height;
+            int ind_r_x = right_x / 98; //получаем индекс клетки по х в мап
+            int ind_l_x = left_x / 98; //получаем индекс клетки по х в мап
+            int ind_y = lower_y / 98; //получаем индекс клетки по y в мап
+
+            if ((M->get_map()->at(ind_y)->at(ind_r_x))->is_busy_cell()){
+                ability = false;
+            }
+            if ((M->get_map()->at(ind_y)->at(ind_l_x))->is_busy_cell()){
+                ability = false;
+            }
+            break;
+        case 3:
+            float left_x = new_pos_x;
+            float right_x = new_pos_x + width;
+            float upper_y = new_pos_y;
+            int ind_r_x = right_x / 98; //получаем индекс клетки по х в мап
+            int ind_l_x = left_x / 98; //получаем индекс клетки по х в мап
+            int ind_y = upper_y / 98; //получаем индекс клетки по y в мап
+
+            if ((M->get_map()->at(ind_y)->at(ind_r_x))->is_busy_cell()){
+                ability = false;
+            }
+            if ((M->get_map()->at(ind_y)->at(ind_l_x))->is_busy_cell()){
+                ability = false;
+            }
+            break;
+    }
+    return ability;
+};
+
+//update
+void Player::update(float time, Map* M){
+    //std::cout<<"update\n";
+    switch (direction){
+        case 0:
+            //std::cout<<"case 0"<<'\n';
             delta_x = speed;
-            std::cout<<speed<<'\n';
+            //std::cout<<speed<<'\n';
             delta_y = 0;
             break;
         case 1:
-            std::cout<<"case 1"<<'\n';
+            //std::cout<<"case 1"<<'\n';
             delta_x = -speed;
             delta_y = 0;
             break;
         case 2:
-            std::cout<<"case 2"<<'\n';
+            //std::cout<<"case 2"<<'\n';
             delta_x = 0;
             delta_y = speed;
             break;
         case 3:
-            std::cout<<"case 3"<<'\n';
+            //std::cout<<"case 3"<<'\n';
             delta_x = 0;
             delta_y = -speed;
             break;
     }
-    std::cout<<"time = "<<time<<" dx = "<<delta_x<<" dy = "<<delta_y<<'\n';
-    pos_x += delta_x * time;
-    pos_y += delta_y * time;
-    std::cout<<pos_x<<' '<<pos_y<<'\n';
+    float new_pos_x = pos_x + delta_x * time;
+    float new_pos_y = pos_y + delta_y * time;
+
+    if (check_ability_to_move(new_pos_x, new_pos_y, M)){
+        pos_x += delta_x * time;
+        pos_y += delta_y * time;
+    }
+    //std::cout<<"time = "<<time<<" dx = "<<delta_x<<" dy = "<<delta_y<<'\n';
+    
+    //std::cout<<pos_x<<' '<<pos_y<<'\n';
 
     speed = 0;
     sprite.setPosition(pos_x, pos_y);

@@ -1,8 +1,11 @@
+#pragma once
 #include <SFML/Graphics.hpp>
+#include "Map.h"
+
 
 class Player{
     private:
-        int health, armor, mana;
+        int health, armor, ammunition;
         float pos_x, pos_y, width, height, delta_x, delta_y, speed;
         int direction;
         sf::String file_image;
@@ -22,9 +25,9 @@ class Player{
         int get_armor();
         void set_armor(int armor);
 
-        //mana
-        int get_mana();
-        void set_mana(int mana);
+        //ammunition
+        int get_ammunition();
+        void set_ammunition(int ammunition);
 
         //position x and y
         float get_position_x();
@@ -44,8 +47,11 @@ class Player{
         int get_direction();
         void set_direction(int direction);
 
+        //check ability to move
+        bool check_ability_to_move(float new_pos_x, float new_pos_y, Map *M);
+
         //update
-        void update(float time);
+        void update(float time, Map *M);
 
         //draw hero
         void draw(sf::RenderWindow *window);
