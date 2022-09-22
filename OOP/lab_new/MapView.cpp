@@ -1,0 +1,21 @@
+#include <SFML/Graphics.hpp>
+#include "MapView.h"
+
+//initialization
+MapView::MapView(Map& map){
+    this->map = map;
+    this->map_view = new CellViewMatrix;
+    map_view->reserve(map.getHeight());
+    for (int y = 0; y < map.getHeight(); y++){
+        map_view->at(y).reserve(map.getWidth());
+        for (int x = 0; x < map.getWidth(); x++){
+            CellView *cl = new CellView(*map.getCell(x, y), x, y);
+            map_view->back().push_back(cl);
+        }
+    }
+};
+
+//get cell view
+CellView* MapView::getCellView(int pos_x, int pos_y){
+    return map_view->at(pos_y).at(pos_x);
+};
