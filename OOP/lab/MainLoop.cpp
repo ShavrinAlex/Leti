@@ -24,6 +24,7 @@ int MainLoop::executor(sf::RenderWindow* window){
     player.setController(&cntrlr);
     drawer.setController(&cntrlr);
     map.setPlayerPosition(player_position);
+    map.update();
     float timer = 0;
     sf::Clock clock;
     //std::cout<<"map "<<map.getPlayerPosition().x<<' '<<map.getPlayerPosition().y<<'\n';
@@ -45,7 +46,7 @@ int MainLoop::executor(sf::RenderWindow* window){
         
         int key = cmdrdr.getPressedKey();
         enum {STAY, RIGHT, LEFT, UP, DOWN};
-        if (timer > 100){
+        if (timer > 150){
             switch (key){
                 case 'D':
                     //std::cout<<"d\n";
@@ -70,7 +71,7 @@ int MainLoop::executor(sf::RenderWindow* window){
             timer = 0;
         }
         window->clear();
-        //map.update();
+        map.update();
         drawer.drawMap(window);
         drawer.drawPlayer(window);
         //player.draw(window);

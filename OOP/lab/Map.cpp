@@ -26,7 +26,6 @@ int Map::getWidth(){
 
 //create map
 CellMatrix* Map::create_map(){
-    bool hero_here = false;
     map = new CellMatrix;
     map->reserve(height);
     for (int i = 0; i < height; i++){
@@ -34,10 +33,15 @@ CellMatrix* Map::create_map(){
         map->push_back(line);
         for (int j = 0; j < width; j++){
             //create cell
+            bool hero_here = false;
+            bool is_busy = false;
             if (player_position.x == j && player_position.y == i){
                 hero_here = true;
             }
-            Cell *cl = new Cell(SIDE, false, hero_here);
+            if (i == 3 && j == 3){
+                is_busy = true;
+            }
+            Cell *cl = new Cell(SIDE, is_busy, hero_here);
             map->back()->push_back(cl);
         }
     }
@@ -70,6 +74,8 @@ void Map::setPlayerPosition(Position next_player_position){
     }
     this->player_position.x = next_player_position.x;
     this->player_position.y = next_player_position.y;
+    map->at(next_player_position.y)->at(next_player_position.x)->setHero(true);
+
 }
 
 //get player position

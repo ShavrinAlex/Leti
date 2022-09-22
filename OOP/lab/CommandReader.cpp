@@ -17,4 +17,5 @@ int CommandReader::getPressedKey(){
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))){
         return 'Q';
     }
+    return ' ';
 };

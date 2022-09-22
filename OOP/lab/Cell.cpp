@@ -63,6 +63,9 @@ void Cell::draw(sf::RenderWindow *window){
 //update
 void Cell::update(){
     reaction_on_hero();
+    if (is_busy){
+        cell->setFillColor(sf::Color::Blue);
+    }
 };
 
 /*
