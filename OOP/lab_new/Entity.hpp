@@ -1,13 +1,15 @@
 #include <string>
 
+enum Direction{Right, Left, Up, Down};
+
 class Entity{
     protected:
         int health;
         int speed;
-        std::string direction;
+        Direction direction;
     public:
         //initialization
-        Entity(int health = 100, int speed = 0, std::string direction = "Not");
+        Entity(int health = 100, int speed = 0, Direction direction = Right);
 
         //health
         int getHealth();
@@ -18,6 +20,6 @@ class Entity{
         void setSpeed(float speed);
 
         //direction
-        std::string getDirection();
-        void setDirection(std::string direction);
+        Direction getDirection();
+        void setDirection(Direction direction);
 };

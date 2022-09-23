@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "Cell.h"
-#include "Position.h"
+#include "Cell.hpp"
+#include "Position.hpp"
 #include <vector>
 
 typedef std::vector <std::vector <Cell*>> CellMatrix;
@@ -9,7 +9,11 @@ class Map{
     private:
         Position player_position;
         int width, height;
-        CellMatrix* map;
+        CellMatrix map;
+
+        //create map
+        void createMap(CellMatrix& map);
+        
     public:
         //initialization
         Map() = default;

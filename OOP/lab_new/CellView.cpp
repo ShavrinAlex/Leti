@@ -1,4 +1,4 @@
-#include "CellView.h"
+#include "CellView.hpp"
 
 //initialization
 CellView::CellView(Cell& cell, int x, int y, int side = SIDE){

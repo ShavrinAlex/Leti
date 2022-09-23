@@ -1,10 +1,9 @@
-#include "Player.h"
+#include "Player.hpp"
 
 //initialization
-Player::Player(int armor = 0, int ammunition = 0, int health = 100, int speed = 0, std::string direction = "Not"){
+Player::Player(int armor = 0, int ammunition = 0, int health = 100, int speed = 0, Direction direction = Right):Entity(health, speed, direction){
     this->armor = armor;
     this->ammunition = ammunition;
-    //Entity::Entity(int health, int speed, std::string direction);
 };
 
 //armor

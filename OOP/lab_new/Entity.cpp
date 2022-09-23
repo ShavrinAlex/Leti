@@ -1,7 +1,7 @@
-#include "Entity.h"
+#include "Entity.hpp"
 
 //initialization
-Entity::Entity(int health = 100, int speed = 0, std::string direction = "Not"){
+Entity::Entity(int health = 100, int speed = 0, Direction direction = Right){
     this->health = health;
     this->speed = speed;
     this->direction = direction;
@@ -24,9 +24,9 @@ void Entity::setSpeed(float speed){
 };
 
 //direction
-std::string Entity::getDirection(){
+Direction Entity::getDirection(){
     return direction;
 };
-void Entity::setDirection(std::string direction){
+void Entity::setDirection(Direction direction){
     this->direction = direction;
 };

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Cell.h"
+#include "Cell.hpp"
 #define SIDE 98
 
 class CellView{

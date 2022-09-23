@@ -6,10 +6,10 @@ class Cell{
         //initialization
         Cell(bool is_wall = false, bool is_here_player = false);
 
-        //check is busy cell
+        //check is wall
         bool isWall();
 
-        //check hero is here
+        //check player is here
         bool isHerePlayer();
 
         //set player

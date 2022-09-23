@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "Entity.hpp"
 #include <string>
 
 class Player: public Entity{
@@ -7,7 +7,7 @@ class Player: public Entity{
         int ammunition;
     public:
         //initialization
-        Player(int armor = 0, int ammunition = 0, int health = 100, int speed = 0, std::string direction = "Not");
+        Player(int armor = 0, int ammunition = 0, int health = 100, int speed = 0, Direction direction = Right);
 
         //armor
         int getArmor();
