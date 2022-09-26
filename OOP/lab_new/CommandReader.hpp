@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
-
-enum Direction{Right, Left, Up, Down};
+#include "Enumerations.hpp"
 
 class CommandReader{
     public:

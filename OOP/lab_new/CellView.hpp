@@ -1,10 +1,11 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Cell.hpp"
 #define SIDE 98
 
 class CellView{
     private:
-        Cell cell;
+        Cell* cell;
         int side;
         int x;
         int y;
@@ -14,7 +15,7 @@ class CellView{
         void updateColor();
     public:
         //initialization
-        CellView(Cell& cell, int x, int y, int side = SIDE);
+        CellView(Cell* cell, int x, int y, int side = SIDE);
 
         //get draw obgect
         sf::RectangleShape* getDrawObject();

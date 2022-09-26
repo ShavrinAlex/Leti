@@ -1,7 +1,7 @@
 #include "Cell.hpp"
 
 //initialization
-Cell::Cell(bool is_wall = false, bool is_here_player = false){
+Cell::Cell(bool is_wall, bool is_here_player){
     this->is_wall = is_wall;
     this->is_here_player= is_here_player;
 };

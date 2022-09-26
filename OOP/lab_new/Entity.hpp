@@ -1,6 +1,6 @@
+#pragma once
 #include <string>
-
-enum Direction{Right, Left, Up, Down};
+#include "Enumerations.hpp"
 
 class Entity{
     protected:

@@ -1,3 +1,5 @@
+#pragma once
+
 class Cell{
     private:
         bool is_wall;

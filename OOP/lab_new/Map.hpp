@@ -1,9 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include "Cell.hpp"
 #include "Position.hpp"
+#include "Enumerations.hpp"
 #include <vector>
 
-typedef std::vector <std::vector <Cell*>> CellMatrix;
+typedef std::vector < std::vector <Cell*> > CellMatrix;
 
 class Map{
     private:
@@ -16,7 +17,7 @@ class Map{
         
     public:
         //initialization
-        Map() = default;
+        Map();
         Map(int width, int height); 
 
         //get size
@@ -27,10 +28,11 @@ class Map{
         Cell* getCell(int pos_x, int pos_y);
 
         //set player position
-        void setPlayerPosition(Position next_player_position);
+        void setPlayerPosition(Position* next_player_position);
 
         //get player position
-        Position getPlayerPosition();
+        Position* getPlayerPosition();
+
+        //calculate next player position
+        Position* calculateNextPlayerPosition(int speed, Direction direction);
 };
-
-

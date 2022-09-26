@@ -1,7 +1,7 @@
 #include "Entity.hpp"
 
 //initialization
-Entity::Entity(int health = 100, int speed = 0, Direction direction = Right){
+Entity::Entity(int health, int speed, Direction direction){
     this->health = health;
     this->speed = speed;
     this->direction = direction;
@@ -9,7 +9,7 @@ Entity::Entity(int health = 100, int speed = 0, Direction direction = Right){
 
 //health
 int Entity::getHealth(){
-    return health;
+    return this->health;
 };
 void Entity::setHealth(int health){
     this->health = health;
@@ -17,7 +17,7 @@ void Entity::setHealth(int health){
 
 //speed
 int Entity::getSpeed(){
-    return speed;
+    return this->speed;
 };
 void Entity::setSpeed(float speed){
     this->speed = speed;
@@ -25,7 +25,7 @@ void Entity::setSpeed(float speed){
 
 //direction
 Direction Entity::getDirection(){
-    return direction;
+    return this->direction;
 };
 void Entity::setDirection(Direction direction){
     this->direction = direction;

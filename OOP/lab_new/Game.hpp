@@ -1,13 +1,13 @@
-#include "RenderWindow.hpp"
+#include "GraphicArts.hpp"
 
 class Game{
     private:
         int map_width;
         int map_height;
-        RenderWindow window;
+        GraphicArts* graphic_arts;
     public:
         //initialization
-        Game(RenderWindow& window, int map_width, int map_height);
+        Game(int map_width, int map_height);
 
         //game
         int game_executor();
