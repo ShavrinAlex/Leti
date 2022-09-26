@@ -2,7 +2,10 @@
 
 //initialization
 EntityView::EntityView(Entity* entity, int width, int height, std::string file_image){
+    //logic entity
     this->entity = entity;
+
+    //draw object
     this->width = width;
     this->height = height;
     this->file_image = file_image;
@@ -21,7 +24,7 @@ void EntityView::setPosition(Position *player_position){
 //update sprite
 void EntityView::updateSprite(){
     //std::cout<<entity.getDirection()<<'\n';
-    switch (entity->getDirection()){
+    switch (this->entity->getDirection()){
         case Right:
             //set texture rect
             this->sprite->setTextureRect(sf::IntRect(this->width-5, this->height*2, this->width, this->height));
@@ -39,10 +42,15 @@ void EntityView::updateSprite(){
             this->sprite->setTextureRect(sf::IntRect(this->width, this->height*0, this->width, this->height));
             break;
     }
-}
+};
 
 //get draw object
 sf::Sprite* EntityView::getDrawObject(){
     updateSprite();
-    return sprite;
+    return this->sprite;
+};
+
+//destruction
+EntityView::~EntityView(){
+    delete sprite;
 };

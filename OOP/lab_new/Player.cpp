@@ -8,7 +8,7 @@ Player::Player(int armor, int ammunition, int health, int speed, Direction direc
 
 //armor
 int Player::getArmor(){
-    return armor;
+    return this->armor;
 };
 void Player::setArmor(int armor){
     this->armor = armor;
@@ -16,7 +16,7 @@ void Player::setArmor(int armor){
 
 //ammunition
 int Player::getAmmunition(){
-    return ammunition;
+    return this->ammunition;
 };
 void Player::setAmmunition(int ammunition){
     this->ammunition = ammunition;

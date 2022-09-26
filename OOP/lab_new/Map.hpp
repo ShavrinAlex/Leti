@@ -13,12 +13,20 @@ class Map{
         CellMatrix map;
 
         //create map
-        void createMap(CellMatrix& map);
-        
+        void createMap();
     public:
         //initialization
         Map();
         Map(int width, int height); 
+
+        //coping
+        Map(const Map& obj);
+        //assignment
+        Map& operator = (const Map& obj);
+
+        //move
+        Map(Map&& obj);
+        Map& operator = (Map&& obj);
 
         //get size
         int getHeight();

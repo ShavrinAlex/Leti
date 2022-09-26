@@ -7,28 +7,30 @@ GraphicArts::GraphicArts(int width, int height, std::string window_name){
     this->width = width * CELL_SIDE;
     this->height = height * CELL_SIDE;
 
+    //set name window
     this->window_name = window_name;
 
+    //create window
     this->window.create(sf::VideoMode(this->height , this->width), this->window_name);
     this->window.setFramerateLimit(60);
 };
 
 //check is open window
 bool GraphicArts::isOpen(){
-    return window.isOpen();
+    return this->window.isOpen();
 };
 
 //close window
 void GraphicArts::closeWindow(){
-    window.close();
+    this->window.close();
 };
 
 //poll event
 void GraphicArts::pollEvent(){
     sf::Event event;
-    while (window.pollEvent(event)){
+    while (this->window.pollEvent(event)){
         if (event.type == sf::Event::Closed){
-            window.close();
+            this->window.close();
         }
     }
 };
@@ -36,29 +38,29 @@ void GraphicArts::pollEvent(){
 //draw entity
 void GraphicArts::drawEntity(EntityView& entity_view){
     //draw sprite
-    window.draw(*entity_view.getDrawObject());
+    this->window.draw(*entity_view.getDrawObject());
 };
 
 //draw map
 void GraphicArts::drawMap(MapView& map_view){
-    for (int y = 0; y < height/CELL_SIDE; y++){
-        for (int x = 0; x < width/CELL_SIDE; x++){
+    for (int y = 0; y < this->height/CELL_SIDE; y++){
+        for (int x = 0; x < this->width/CELL_SIDE; x++){
             //get cell
             CellView* cell_view = map_view.getCellView(x, y);
             //get cell draw object
             sf::RectangleShape* cell = cell_view->getDrawObject();
             //draw
-            window.draw(*cell);
+            this->window.draw(*cell);
         }
     }
 };
 
 //window clear
 void GraphicArts::clear(){
-    window.clear();
+    this->window.clear();
 };
 
 //window display
 void GraphicArts::display(){
-    window.display();
+    this->window.display();
 };

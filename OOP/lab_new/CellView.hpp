@@ -5,13 +5,15 @@
 
 class CellView{
     private:
-        Cell* cell;
         int side;
-        int x;
-        int y;
+        int pos_x;
+        int pos_y;
         sf::RectangleShape* cell_view;
 
-        //change color
+        //logic cell
+        Cell* cell;
+
+        //update color
         void updateColor();
     public:
         //initialization
@@ -19,4 +21,7 @@ class CellView{
 
         //get draw obgect
         sf::RectangleShape* getDrawObject();
+
+        //destruction
+        ~CellView();
 };

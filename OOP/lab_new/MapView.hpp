@@ -6,11 +6,13 @@ typedef std::vector <std::vector <CellView*>> CellViewMatrix;
 
 class MapView{
     private:
-        Map* map;
         CellViewMatrix map_view;
 
+        //logic map
+        Map* map;
+
         //create map view
-        void createMapView(CellViewMatrix& map_view);
+        void createMapView();
         
     public:
         //initialization
@@ -18,4 +20,7 @@ class MapView{
 
         //get cell view
         CellView* getCellView(int pos_x, int pos_y);
+
+        //destruction
+        ~MapView();
 };

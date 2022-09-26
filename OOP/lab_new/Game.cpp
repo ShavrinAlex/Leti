@@ -16,34 +16,47 @@ Game::Game(int map_width, int map_height){
 
 //game
 int Game::game_executor(){
+    /*
+    Cell cell1 = Cell(true, true);
+    Cell cell2 = std::move(cell1);
+
+    Cell cell3(false, true);
+    Cell cell4(cell3);
+    cell3 = cell4;
+    cell4 = std::move(cell3);
+
+    Map map1 = Map();
+    Map map2 = std::move(map2);
+
+    Map map3 = Map();
+    Map map4 = map3;
+    map3 = map4;
+    map4 = std::move(map3);
+    */
     //create map
-    Map map = Map(map_width, map_height);
+    Map map = Map(this->map_width, this->map_height);
     MapView map_view = MapView(&map);
 
     //create player
     Player player = Player();
+    player.setSpeed(1);
     EntityView player_view = EntityView(&player, PLAYER_W, PLAYER_H, "hero1.png");
 
     //create command reader
     CommandReader com_reader = CommandReader();
-
-    //set player on map
-
-    //map.setPlayerPosition();
-
     //main loop
     float timer = 0;
     sf::Clock clock;
-    //std::cout<<player.getSpeed()<<'\n';
-    player.setSpeed(1);
     while (graphic_arts->isOpen()){
         float time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time /= 800;
         timer += time;
 
+        //check close window
         graphic_arts->pollEvent();
 
+        //get pressed key
         Direction key = com_reader.getPressedKey();
         
         if (timer > 350){
@@ -76,12 +89,12 @@ int Game::game_executor(){
                     break;
             }
         }
-        //std::cout<<player.getDirection()<<"\n";
-        graphic_arts->clear();
-        graphic_arts->drawMap(map_view);
-        graphic_arts->drawEntity(player_view);
-        graphic_arts->display();
-    }
 
+        //draw all
+        this->graphic_arts->clear();
+        this->graphic_arts->drawMap(map_view);
+        this->graphic_arts->drawEntity(player_view);
+        this->graphic_arts->display();
+    }
     return 0;
 };

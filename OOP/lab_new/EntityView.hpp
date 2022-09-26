@@ -7,15 +7,16 @@ class EntityView{
     private:
         int width;
         int height;
-        Entity* entity;
         std::string file_image;
         sf::Image image;
         sf::Texture texture;
         sf::Sprite* sprite;
 
+        //logic entity
+        Entity* entity;
+
         //update sprite
         void updateSprite();
-        
     public:
         //initialization
         EntityView(Entity* entity, int width, int height, std::string file_image);
@@ -25,4 +26,7 @@ class EntityView{
 
         //get draw object
         sf::Sprite* getDrawObject();
+
+        //destruction
+        ~EntityView();
 };

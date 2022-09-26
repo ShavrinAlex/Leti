@@ -8,6 +8,15 @@ class Cell{
         //initialization
         Cell(bool is_wall = false, bool is_here_player = false);
 
+        //coping
+        Cell(const Cell& obj);
+        //assignment
+        Cell& operator = (const Cell& obj);
+        
+        //move
+        Cell(Cell&& obj);
+        Cell& operator = (Cell&& obj);
+
         //check is wall
         bool isWall();
 
