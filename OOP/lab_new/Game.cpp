@@ -2,20 +2,23 @@
 #include "Player.hpp"
 #include "CommandReader.hpp"
 #include "Enumerations.hpp"
+#include "StartDialog.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
+#define PLAYER_IMAGE "hero1.png"
 #include <iostream>
 
 //initialization
-Game::Game(int map_width, int map_height){
-    this->map_width = map_width;
-    this->map_height = map_height;
+Game::Game(){
+    StartDialog start_dialog = StartDialog();
+    this->map_width = start_dialog.getWidth();
+    this->map_height = start_dialog.getHeight();
     this->graphic_arts = new GraphicArts(this->map_width, this->map_height);
 };
 
-//game
-int Game::game_executor(){
+//game start
+int Game::startGame(){
     /*
     Cell cell1 = Cell(true, true);
     Cell cell2 = std::move(cell1);
@@ -40,7 +43,7 @@ int Game::game_executor(){
     //create player
     Player player = Player();
     player.setSpeed(1);
-    EntityView player_view = EntityView(&player, PLAYER_W, PLAYER_H, "hero1.png");
+    EntityView player_view = EntityView(&player, PLAYER_W, PLAYER_H, PLAYER_IMAGE);
 
     //create command reader
     CommandReader com_reader = CommandReader();

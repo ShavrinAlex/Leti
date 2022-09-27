@@ -7,8 +7,8 @@ class Game{
         GraphicArts* graphic_arts;
     public:
         //initialization
-        Game(int map_width, int map_height);
+        Game();
 
-        //game
-        int game_executor();
+        //game start
+        int startGame();
 };
