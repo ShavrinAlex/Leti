@@ -37,7 +37,11 @@ Cell& Cell::operator = (Cell&& obj){
         std::swap(this->is_here_player, obj.is_here_player);
     }
     return *this;
-}
+};
+
+//set event
+void setEvent(){
+};
 
 //check is wall
 bool Cell::isWall(){

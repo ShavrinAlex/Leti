@@ -1,9 +1,11 @@
 #pragma once
+#include "Event.hpp"
 
 class Cell{
     private:
         bool is_wall;
         bool is_here_player;
+        Event* event;
     public:
         //initialization
         Cell(bool is_wall = false, bool is_here_player = false);
@@ -16,6 +18,9 @@ class Cell{
         //move
         Cell(Cell&& obj);
         Cell& operator = (Cell&& obj);
+
+        //set event
+        void setEvent();
 
         //check is wall
         bool isWall();
