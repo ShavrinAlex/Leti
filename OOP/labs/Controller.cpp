@@ -13,7 +13,7 @@ Controller::Controller(Player* player, Map* map, EntityView* player_view, Comman
 void Controller::send(std::string message, GameElement* element){
     this->timer = clock() - this->time;
     if (element == this->com_reader){
-        if (this->timer >= 77000){
+        if (this->timer >= 70000){
             if (message == "move player right"){
                 movePlayer(Right);
             }

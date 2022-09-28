@@ -10,7 +10,6 @@ class StartDialog{
         StartDialog();
 
         //map
-        bool isSizeSet();
         int getHeight();
         int getWidth();
 

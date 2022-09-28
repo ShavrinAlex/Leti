@@ -40,7 +40,8 @@ Cell& Cell::operator = (Cell&& obj){
 };
 
 //set event
-void setEvent(){
+void Cell::setEvent(Event* event){
+    this->event = event;
 };
 
 //check is wall

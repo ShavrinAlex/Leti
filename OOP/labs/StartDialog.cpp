@@ -16,9 +16,6 @@ StartDialog::StartDialog(){
 };
 
 //map
-bool StartDialog::isSizeSet(){
-    return this->is_size_set;
-};
 int StartDialog::getHeight(){
     return this->map_height;
 };

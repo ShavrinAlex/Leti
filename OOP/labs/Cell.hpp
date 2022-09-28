@@ -20,7 +20,7 @@ class Cell{
         Cell& operator = (Cell&& obj);
 
         //set event
-        void setEvent();
+        void setEvent(Event* event);
 
         //check is wall
         bool isWall();
