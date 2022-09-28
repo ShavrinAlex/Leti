@@ -43,4 +43,7 @@ class Map{
 
         //calculate next player position
         Position* calculateNextPlayerPosition(int speed, Direction direction);
+
+        //destruction
+        ~Map();
 };

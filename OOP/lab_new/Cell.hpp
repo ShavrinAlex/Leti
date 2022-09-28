@@ -30,4 +30,7 @@ class Cell{
 
         //set player
         void setPlayer(bool is_here_player);
+
+        //destruction
+        ~Cell();
 };

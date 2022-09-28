@@ -101,3 +101,8 @@ int Game::startGame(){
     }
     return 0;
 };
+
+//destruction
+Game::~Game(){
+    delete graphic_arts;
+};

@@ -44,5 +44,5 @@ sf::RectangleShape* CellView::getDrawObject(){
 
 //destruction
 CellView::~CellView(){
-    delete cell;
+    this->cell = nullptr;
 };

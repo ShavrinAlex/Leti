@@ -11,4 +11,7 @@ class Game{
 
         //game start
         int startGame();
+
+        //destruction
+        ~Game();
 };

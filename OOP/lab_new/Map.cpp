@@ -186,3 +186,11 @@ Position* Map::calculateNextPlayerPosition(int speed, Direction direction){
     next_player_position->y = player_position.y + dy;
     return next_player_position;
 };
+
+Map::~Map(){
+    for (auto row: this->map){
+        for (auto cell: row){
+            delete cell;
+        }
+    }
+};

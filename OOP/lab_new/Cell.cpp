@@ -57,3 +57,7 @@ bool Cell::isHerePlayer(){
 void Cell::setPlayer(bool is_here_player){
     this->is_here_player = is_here_player;
 };
+
+Cell::~Cell(){
+    this->event = nullptr;
+};
