@@ -3,6 +3,7 @@
 #include "CellView.hpp"
 #include "MapView.hpp"
 #include "EntityView.hpp"
+#include "PlayerView.hpp"
 #include <string>
 #define WINDOW_NAME "My game"
 
@@ -27,6 +28,9 @@ class GraphicArts{
 
         //draw entity
         void drawEntity(EntityView& entity_view);
+
+        //draw player
+        void drawPlayer(PlayerView& player_view);
 
         //draw map
         void drawMap(MapView& map_view);

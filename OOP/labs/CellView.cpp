@@ -9,8 +9,8 @@ CellView::CellView(Cell* cell, int x, int y, int side){
     this->side = side;
 
     //coordinates in pixels
-    this->pos_x = x * side;
-    this->pos_y = y * side;
+    this->position.x = x * side;
+    this->position.y = y * side;
 
     //draw object
     this->cell_view = new sf::RectangleShape(sf::Vector2f(side, side));
@@ -20,7 +20,7 @@ CellView::CellView(Cell* cell, int x, int y, int side){
     } else{
         this->cell_view->setOutlineColor(sf::Color(255, 140, 0));
     }
-    this->cell_view->setPosition(this->pos_x, this->pos_y);
+    this->cell_view->setPosition(this->position.x, this->position.y);
     updateColor();
 };
 

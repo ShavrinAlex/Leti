@@ -1,7 +1,7 @@
 #include "Controller.hpp"
-
+#include <iostream>
 //initialization
-Controller::Controller(Player* player, Map* map, EntityView* player_view, CommandReader* com_reader){
+Controller::Controller(Player* player, Map* map, PlayerView* player_view, CommandReader* com_reader){
     this->player = player;
     this->map = map;
     this->player_view = player_view;
@@ -11,9 +11,10 @@ Controller::Controller(Player* player, Map* map, EntityView* player_view, Comman
 
 //send
 void Controller::send(std::string message, GameElement* element){
-    this->timer = clock() - this->time;
+    this->timer = (clock() - this->time)/CLOCKS_PER_SEC;
+    //std::cout<<timer<<'\n';
     if (element == this->com_reader){
-        if (this->timer >= 70000){
+        if (this->timer >= 0.03){
             if (message == "move player right"){
                 movePlayer(Right);
             }

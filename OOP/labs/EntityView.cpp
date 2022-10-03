@@ -1,29 +1,62 @@
 #include "EntityView.hpp"
+#define SCALE_HEIGHT 5
 
 //initialization
-EntityView::EntityView(Entity* entity, int width, int height, std::string file_image){
+EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image){
     //logic entity
     this->entity = entity;
 
-    //draw object
+    //sprite size
     this->width = width;
     this->height = height;
+
+    //position
+    this->position.x = pos->x * this->width;
+    this->position.y = pos->y * this->height;
+
+    //sprite initialization
     this->file_image = file_image;
     this->image.loadFromFile("images/entities/" + this->file_image);
     this->texture.loadFromImage(image);
     this->sprite = new sf::Sprite();
     this->sprite->setTexture(texture);
     this->sprite->setTextureRect(sf::IntRect(this->width, this->height, this->width, this->height));
+
+    //health scale stroke
+    this->health_scale_stroke = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
+    this->health_scale_stroke->setOutlineThickness(-1);
+    this->health_scale_stroke->setOutlineColor(sf::Color(139, 0, 0));
+    
+    //health scale
+    this->health_scale = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
+    this->health_scale->setFillColor(sf::Color(255, 0, 0));
+
+    //update heakth scale position and size
+    updateHealthScale();
+
+    //update sprite direction
+    updateSprite();
 };
 
 //set position
 void EntityView::setPosition(Position *player_position){
-    this->sprite->setPosition(player_position->x * this->width, player_position->y * this->height);
+    //set new position
+    position.x = player_position->x;
+    position.y = player_position->y; 
+
+    //update heakth scale position and size
+    updateHealthScale();
+
+    //update sprite direction
+    updateSprite();
 };
 
 //update sprite
 void EntityView::updateSprite(){
-    //std::cout<<entity.getDirection()<<'\n';
+    //update sprite position
+    this->sprite->setPosition(position.x * this->width, position.y * this->height);
+
+    //update sprite direction
     switch (this->entity->getDirection()){
         case Right:
             //set texture rect
@@ -44,10 +77,29 @@ void EntityView::updateSprite(){
     }
 };
 
-//get draw object
-sf::Sprite* EntityView::getDrawObject(){
+//update health scale
+void EntityView::updateHealthScale(){
+    //health scale position
+    this->health_scale->setPosition(position.x * this->width + 5, position.y * this->height);
+    this->health_scale_stroke->setPosition(position.x * this->width + 5, position.y * this->height);
+};
+
+//get sprite
+sf::Sprite* EntityView::getSprite(){
     updateSprite();
     return this->sprite;
+};
+
+//get health scale
+sf::RectangleShape* EntityView::getHealthScale(){
+    updateHealthScale();
+    return this->health_scale;
+};
+
+//get health scale
+sf::RectangleShape* EntityView::getHealthScaleStroke(){
+    updateHealthScale();
+    return this->health_scale_stroke;
 };
 
 //destruction

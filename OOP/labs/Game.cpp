@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "Player.hpp"
+#include "PlayerView.hpp"
 #include "CommandReader.hpp"
 #include "Enumerations.hpp"
 #include "StartDialog.hpp"
@@ -44,7 +45,7 @@ int Game::startGame(){
     //create player
     Player player = Player();
     player.setSpeed(1);
-    EntityView player_view = EntityView(&player, PLAYER_W, PLAYER_H, PLAYER_IMAGE);
+    PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, map.getPlayerPosition(),PLAYER_IMAGE);
 
     //create command reader
     CommandReader com_reader = CommandReader();
@@ -68,7 +69,7 @@ int Game::startGame(){
         //draw all
         this->graphic_arts->clear();
         this->graphic_arts->drawMap(map_view);
-        this->graphic_arts->drawEntity(player_view);
+        this->graphic_arts->drawPlayer(player_view);
         this->graphic_arts->display();
         
     }

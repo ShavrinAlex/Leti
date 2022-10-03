@@ -1,13 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Cell.hpp"
+#include "Position.hpp"
 #define SIDE 98
 
 class CellView{
     private:
         int side;
-        int pos_x;
-        int pos_y;
+        Position position;
         sf::RectangleShape* cell_view;
 
         //logic cell

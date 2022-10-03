@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include "Enumerations.hpp"
+#include "GameElement.hpp"
 
-class Entity{
+class Entity: public GameElement{
     protected:
         int health;
         int speed;

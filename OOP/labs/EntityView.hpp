@@ -6,28 +6,45 @@
 #include <string>
 
 class EntityView: public GameElement{
-    private:
+    protected:
+        //entity
         int width;
         int height;
+        Position position;
+
+        //sprite
         std::string file_image;
         sf::Image image;
         sf::Texture texture;
         sf::Sprite* sprite;
 
+        //health scale
+        sf::RectangleShape* health_scale;
+        sf::RectangleShape* health_scale_stroke;
+
         //logic entity
         Entity* entity;
 
-        //update sprite
+        //update sprite position and direction
         void updateSprite();
+
+        //update health scale position and size
+        void updateHealthScale();
     public:
         //initialization
-        EntityView(Entity* entity, int width, int height, std::string file_image);
+        EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image);
 
         //set position
         void setPosition(Position *player_position);
 
-        //get draw object
-        sf::Sprite* getDrawObject();
+        //get sprite
+        sf::Sprite* getSprite();
+
+        //get health scale
+        sf::RectangleShape* getHealthScale();
+
+        //get health scale
+        sf::RectangleShape* getHealthScaleStroke();
 
         //destruction
         ~EntityView();

@@ -11,7 +11,7 @@ GraphicArts::GraphicArts(int width, int height, std::string window_name){
     this->window_name = window_name;
 
     //create window
-    this->window.create(sf::VideoMode(this->height , this->width), this->window_name);
+    this->window.create(sf::VideoMode(this->width , this->height), this->window_name);
     this->window.setFramerateLimit(60);
 };
 
@@ -35,10 +35,24 @@ void GraphicArts::pollEvent(){
     }
 };
 
+//draw player
+void GraphicArts::drawPlayer(PlayerView& player_view){
+    //draw entity
+    this->drawEntity(player_view);
+
+    //draw ammunition scale
+    this->window.draw(*player_view.getAmmunitionScaleStroke());
+    this->window.draw(*player_view.getAmmunitionScale());
+};
+
 //draw entity
 void GraphicArts::drawEntity(EntityView& entity_view){
     //draw sprite
-    this->window.draw(*entity_view.getDrawObject());
+    this->window.draw(*entity_view.getSprite());
+
+    //draw health scale
+    this->window.draw(*entity_view.getHealthScaleStroke());
+    this->window.draw(*entity_view.getHealthScale());
 };
 
 //draw map

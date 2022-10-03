@@ -1,9 +1,8 @@
 #pragma once
 #include "Entity.hpp"
-#include "GameElement.hpp"
 #include <string>
 
-class Player: public Entity, public GameElement{
+class Player: public Entity{
     private:
         int armor;
         int ammunition;

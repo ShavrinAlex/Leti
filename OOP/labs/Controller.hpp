@@ -2,6 +2,7 @@
 #include "CommandReader.hpp"
 #include "Player.hpp"
 #include "EntityView.hpp"
+#include "PlayerView.hpp"
 #include "Map.hpp"
 #include "Enumerations.hpp"
 #include <ctime>
@@ -10,13 +11,13 @@ class Controller: public Mediator{
     private:
         Player* player;
         Map* map;
-        EntityView* player_view;
+        PlayerView* player_view;
         CommandReader* com_reader;
-        int time;
-        int timer;
+        float time;
+        float timer;
     public:
         //initialization
-        Controller(Player* player, Map* map, EntityView* player_view, CommandReader* com_reader);
+        Controller(Player* player, Map* map, PlayerView* player_view, CommandReader* com_reader);
 
         //send
         void send(std::string message, GameElement* element);
