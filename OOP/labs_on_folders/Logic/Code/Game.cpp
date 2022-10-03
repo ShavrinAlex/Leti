@@ -8,7 +8,7 @@
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
-#define PLAYER_IMAGE "../../Images/Entities/hero1.png"
+#define PLAYER_IMAGE "./Graphic/Images/Entities/hero1.png"
 #include <iostream>
 
 //initialization
@@ -45,7 +45,7 @@ int Game::startGame(){
     //create player
     Player player = Player();
     player.setSpeed(1);
-    PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, map.getPlayerPosition(),PLAYER_IMAGE);
+    PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, map.getPlayerPosition(), PLAYER_IMAGE);
 
     //create command reader
     CommandReader com_reader = CommandReader();

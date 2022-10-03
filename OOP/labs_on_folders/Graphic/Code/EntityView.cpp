@@ -16,7 +16,7 @@ EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std
 
     //sprite initialization
     this->file_image = file_image;
-    this->image.loadFromFile("../Images/Entities/hero1.png"); //this->file_image
+    this->image.loadFromFile(this->file_image); 
     this->texture.loadFromImage(image);
     this->sprite = new sf::Sprite();
     this->sprite->setTexture(texture);

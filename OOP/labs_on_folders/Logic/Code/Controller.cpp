@@ -14,7 +14,7 @@ void Controller::send(std::string message, GameElement* element){
     this->timer = (clock() - this->time)/CLOCKS_PER_SEC;
     //std::cout<<timer<<'\n';
     if (element == this->com_reader){
-        if (this->timer >= 0.03){
+        if (this->timer >= 0.09){
             if (message == "move player right"){
                 movePlayer(Right);
             }
