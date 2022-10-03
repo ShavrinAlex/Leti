@@ -1,5 +1,5 @@
 def create_children_list(parents_list, n):
-    children_list = [[] for i in range(n+1)]
+    children_list = [[] for _ in range(n+1)]
     for child in range(n):
         children_list[parents_list[child]].append(child)
     return children_list
