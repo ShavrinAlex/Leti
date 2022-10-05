@@ -29,8 +29,10 @@ class Cell{
         bool isHerePlayer();
 
         //set player
-        void setPlayer(bool is_here_player);
+        void setPlayer();
 
+        //remove player
+        void removePlayer();
         //destruction
         ~Cell();
 };

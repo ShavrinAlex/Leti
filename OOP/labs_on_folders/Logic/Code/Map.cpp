@@ -144,14 +144,14 @@ void Map::setPlayerPosition(Position* next_player_position){
         return;
     } else{
         //delete reaction on player
-        map.at(player_position.y).at(player_position.x)->setPlayer(false);
+        map.at(player_position.y).at(player_position.x)->removePlayer();
 
         //set new position
         player_position.x = next_player_position->x;
         player_position.y = next_player_position->y;
 
         //set reaction on player
-        map.at(player_position.y).at(player_position.x)->setPlayer(true);
+        map.at(player_position.y).at(player_position.x)->setPlayer();
 
         //clear memory
         delete next_player_position;

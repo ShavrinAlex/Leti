@@ -5,7 +5,7 @@
 Cell::Cell(bool is_wall, bool is_here_player){
     //std::cout<<this<<" constr\n";
     this->is_wall = is_wall;
-    this->is_here_player= is_here_player;
+    this->is_here_player = is_here_player;
 };
 
 //coping
@@ -55,9 +55,14 @@ bool Cell::isHerePlayer(){
 };
 
 //set player
-void Cell::setPlayer(bool is_here_player){
-    this->is_here_player = is_here_player;
+void Cell::setPlayer(){
+    this->is_here_player = true;
 };
+
+//remove player
+void Cell::removePlayer(){
+    this->is_here_player = false;
+}
 
 Cell::~Cell(){
     this->event = nullptr;
