@@ -62,7 +62,7 @@ int Game::startGame(){
     while (graphic_arts->isOpen()){
         //check close window
         graphic_arts->pollEvent();
-
+        
         //actions
         com_reader.getPressedKey();
     

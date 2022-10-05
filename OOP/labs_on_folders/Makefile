@@ -6,8 +6,8 @@ OBJ_FOLDER = ./ObjectFiles/
 all: $(OBJ_FOLDER)main.o $(OBJ_FOLDER)Cell.o $(OBJ_FOLDER)CellView.o $(OBJ_FOLDER)CommandReader.o $(OBJ_FOLDER)Controller.o $(OBJ_FOLDER)Entity.o $(OBJ_FOLDER)EntityView.o $(OBJ_FOLDER)Game.o $(OBJ_FOLDER)GameElement.o $(OBJ_FOLDER)GraphicArts.o $(OBJ_FOLDER)Map.o $(OBJ_FOLDER)MapView.o $(OBJ_FOLDER)Player.o $(OBJ_FOLDER)PlayerView.o $(OBJ_FOLDER)StartDialog.o
 	$(CC) $(OBJ_FOLDER)main.o $(OBJ_FOLDER)Cell.o $(OBJ_FOLDER)CellView.o $(OBJ_FOLDER)CommandReader.o $(OBJ_FOLDER)Controller.o $(OBJ_FOLDER)Entity.o $(OBJ_FOLDER)EntityView.o $(OBJ_FOLDER)Game.o $(OBJ_FOLDER)GameElement.o $(OBJ_FOLDER)GraphicArts.o $(OBJ_FOLDER)Map.o $(OBJ_FOLDER)MapView.o $(OBJ_FOLDER)Player.o $(OBJ_FOLDER)PlayerView.o $(OBJ_FOLDER)StartDialog.o -o sfml-app $(LINK_FLAGS)
 
-$(OBJ_FOLDER)main.o: main.cpp ./Logic/Headlines/StartDialog.hpp ./Logic/Headlines/Game.hpp
-	$(CC) $(COMPILE_FLAGS) main.cpp -o $(OBJ_FOLDER)main.o
+$(OBJ_FOLDER)main.o: ./Logic/Code/main.cpp ./Logic/Headlines/StartDialog.hpp ./Logic/Headlines/Game.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Code/main.cpp -o $(OBJ_FOLDER)main.o
 
 $(OBJ_FOLDER)Cell.o: ./Logic/Code/Cell.cpp ./Logic/Headlines/Cell.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/Code/Cell.cpp -o $(OBJ_FOLDER)Cell.o
