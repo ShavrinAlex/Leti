@@ -13,6 +13,8 @@ int Entity::getHealth(){
 };
 void Entity::setHealth(int health){
     this->health = health;
+    //notify observer
+    this->notify();
 };
 
 //speed
@@ -29,4 +31,6 @@ Direction Entity::getDirection(){
 };
 void Entity::setDirection(Direction direction){
     this->direction = direction;
+    //notify observer
+    this->notify();
 };

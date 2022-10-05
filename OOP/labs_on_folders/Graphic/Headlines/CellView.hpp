@@ -2,9 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include "../../Logic/Headlines/Cell.hpp"
 #include "../../Logic/Headlines/Position.hpp"
+#include "../../Logic/Headlines/Observer.hpp"
 #define SIDE 98
 
-class CellView{
+class CellView: public Observer{
     private:
         int side;
         Position position;
@@ -21,6 +22,9 @@ class CellView{
 
         //get draw obgect
         sf::RectangleShape* getDrawObject();
+
+        //update
+        void update() override;
 
         //destruction
         ~CellView();

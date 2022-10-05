@@ -1,5 +1,5 @@
 #include "../Headlines/Controller.hpp"
-#include <iostream>
+
 //initialization
 Controller::Controller(Player* player, Map* map, PlayerView* player_view, CommandReader* com_reader){
     this->player = player;

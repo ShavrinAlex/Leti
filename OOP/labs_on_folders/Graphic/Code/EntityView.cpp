@@ -5,6 +5,7 @@
 EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image){
     //logic entity
     this->entity = entity;
+    this->entity->setObserver(this);
 
     //sprite size
     this->width = width;
@@ -39,16 +40,13 @@ EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std
 };
 
 //set position
-void EntityView::setPosition(Position *player_position){
+void EntityView::setPosition(Position *entity_position){
     //set new position
-    position.x = player_position->x;
-    position.y = player_position->y; 
+    this->position.x = entity_position->x;
+    this->position.y = entity_position->y;
 
-    //update heakth scale position and size
-    updateHealthScale();
-
-    //update sprite direction
-    updateSprite();
+    //update
+    this->update();
 };
 
 //update sprite
@@ -90,20 +88,23 @@ void EntityView::updateHealthScale(){
 
 //get sprite
 sf::Sprite* EntityView::getSprite(){
-    updateSprite();
     return this->sprite;
 };
 
 //get health scale
 sf::RectangleShape* EntityView::getHealthScale(){
-    updateHealthScale();
     return this->health_scale;
 };
 
 //get health scale
 sf::RectangleShape* EntityView::getHealthScaleStroke(){
-    updateHealthScale();
     return this->health_scale_stroke;
+};
+
+//update
+void EntityView::update(){
+    this->updateSprite();
+    this->updateHealthScale();
 };
 
 //destruction

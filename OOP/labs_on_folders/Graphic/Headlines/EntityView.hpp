@@ -3,9 +3,10 @@
 #include "../../Logic/Headlines/Position.hpp"
 #include "../../Logic/Headlines/Entity.hpp"
 #include "../../Logic/Headlines/GameElement.hpp"
+#include "../../Logic/Headlines/Observer.hpp"
 #include <string>
 
-class EntityView: public GameElement{
+class EntityView: public GameElement, public Observer{
     protected:
         //entity
         int width;
@@ -35,7 +36,7 @@ class EntityView: public GameElement{
         EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image);
 
         //set position
-        void setPosition(Position *player_position);
+        void setPosition(Position* entity_position);
 
         //get sprite
         sf::Sprite* getSprite();
@@ -45,6 +46,9 @@ class EntityView: public GameElement{
 
         //get health scale
         sf::RectangleShape* getHealthScaleStroke();
+
+        //update
+        void update() override;
 
         //destruction
         ~EntityView();

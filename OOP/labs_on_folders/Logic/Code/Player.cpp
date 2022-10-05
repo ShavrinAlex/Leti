@@ -12,6 +12,8 @@ int Player::getArmor(){
 };
 void Player::setArmor(int armor){
     this->armor = armor;
+    //notify observer
+    this->notify();
 };
 
 //ammunition
@@ -20,4 +22,6 @@ int Player::getAmmunition(){
 };
 void Player::setAmmunition(int ammunition){
     this->ammunition = ammunition;
+    //notify observer
+    this->notify();
 };

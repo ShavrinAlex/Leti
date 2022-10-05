@@ -1,7 +1,8 @@
 #pragma once
 #include "Event.hpp"
+#include "Observable.hpp"
 
-class Cell{
+class Cell: public Observable{
     private:
         bool is_wall;
         bool is_here_player;
@@ -33,6 +34,7 @@ class Cell{
 
         //remove player
         void removePlayer();
+        
         //destruction
         ~Cell();
 };

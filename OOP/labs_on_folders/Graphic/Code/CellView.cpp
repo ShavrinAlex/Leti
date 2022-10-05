@@ -4,6 +4,7 @@
 CellView::CellView(Cell* cell, int x, int y, int side){
     //logic cell
     this->cell = cell;
+    this->cell->setObserver(this);
 
     //cell side
     this->side = side;
@@ -38,9 +39,13 @@ void CellView::updateColor(){
 
 //get draw obgect
 sf::RectangleShape* CellView::getDrawObject(){
-    updateColor();
     return this->cell_view;
 };
+
+//update all
+void CellView::update(){
+    updateColor();
+}
 
 //destruction
 CellView::~CellView(){

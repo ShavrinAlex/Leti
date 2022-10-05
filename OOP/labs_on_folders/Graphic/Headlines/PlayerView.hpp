@@ -15,12 +15,12 @@ class PlayerView: public EntityView{
         //initialization
         PlayerView(Player* player, int width, int height, Position* pos, std::string file_image);
 
-        //set position
-        void setPosition(Position *player_position);
-
         //get ammunition scale
         sf::RectangleShape* getAmmunitionScale();
 
         //get ammunition scale
         sf::RectangleShape* getAmmunitionScaleStroke();
+
+        //update
+        void update() override;
 };

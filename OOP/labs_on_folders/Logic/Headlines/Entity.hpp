@@ -2,8 +2,9 @@
 #include <string>
 #include "Enumerations.hpp"
 #include "GameElement.hpp"
+#include "Observable.hpp"
 
-class Entity: public GameElement{
+class Entity:public GameElement, public Observable{
     protected:
         int health;
         int speed;

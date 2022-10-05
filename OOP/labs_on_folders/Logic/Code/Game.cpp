@@ -53,9 +53,9 @@ int Game::startGame(){
     //create controller(mediator)
     Controller contrtoller = Controller(&player, &map, &player_view, &com_reader);
     
-    player.setMediator(&contrtoller);
+    //player.setMediator(&contrtoller);
     map.setMediator(&contrtoller);
-    player_view.setMediator(&contrtoller);
+    //player_view.setMediator(&contrtoller);
     com_reader.setMediator(&contrtoller);
 
     //main loop
@@ -71,7 +71,6 @@ int Game::startGame(){
         this->graphic_arts->drawMap(map_view);
         this->graphic_arts->drawPlayer(player_view);
         this->graphic_arts->display();
-        
     }
     return 0;
 };

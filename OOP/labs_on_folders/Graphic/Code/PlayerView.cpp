@@ -3,6 +3,9 @@
 
 //initialization
 PlayerView::PlayerView(Player* player, int width, int height, Position* pos, std::string file_image):EntityView(player, width, height, pos, file_image){
+    //set observer
+    this->entity->setObserver(this);
+
     //scale stroke
     this->ammunition_scale_stroke = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
     this->ammunition_scale_stroke->setOutlineThickness(-1);
@@ -16,15 +19,6 @@ PlayerView::PlayerView(Player* player, int width, int height, Position* pos, std
     updateAmmunitionScale();
 };
 
-//set position
-void PlayerView::setPosition(Position *player_position){
-    //set entity position
-    EntityView::setPosition(player_position);
-
-    //update ammunition scale and size
-    updateAmmunitionScale();
-};
-
 //update ammunition scale
 void PlayerView::updateAmmunitionScale(){
     //ammunition scale position
@@ -34,12 +28,16 @@ void PlayerView::updateAmmunitionScale(){
 
 //get ammunition scale
 sf::RectangleShape* PlayerView::getAmmunitionScale(){
-    updateAmmunitionScale();
     return this->ammunition_scale;
 };
 
 //get scale stroke
 sf::RectangleShape* PlayerView::getAmmunitionScaleStroke(){
-    updateAmmunitionScale();
     return this->ammunition_scale_stroke;
+};
+
+//update
+void PlayerView::update(){
+    EntityView::update();
+    this->updateAmmunitionScale();
 };
