@@ -5,7 +5,7 @@
 #include "../../Graphic/Headlines/PlayerView.hpp"
 #include "Map.hpp"
 #include "Enumerations.hpp"
-#include <ctime>
+#include "SFML/Graphics.hpp"
 
 class Controller: public Mediator{
     private:
@@ -13,6 +13,7 @@ class Controller: public Mediator{
         Map* map;
         PlayerView* player_view;
         CommandReader* com_reader;
+        sf::Clock clock;
         float time;
         float timer;
     public:

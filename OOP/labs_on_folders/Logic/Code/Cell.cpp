@@ -57,6 +57,7 @@ bool Cell::isHerePlayer(){
 //set player
 void Cell::setPlayer(){
     this->is_here_player = true;
+
     //notify observer
     this->notify();
 };
@@ -64,6 +65,7 @@ void Cell::setPlayer(){
 //remove player
 void Cell::removePlayer(){
     this->is_here_player = false;
+    
     //notify observer
     this->notify();
 }

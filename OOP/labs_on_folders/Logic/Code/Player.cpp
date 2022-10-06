@@ -1,17 +1,18 @@
 #include "../Headlines/Player.hpp"
 
 //initialization
-Player::Player(int armor, int ammunition, int health, int speed, Direction direction):Entity(health, speed, direction){
+Player::Player(bool armor, int ammunition, int health, int speed, Direction direction):Entity(health, speed, direction){
     this->armor = armor;
     this->ammunition = ammunition;
 };
 
 //armor
-int Player::getArmor(){
+bool Player::getArmor(){
     return this->armor;
 };
-void Player::setArmor(int armor){
+void Player::setArmor(bool armor){
     this->armor = armor;
+
     //notify observer
     this->notify();
 };
@@ -22,6 +23,7 @@ int Player::getAmmunition(){
 };
 void Player::setAmmunition(int ammunition){
     this->ammunition = ammunition;
+    
     //notify observer
     this->notify();
 };

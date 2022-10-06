@@ -9,7 +9,6 @@
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
 #define PLAYER_IMAGE "./Graphic/Images/Entities/hero1.png"
-#include <iostream>
 
 //initialization
 Game::Game(){

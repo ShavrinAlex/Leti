@@ -26,6 +26,12 @@ class EntityView: public GameElement, public Observer{
         //logic entity
         Entity* entity;
 
+        //create sprite
+        void createSprite(std::string file_image);
+
+        //create health scale
+        void createHealthScale();
+
         //update sprite position and direction
         void updateSprite();
 

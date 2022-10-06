@@ -15,22 +15,11 @@ EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std
     this->position.x = pos->x * this->width;
     this->position.y = pos->y * this->height;
 
-    //sprite initialization
-    this->file_image = file_image;
-    this->image.loadFromFile(this->file_image); 
-    this->texture.loadFromImage(image);
-    this->sprite = new sf::Sprite();
-    this->sprite->setTexture(texture);
-    this->sprite->setTextureRect(sf::IntRect(this->width, this->height, this->width, this->height));
-
-    //health scale stroke
-    this->health_scale_stroke = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
-    this->health_scale_stroke->setOutlineThickness(-1);
-    this->health_scale_stroke->setOutlineColor(sf::Color(139, 0, 0));
+    //create sprite
+    createSprite(file_image);
     
-    //health scale
-    this->health_scale = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
-    this->health_scale->setFillColor(sf::Color(255, 0, 0));
+    //create health scale
+    this->createHealthScale();
 
     //update heakth scale position and size
     updateHealthScale();
@@ -47,6 +36,29 @@ void EntityView::setPosition(Position *entity_position){
 
     //update
     this->update();
+};
+
+//create sprite
+void EntityView::createSprite(std::string file_image){
+    this->file_image = file_image;
+    this->image.loadFromFile(this->file_image); 
+    this->texture.loadFromImage(image);
+    this->sprite = new sf::Sprite();
+    this->sprite->setTexture(texture);
+    this->sprite->setTextureRect(sf::IntRect(this->width, this->height, this->width, this->height));
+};
+
+//create health scale
+void EntityView::createHealthScale(){
+    //create health scale stroke
+    this->health_scale_stroke = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
+    this->health_scale_stroke->setOutlineThickness(-1);
+    this->health_scale_stroke->setOutlineColor(sf::Color(139, 0, 0));
+    this->health_scale_stroke->setFillColor(sf::Color(255, 0, 0, 0));
+    
+    //create health scale
+    this->health_scale = new sf::RectangleShape(sf::Vector2f(this->width - 10, SCALE_HEIGHT));
+    this->health_scale->setFillColor(sf::Color(255, 0, 0));
 };
 
 //update sprite
@@ -81,6 +93,9 @@ void EntityView::updateSprite(){
 
 //update health scale
 void EntityView::updateHealthScale(){
+    //health scale size
+    this->health_scale->setSize(sf::Vector2f((this->width - 10)*(this->entity->getHealth()/100.0), SCALE_HEIGHT));
+
     //health scale position
     this->health_scale->setPosition(position.x * this->width + 5, position.y * this->height);
     this->health_scale_stroke->setPosition(position.x * this->width + 5, position.y * this->height);

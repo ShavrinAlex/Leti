@@ -43,6 +43,10 @@ void GraphicArts::drawPlayer(PlayerView& player_view){
     //draw ammunition scale
     this->window.draw(*player_view.getAmmunitionScaleStroke());
     this->window.draw(*player_view.getAmmunitionScale());
+
+    //draw armor scale
+    this->window.draw(*player_view.getArmorScaleStroke());
+    this->window.draw(*player_view.getArmorScale());
 };
 
 //draw entity
