@@ -6,8 +6,8 @@
 class PlayerView: public EntityView{
     private:
         //ammunition scale
-        sf::RectangleShape* ammunition_scale;
-        sf::RectangleShape* ammunition_scale_stroke;
+        sf::RectangleShape* energy_scale;
+        sf::RectangleShape* energy_scale_stroke;
 
         //armor scale
         sf::RectangleShape* armor_scale;
@@ -16,11 +16,11 @@ class PlayerView: public EntityView{
         //create armor scale
         void createArmorScale();
 
-        //create ammunition scale
-        void createAmmunitionScale();
+        //create energy scale
+        void createEnergyScale();
 
-        //update ammunition scale position and size
-        void updateAmmunitionScale();
+        //update energy scale position and size
+        void updateEnergyScale();
 
         //update armor scale position and size
         void updateArmorScale();
@@ -29,18 +29,21 @@ class PlayerView: public EntityView{
         //initialization
         PlayerView(Player* player, int width, int height, Position* pos, std::string file_image);
 
-        //get ammunition scale
-        sf::RectangleShape* getAmmunitionScale();
+        //get energy scale
+        sf::RectangleShape* getEnergyScale();
 
-        //get ammunition scale
-        sf::RectangleShape* getAmmunitionScaleStroke();
+        //get energy scale stroke
+        sf::RectangleShape* getEnergyScaleStroke();
 
         //get armor scale
         sf::RectangleShape* getArmorScale();
 
-        //get armor scale
+        //get armor scale stroke
         sf::RectangleShape* getArmorScaleStroke();
 
         //update
         void update() override;
+
+        //destruction
+        ~PlayerView();
 };

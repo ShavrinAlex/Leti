@@ -41,12 +41,12 @@ void GraphicArts::drawPlayer(PlayerView& player_view){
     this->drawEntity(player_view);
 
     //draw ammunition scale
-    this->window.draw(*player_view.getAmmunitionScaleStroke());
-    this->window.draw(*player_view.getAmmunitionScale());
+    this->window.draw(*player_view.getEnergyScale());
+    this->window.draw(*player_view.getEnergyScaleStroke());
 
     //draw armor scale
-    this->window.draw(*player_view.getArmorScaleStroke());
     this->window.draw(*player_view.getArmorScale());
+    this->window.draw(*player_view.getArmorScaleStroke());
 };
 
 //draw entity
@@ -55,20 +55,29 @@ void GraphicArts::drawEntity(EntityView& entity_view){
     this->window.draw(*entity_view.getSprite());
 
     //draw health scale
-    this->window.draw(*entity_view.getHealthScaleStroke());
     this->window.draw(*entity_view.getHealthScale());
+    this->window.draw(*entity_view.getHealthScaleStroke());
 };
 
 //draw map
 void GraphicArts::drawMap(MapView& map_view){
     for (int y = 0; y < this->height/CELL_SIDE; y++){
         for (int x = 0; x < this->width/CELL_SIDE; x++){
-            //get cell
+            //get cell view
             CellView* cell_view = map_view.getCellView(x, y);
             //get cell draw object
             sf::RectangleShape* cell = cell_view->getDrawObject();
-            //draw
+            //draw cell view
             this->window.draw(*cell);
+
+            //get event view
+            EventView* event_view = cell_view->getEventView();
+            if (event_view){
+                //get event draw object
+                sf::Sprite* event = event_view->getSprite();
+                //draw event view
+                this->window.draw(*event);
+            }
         }
     }
 };

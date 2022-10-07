@@ -2,7 +2,6 @@
 #define WIDTH 5
 #define HEIGHT 5
 #define START_POSITION {0, 0}
-#include <iostream>
 
 //create map
 void Map::createMap(){

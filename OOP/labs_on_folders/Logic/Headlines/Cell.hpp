@@ -20,19 +20,25 @@ class Cell: public Observable{
         Cell(Cell&& obj);
         Cell& operator = (Cell&& obj);
 
-        //set event
+        //set and remove event
         void setEvent(Event* event);
+        void removeEvent();
+
+        //get event
+        Event* getEvent();
 
         //check is wall
         bool isWall();
 
+        //set and remove wall
+        void setWall();
+        void removeWall();
+
         //check player is here
         bool isHerePlayer();
 
-        //set player
+        //set and remove player
         void setPlayer();
-
-        //remove player
         void removePlayer();
         
         //destruction

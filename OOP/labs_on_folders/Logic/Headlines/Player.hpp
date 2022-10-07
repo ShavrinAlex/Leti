@@ -5,16 +5,17 @@
 class Player: public Entity{
     private:
         bool armor;
-        int ammunition;
+        int energy;
     public:
         //initialization
-        Player(bool armor = true, int ammunition = 0, int health = 70, int speed = 0, Direction direction = Right);
+        Player(bool armor = false, int energy = 0, int health = 0, int speed = 0, Direction direction = Right);
 
         //armor
         bool getArmor();
-        void setArmor(bool armor);
+        void setArmor();
+        void removeArmor();
 
-        //ammunition
-        int getAmmunition();
-        void setAmmunition(int ammunition);
+        //energy
+        int getEnergy();
+        void setEnergy(int energy);
 };

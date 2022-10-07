@@ -1,3 +1,4 @@
+#pragma once
 #include "../../Graphic/Headlines/GraphicArts.hpp"
 
 class Game{

@@ -124,5 +124,8 @@ void EntityView::update(){
 
 //destruction
 EntityView::~EntityView(){
+    this->entity = nullptr;
     delete sprite;
+    delete health_scale;
+    delete health_scale_stroke;
 };

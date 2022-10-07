@@ -5,6 +5,9 @@
 #include "../Headlines/Enumerations.hpp"
 #include "../Headlines/StartDialog.hpp"
 #include "../Headlines/Controller.hpp"
+#include "../Headlines/ConditionalEventFactory.hpp"
+#include "../Headlines/UnconditionalEventFactory.hpp"
+#include "../Headlines/EventGenerator.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
@@ -52,10 +55,19 @@ int Game::startGame(){
     //create controller(mediator)
     Controller contrtoller = Controller(&player, &map, &player_view, &com_reader);
     
-    //player.setMediator(&contrtoller);
+    //set mediator
+    player.setMediator(&contrtoller);
     map.setMediator(&contrtoller);
-    //player_view.setMediator(&contrtoller);
+    player_view.setMediator(&contrtoller);
     com_reader.setMediator(&contrtoller);
+
+    //create fabrics
+    ConditionalEventFactory conditional_event_factory = ConditionalEventFactory(&player);
+    UnconditionalEventFactory unconditional_event_factory = UnconditionalEventFactory(&player, &map, this);
+
+    //create event generator
+    EventGenerator event_generator = EventGenerator(&conditional_event_factory, &unconditional_event_factory, &map, &map_view);
+    event_generator.execute();
 
     //main loop
     while (graphic_arts->isOpen()){

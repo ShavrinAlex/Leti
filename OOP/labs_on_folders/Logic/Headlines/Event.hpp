@@ -2,5 +2,6 @@
 
 class Event{
     public:
-        void virtual trigger() = 0;
+        void virtual execute() = 0;
+        virtual ~Event(){};
 };
