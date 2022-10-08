@@ -73,7 +73,7 @@ int Game::startGame(){
     //main loop
     while (graphic_arts->isOpen()){
         //check close window
-        graphic_arts->pollEvent();
+        this->graphic_arts->pollEvent();
         
         //actions
         com_reader.getPressedKey();
@@ -85,7 +85,7 @@ int Game::startGame(){
         this->graphic_arts->display();
 
         //check end game
-        checkEndGame(&player);
+        this->checkEndGame(&player);
     }
     return 0;
 };
