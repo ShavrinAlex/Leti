@@ -13,6 +13,7 @@ int Entity::getHealth(){
 };
 void Entity::setHealth(int health){
     this->health = health;
+    
     //notify observer
     this->notify();
 };

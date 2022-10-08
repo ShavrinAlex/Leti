@@ -1,4 +1,5 @@
 #include "../Headlines/WinEvent.hpp"
+#include "../Headlines/Enumerations.hpp"
 
 //initialization
 WinEvent::WinEvent(Game* game){
@@ -7,5 +8,6 @@ WinEvent::WinEvent(Game* game){
 
 //execute
 void WinEvent::execute(){
-    //set game win
+    std::cout<<"You win!!!\n";
+    game->setGameStatus(WIN);
 };

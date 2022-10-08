@@ -19,6 +19,7 @@ Game::Game(){
     this->map_width = start_dialog.getWidth();
     this->map_height = start_dialog.getHeight();
     this->graphic_arts = new GraphicArts(this->map_width, this->map_height);
+    this->game_status = CONTINUES;
 };
 
 //game start
@@ -82,8 +83,27 @@ int Game::startGame(){
         this->graphic_arts->drawMap(map_view);
         this->graphic_arts->drawPlayer(player_view);
         this->graphic_arts->display();
+
+        //check end game
+        checkEndGame(&player);
     }
     return 0;
+};
+
+//set game status
+void Game::setGameStatus(GameStatus game_status){
+    this->game_status = game_status;
+};
+
+//check end game
+void Game::checkEndGame(Player* player){
+    if (player->getHealth() == 0){
+            this->game_status = LOOSE;
+            std::cout<<"You loose!!!\n";
+    }
+    if (this->game_status == WIN || this->game_status == LOOSE){
+        graphic_arts->closeWindow();
+    }
 };
 
 //destruction

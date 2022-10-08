@@ -96,7 +96,7 @@ void EventGenerator::generateWinEvent(){
     Position* position = this->getPositionFreeCell();
 
     //set win event
-    (this->map->getCell(position->x, position->y))->setEvent(this->unconditional_event_factory->createEvent1());
+    (this->map->getCell(position->x, position->y))->setEvent(this->unconditional_event_factory->createEvent3());
 
     //set win event view
     EventView* ev = new EventView(position->x, position->y, WIN);
