@@ -1,9 +1,7 @@
 #include "../Headlines/SetArmorEvent.hpp"
 
 //initialization
-SetArmorEvent::SetArmorEvent(Player* player){
-    this->player = player;
-};
+SetArmorEvent::SetArmorEvent(Player* player):EventOnPlayer(player){};
 
 //check conditional
 bool SetArmorEvent::checkConditional(){
@@ -11,8 +9,10 @@ bool SetArmorEvent::checkConditional(){
 };
 
 //execute
-void SetArmorEvent::execute(){
+EventStatus SetArmorEvent::execute(){
     if (this->checkConditional()){
         this->player->setArmor();
+        return DELETE;
     }
+    return LEAVE;
 };

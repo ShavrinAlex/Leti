@@ -2,8 +2,7 @@
 #define MAX_ENERGY 100
 
 //initialization
-SetEnergyEvent::SetEnergyEvent(Player* player, int energy){
-    this->player = player;
+SetEnergyEvent::SetEnergyEvent(Player* player, int energy):EventOnPlayer(player){
     this->energy = energy;
 };
 
@@ -13,7 +12,7 @@ bool SetEnergyEvent::checkConditional(){
 };
 
 //execute
-void SetEnergyEvent::execute(){
+EventStatus SetEnergyEvent::execute(){
     //check conditional
     if (this->checkConditional()){
         int player_energy = player->getEnergy() + energy;
@@ -23,5 +22,7 @@ void SetEnergyEvent::execute(){
         } else{
             player->setEnergy(player_energy);
         }
+        return DELETE;
     }
+    return LEAVE;
 };

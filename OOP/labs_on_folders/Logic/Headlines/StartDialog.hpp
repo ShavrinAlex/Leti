@@ -12,5 +12,5 @@ class StartDialog{
         int getWidth();
 
         //executor
-        void executor();
+        int executor();
 };

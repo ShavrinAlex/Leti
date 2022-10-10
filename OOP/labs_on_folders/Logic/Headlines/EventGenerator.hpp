@@ -1,40 +1,37 @@
 #pragma once
-#include "ConditionalEventFactory.hpp"
-#include "UnconditionalEventFactory.hpp"
+#include "../Headlines/EventFactory.hpp"
 #include "Map.hpp"
 #include "../../Graphic/Headlines/MapView.hpp"
 
 class EventGenerator{
     private:
-        ConditionalEventFactory* conditional_event_factory;
-        UnconditionalEventFactory* unconditional_event_factory;
         Map* map;
         MapView* map_view;
     public:
         //initialization
-        EventGenerator(ConditionalEventFactory* conditional_event_factory, UnconditionalEventFactory* unconditional_event_factory, Map* map, MapView* map_view);
+        EventGenerator(Map* map, MapView* map_view);
 
         //get position random free cell
         Position* getPositionFreeCell();
 
         //generate and set health event and his appearance
-        void generateHealthEvent();
+        void generateHealthEvent(EventFactory* factory_event_on_player);
 
         //generate and set armor event and his appearance
-        void generateArmorEvent();
+        void generateArmorEvent(EventFactory* factory_event_on_player);
 
         //generate and set energy event and his appearance
-        void generateEnergyEvent();
+        void generateEnergyEvent(EventFactory* factory_event_on_player);
 
-        //generate and set fire damage event and his appearance
-        void generateFireDamageEvent();
+        //generate and set win game event and his appearance
+        void generateWinGameEvent(Position* position, EventFactory* factory_event_on_game);
 
-        //generate and set change map event and his appearance
-        void generateChangeMapEvent();
+        //generate and set end game event and his appearance
+        void generateEndGameEvent(EventFactory* factory_event_on_game);
 
-        //generate and set win event and his appearance
-        void generateWinEvent();
+        //generate and set wall event event and his appearance
+        void generateSetWallEvent(EventFactory* factory_event_on_map);
 
-        //execute
-        void execute();
+        //generate and set wall event and his appearance
+        void generateSetWinGameEvent(EventFactory* factory_event_on_map);
 };

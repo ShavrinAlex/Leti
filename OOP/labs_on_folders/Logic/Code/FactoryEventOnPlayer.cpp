@@ -1,24 +1,25 @@
-#include "../Headlines/ConditionalEventFactory.hpp"
+#include "../Headlines/FactoryEventOnPlayer.hpp"
+
 #include "../Headlines/SetHealthEvent.hpp"
 #include "../Headlines/SetArmorEvent.hpp"
 #include "../Headlines/SetEnergyEvent.hpp"
 
 //initialization
-ConditionalEventFactory::ConditionalEventFactory(Player* player){
+FactoryEventOnPlayer::FactoryEventOnPlayer(Player* player){
     this->player = player;
 };
 
 //create health event
-Event* ConditionalEventFactory::createEvent1(){
+Event* FactoryEventOnPlayer::createEvent1(){
     return new SetHealthEvent(this->player);
 };
 
 //create armor event
-Event* ConditionalEventFactory::createEvent2(){
+Event* FactoryEventOnPlayer::createEvent2(){
     return new SetArmorEvent(this->player);
 };
 
 //create energy event
-Event* ConditionalEventFactory::createEvent3(){
+Event* FactoryEventOnPlayer::createEvent3(){
     return new SetEnergyEvent(this->player);
 };

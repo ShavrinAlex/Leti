@@ -5,8 +5,9 @@
 #include "../Headlines/Enumerations.hpp"
 #include "../Headlines/StartDialog.hpp"
 #include "../Headlines/Controller.hpp"
-#include "../Headlines/ConditionalEventFactory.hpp"
-#include "../Headlines/UnconditionalEventFactory.hpp"
+#include "../Headlines/FactoryEventOnPlayer.hpp"
+#include "../Headlines/FactoryEventOnMap.hpp"
+#include "../Headlines/FactoryEventOnGame.hpp"
 #include "../Headlines/EventGenerator.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
@@ -61,14 +62,23 @@ int Game::startGame(){
     map.setMediator(&contrtoller);
     player_view.setMediator(&contrtoller);
     com_reader.setMediator(&contrtoller);
-
-    //create fabrics
-    ConditionalEventFactory conditional_event_factory = ConditionalEventFactory(&player);
-    UnconditionalEventFactory unconditional_event_factory = UnconditionalEventFactory(&player, &map, this);
-
+    
     //create event generator
-    EventGenerator event_generator = EventGenerator(&conditional_event_factory, &unconditional_event_factory, &map, &map_view);
-    event_generator.execute();
+    EventGenerator event_generator = EventGenerator(&map, &map_view);
+
+    //create event fabrics
+    FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
+    FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(this);
+    FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game, &event_generator);
+
+    event_generator.generateHealthEvent(&factory_event_on_player);
+    event_generator.generateArmorEvent(&factory_event_on_player);
+    event_generator.generateEnergyEvent(&factory_event_on_player);
+    event_generator.generateSetWallEvent(&factory_event_on_map);
+    event_generator.generateSetWinGameEvent(&factory_event_on_map);
+    event_generator.generateEndGameEvent(&factory_event_on_game);
+    event_generator.generateEndGameEvent(&factory_event_on_game);
+    event_generator.generateEndGameEvent(&factory_event_on_game);
 
     //main loop
     while (graphic_arts->isOpen()){
@@ -97,10 +107,6 @@ void Game::setGameStatus(GameStatus game_status){
 
 //check end game
 void Game::checkEndGame(Player* player){
-    if (player->getHealth() == 0){
-            this->game_status = LOOSE;
-            std::cout<<"You loose!!!\n";
-    }
     if (this->game_status == WIN || this->game_status == LOOSE){
         graphic_arts->closeWindow();
     }

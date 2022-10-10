@@ -1,10 +1,8 @@
-#include "ConditionalEvent.hpp"
-#include "Player.hpp"
+#include "EventOnPlayer.hpp"
 
-class SetEnergyEvent: public ConditionalEvent{
+class SetEnergyEvent: public EventOnPlayer{
     private:
         int energy;
-        Player* player;
 
         //check conditional
         bool checkConditional() override;
@@ -13,5 +11,5 @@ class SetEnergyEvent: public ConditionalEvent{
         SetEnergyEvent(Player* player, int energy = 25);
 
         //execute
-        void execute() override;
+        EventStatus execute() override;
 };

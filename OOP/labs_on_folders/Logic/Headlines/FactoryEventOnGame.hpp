@@ -1,13 +1,13 @@
 #pragma once
 #include "EventFactory.hpp"
-#include "Player.hpp"
+#include "Game.hpp"
 
-class ConditionalEventFactory: public EventFactory{
+class FactoryEventOnGame: public EventFactory{
     private:
-        Player* player;
+        Game* game;
     public:
         //initialization
-        ConditionalEventFactory(Player* player);
+        FactoryEventOnGame(Game* game);
 
         //create event
         Event* createEvent1() override;

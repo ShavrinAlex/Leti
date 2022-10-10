@@ -12,5 +12,5 @@ void Observable::setObserver(Observer* observer){
 
 //notify observer
 void Observable::notify(){
-    observer->update();
+    this->observer->update();
 };

@@ -4,7 +4,7 @@
 #include "GameElement.hpp"
 #include "Observable.hpp"
 
-class Entity:public GameElement, public Observable{
+class Entity: public GameElement, public Observable{
     protected:
         int health;
         int speed;

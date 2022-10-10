@@ -1,10 +1,8 @@
-#include "ConditionalEvent.hpp"
-#include "Player.hpp"
+#include "EventOnPlayer.hpp"
 
-class SetHealthEvent: public ConditionalEvent{
+class SetHealthEvent: public EventOnPlayer{
     private:
         int health;
-        Player* player;
 
         //check conditional
         bool checkConditional() override;
@@ -13,5 +11,5 @@ class SetHealthEvent: public ConditionalEvent{
         SetHealthEvent(Player* player, int health = 25);
 
         //execute
-        void execute() override;
+        EventStatus execute() override;
 };

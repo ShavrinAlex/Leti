@@ -1,10 +1,7 @@
-#include "ConditionalEvent.hpp"
-#include "Player.hpp"
+#include "EventOnPlayer.hpp"
 
-class SetArmorEvent: public ConditionalEvent{
+class SetArmorEvent: public EventOnPlayer{
     private:
-        Player* player;
-
         //check conditional
         bool checkConditional() override;
     public:
@@ -12,5 +9,5 @@ class SetArmorEvent: public ConditionalEvent{
         SetArmorEvent(Player* player);
 
         //execute
-        void execute() override;
+        EventStatus execute() override;
 };

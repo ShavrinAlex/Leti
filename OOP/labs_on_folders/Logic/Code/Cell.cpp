@@ -82,8 +82,9 @@ bool Cell::isHerePlayer(){
 void Cell::setPlayer(){
     this->is_here_player = true;
     if (this->event != nullptr){
-        this->event->execute();
-        this->removeEvent();
+        if (this->event->execute() != LEAVE){
+            this->removeEvent();
+        }
     }
 
     //notify observer

@@ -1,7 +1,8 @@
 #pragma once
+#include "Enumerations.hpp"
 
 class Event{
     public:
-        void virtual execute() = 0;
+        EventStatus virtual execute() = 0;
         virtual ~Event(){};
 };
