@@ -2,11 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include "../../../Logic/Utility/Position.hpp"
 #include "../../../Logic/Entities/Entity/Entity.hpp"
-#include "../../../Logic/GameElement/GameElement.hpp"
 #include "../../../Logic/ObserverPattern/Observer.hpp"
 #include <string>
 
-class EntityView: public GameElement, public Observer{
+class EntityView: public Observer{
     protected:
         //entity
         int width;

@@ -1,9 +1,8 @@
 #pragma once
 #include "../../Utility/Enumerations.hpp"
-#include "../../GameElement/GameElement.hpp"
 #include "../../ObserverPattern/Observable/Observable.hpp"
 
-class Entity: public GameElement, public Observable{
+class Entity: public Observable{
     protected:
         int health;
         int speed;

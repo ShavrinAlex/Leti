@@ -2,7 +2,6 @@
 #include "../../CommandReader/CommandReader.hpp"
 #include "../../Controllers/PlayerController/PlayerController.hpp"
 #include "../../Controllers/GameController/GameController.hpp"
-#include "../../Utility/Enumerations.hpp"
 
 class CommandReaderMediator: public Mediator{
     private:
@@ -14,7 +13,7 @@ class CommandReaderMediator: public Mediator{
         CommandReaderMediator(CommandReader* com_reader, PlayerController* player_controller, GameController* game_controller);
 
         //send
-        void send(KeyboardCommand message, GameElement* element);
+        void send(std::string  message, GameElement* element) override;
 
         //destruction
         ~CommandReaderMediator();

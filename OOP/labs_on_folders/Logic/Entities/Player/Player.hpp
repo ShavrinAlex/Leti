@@ -7,7 +7,7 @@ class Player: public Entity{
         int energy;
     public:
         //initialization
-        Player(bool armor = false, int energy = 0, int health = 60, int speed = 0, Direction direction = Right);
+        Player(bool armor = false, int energy = 50, int health = 75, int speed = 0, Direction direction = Right);
 
         //armor
         bool getArmor();

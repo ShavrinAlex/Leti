@@ -3,12 +3,11 @@
 #include "../Cell/Cell.hpp"
 #include "../Utility/Position.hpp"
 #include "../Utility/Enumerations.hpp"
-#include "../GameElement/GameElement.hpp"
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
 
-class Map: public GameElement{
+class Map{
     private:
         Position player_position;
         int width, height;

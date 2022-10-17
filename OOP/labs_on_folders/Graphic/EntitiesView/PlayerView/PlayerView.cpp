@@ -3,9 +3,6 @@
 
 //initialization
 PlayerView::PlayerView(Player* player, int width, int height, Position* pos, std::string file_image):EntityView(player, width, height, pos, file_image){
-    //set observer
-    this->entity->addObserver(this);
-
     //create armor scale
     createArmorScale();
 

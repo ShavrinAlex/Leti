@@ -1,5 +1,4 @@
 #include "GameController.hpp"
-#include <iostream>
 
 //initialization
 GameController::GameController(Game* game, Player* player){

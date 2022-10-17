@@ -8,25 +8,18 @@ CommandReaderMediator::CommandReaderMediator(CommandReader* com_reader, PlayerCo
 };
 
 //send
-void CommandReaderMediator::send(KeyboardCommand message, GameElement* element){
+void CommandReaderMediator::send(std::string message, GameElement* element){
     if (element == this->com_reader){
-        switch(message){
-            case D:
-                this->player_controller->move(Right);
-                break;
-            case A:
-                this->player_controller->move(Left);
-                break;
-            case W:
-                this->player_controller->move(Up);
-                break;
-            case S:
-                this->player_controller->move(Down);
-                break;
-            case Q:
-                this->game_controller->setGameStatus(Quit);
-                break;
-        }
+        if (message == "D")
+            this->player_controller->move(Right);
+        if (message == "A")
+            this->player_controller->move(Left);
+        if (message == "W")
+            this->player_controller->move(Up);
+        if (message == "S")
+            this->player_controller->move(Down);
+        if (message == "Q")
+            this->game_controller->setGameStatus(Quit);
     }
 };
 

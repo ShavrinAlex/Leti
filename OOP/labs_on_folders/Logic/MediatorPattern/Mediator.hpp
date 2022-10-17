@@ -1,9 +1,9 @@
 #pragma once
 class GameElement;
-#include "../Utility/Enumerations.hpp"
+#include <iostream>
 
 class Mediator{
     public:
-        virtual void send(KeyboardCommand message, GameElement* element) = 0;
+        virtual void send(std::string message, GameElement* element) = 0;
         virtual ~Mediator(){};
 };

@@ -5,6 +5,7 @@
 #include "../Utility/Enumerations.hpp"
 #include "../StartDialog/StartDialog.hpp"
 #include "../Controllers/PlayerController/PlayerController.hpp"
+#include "../Controllers/EventsController/EventsController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
 #include "../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
 #include "../FactoriesPattern/FactoryEventOnMap/FactoryEventOnMap.hpp"
@@ -73,43 +74,12 @@ int Game::startGame(){
     FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(&game_controller);
     FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game, &event_generator);
 
-    //create start events
-    event_generator.generateHealthEvent(&factory_event_on_player);
-    event_generator.generateArmorEvent(&factory_event_on_player);
-    event_generator.generateEnergyEvent(&factory_event_on_player);
-    event_generator.generateSetWallEvent(&factory_event_on_map);
-    event_generator.generateSetWinGameEvent(&factory_event_on_map);
-    event_generator.generateEndGameEvent(&factory_event_on_game);
-    event_generator.generateEndGameEvent(&factory_event_on_game);
-    event_generator.generateEndGameEvent(&factory_event_on_game);
-/*
-    //create controller(mediator)
-    PlayerController contrtoller = PlayerController(&player, &map, &player_view, &com_reader);
-    
-    //set mediator
-    player.setMediator(&contrtoller);
-    map.setMediator(&contrtoller);
-    player_view.setMediator(&contrtoller);
-    com_reader.setMediator(&contrtoller);
-    
-    //create event generator
-    EventGenerator event_generator = EventGenerator(&map, &map_view);
+    //create events controller
+    EventsController events_controller = EventsController(&event_generator, &factory_event_on_player, &factory_event_on_game, &factory_event_on_map, this->map_height, this->map_width);
 
-    //create event fabrics
-    FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
-    FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(this);
-    FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game, &event_generator);
+    //create events
+    events_controller.createEvents();
 
-    //create start events
-    event_generator.generateHealthEvent(&factory_event_on_player);
-    event_generator.generateArmorEvent(&factory_event_on_player);
-    event_generator.generateEnergyEvent(&factory_event_on_player);
-    event_generator.generateSetWallEvent(&factory_event_on_map);
-    event_generator.generateSetWinGameEvent(&factory_event_on_map);
-    event_generator.generateEndGameEvent(&factory_event_on_game);
-    event_generator.generateEndGameEvent(&factory_event_on_game);
-    event_generator.generateEndGameEvent(&factory_event_on_game);
-*/
     //main loop
     while (graphic_arts->isOpen() && this->game_status == Continues){
         //check close window
