@@ -13,8 +13,10 @@ class EnemiesController{
         float time;
         float timer;
 
-        //get random direction
-        Direction getRandomDirection();
+        //get direction
+        Direction getDirection(Entity* enemy);
+
+        
     public:
         //initialization
         EnemiesController(Map* map, MapView* map_view);

@@ -93,7 +93,7 @@ int Game::startGame(){
         //check close window
         this->graphic_arts->pollEvent();
         
-        //actions
+        //player actions
         com_reader.getPressedKey();
 
         //enemies actions
