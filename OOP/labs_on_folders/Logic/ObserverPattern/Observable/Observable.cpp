@@ -13,7 +13,7 @@ void Observable::addObserver(Observer* observer){
     this->observers.emplace_back(observer);
 };
 
-//notify observer
+//notify observers
 void Observable::notify(){
     for (auto observer: this->observers){
         observer->update();

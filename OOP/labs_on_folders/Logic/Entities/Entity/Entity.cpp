@@ -1,9 +1,11 @@
 #include "Entity.hpp"
+#define MIN_DAMAGE 25
 
 //initialization
 Entity::Entity(int health, int speed, Direction direction){
     this->health = health;
     this->speed = speed;
+    this->damage = MIN_DAMAGE;
     this->direction = direction;
 };
 
@@ -14,7 +16,7 @@ int Entity::getHealth(){
 void Entity::setHealth(int health){
     this->health = health;
     
-    //notify observer
+    //notify observers
     this->notify();
 };
 
@@ -24,6 +26,14 @@ int Entity::getSpeed(){
 };
 void Entity::setSpeed(float speed){
     this->speed = speed;
+};
+
+//damage
+int Entity::getDamage(){
+    return this->damage;
+};
+void Entity::setDamage(int damage){
+    this->damage = damage;
 };
 
 //direction

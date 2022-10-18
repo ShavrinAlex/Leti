@@ -6,6 +6,7 @@ class Entity: public Observable{
     protected:
         int health;
         int speed;
+        int damage;
         Direction direction;
     public:
         //initialization
@@ -18,6 +19,10 @@ class Entity: public Observable{
         //speed
         int getSpeed();
         void setSpeed(float speed);
+
+        //damage
+        int getDamage();
+        void setDamage(int damage);
 
         //direction
         Direction getDirection();

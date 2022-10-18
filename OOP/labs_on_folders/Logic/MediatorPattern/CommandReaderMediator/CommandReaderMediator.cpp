@@ -10,15 +10,17 @@ CommandReaderMediator::CommandReaderMediator(CommandReader* com_reader, PlayerCo
 //send
 void CommandReaderMediator::send(std::string message, GameElement* element){
     if (element == this->com_reader){
-        if (message == "D")
+        if (message == "Right")
             this->player_controller->move(Right);
-        if (message == "A")
+        if (message == "Left")
             this->player_controller->move(Left);
-        if (message == "W")
+        if (message == "Up")
             this->player_controller->move(Up);
-        if (message == "S")
+        if (message == "Down")
             this->player_controller->move(Down);
-        if (message == "Q")
+        if (message == "Shoot")
+            this->player_controller->shoot();
+        if (message == "Quit")
             this->game_controller->setGameStatus(Quit);
     }
 };

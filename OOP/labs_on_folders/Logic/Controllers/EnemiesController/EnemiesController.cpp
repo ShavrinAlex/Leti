@@ -44,9 +44,17 @@ void EnemiesController::move(){
             enemy->setDirection(this->getDirection(enemy));
             this->map->moveEntity(enemy);
             enemy_view->setPosition(map->getEnemyPosition(enemy));
+
+            //shoot
+            this->shoot(enemy);
         }
         this->timer = 0;
     }
+};
+
+//shoot
+void EnemiesController::shoot(Entity* enemy){
+    this->map->makeDamage(enemy);
 };
 
 //destruction

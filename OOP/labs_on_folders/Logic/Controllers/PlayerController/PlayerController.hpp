@@ -19,6 +19,9 @@ class PlayerController{
         //move player
         void move(Direction dir);
 
+        //shoot
+        void shoot();
+
         //destruction
         ~PlayerController();
 };

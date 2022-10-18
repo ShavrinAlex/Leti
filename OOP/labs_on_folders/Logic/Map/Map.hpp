@@ -1,5 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "../Entities/Entity/Entity.hpp"
 #include "../Entities/Player/Player.hpp"
 #include "../Cell/Cell.hpp"
@@ -58,6 +57,9 @@ class Map{
         //add enemy
         void addEnemy(Entity* enemy, Position* pos);
 
+        //remove enemy
+        void removeEnemy(Entity* enemy);
+
         //get enemies
         Enemies getEnemies();
 
@@ -69,6 +71,9 @@ class Map{
 
         //move entity
         void moveEntity(Entity* entity);
+
+        //make damage
+        void makeDamage(Entity* entity);
 
         //get player position
         Position* getPlayerPosition();

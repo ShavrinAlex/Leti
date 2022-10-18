@@ -150,6 +150,19 @@ void Map::addEnemy(Entity* enemy, Position* pos){
     this->enemies.emplace_back(*en);
 };
 
+//remove enemy
+void Map::removeEnemy(Entity* enemy){
+    //search enemy
+    for (int i = 0; i < this->enemies.size(); i++){
+        if (this->enemies.at(i).entity == enemy){
+            delete this->enemies.at(i).entity;
+            delete this->enemies.at(i).pos;
+            auto iter = this->enemies.begin();
+            this->enemies.erase(iter + i);
+        }
+    }
+};
+
 //get enemies
 Enemies Map::getEnemies(){
     return this->enemies;
@@ -269,6 +282,50 @@ void Map::moveEntity(Entity* entity){
     }
     //clear memory
     delete next_position;
+};
+
+//make damage
+void Map::makeDamage(Entity* entity){
+    //calculate position to damage
+    Position* damage_position = this->calculateNextEntityPosition(entity);
+
+    //convert damage position
+    this->convertEntityPosition(damage_position);
+
+    //check entity on damage position
+    if (this->isHereEntity(damage_position)){
+        int health;
+        int damage;
+        //check enemy agressor
+        if (entity == this->player->entity){
+            //damage enemy on damage position
+            for (int i = 0; i < this->enemies.size(); i++){
+                if (this->enemies.at(i).pos->x == damage_position->x && this->enemies.at(i).pos->y == damage_position->y){
+                    health= this->enemies.at(i).entity->getHealth();
+                    damage = this->player->entity->getDamage();
+                    //damage enemy
+                    if (health - damage <= 0){
+                        this->enemies.at(i).entity->setHealth(0);
+                        this->removeEnemy(this->enemies.at(i).entity);
+                    } else{
+                        this->enemies.at(i).entity->setHealth(health - damage);
+                    }
+                }
+            }
+        } else{
+            health = this->player->entity->getHealth();
+            damage = entity->getDamage();
+
+            //damage player
+            if (health - damage <= 0){
+                this->player->entity->setHealth(0);
+            } else{
+                this->player->entity->setHealth(health - damage);
+            }
+        }
+    }
+    //clear memory
+    delete damage_position;
 };
 
 //get player position

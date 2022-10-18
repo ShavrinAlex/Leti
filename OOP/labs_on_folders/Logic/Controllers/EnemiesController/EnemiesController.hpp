@@ -24,6 +24,9 @@ class EnemiesController{
         //move enemy
         void move();
 
+        //shoot
+        void shoot(Entity* enemy);
+
         //destruction
         ~EnemiesController();
 };

@@ -53,6 +53,7 @@ int Game::startGame(){
     //create player
     Player player = Player();
     player.setSpeed(1);
+    player.setDamage(50);
     map.setPlayer(&player);
     PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, map.getPlayerPosition(), PLAYER_IMAGE);
 
