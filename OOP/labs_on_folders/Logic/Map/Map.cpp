@@ -33,7 +33,7 @@ Map::Map(){
     this->width = WIDTH;
     this->height = HEIGHT;
     //create player
-    this->player = new EntityElem;
+    this->player = new PlayerElem;
     this->player->entity = nullptr;
     Position* pos = new Position;
     pos->x = START_POSITION_X;
@@ -47,7 +47,7 @@ Map::Map(int width, int height){
     this->height = height;
 
     //create player
-    this->player = new EntityElem;
+    this->player = new PlayerElem;
     this->player->entity = nullptr;
     Position* pos = new Position;
     pos->x = START_POSITION_X;
@@ -174,12 +174,7 @@ Cell* Map::getCell(int pos_x, int pos_y){
 };
 
 //check enemy on cell
-bool Map::isHereEntity(Position* pos){
-    //check player on this position
-    if (this->player->pos->x == pos->x && this->player->pos->y == pos->y){
-        return true;
-    }
-
+bool Map::isHereEnemy(Position* pos){
     //check absence enemies
     if (this->enemies.size() == 0){
         return false;
@@ -255,8 +250,8 @@ void Map::moveEntity(Entity* entity){
     //convert entity position
     this->convertEntityPosition(next_position);
     
-    //check cell on wall and on entity
-    if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEntity(next_position)){
+    //check cell on wall and on enemy
+    if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEnemy(next_position) || (this->player->pos->x == next_position->x && this->player->pos->y == next_position->y)){
         return;
     }
 
@@ -292,12 +287,12 @@ void Map::makeDamage(Entity* entity){
     //convert damage position
     this->convertEntityPosition(damage_position);
 
-    //check entity on damage position
-    if (this->isHereEntity(damage_position)){
-        int health;
-        int damage;
-        //check enemy agressor
-        if (entity == this->player->entity){
+    int health;
+    int damage;
+    //check enemy agressor
+    if (entity == this->player->entity){
+        //check entity on damage position
+        if (this->isHereEnemy(damage_position)){
             //damage enemy on damage position
             for (int i = 0; i < this->enemies.size(); i++){
                 if (this->enemies.at(i).pos->x == damage_position->x && this->enemies.at(i).pos->y == damage_position->y){
@@ -312,18 +307,25 @@ void Map::makeDamage(Entity* entity){
                     }
                 }
             }
-        } else{
-            health = this->player->entity->getHealth();
-            damage = entity->getDamage();
-
-            //damage player
-            if (health - damage <= 0){
-                this->player->entity->setHealth(0);
-            } else{
-                this->player->entity->setHealth(health - damage);
-            }
         }
+    } else{
+        //check player on danmage position
+        if (this->player->pos->x == damage_position->x && this->player->pos->y == damage_position->y)
+            if (this->player->entity->getArmor()){
+                this->player->entity->removeArmor();
+            } else{
+                health = this->player->entity->getHealth();
+                damage = entity->getDamage();
+
+                //damage player
+                if (health - damage <= 0){
+                    this->player->entity->setHealth(0);
+                } else{
+                    this->player->entity->setHealth(health - damage);
+                }
+            }
     }
+
     //clear memory
     delete damage_position;
 };

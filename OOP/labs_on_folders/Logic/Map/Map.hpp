@@ -7,6 +7,11 @@
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
+typedef struct PlayerElem{
+    Player* entity;
+    Position* pos;
+} PlayerElem;
+
 typedef struct EntityElem{
     Entity* entity;
     Position* pos;
@@ -16,7 +21,7 @@ typedef std::vector <EntityElem> Enemies;
 class Map{
     private:
         //player
-        EntityElem* player;
+        PlayerElem* player;
         //Position player_position;
         //map
         int width, height;
@@ -67,7 +72,7 @@ class Map{
         Cell* getCell(int pos_x, int pos_y);
 
         //check enemy on cell
-        bool isHereEntity(Position* pos);
+        bool isHereEnemy(Position* pos);
 
         //move entity
         void moveEntity(Entity* entity);

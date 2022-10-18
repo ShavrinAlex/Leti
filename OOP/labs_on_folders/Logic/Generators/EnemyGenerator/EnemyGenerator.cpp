@@ -27,7 +27,8 @@ void EnemyGenerator::generateEnemy(){
 void EnemyGenerator::generate(int map_height, int map_width){
     int map_size = map_height * map_width;
     
-    for (int i = 0; i < (map_size / 100.0) * 8; i++){
+    for (int i = 0; i < (map_size / 100.0) * 4; i++){
+        std::cout<<"new enemy "<<i<<'\n';
         this->generateEnemy();
     }
 };
