@@ -1,14 +1,17 @@
 #pragma once
+#include "../EntityController/EntityController.hpp"
 #include "../../Entities/Player/Player.hpp"
 #include "../../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
 #include "../../Map/Map.hpp"
 #include "../../Utility/Enumerations.hpp"
 
-class PlayerController{
+class PlayerController: public EntityController{
     private:
         Player* player;
+        
         Map* map;
         PlayerView* player_view;
+
         sf::Clock clock;
         float time;
         float timer;
@@ -21,6 +24,9 @@ class PlayerController{
 
         //shoot
         void shoot();
+
+        //take damage
+        void takeDamage(int damage, Entity* entity) override;
 
         //destruction
         ~PlayerController();

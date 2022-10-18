@@ -1,6 +1,7 @@
 #include "EnemiesController.hpp"
 #include "../../../Graphic/EntitiesView/EntityView/EntityView.hpp"
 #include <iostream>
+#define ENEMY_DAMAGE 25
 
 //initialization
 EnemiesController::EnemiesController(Map* map, MapView* map_view){
@@ -55,6 +56,26 @@ void EnemiesController::move(){
 //shoot
 void EnemiesController::shoot(Entity* enemy){
     this->map->makeDamage(enemy);
+};
+
+//take damage
+void EnemiesController::takeDamage(int damage, Entity* entity){
+    auto enemies = this->map->getEnemies();
+    for (int i = 0; i < enemies.size(); i++){
+        if (enemies.at(i).entity == entity){
+            int health = enemies.at(i).entity->getHealth();
+            //damage enemy
+            if (health - damage <= 0){
+                enemies.at(i).entity->setHealth(0);
+
+                //remove enemy
+                this->map->removeEnemy(enemies.at(i).entity);
+                this->map_view->removeEnemyView(i);
+            } else{
+                enemies.at(i).entity->setHealth(health - damage);
+            }
+        }
+    }
 };
 
 //destruction

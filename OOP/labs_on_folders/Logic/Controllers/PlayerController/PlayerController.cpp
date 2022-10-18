@@ -29,11 +29,32 @@ void PlayerController::shoot(){
     this->time = time/800;
     this->timer += time;
     if (this->timer >= 350){
+        //erraise energy
         int player_energy = this->player->getEnergy();
         if (player_energy >= SHOOT_ENERGY){
             this->player->setEnergy(player_energy - SHOOT_ENERGY);
+
             this->map->makeDamage(this->player);
             this->timer = 0;
+        }
+    }
+};
+
+//take damage
+void PlayerController::takeDamage(int damage, Entity* entity){
+    if (entity == this->player){
+        //check armor
+        if (this->player->getArmor()){
+            this->player->removeArmor();
+        } else{
+            int health = this->player->getHealth();
+
+            //damage player
+            if (health - damage <= 0){
+                this->player->setHealth(0);
+            } else{
+                this->player->setHealth(health - damage);
+            }
         }
     }
 };

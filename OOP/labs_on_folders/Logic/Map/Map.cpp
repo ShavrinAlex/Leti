@@ -139,6 +139,12 @@ int Map::getWidth(){
     return this->width;
 };
 
+//set controllers
+void Map::setControllers(EntityController* player_controller, EntityController* enemies_controller){
+    this->player_controller = player_controller;
+    this->enemies_controller = enemies_controller;
+};
+
 //add enemy
 void Map::addEnemy(Entity* enemy, Position* pos){
     //create enemy struct
@@ -223,6 +229,8 @@ Position* Map::calculateNextEntityPosition(Entity* entity){
             }
         }
     }
+    //convert damage position
+    this->convertEntityPosition(next_position);
     return next_position;
 };
 
@@ -246,9 +254,6 @@ void Map::convertEntityPosition(Position* position){
 void Map::moveEntity(Entity* entity){
     //calculate next entity position
     Position* next_position = this->calculateNextEntityPosition(entity);
-
-    //convert entity position
-    this->convertEntityPosition(next_position);
     
     //check cell on wall and on enemy
     if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEnemy(next_position) || (this->player->pos->x == next_position->x && this->player->pos->y == next_position->y)){
@@ -284,46 +289,21 @@ void Map::makeDamage(Entity* entity){
     //calculate position to damage
     Position* damage_position = this->calculateNextEntityPosition(entity);
 
-    //convert damage position
-    this->convertEntityPosition(damage_position);
-
-    int health;
-    int damage;
-    //check enemy agressor
+    //check entity agressor
     if (entity == this->player->entity){
         //check entity on damage position
         if (this->isHereEnemy(damage_position)){
-            //damage enemy on damage position
             for (int i = 0; i < this->enemies.size(); i++){
                 if (this->enemies.at(i).pos->x == damage_position->x && this->enemies.at(i).pos->y == damage_position->y){
-                    health= this->enemies.at(i).entity->getHealth();
-                    damage = this->player->entity->getDamage();
-                    //damage enemy
-                    if (health - damage <= 0){
-                        this->enemies.at(i).entity->setHealth(0);
-                        this->removeEnemy(this->enemies.at(i).entity);
-                    } else{
-                        this->enemies.at(i).entity->setHealth(health - damage);
-                    }
+                    this->enemies_controller->takeDamage(entity->getDamage(), this->enemies.at(i).entity);
                 }
             }
-        }
+        }     
     } else{
         //check player on danmage position
-        if (this->player->pos->x == damage_position->x && this->player->pos->y == damage_position->y)
-            if (this->player->entity->getArmor()){
-                this->player->entity->removeArmor();
-            } else{
-                health = this->player->entity->getHealth();
-                damage = entity->getDamage();
-
-                //damage player
-                if (health - damage <= 0){
-                    this->player->entity->setHealth(0);
-                } else{
-                    this->player->entity->setHealth(health - damage);
-                }
-            }
+        if (this->player->pos->x == damage_position->x && this->player->pos->y == damage_position->y){
+            this->player_controller->takeDamage(entity->getDamage(), this->player->entity);
+        }
     }
 
     //clear memory

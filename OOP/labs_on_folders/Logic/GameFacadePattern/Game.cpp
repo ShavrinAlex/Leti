@@ -88,6 +88,8 @@ int Game::startGame(){
 
     //create enemies controller
     EnemiesController enemies_controller = EnemiesController(&map, &map_view);
+
+    map.setControllers(&player_controller, &enemies_controller);
     
     //main loop
     while (graphic_arts->isOpen() && this->game_status == Continues){

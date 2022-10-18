@@ -25,6 +25,9 @@ class MapView{
         //add enemy view
         void addEnemyView(EntityView* enemy_view);
 
+        //remove enemy view
+        void removeEnemyView(int index);
+
         //get enemies view
         EnemiesView getEnemiesView();
 

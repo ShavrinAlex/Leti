@@ -4,6 +4,7 @@
 #include "../Cell/Cell.hpp"
 #include "../Utility/Position.hpp"
 #include "../Utility/Enumerations.hpp"
+#include "../Controllers/EntityController/EntityController.hpp"
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
@@ -22,7 +23,7 @@ class Map{
     private:
         //player
         PlayerElem* player;
-        //Position player_position;
+        
         //map
         int width, height;
         CellMatrix map;
@@ -30,11 +31,12 @@ class Map{
         //enemies
         Enemies enemies;
 
+        //controllers
+        EntityController* player_controller;
+        EntityController* enemies_controller;
+
         //create map
         void createMap();
-
-        //calculate next entity position
-        Position* calculateNextEntityPosition(Entity* entity);
 
         //convert entity position
         void convertEntityPosition(Position* position);
@@ -59,6 +61,9 @@ class Map{
         int getHeight();
         int getWidth();
 
+        //set controllers
+        void setControllers(EntityController* player_controller, EntityController* enemies_controller);
+
         //add enemy
         void addEnemy(Entity* enemy, Position* pos);
 
@@ -73,6 +78,9 @@ class Map{
 
         //check enemy on cell
         bool isHereEnemy(Position* pos);
+
+        //calculate next entity position
+        Position* calculateNextEntityPosition(Entity* entity);
 
         //move entity
         void moveEntity(Entity* entity);

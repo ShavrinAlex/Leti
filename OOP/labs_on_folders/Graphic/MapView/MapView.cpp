@@ -24,6 +24,12 @@ void MapView::addEnemyView(EntityView* enemy_view){
     this->enemies_view.emplace_back(enemy_view);
 };
 
+//remove enemy view
+void MapView::removeEnemyView(int index){
+    auto iter = this->enemies_view.begin();
+    this->enemies_view.erase(iter + index);
+};
+
 //get enemies view
 EnemiesView MapView::getEnemiesView(){
     return this->enemies_view;
