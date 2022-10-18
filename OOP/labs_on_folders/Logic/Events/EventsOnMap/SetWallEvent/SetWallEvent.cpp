@@ -2,17 +2,12 @@
 #include "../../../Cell/Cell.hpp"
 
 //initialization
-SetWallEvent::SetWallEvent(Map* map):EventOnMap(map){};
+SetWallEvent::SetWallEvent(Map* map, Generator* generator):EventOnMap(map, generator){};
 
 //execute
 EventStatus SetWallEvent::execute(){
-    int x, y;
-    Cell* cell;
-    do{
-        x = rand() % this->map->getWidth();
-        y = rand() % this->map->getHeight();
-        cell = this->map->getCell(x, y);
-    } while(cell->getEvent() != nullptr || cell->isHerePlayer() || cell->isWall());
+    Position* pos = this->generator->getPositionFreeCell();
+    Cell* cell = this->map->getCell(pos->x, pos->y);
     cell->setWall();
 
     return Delete;

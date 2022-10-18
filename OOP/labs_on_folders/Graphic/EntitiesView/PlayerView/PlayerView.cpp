@@ -47,8 +47,8 @@ void PlayerView::updateEnergyScale(){
     this->energy_scale_stroke->setSize(sf::Vector2f((this->width - 10) * bool(((Player*)entity)->getEnergy()), SCALE_HEIGHT * bool(((Player*)entity)->getEnergy())));
 
     //energy scale position
-    this->energy_scale->setPosition(position.x * this->width + 5, ((position.y + 1) * this->height) - SCALE_HEIGHT);
-    this->energy_scale_stroke->setPosition(position.x * this->width + 5, ((position.y + 1) * this->height) - SCALE_HEIGHT);
+    this->energy_scale->setPosition(position.x + 5, (position.y + this->height) - SCALE_HEIGHT);
+    this->energy_scale_stroke->setPosition(position.x + 5, (position.y + this->height) - SCALE_HEIGHT);
 };
 
 //update armor scale position and size
@@ -58,8 +58,8 @@ void PlayerView::updateArmorScale(){
     this->armor_scale_stroke->setSize(sf::Vector2f((this->width - 10) * (((Player*)entity)->getArmor()), SCALE_HEIGHT * (((Player*)entity)->getArmor())));
 
     //armor scale position
-    this->armor_scale->setPosition(position.x * this->width + 5, (position.y * this->height) + SCALE_HEIGHT);
-    this->armor_scale_stroke->setPosition(position.x * this->width + 5, (position.y * this->height) + SCALE_HEIGHT);
+    this->armor_scale->setPosition(position.x + 5, position.y + SCALE_HEIGHT);
+    this->armor_scale_stroke->setPosition(position.x + 5, position.y + SCALE_HEIGHT);
 };
 
 //get energy scale

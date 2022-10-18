@@ -5,12 +5,12 @@
 #include "../Utility/Enumerations.hpp"
 #include "../StartDialog/StartDialog.hpp"
 #include "../Controllers/PlayerController/PlayerController.hpp"
-#include "../Controllers/EventsController/EventsController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
 #include "../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
 #include "../FactoriesPattern/FactoryEventOnMap/FactoryEventOnMap.hpp"
 #include "../FactoriesPattern/FactoryEventOnGame/FactoryEventOnGame.hpp"
-#include "../EventGenerator/EventGenerator.hpp"
+#include "../Generators/EventGenerator/EventGenerator.hpp"
+#include "../Generators/EnemyGenerator/EnemyGenerator.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
@@ -74,12 +74,14 @@ int Game::startGame(){
     FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(&game_controller);
     FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game, &event_generator);
 
-    //create events controller
-    EventsController events_controller = EventsController(&event_generator, &factory_event_on_player, &factory_event_on_game, &factory_event_on_map, this->map_height, this->map_width);
-
     //create events
-    events_controller.createEvents();
+    event_generator.setFactories(&factory_event_on_player, &factory_event_on_game, &factory_event_on_map);
+    event_generator.generate(this->map_height, this->map_width);
 
+    //create enemy generator
+    EnemyGenerator enemy_generator = EnemyGenerator(&map, &map_view);
+    enemy_generator.generate(this->map_height, this->map_width);
+    
     //main loop
     while (graphic_arts->isOpen() && this->game_status == Continues){
         //check close window

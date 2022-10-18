@@ -1,6 +1,6 @@
 #include "EntityView.hpp"
 #define SCALE_HEIGHT 5
-
+#include <iostream>
 //initialization
 EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image){
     //logic entity
@@ -31,8 +31,8 @@ EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std
 //set position
 void EntityView::setPosition(Position *entity_position){
     //set new position
-    this->position.x = entity_position->x;
-    this->position.y = entity_position->y;
+    this->position.x = entity_position->x * this->width;
+    this->position.y = entity_position->y * this->height;
 
     //update
     this->update();
@@ -64,7 +64,7 @@ void EntityView::createHealthScale(){
 //update sprite
 void EntityView::updateSprite(){
     //update sprite position
-    this->sprite->setPosition(position.x * this->width, position.y * this->height);
+    this->sprite->setPosition(position.x, position.y);
 
     //update sprite direction
     switch (this->entity->getDirection()){
@@ -93,8 +93,8 @@ void EntityView::updateHealthScale(){
     this->health_scale->setSize(sf::Vector2f((this->width - 10)*(this->entity->getHealth()/100.0), SCALE_HEIGHT));
 
     //health scale position
-    this->health_scale->setPosition(position.x * this->width + 5, position.y * this->height);
-    this->health_scale_stroke->setPosition(position.x * this->width + 5, position.y * this->height);
+    this->health_scale->setPosition(position.x + 5, position.y);
+    this->health_scale_stroke->setPosition(position.x + 5, position.y);
 };
 
 //get sprite

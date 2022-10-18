@@ -117,6 +117,22 @@ int Map::getWidth(){
     return this->width;
 };
 
+//add enemy
+void Map::addEnemy(Entity* enemy, Position* pos){
+    //create enemy struct
+    Enemy* en = new Enemy;
+    en->enemy = enemy;
+    en->pos = pos;
+
+    //add enemy
+    this->enemies.emplace_back(*en);
+};
+
+//get enemies
+Enemies Map::getEnemies(){
+    return this->enemies;
+};
+
 //get cell
 Cell* Map::getCell(int pos_x, int pos_y){
     return this->map.at(pos_y).at(pos_x);

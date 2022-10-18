@@ -1,18 +1,21 @@
 #pragma once
-#include "../FactoriesPattern/EventFactory.hpp"
-#include "../Map/Map.hpp"
-#include "../../Graphic/MapView/MapView.hpp"
+#include "../Generator/Generator.hpp"
+#include "../../FactoriesPattern/EventFactory.hpp"
+#include "../../FactoriesPattern/FactoryEventOnGame/FactoryEventOnGame.hpp"
+#include "../../FactoriesPattern/FactoryEventOnMap/FactoryEventOnMap.hpp"
+#include "../../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
 
-class EventGenerator{
+class EventGenerator: public Generator{
     private:
-        Map* map;
-        MapView* map_view;
+        FactoryEventOnPlayer* factory_event_on_player;
+        FactoryEventOnGame* factory_event_on_game;
+        FactoryEventOnMap* factory_event_on_map;
     public:
         //initialization
         EventGenerator(Map* map, MapView* map_view);
 
-        //get position random free cell
-        Position* getPositionFreeCell();
+        //set factories
+        void setFactories(FactoryEventOnPlayer* factory_event_on_player, FactoryEventOnGame* factory_event_on_game, FactoryEventOnMap* factory_event_on_map);
 
         //generate and set health event and his appearance
         void generateHealthEvent(EventFactory* factory_event_on_player);
@@ -34,6 +37,9 @@ class EventGenerator{
 
         //generate and set wall event and his appearance
         void generateSetWinGameEvent(EventFactory* factory_event_on_map);
+
+        //generate all events
+        void generate(int map_height, int map_width) override;
 
         //destruction
         ~EventGenerator();

@@ -61,6 +61,7 @@ void GraphicArts::drawEntity(EntityView& entity_view){
 
 //draw map
 void GraphicArts::drawMap(MapView& map_view){
+    //draw map
     for (int y = 0; y < this->height/CELL_SIDE; y++){
         for (int x = 0; x < this->width/CELL_SIDE; x++){
             //get cell view
@@ -79,6 +80,11 @@ void GraphicArts::drawMap(MapView& map_view){
                 this->window.draw(*event);
             }
         }
+    }
+
+    //draw enemies
+    for(int i = 0; i < map_view.getEnemiesView().size(); i++){
+        this->drawEntity(*(map_view.getEnemiesView()).at(i));
     }
 };
 

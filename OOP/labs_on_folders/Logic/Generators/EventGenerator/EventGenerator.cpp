@@ -7,22 +7,18 @@
 #define ENERGY "./Graphic/Images/Events/EventsOnPlayer/energy.png"
 
 //initialization
-EventGenerator::EventGenerator(Map* map, MapView* map_view){
-    this->map = map;
-    this->map_view = map_view;
+EventGenerator::EventGenerator(Map* map, MapView* map_view):Generator(map, map_view){
+    this->factory_event_on_player = nullptr;
+    this->factory_event_on_game = nullptr;
+    this->factory_event_on_map = nullptr;
 };
 
-//get position random free cell
-Position* EventGenerator::getPositionFreeCell(){
-    Position* position = new Position();
-    Cell* cell = nullptr;
-    do{
-        position->x = rand() % this->map->getWidth();
-        position->y = rand() % this->map->getHeight();
-        cell = this->map->getCell(position->x, position->y);
-    } while (cell->isWall() || cell->isHerePlayer() || cell->getEvent() != nullptr);
-    return position;
-}
+//set factories
+void EventGenerator::setFactories(FactoryEventOnPlayer* factory_event_on_player, FactoryEventOnGame* factory_event_on_game, FactoryEventOnMap* factory_event_on_map){
+    this->factory_event_on_player = factory_event_on_player;
+    this->factory_event_on_game = factory_event_on_game;
+    this->factory_event_on_map = factory_event_on_map;
+};
 
 //generate and set health event and his appearance
 void EventGenerator::generateHealthEvent(EventFactory* factory_event_on_player){
@@ -83,6 +79,7 @@ void EventGenerator::generateEndGameEvent(EventFactory* factory_event_on_game){
     //set end game event view
     EventView* ev = new EventView(position->x, position->y, FIRE);
     (this->map_view->getCellView(position->x, position->y))->setEventView(ev);
+    delete position;
 };
 
 //generate and set wall event and his appearance
@@ -108,6 +105,45 @@ void EventGenerator::generateSetWinGameEvent(EventFactory* factory_event_on_map)
     //set SetWinGameEvent view
     EventView* ev = new EventView(position->x, position->y, SECRET);
     (this->map_view->getCellView(position->x, position->y))->setEventView(ev);
+    delete position;
+};
+
+//generate all events
+void EventGenerator::generate(int map_height, int map_width){
+    //check mistakes
+    if (this->factory_event_on_game == nullptr || this->factory_event_on_map == nullptr || this->factory_event_on_player == nullptr){
+        return;
+    }
+
+    int map_size = map_height * map_width;
+    
+    //set win game event
+    this->generateSetWinGameEvent(this->factory_event_on_map);
+
+    //create end game events 
+    for (int i = 0; i < (map_size / 100.0) * 5; i++){
+        this->generateEndGameEvent(this->factory_event_on_game);
+    }
+
+    //create set wall events 
+    for (int i = 0; i < (map_size / 100.0) * 8; i++){
+        this->generateSetWallEvent(this->factory_event_on_map);
+    }
+
+    //create set health events 
+    for (int i = 0; i < (map_size / 100.0) * 5; i++){
+        this->generateHealthEvent(this->factory_event_on_player);
+    }
+
+    //create set armor events 
+    for (int i = 0; i < (map_size / 100.0) * 3; i++){
+        this->generateArmorEvent(this->factory_event_on_player);
+    }
+    
+    //create set energy events 
+    for (int i = 0; i < (map_size / 100.0) * 8; i++){
+        this->generateEnergyEvent(this->factory_event_on_player);
+    }
 };
 
 //destruction

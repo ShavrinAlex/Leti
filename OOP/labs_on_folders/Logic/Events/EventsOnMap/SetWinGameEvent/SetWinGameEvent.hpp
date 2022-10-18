@@ -1,6 +1,6 @@
 #include "../EventOnMap/EventOnMap.hpp"
 #include "../../../FactoriesPattern/EventFactory.hpp"
-#include "../../../EventGenerator/EventGenerator.hpp"
+#include "../../../Generators/EventGenerator/EventGenerator.hpp"
 
 class SetWinGameEvent: public EventOnMap{
     private:

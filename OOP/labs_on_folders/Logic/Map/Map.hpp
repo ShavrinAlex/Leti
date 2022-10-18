@@ -1,17 +1,24 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Entities/Entity/Entity.hpp"
 #include "../Cell/Cell.hpp"
 #include "../Utility/Position.hpp"
 #include "../Utility/Enumerations.hpp"
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
+typedef struct Enemy{
+    Entity* enemy;
+    Position* pos;
+} Enemy;
+typedef std::vector <Enemy> Enemies;
 
 class Map{
     private:
         Position player_position;
         int width, height;
         CellMatrix map;
+        Enemies enemies;
 
         //create map
         void createMap();
@@ -32,6 +39,12 @@ class Map{
         //get size
         int getHeight();
         int getWidth();
+
+        //add enemy
+        void addEnemy(Entity* enemy, Position* pos);
+
+        //get enemies
+        Enemies getEnemies();
 
         //get cell
         Cell* getCell(int pos_x, int pos_y);

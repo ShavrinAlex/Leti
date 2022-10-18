@@ -19,6 +19,16 @@ MapView::MapView(Map* map){
     createMapView();
 };
 
+//add enemy view
+void MapView::addEnemyView(EntityView* enemy_view){
+    this->enemies_view.emplace_back(enemy_view);
+};
+
+//get enemies view
+EnemiesView MapView::getEnemiesView(){
+    return this->enemies_view;
+};
+
 //get cell view
 CellView* MapView::getCellView(int pos_x, int pos_y){
     return this->map_view.at(pos_y).at(pos_x);

@@ -11,7 +11,7 @@ FactoryEventOnMap::FactoryEventOnMap(Map* map, EventFactory* factory_event_on_ga
 
 //create set wall event
 Event* FactoryEventOnMap::createEvent1(){
-    return new SetWallEvent(this->map);
+    return new SetWallEvent(this->map, this->event_generator);
 };
 
 //create set end game event
