@@ -1,7 +1,8 @@
 #include "Map.hpp"
 #define WIDTH 5
 #define HEIGHT 5
-#define START_POSITION {0, 0}
+#define START_POSITION_X 0
+#define START_POSITION_Y 0
 
 //create map
 void Map::createMap(){
@@ -13,7 +14,7 @@ void Map::createMap(){
             //create cell
             bool is_here_player = false;
             bool is_wall = false;
-            if (this->player_position.x == x && this->player_position.y == y){
+            if (this->player->pos->x == x && this->player->pos->y == y){
                 is_here_player = true;
             }
             if (rand() % 10 > 7 && is_here_player == false){
@@ -30,21 +31,41 @@ Map::Map(){
     //std::cout<<"map "<<this<<" constr\n";
     this->width = WIDTH;
     this->height = HEIGHT;
-    this->player_position = (Position)START_POSITION;
+    //create player
+    this->player = new EntityElem;
+    this->player->entity = nullptr;
+    Position* pos = new Position;
+    pos->x = START_POSITION_X;
+    pos->y = START_POSITION_Y;
+    this->player->pos = pos;
+
     createMap();
 };
 Map::Map(int width, int height){
     this->width = width;
     this->height = height;
-    this->player_position = (Position)START_POSITION;
+
+    //create player
+    this->player = new EntityElem;
+    this->player->entity = nullptr;
+    Position* pos = new Position;
+    pos->x = START_POSITION_X;
+    pos->y = START_POSITION_Y;
+    this->player->pos = pos;
+
     createMap();
+};
+
+//set player
+void Map::setPlayer(Player* player){
+    this->player->entity = player;
 };
 
 //coping
 Map::Map(const Map& obj){
     //std::cout<<"map "<<this<<" constr copy\n";
-    this->player_position.x = obj.player_position.x;
-    this->player_position.y = obj.player_position.y;
+    this->player->pos->x = obj.player->pos->x;
+    this->player->pos->y = obj.player->pos->y;
     this->width = obj.width;
     this->height = obj.height;
     for (int y = 0; y < this->height; y++){
@@ -66,8 +87,8 @@ Map& Map::operator = (const Map& obj){
                 delete cell;
             }
         }
-        this->player_position.x = obj.player_position.x;
-        this->player_position.y = obj.player_position.y;
+        this->player->pos->x = obj.player->pos->x;
+        this->player->pos->y = obj.player->pos->y;
         this->width = obj.width;
         this->height = obj.height;
         for (int y = 0; y < this->height; y++){
@@ -86,8 +107,8 @@ Map& Map::operator = (const Map& obj){
 //move
 Map::Map(Map&& obj){
     //std::cout<<"map "<<this<<" constr peremesh\n";
-    std::swap(this->player_position.x, obj.player_position.x);
-    std::swap(this->player_position.y, obj.player_position.y);
+    std::swap(this->player->pos->x, obj.player->pos->x);
+    std::swap(this->player->pos->y, obj.player->pos->y);
     std::swap(this->width, obj.width);
     std::swap(this->height, obj.height);
     std::swap(this->map, obj.map);
@@ -100,8 +121,8 @@ Map& Map::operator = (Map&& obj){
                 delete cell;
             }
         }
-        std::swap(this->player_position.x, obj.player_position.x);
-        std::swap(this->player_position.y, obj.player_position.y);
+        std::swap(this->player->pos->x, obj.player->pos->x);
+        std::swap(this->player->pos->y, obj.player->pos->y);
         std::swap(this->width, obj.width);
         std::swap(this->height, obj.height);
         std::swap(this->map, obj.map);
@@ -120,8 +141,8 @@ int Map::getWidth(){
 //add enemy
 void Map::addEnemy(Entity* enemy, Position* pos){
     //create enemy struct
-    Enemy* en = new Enemy;
-    en->enemy = enemy;
+    EntityElem* en = new EntityElem;
+    en->entity = enemy;
     en->pos = pos;
 
     //add enemy
@@ -138,68 +159,120 @@ Cell* Map::getCell(int pos_x, int pos_y){
     return this->map.at(pos_y).at(pos_x);
 };
 
-//set player position
-void Map::setPlayerPosition(Position* next_player_position){
-    //convert player position
-    if (next_player_position->x >= this->width){
-        next_player_position->x -= this->width;        
+//check enemy on cell
+bool Map::isHereEntity(Position* pos){
+    //check player on this position
+    if (this->player->pos->x == pos->x && this->player->pos->y == pos->y){
+        return true;
     }
-    if (next_player_position->x < 0){
-        next_player_position->x += this->width;        
+
+    //check absence enemies
+    if (this->enemies.size() == 0){
+        return false;
     }
-    if (next_player_position->y >= this->height){
-        next_player_position->y -= this->height;        
+
+    //check position all enemies
+    for (int i = 0; i < this->enemies.size(); i++){
+        if (this->enemies.at(i).pos->x == pos->x && this->enemies.at(i).pos->y == pos->y){
+            return true;
+        }
     }
-    if (next_player_position->y < 0){
-        next_player_position->y += this->height;        
+    return false;
+};
+
+//calculate next entity position
+Position* Map::calculateNextEntityPosition(Entity* entity){
+    //calculate increments
+    int dx = 0;
+    int dy = 0;
+    switch (entity->getDirection()){
+        case Right:
+            dx = entity->getSpeed();
+            break;
+        case Left:
+            dx = -entity->getSpeed();
+            break;
+        case Up:
+            dy = -entity->getSpeed();
+            break;
+        case Down:
+            dy = entity->getSpeed();
+            break;
     }
-    
-    //check cell on wall
-    if (map.at(next_player_position->y).at(next_player_position->x)->isWall()){
-        return;
+    Position* next_position = new Position();
+
+    //calculate next position
+    if (entity == this->player->entity){
+        next_position->x = this->player->pos->x + dx;
+        next_position->y = this->player->pos->y + dy;
     } else{
+        //search entity
+        for (int i = 0; i < this->enemies.size(); i++){
+            if (this->enemies.at(i).entity == entity){
+                next_position->x = this->enemies.at(i).pos->x + dx;
+                next_position->y = this->enemies.at(i).pos->y + dy;
+            }
+        }
+    }
+    return next_position;
+};
+
+//convert entity position
+void Map::convertEntityPosition(Position* position){
+    if (position->x >= this->width){
+        position->x -= this->width;        
+    }
+    if (position->x < 0){
+        position->x += this->width;        
+    }
+    if (position->y >= this->height){
+        position->y -= this->height;        
+    }
+    if (position->y < 0){
+        position->y += this->height;        
+    }
+};
+
+//move entity
+void Map::moveEntity(Entity* entity){
+    //calculate next entity position
+    Position* next_position = this->calculateNextEntityPosition(entity);
+
+    //convert entity position
+    this->convertEntityPosition(next_position);
+    
+    //check cell on wall and on entity
+    if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEntity(next_position)){
+        return;
+    }
+
+    //move entity on new position
+    if (entity == this->player->entity){
         //delete reaction on player
-        map.at(player_position.y).at(player_position.x)->removePlayer();
+        map.at(this->player->pos->y).at(this->player->pos->x)->removePlayer();
 
         //set new position
-        player_position.x = next_player_position->x;
-        player_position.y = next_player_position->y;
+        this->player->pos->x = next_position->x;
+        this->player->pos->y = next_position->y;
 
         //set reaction on player
-        map.at(player_position.y).at(player_position.x)->setPlayer();
-
-        //clear memory
-        delete next_player_position;
+        map.at(this->player->pos->y).at(this->player->pos->x)->setPlayer();
+    } else{
+        //search entity
+        for (int i = 0; i < this->enemies.size(); i++){
+            if (this->enemies.at(i).entity == entity){
+                this->enemies.at(i).pos->x = next_position->x;
+                this->enemies.at(i).pos->y = next_position->y;
+            }
+        }
     }
+    //clear memory
+    delete next_position;
 };
 
 //get player position
 Position* Map::getPlayerPosition(){
-    return &player_position;
-};
-
-//calculate next player position
-Position* Map::calculateNextPlayerPosition(int speed, Direction direction){
-    int dx = 0;
-    int dy = 0;
-    switch (direction){
-        case Right:
-            dx = speed;
-            break;
-        case Left:
-            dx = -speed;
-            break;
-        case Up:
-            dy = -speed;
-            break;
-        case Down:
-            dy = speed;
-            break;
-    }
-    Position* next_player_position = new Position();
-    next_player_position->x = player_position.x + dx;
-    next_player_position->y = player_position.y + dy;
-    return next_player_position;
+    return this->player->pos;
 };
 
 Map::~Map(){

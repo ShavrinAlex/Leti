@@ -15,7 +15,7 @@ void PlayerController::move(Direction dir){
     this->timer += time;
     if (this->timer >= 350){
         this->player->setDirection(dir);
-        this->map->setPlayerPosition(map->calculateNextPlayerPosition(player->getSpeed(), dir));
+        this->map->moveEntity(this->player);
         this->player_view->setPosition(map->getPlayerPosition());
         this->timer = 0;
     }

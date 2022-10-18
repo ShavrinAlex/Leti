@@ -1,31 +1,46 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../Entities/Entity/Entity.hpp"
+#include "../Entities/Player/Player.hpp"
 #include "../Cell/Cell.hpp"
 #include "../Utility/Position.hpp"
 #include "../Utility/Enumerations.hpp"
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
-typedef struct Enemy{
-    Entity* enemy;
+typedef struct EntityElem{
+    Entity* entity;
     Position* pos;
-} Enemy;
-typedef std::vector <Enemy> Enemies;
+} EntityElem;
+typedef std::vector <EntityElem> Enemies;
 
 class Map{
     private:
-        Position player_position;
+        //player
+        EntityElem* player;
+        //Position player_position;
+        //map
         int width, height;
         CellMatrix map;
+
+        //enemies
         Enemies enemies;
 
         //create map
         void createMap();
+
+        //calculate next entity position
+        Position* calculateNextEntityPosition(Entity* entity);
+
+        //convert entity position
+        void convertEntityPosition(Position* position);
     public:
         //initialization
         Map();
         Map(int width, int height); 
+
+        //set player
+        void setPlayer(Player* player);
 
         //coping
         Map(const Map& obj);
@@ -49,14 +64,14 @@ class Map{
         //get cell
         Cell* getCell(int pos_x, int pos_y);
 
-        //set player position
-        void setPlayerPosition(Position* next_player_position);
+        //check enemy on cell
+        bool isHereEntity(Position* pos);
+
+        //move entity
+        void moveEntity(Entity* entity);
 
         //get player position
         Position* getPlayerPosition();
-
-        //calculate next player position
-        Position* calculateNextPlayerPosition(int speed, Direction direction);
 
         //destruction
         ~Map();

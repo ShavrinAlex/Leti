@@ -7,8 +7,6 @@ class Generator{
         Map* map;
         MapView* map_view;
 
-        //check enemy on cell
-        bool isHereEnemy(Position* pos);
     public:
         //initialization
         Generator(Map* map, MapView* map_view);
