@@ -73,6 +73,9 @@ class Map{
         //get player position
         Position* getPlayerPosition();
 
+        //get enemy position
+        Position* getEnemyPosition(Entity* entity);
+
         //destruction
         ~Map();
 };

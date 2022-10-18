@@ -4,7 +4,7 @@
 
 #define ENEMY_WIDTH 98
 #define ENEMY_HEIGHT 98
-#define ENEMY_IMAGE "./Graphic/Images/Entities/Enemy/enemy1.png"
+#define ENEMY_IMAGE "./Graphic/Images/Entities/Player/hero1.png"
 
 //initialization
 EnemyGenerator::EnemyGenerator(Map* map, MapView* map_view):Generator(map, map_view){};
@@ -13,6 +13,7 @@ EnemyGenerator::EnemyGenerator(Map* map, MapView* map_view):Generator(map, map_v
 void EnemyGenerator::generateEnemy(){
     Position* position = this->getPositionFreeCell();
     Entity* ent = new Entity();
+    ent->setSpeed(1);
     
     //set enemy
     (this->map)->addEnemy(ent, position);
@@ -26,7 +27,7 @@ void EnemyGenerator::generateEnemy(){
 void EnemyGenerator::generate(int map_height, int map_width){
     int map_size = map_height * map_width;
     
-    for (int i = 0; i < (map_size / 100.0) * 15; i++){
+    for (int i = 0; i < (map_size / 100.0) * 8; i++){
         this->generateEnemy();
     }
 };

@@ -5,6 +5,7 @@
 #include "../Utility/Enumerations.hpp"
 #include "../StartDialog/StartDialog.hpp"
 #include "../Controllers/PlayerController/PlayerController.hpp"
+#include "../Controllers/EnemiesController/EnemiesController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
 #include "../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
 #include "../FactoriesPattern/FactoryEventOnMap/FactoryEventOnMap.hpp"
@@ -16,6 +17,7 @@
 #define START_POSITION {1, 1}
 #define PLAYER_IMAGE "./Graphic/Images/Entities/Player/hero1.png"
 
+#include <iostream>
 //initialization
 Game::Game(){
     StartDialog start_dialog = StartDialog();
@@ -82,6 +84,9 @@ int Game::startGame(){
     //create enemy generator
     EnemyGenerator enemy_generator = EnemyGenerator(&map, &map_view);
     enemy_generator.generate(this->map_height, this->map_width);
+
+    //create enemies controller
+    EnemiesController enemies_controller = EnemiesController(&map, &map_view);
     
     //main loop
     while (graphic_arts->isOpen() && this->game_status == Continues){
@@ -90,6 +95,9 @@ int Game::startGame(){
         
         //actions
         com_reader.getPressedKey();
+
+        //enemies actions
+        enemies_controller.move();
     
         //draw all
         this->graphic_arts->clear();

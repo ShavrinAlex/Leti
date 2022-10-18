@@ -3,6 +3,7 @@
 #define HEIGHT 5
 #define START_POSITION_X 0
 #define START_POSITION_Y 0
+#include <iostream>
 
 //create map
 void Map::createMap(){
@@ -273,6 +274,17 @@ void Map::moveEntity(Entity* entity){
 //get player position
 Position* Map::getPlayerPosition(){
     return this->player->pos;
+};
+
+//get enemy position
+Position* Map::getEnemyPosition(Entity* entity){
+    Position* pos = nullptr;
+    for (int i = 0; i < this->enemies.size(); i++){
+        if (this->enemies.at(i).entity == entity){
+            pos = this->enemies.at(i).pos;
+        }
+    }
+    return pos;   
 };
 
 Map::~Map(){
