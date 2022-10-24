@@ -1,10 +1,10 @@
 #pragma once
-#include "../EntityController/EntityController.hpp"
-#include "../../Entities/Entity/Entity.hpp"
-#include "../../../Graphic/EntitiesView/EntityView/EntityView.hpp"
-#include "../../../Graphic/MapView/MapView.hpp"
-#include "../../Map/Map.hpp"
-#include "../../Utility/Enumerations.hpp"
+#include "../EntityController.hpp"
+#include "../../../Entities/Entity/Entity.hpp"
+#include "../../../../Graphic/EntitiesView/EntityView/EntityView.hpp"
+#include "../../../../Graphic/MapView/MapView.hpp"
+#include "../../../Map/Map.hpp"
+#include "../../../Utility/Enumerations.hpp"
 
 class EnemiesController: public EntityController{
     private:

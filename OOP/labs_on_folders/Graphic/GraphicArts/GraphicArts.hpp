@@ -15,6 +15,7 @@ class GraphicArts{
         sf::RenderWindow window;
     public:
         //initialization
+        GraphicArts();
         GraphicArts(int width, int height, std::string window_name = WINDOW_NAME);
         
         //check is open window

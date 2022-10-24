@@ -18,14 +18,14 @@ $(OBJ_FOLDER)CellView.o: ./Graphic/CellView/CellView.cpp ./Graphic/CellView/Cell
 $(OBJ_FOLDER)CommandReader.o: ./Logic/CommandReader/CommandReader.cpp ./Logic/CommandReader/CommandReader.hpp ./Logic/MediatorPattern/Mediator.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/CommandReader/CommandReader.cpp -o $(OBJ_FOLDER)CommandReader.o
 
-$(OBJ_FOLDER)CommandReaderMediator.o: ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.cpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/MediatorPattern/Mediator.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/Controllers/PlayerController/PlayerController.hpp ./Logic/Utility/Enumerations.hpp
+$(OBJ_FOLDER)CommandReaderMediator.o: ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.cpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/MediatorPattern/Mediator.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.hpp ./Logic/Utility/Enumerations.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.cpp -o $(OBJ_FOLDER)CommandReaderMediator.o
 
-$(OBJ_FOLDER)PlayerController.o: ./Logic/Controllers/PlayerController/PlayerController.cpp ./Logic/Controllers/PlayerController/PlayerController.hpp
-	$(CC) $(COMPILE_FLAGS) ./Logic/Controllers/PlayerController/PlayerController.cpp -o $(OBJ_FOLDER)PlayerController.o
+$(OBJ_FOLDER)PlayerController.o: ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.cpp ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.cpp -o $(OBJ_FOLDER)PlayerController.o
 
-$(OBJ_FOLDER)EnemiesController.o: ./Logic/Controllers/EnemiesController/EnemiesController.cpp ./Logic/Controllers/EnemiesController/EnemiesController.hpp
-	$(CC) $(COMPILE_FLAGS) ./Logic/Controllers/EnemiesController/EnemiesController.cpp -o $(OBJ_FOLDER)EnemiesController.o
+$(OBJ_FOLDER)EnemiesController.o: ./Logic/Controllers/EntitiesControllers/EnemiesController/EnemiesController.cpp ./Logic/Controllers/EntitiesControllers/EnemiesController/EnemiesController.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Controllers/EntitiesControllers/EnemiesController/EnemiesController.cpp -o $(OBJ_FOLDER)EnemiesController.o
 
 $(OBJ_FOLDER)GameController.o: ./Logic/Controllers/GameController/GameController.cpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/GameFacadePattern/Game.hpp ./Logic/Entities/Player/Player.hpp ./Logic/ObserverPattern/Observer.hpp ./Logic/Utility/Enumerations.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/Controllers/GameController/GameController.cpp -o $(OBJ_FOLDER)GameController.o
@@ -36,7 +36,7 @@ $(OBJ_FOLDER)Entity.o: ./Logic/Entities/Entity/Entity.cpp ./Logic/Entities/Entit
 $(OBJ_FOLDER)EntityView.o: ./Graphic/EntitiesView/EntityView/EntityView.cpp ./Graphic/EntitiesView/EntityView/EntityView.hpp ./Logic/Entities/Entity//Entity.hpp ./Logic/MediatorPattern/Mediator.hpp ./Logic/ObserverPattern/Observer.hpp
 	$(CC) $(COMPILE_FLAGS) ./Graphic/EntitiesView/EntityView/EntityView.cpp -o $(OBJ_FOLDER)EntityView.o
 
-$(OBJ_FOLDER)Game.o: ./Logic/GameFacadePattern/Game.cpp ./Logic/GameFacadePattern/Game.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/Entities/Player/Player.hpp ./Logic/Utility/Enumerations.hpp ./Logic/Controllers/PlayerController/PlayerController.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Graphic/GraphicArts/GraphicArts.hpp
+$(OBJ_FOLDER)Game.o: ./Logic/GameFacadePattern/Game.cpp ./Logic/GameFacadePattern/Game.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/Entities/Player/Player.hpp ./Logic/Utility/Enumerations.hpp ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Graphic/GraphicArts/GraphicArts.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/GameFacadePattern/Game.cpp -o $(OBJ_FOLDER)Game.o
 
 $(OBJ_FOLDER)GameElement.o : ./Logic/GameElement/GameElement.cpp ./Logic/GameElement/GameElement.hpp ./Logic/MediatorPattern/Mediator.hpp

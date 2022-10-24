@@ -1,6 +1,6 @@
 #include "../Mediator.hpp"
 #include "../../CommandReader/CommandReader.hpp"
-#include "../../Controllers/PlayerController/PlayerController.hpp"
+#include "../../Controllers/EntitiesControllers/PlayerController/PlayerController.hpp"
 #include "../../Controllers/GameController/GameController.hpp"
 
 class CommandReaderMediator: public Mediator{

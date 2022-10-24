@@ -4,7 +4,7 @@
 #include "../Cell/Cell.hpp"
 #include "../Utility/Position.hpp"
 #include "../Utility/Enumerations.hpp"
-#include "../Controllers/EntityController/EntityController.hpp"
+#include "../Controllers/EntitiesControllers/EntityController.hpp"
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
@@ -37,6 +37,9 @@ class Map{
 
         //create map
         void createMap();
+
+        //create player elem
+        void createPlayerElem();
 
         //convert entity position
         void convertEntityPosition(Position* position);

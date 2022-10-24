@@ -22,7 +22,9 @@ void Observable::notify(){
 
 //destruction
 Observable::~Observable(){
-    for (auto observer: this->observers){
-        observer = nullptr;
+    if (observers.size()){
+        for (auto observer: this->observers){
+            observer = nullptr;
+        }
     }
 };

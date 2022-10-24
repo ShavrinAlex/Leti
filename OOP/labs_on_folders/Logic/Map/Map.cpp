@@ -27,32 +27,25 @@ void Map::createMap(){
     }
 };
 
-//initialization
-Map::Map(){
-    //std::cout<<"map "<<this<<" constr\n";
-    this->width = WIDTH;
-    this->height = HEIGHT;
-    //create player
+//create player elem
+void Map::createPlayerElem(){
     this->player = new PlayerElem;
     this->player->entity = nullptr;
     Position* pos = new Position;
     pos->x = START_POSITION_X;
     pos->y = START_POSITION_Y;
     this->player->pos = pos;
-
-    createMap();
 };
+
+//initialization
+Map::Map():Map(WIDTH, HEIGHT){};
 Map::Map(int width, int height){
+    //std::cout<<"map "<<this<<" constr\n";
     this->width = width;
     this->height = height;
 
     //create player
-    this->player = new PlayerElem;
-    this->player->entity = nullptr;
-    Position* pos = new Position;
-    pos->x = START_POSITION_X;
-    pos->y = START_POSITION_Y;
-    this->player->pos = pos;
+    createPlayerElem();
 
     createMap();
 };
@@ -159,7 +152,7 @@ void Map::addEnemy(Entity* enemy, Position* pos){
 //remove enemy
 void Map::removeEnemy(Entity* enemy){
     //search enemy
-    for (int i = 0; i < this->enemies.size(); i++){
+    for (size_t i = 0; i < this->enemies.size(); i++){
         if (this->enemies.at(i).entity == enemy){
             delete this->enemies.at(i).entity;
             delete this->enemies.at(i).pos;
@@ -187,7 +180,7 @@ bool Map::isHereEnemy(Position* pos){
     }
 
     //check position all enemies
-    for (int i = 0; i < this->enemies.size(); i++){
+    for (size_t i = 0; i < this->enemies.size(); i++){
         if (this->enemies.at(i).pos->x == pos->x && this->enemies.at(i).pos->y == pos->y){
             return true;
         }
@@ -222,7 +215,7 @@ Position* Map::calculateNextEntityPosition(Entity* entity){
         next_position->y = this->player->pos->y + dy;
     } else{
         //search entity
-        for (int i = 0; i < this->enemies.size(); i++){
+        for (size_t i = 0; i < this->enemies.size(); i++){
             if (this->enemies.at(i).entity == entity){
                 next_position->x = this->enemies.at(i).pos->x + dx;
                 next_position->y = this->enemies.at(i).pos->y + dy;
@@ -273,7 +266,7 @@ void Map::moveEntity(Entity* entity){
         map.at(this->player->pos->y).at(this->player->pos->x)->setPlayer();
     } else{
         //search entity
-        for (int i = 0; i < this->enemies.size(); i++){
+        for (size_t i = 0; i < this->enemies.size(); i++){
             if (this->enemies.at(i).entity == entity){
                 this->enemies.at(i).pos->x = next_position->x;
                 this->enemies.at(i).pos->y = next_position->y;
@@ -293,7 +286,7 @@ void Map::makeDamage(Entity* entity){
     if (entity == this->player->entity){
         //check entity on damage position
         if (this->isHereEnemy(damage_position)){
-            for (int i = 0; i < this->enemies.size(); i++){
+            for (size_t i = 0; i < this->enemies.size(); i++){
                 if (this->enemies.at(i).pos->x == damage_position->x && this->enemies.at(i).pos->y == damage_position->y){
                     this->enemies_controller->takeDamage(entity->getDamage(), this->enemies.at(i).entity);
                 }
@@ -318,7 +311,7 @@ Position* Map::getPlayerPosition(){
 //get enemy position
 Position* Map::getEnemyPosition(Entity* entity){
     Position* pos = nullptr;
-    for (int i = 0; i < this->enemies.size(); i++){
+    for (size_t i = 0; i < this->enemies.size(); i++){
         if (this->enemies.at(i).entity == entity){
             pos = this->enemies.at(i).pos;
         }

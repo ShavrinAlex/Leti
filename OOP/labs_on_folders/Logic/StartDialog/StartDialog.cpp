@@ -1,8 +1,8 @@
 #include "StartDialog.hpp"
 #include <iostream>
-#define BASE_HEIGHT 5
-#define BASE_WIDTH 5
-#define MIN_SIZE 4
+#define MIN_SIZE 5
+#define START_MAP_WIDTH 5
+#define START_MAP_HEIGHT 5
 
 //initialization
 StartDialog::StartDialog(){
@@ -11,10 +11,10 @@ StartDialog::StartDialog(){
     while (executor() != 0){
         std::cout<<"Вы ввели недопустимый размер поля. Повторите снова\n";
     }
-    
+
     if (this->is_size_set == false){
-        this->map_height = BASE_HEIGHT;
-        this->map_width = BASE_WIDTH;
+        this->map_width = START_MAP_WIDTH;
+        this->map_height = START_MAP_HEIGHT;
     }
 };
 
@@ -24,6 +24,9 @@ int StartDialog::getHeight(){
 };
 int StartDialog::getWidth(){
     return this->map_width;
+};
+bool StartDialog::getIsSizeSet(){
+    return is_size_set;
 };
 
 //executor

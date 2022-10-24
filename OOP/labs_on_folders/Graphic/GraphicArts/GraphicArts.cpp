@@ -1,7 +1,10 @@
 #include "GraphicArts.hpp"
 #define CELL_SIDE 98
+#define START_WINDOW_HEIGHT 5*CELL_SIDE
+#define START_WINDOW_WIDTH 5*CELL_SIDE
 
 //initialization
+GraphicArts::GraphicArts():GraphicArts(START_WINDOW_WIDTH, START_WINDOW_HEIGHT){};
 GraphicArts::GraphicArts(int width, int height, std::string window_name){
     //size in pixels
     this->width = width * CELL_SIDE;
@@ -83,7 +86,7 @@ void GraphicArts::drawMap(MapView& map_view){
     }
 
     //draw enemies
-    for(int i = 0; i < map_view.getEnemiesView().size(); i++){
+    for(size_t i = 0; i < map_view.getEnemiesView().size(); i++){
         this->drawEntity(*(map_view.getEnemiesView()).at(i));
     }
 };

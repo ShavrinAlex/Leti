@@ -1,9 +1,9 @@
 #pragma once
-#include "../EntityController/EntityController.hpp"
-#include "../../Entities/Player/Player.hpp"
-#include "../../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
-#include "../../Map/Map.hpp"
-#include "../../Utility/Enumerations.hpp"
+#include "../EntityController.hpp"
+#include "../../../Entities/Player/Player.hpp"
+#include "../../../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
+#include "../../../Map/Map.hpp"
+#include "../../../Utility/Enumerations.hpp"
 
 class PlayerController: public EntityController{
     private:
