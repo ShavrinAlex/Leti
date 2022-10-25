@@ -23,7 +23,7 @@ Game::Game(){
     this->log_controller = new LogController();
     this->mediator = new LogMediator(log_controller);
 
-    StartDialog start_dialog = StartDialog();
+    StartDialog start_dialog = StartDialog(this->mediator);
     this->map_width = start_dialog.getWidth();
     this->map_height = start_dialog.getHeight();
     this->graphic_arts = new GraphicArts(this->map_width, this->map_height);

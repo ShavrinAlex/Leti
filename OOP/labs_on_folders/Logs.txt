@@ -3,13 +3,4 @@ LogLevel: 2 ; Message: Map was create
 LogLevel: 2 ; Message: Map got a plyer
 LogLevel: 2 ; Message: Enemy has been added to the map
 LogLevel: 2 ; Message: Enemy has been added to the map
-LogLevel: 2 ; Message: Enemy has been removed from the map
-LogLevel: 2 ; Message: Event (set energy) was execute
-LogLevel: 2 ; Message: Event (set win game) was execute
-LogLevel: 2 ; Message: Event (set energy) was execute
-LogLevel: 2 ; Message: Enemy has been removed from the map
-LogLevel: 2 ; Message: Event (set wall) was execute
-LogLevel: 2 ; Message: Event (set health) was execute
-LogLevel: 2 ; Message: Event (set wall) was execute
-LogLevel: 2 ; Message: Event (win game) was execute
-LogLevel: 1 ; Message: Game was end
+LogLevel: 0 ; Message: Error!!! Entity tried to move to an impassable cell or another entity

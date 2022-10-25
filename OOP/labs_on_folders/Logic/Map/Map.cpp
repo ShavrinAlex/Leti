@@ -271,6 +271,11 @@ void Map::moveEntity(Entity* entity){
     
     //check cell on wall and on enemy
     if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEnemy(next_position) || (this->player->pos->x == next_position->x && this->player->pos->y == next_position->y)){
+        //logging
+        Log* log = new Log(Errors, "Error!!! Entity tried to move to an impassable cell or another entity");
+        this->mediator->send(log);
+        delete log;
+
         return;
     }
 

@@ -5,10 +5,16 @@
 #define START_MAP_HEIGHT 5
 
 //initialization
-StartDialog::StartDialog(){
+StartDialog::StartDialog(Mediator<Log*>* mediator){
+    this->setMediator(mediator);
+
     this->is_size_set = false;
 
     while (executor() != 0){
+        //logging
+        Log* log = new Log(Errors, "Error!!! Entered invalid map sizes");
+        this->mediator->send(log);
+        delete log;
         std::cout<<"Вы ввели недопустимый размер поля. Повторите снова\n";
     }
 
