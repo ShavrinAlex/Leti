@@ -76,6 +76,7 @@ int Game::startGame(){
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
     PlayerController player_controller = PlayerController(&player, &map, &player_view);
+    player_controller.setMediator(this->mediator);
 
     //create command reader mediator
     CommandReaderMediator com_reader_mediator = CommandReaderMediator(&player_controller, &game_controller, log_controller);

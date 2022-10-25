@@ -29,6 +29,7 @@ void PlayerController::shoot(){
     this->time = time/800;
     this->timer += time;
     if (this->timer >= 350){
+        Log* log;
         //erraise energy
         int player_energy = this->player->getEnergy();
         if (player_energy >= SHOOT_ENERGY){
@@ -36,13 +37,23 @@ void PlayerController::shoot(){
 
             this->map->makeDamage(this->player);
             this->timer = 0;
+
+            //logging
+            log = new Log(Processes, "Player hit");
+            this->mediator->send(log);
+        } else{
+            //logging
+            log = new Log(Errors, "Error!!! Player tried to hit without energy");
+            this->mediator->send(log);
         }
+        delete log;
     }
 };
 
 //take damage
 void PlayerController::takeDamage(int damage, Entity* entity){
     if (entity == this->player){
+        Log* log;
         //check armor
         if (this->player->getArmor()){
             this->player->removeArmor();
@@ -55,7 +66,11 @@ void PlayerController::takeDamage(int damage, Entity* entity){
             } else{
                 this->player->setHealth(health - damage);
             }
+            //logging
+            log = new Log(Processes, "Player taked damage");
+            this->mediator->send(log);
         }
+        delete log;
     }
 };
 

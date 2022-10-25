@@ -18,9 +18,6 @@ void Entity::setHealth(int health){
     
     //notify observers
     this->notify();
-
-    //notifi loger
-    //this->mediator->send(new Log(Processes, "entity's health changed"));
 };
 
 //speed
