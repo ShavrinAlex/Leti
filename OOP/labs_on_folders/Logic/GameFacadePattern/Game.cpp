@@ -61,7 +61,7 @@ int Game::startGame(){
     Player player = Player();
     player.setSpeed(1);
     player.setDamage(50);
-    player.setMediator(&log_mediator);
+    //player.setMediator(&log_mediator);
 
     //create map
     Map map = Map(this->map_width, this->map_height);

@@ -6,6 +6,9 @@ class GameElement{
     protected:
         Mediator<T>* mediator;
     public:
+        //initialization
+        GameElement();
+
         //set mediator
         void setMediator(Mediator<T>* mediator);    
 
