@@ -1,8 +1,10 @@
 #pragma once
 #include "../../Utility/Enumerations.hpp"
 #include "../../ObserverPattern/Observable/Observable.hpp"
+#include "../../Logging/Log/Log.hpp"
+#include "../../MediatorPattern/GameElement/GameElementDescription.hpp"
 
-class Entity: public Observable{
+class Entity: public Observable, public GameElement<Log*>{
     protected:
         int health;
         int speed;

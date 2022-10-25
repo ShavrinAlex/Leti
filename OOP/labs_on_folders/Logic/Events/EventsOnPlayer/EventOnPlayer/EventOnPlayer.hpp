@@ -1,8 +1,10 @@
 #pragma once
 #include "../../Event.hpp"
 #include "../../../Entities/Player/Player.hpp"
+#include "../../../Logging/Log/Log.hpp"
+#include "../../../MediatorPattern/GameElement/GameElementDescription.hpp"
 
-class EventOnPlayer: public Event{
+class EventOnPlayer: public Event, public GameElement<Log*>{
     protected:
         Player* player;
 

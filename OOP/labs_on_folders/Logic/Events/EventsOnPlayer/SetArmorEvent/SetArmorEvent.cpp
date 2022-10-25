@@ -12,6 +12,12 @@ bool SetArmorEvent::checkConditional(){
 EventStatus SetArmorEvent::execute(){
     if (this->checkConditional()){
         this->player->setArmor();
+
+        //logging
+        Log* log = new Log(Processes, "Set armor event was execute");
+        this->mediator->send(log);
+        delete log;
+
         return Delete;
     }
     return Leave;

@@ -1,23 +1,27 @@
 #include "CommandReader.hpp"
+#include <SFML/Graphics.hpp>
 
 //read kyboard
 void CommandReader::getPressedKey(){
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))){
-        mediator->send("Right", this);
+        this->mediator->send("Right");
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))){
-        mediator->send("Left", this);
+        this->mediator->send("Left");
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))){
-        mediator->send("Up", this);
+        this->mediator->send("Up");
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))){
-        mediator->send("Down", this);
+        this->mediator->send("Down");
     }
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space))){
-        mediator->send("Shoot", this);
+        this->mediator->send("Shoot");
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-        mediator->send("Quit", this);
+        this->mediator->send("Quit");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)){
+        this->mediator->send("Logging");
     }
 };

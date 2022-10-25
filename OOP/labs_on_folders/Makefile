@@ -1,13 +1,19 @@
 CC = g++
 LINK_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
-COMPILE_FLAGS = -c -Wall
+COMPILE_FLAGS = -c -Wall -g
 OBJ_FOLDER = ./ObjectFiles/
 
-all: $(OBJ_FOLDER)main.o $(OBJ_FOLDER)Cell.o $(OBJ_FOLDER)CellView.o $(OBJ_FOLDER)CommandReader.o $(OBJ_FOLDER)CommandReaderMediator.o $(OBJ_FOLDER)PlayerController.o $(OBJ_FOLDER)EnemiesController.o $(OBJ_FOLDER)GameController.o $(OBJ_FOLDER)Entity.o $(OBJ_FOLDER)EntityView.o $(OBJ_FOLDER)Game.o $(OBJ_FOLDER)GameElement.o $(OBJ_FOLDER)GraphicArts.o $(OBJ_FOLDER)Map.o $(OBJ_FOLDER)MapView.o $(OBJ_FOLDER)Observable.o $(OBJ_FOLDER)Player.o $(OBJ_FOLDER)PlayerView.o $(OBJ_FOLDER)StartDialog.o $(OBJ_FOLDER)EventOnGame.o $(OBJ_FOLDER)EventOnMap.o $(OBJ_FOLDER)EventOnPlayer.o $(OBJ_FOLDER)EndGameEvent.o $(OBJ_FOLDER)WinGameEvent.o $(OBJ_FOLDER)SetHealthEvent.o $(OBJ_FOLDER)SetArmorEvent.o $(OBJ_FOLDER)SetEnergyEvent.o $(OBJ_FOLDER)SetWallEvent.o $(OBJ_FOLDER)SetWinGameEvent.o $(OBJ_FOLDER)FactoryEventOnMap.o $(OBJ_FOLDER)FactoryEventOnGame.o $(OBJ_FOLDER)FactoryEventOnPlayer.o $(OBJ_FOLDER)EventView.o $(OBJ_FOLDER)Generator.o $(OBJ_FOLDER)EventGenerator.o $(OBJ_FOLDER)EnemyGenerator.o
-	$(CC) $(OBJ_FOLDER)main.o $(OBJ_FOLDER)Cell.o $(OBJ_FOLDER)CellView.o $(OBJ_FOLDER)CommandReader.o $(OBJ_FOLDER)CommandReaderMediator.o $(OBJ_FOLDER)PlayerController.o $(OBJ_FOLDER)EnemiesController.o $(OBJ_FOLDER)GameController.o $(OBJ_FOLDER)Entity.o $(OBJ_FOLDER)EntityView.o $(OBJ_FOLDER)Game.o $(OBJ_FOLDER)GameElement.o $(OBJ_FOLDER)GraphicArts.o $(OBJ_FOLDER)Map.o $(OBJ_FOLDER)MapView.o $(OBJ_FOLDER)Observable.o $(OBJ_FOLDER)Player.o $(OBJ_FOLDER)PlayerView.o $(OBJ_FOLDER)StartDialog.o $(OBJ_FOLDER)EventOnGame.o $(OBJ_FOLDER)EventOnMap.o $(OBJ_FOLDER)EventOnPlayer.o $(OBJ_FOLDER)EndGameEvent.o $(OBJ_FOLDER)WinGameEvent.o $(OBJ_FOLDER)SetHealthEvent.o $(OBJ_FOLDER)SetArmorEvent.o $(OBJ_FOLDER)SetEnergyEvent.o $(OBJ_FOLDER)SetWallEvent.o $(OBJ_FOLDER)SetWinGameEvent.o $(OBJ_FOLDER)FactoryEventOnMap.o $(OBJ_FOLDER)FactoryEventOnGame.o $(OBJ_FOLDER)FactoryEventOnPlayer.o $(OBJ_FOLDER)EventView.o $(OBJ_FOLDER)Generator.o $(OBJ_FOLDER)EventGenerator.o $(OBJ_FOLDER)EnemyGenerator.o -o sfml-app $(LINK_FLAGS)
+all: $(OBJ_FOLDER)main.o $(OBJ_FOLDER)Game.o $(OBJ_FOLDER)Cell.o $(OBJ_FOLDER)CellView.o $(OBJ_FOLDER)CommandReader.o $(OBJ_FOLDER)CommandReaderMediator.o $(OBJ_FOLDER)PlayerController.o $(OBJ_FOLDER)EnemiesController.o $(OBJ_FOLDER)GameController.o $(OBJ_FOLDER)Entity.o $(OBJ_FOLDER)EntityView.o $(OBJ_FOLDER)GraphicArts.o $(OBJ_FOLDER)Map.o $(OBJ_FOLDER)MapView.o $(OBJ_FOLDER)Observable.o $(OBJ_FOLDER)Player.o $(OBJ_FOLDER)PlayerView.o $(OBJ_FOLDER)StartDialog.o $(OBJ_FOLDER)EventOnGame.o $(OBJ_FOLDER)EventOnMap.o $(OBJ_FOLDER)EventOnPlayer.o $(OBJ_FOLDER)EndGameEvent.o $(OBJ_FOLDER)WinGameEvent.o $(OBJ_FOLDER)SetHealthEvent.o $(OBJ_FOLDER)SetArmorEvent.o $(OBJ_FOLDER)SetEnergyEvent.o $(OBJ_FOLDER)SetWallEvent.o $(OBJ_FOLDER)SetWinGameEvent.o $(OBJ_FOLDER)FactoryEventOnMap.o $(OBJ_FOLDER)FactoryEventOnGame.o $(OBJ_FOLDER)FactoryEventOnPlayer.o $(OBJ_FOLDER)EventView.o $(OBJ_FOLDER)Generator.o $(OBJ_FOLDER)EventGenerator.o $(OBJ_FOLDER)EnemyGenerator.o $(OBJ_FOLDER)Log.o $(OBJ_FOLDER)LogMediator.o $(OBJ_FOLDER)ConsoleLogger.o $(OBJ_FOLDER)FileLogger.o $(OBJ_FOLDER)LogController.o
+	$(CC) $(OBJ_FOLDER)main.o $(OBJ_FOLDER)Game.o $(OBJ_FOLDER)Cell.o $(OBJ_FOLDER)CellView.o $(OBJ_FOLDER)CommandReader.o $(OBJ_FOLDER)CommandReaderMediator.o $(OBJ_FOLDER)PlayerController.o $(OBJ_FOLDER)EnemiesController.o $(OBJ_FOLDER)GameController.o $(OBJ_FOLDER)Entity.o $(OBJ_FOLDER)EntityView.o $(OBJ_FOLDER)GraphicArts.o $(OBJ_FOLDER)Map.o $(OBJ_FOLDER)MapView.o $(OBJ_FOLDER)Observable.o $(OBJ_FOLDER)Player.o $(OBJ_FOLDER)PlayerView.o $(OBJ_FOLDER)StartDialog.o $(OBJ_FOLDER)EventOnGame.o $(OBJ_FOLDER)EventOnMap.o $(OBJ_FOLDER)EventOnPlayer.o $(OBJ_FOLDER)EndGameEvent.o $(OBJ_FOLDER)WinGameEvent.o $(OBJ_FOLDER)SetHealthEvent.o $(OBJ_FOLDER)SetArmorEvent.o $(OBJ_FOLDER)SetEnergyEvent.o $(OBJ_FOLDER)SetWallEvent.o $(OBJ_FOLDER)SetWinGameEvent.o $(OBJ_FOLDER)FactoryEventOnMap.o $(OBJ_FOLDER)FactoryEventOnGame.o $(OBJ_FOLDER)FactoryEventOnPlayer.o $(OBJ_FOLDER)EventView.o $(OBJ_FOLDER)Generator.o $(OBJ_FOLDER)EventGenerator.o $(OBJ_FOLDER)EnemyGenerator.o $(OBJ_FOLDER)Log.o $(OBJ_FOLDER)LogMediator.o $(OBJ_FOLDER)ConsoleLogger.o $(OBJ_FOLDER)FileLogger.o $(OBJ_FOLDER)LogController.o -o sfml-app $(LINK_FLAGS)
 
 $(OBJ_FOLDER)main.o: ./Logic/main.cpp ./Logic/StartDialog/StartDialog.hpp ./Logic/GameFacadePattern/Game.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/main.cpp -o $(OBJ_FOLDER)main.o
+
+$(OBJ_FOLDER)GraphicArts.o: ./Graphic/GraphicArts/GraphicArts.cpp ./Graphic/GraphicArts/GraphicArts.hpp
+	$(CC) $(COMPILE_FLAGS) ./Graphic/GraphicArts/GraphicArts.cpp -o $(OBJ_FOLDER)GraphicArts.o
+
+$(OBJ_FOLDER)Game.o: ./Logic/GameFacadePattern/Game.cpp ./Logic/GameFacadePattern/Game.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/Entities/Player/Player.hpp ./Logic/Utility/Enumerations.hpp ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Graphic/GraphicArts/GraphicArts.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/GameFacadePattern/Game.cpp -o $(OBJ_FOLDER)Game.o
 
 $(OBJ_FOLDER)Cell.o: ./Logic/Cell/Cell.cpp ./Logic/Cell/Cell.hpp ./Logic/ObserverPattern/Observable/Observable.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/Cell/Cell.cpp -o $(OBJ_FOLDER)Cell.o
@@ -15,7 +21,7 @@ $(OBJ_FOLDER)Cell.o: ./Logic/Cell/Cell.cpp ./Logic/Cell/Cell.hpp ./Logic/Observe
 $(OBJ_FOLDER)CellView.o: ./Graphic/CellView/CellView.cpp ./Graphic/CellView/CellView.hpp ./Logic/Cell/Cell.hpp ./Logic/ObserverPattern/Observer.hpp
 	$(CC) $(COMPILE_FLAGS) ./Graphic/CellView/CellView.cpp -o $(OBJ_FOLDER)CellView.o
 
-$(OBJ_FOLDER)CommandReader.o: ./Logic/CommandReader/CommandReader.cpp ./Logic/CommandReader/CommandReader.hpp ./Logic/MediatorPattern/Mediator.hpp
+$(OBJ_FOLDER)CommandReader.o: ./Logic/CommandReader/CommandReader.cpp ./Logic/CommandReader/CommandReader.hpp ./Logic/MediatorPattern/GameElement/GameElementDescription.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/CommandReader/CommandReader.cpp -o $(OBJ_FOLDER)CommandReader.o
 
 $(OBJ_FOLDER)CommandReaderMediator.o: ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.cpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/MediatorPattern/Mediator.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.hpp ./Logic/Utility/Enumerations.hpp
@@ -36,14 +42,8 @@ $(OBJ_FOLDER)Entity.o: ./Logic/Entities/Entity/Entity.cpp ./Logic/Entities/Entit
 $(OBJ_FOLDER)EntityView.o: ./Graphic/EntitiesView/EntityView/EntityView.cpp ./Graphic/EntitiesView/EntityView/EntityView.hpp ./Logic/Entities/Entity//Entity.hpp ./Logic/MediatorPattern/Mediator.hpp ./Logic/ObserverPattern/Observer.hpp
 	$(CC) $(COMPILE_FLAGS) ./Graphic/EntitiesView/EntityView/EntityView.cpp -o $(OBJ_FOLDER)EntityView.o
 
-$(OBJ_FOLDER)Game.o: ./Logic/GameFacadePattern/Game.cpp ./Logic/GameFacadePattern/Game.hpp ./Logic/CommandReader/CommandReader.hpp ./Logic/Entities/Player/Player.hpp ./Logic/Utility/Enumerations.hpp ./Logic/Controllers/EntitiesControllers/PlayerController/PlayerController.hpp ./Logic/Controllers/GameController/GameController.hpp ./Logic/MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp ./Graphic/GraphicArts/GraphicArts.hpp
-	$(CC) $(COMPILE_FLAGS) ./Logic/GameFacadePattern/Game.cpp -o $(OBJ_FOLDER)Game.o
-
-$(OBJ_FOLDER)GameElement.o : ./Logic/GameElement/GameElement.cpp ./Logic/GameElement/GameElement.hpp ./Logic/MediatorPattern/Mediator.hpp
-	$(CC) $(COMPILE_FLAGS) ./Logic/GameElement/GameElement.cpp -o $(OBJ_FOLDER)GameElement.o
-
-$(OBJ_FOLDER)GraphicArts.o: ./Graphic/GraphicArts/GraphicArts.cpp ./Graphic/GraphicArts/GraphicArts.hpp ./Graphic/CellView/CellView.hpp ./Graphic/MapView/MapView.hpp ./Graphic/EntitiesView/EntityView/EntityView.hpp ./Graphic/EntitiesView/PlayerView/PlayerView.hpp
-	$(CC) $(COMPILE_FLAGS) ./Graphic/GraphicArts/GraphicArts.cpp -o $(OBJ_FOLDER)GraphicArts.o
+$(OBJ_FOLDER)GameElement.o : ./Logic/MediatorPattern/GameElement/GameElement.cpp ./Logic/MediatorPattern/GameElement/GameElement.hpp ./Logic/MediatorPattern/Mediator.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/MediatorPattern/GameElement/GameElement.cpp -o $(OBJ_FOLDER)GameElement.o
 
 $(OBJ_FOLDER)Map.o: ./Logic/Map/Map.cpp ./Logic/Map/Map.hpp ./Logic/Cell/Cell.hpp ./Logic/Utility/Position.hpp ./Logic/Utility/Enumerations.hpp ./Logic/MediatorPattern/Mediator.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/Map/Map.cpp -o $(OBJ_FOLDER)Map.o
@@ -113,7 +113,22 @@ $(OBJ_FOLDER)EventGenerator.o: ./Logic/Generators/EventGenerator/EventGenerator.
 
 $(OBJ_FOLDER)EnemyGenerator.o: ./Logic/Generators/EnemyGenerator/EnemyGenerator.cpp ./Logic/Generators/EnemyGenerator/EnemyGenerator.hpp
 	$(CC) $(COMPILE_FLAGS) ./Logic/Generators/EnemyGenerator/EnemyGenerator.cpp -o $(OBJ_FOLDER)EnemyGenerator.o
-	
+
+$(OBJ_FOLDER)Log.o: ./Logic/Logging/Log/Log.cpp ./Logic/Logging/Log/Log.hpp ./Logic/Utility/Enumerations.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Logging/Log/Log.cpp -o $(OBJ_FOLDER)Log.o
+
+$(OBJ_FOLDER)LogMediator.o: ./Logic/MediatorPattern/LogMediator/LogMediator.cpp ./Logic/MediatorPattern/LogMediator/LogMediator.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/MediatorPattern/LogMediator/LogMediator.cpp -o $(OBJ_FOLDER)LogMediator.o
+
+$(OBJ_FOLDER)ConsoleLogger.o: ./Logic/Logging/Loggers/ConsoleLogger/ConsoleLogger.cpp ./Logic/Logging/Loggers/ConsoleLogger/ConsoleLogger.hpp ./Logic/Logging/Loggers/Logger.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Logging/Loggers/ConsoleLogger/ConsoleLogger.cpp -o $(OBJ_FOLDER)ConsoleLogger.o
+
+$(OBJ_FOLDER)FileLogger.o: ./Logic/Logging/Loggers/FileLogger/FileLogger.cpp ./Logic/Logging/Loggers/FileLogger/FileLogger.hpp ./Logic/Logging/Loggers/Logger.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Logging/Loggers/FileLogger/FileLogger.cpp -o $(OBJ_FOLDER)FileLogger.o
+
+$(OBJ_FOLDER)LogController.o: ./Logic/Controllers/LogController/LogController.cpp ./Logic/Controllers/LogController/LogController.hpp
+	$(CC) $(COMPILE_FLAGS) ./Logic/Controllers/LogController/LogController.cpp -o $(OBJ_FOLDER)LogController.o
+
 clean:
 	rm $(OBJ_FOLDER)*.o
 	

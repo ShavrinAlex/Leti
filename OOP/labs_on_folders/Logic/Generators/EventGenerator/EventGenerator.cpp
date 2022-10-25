@@ -7,10 +7,11 @@
 #define ENERGY "./Graphic/Images/Events/EventsOnPlayer/energy.png"
 
 //initialization
-EventGenerator::EventGenerator(Map* map, MapView* map_view):Generator(map, map_view){
+EventGenerator::EventGenerator(Map* map, MapView* map_view, Mediator<Log*>* mediator):Generator(map, map_view){
     this->factory_event_on_player = nullptr;
     this->factory_event_on_game = nullptr;
     this->factory_event_on_map = nullptr;
+    this->mediator = mediator;
 };
 
 //set factories
@@ -25,7 +26,7 @@ void EventGenerator::generateHealthEvent(EventFactory* factory_event_on_player){
     Position* position = this->getPositionFreeCell();
 
     //set health event
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_player->createEvent1());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_player->createEvent1(this->mediator));
 
     //set health event view
     EventView* ev = new EventView(position->x, position->y, HEALTH);
@@ -38,7 +39,7 @@ void EventGenerator::generateArmorEvent(EventFactory* factory_event_on_player){
     Position* position = this->getPositionFreeCell();
 
     //set armor event
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_player->createEvent2());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_player->createEvent2(this->mediator));
 
     //set armor event view
     EventView* ev = new EventView(position->x, position->y, ARMOR);
@@ -51,7 +52,7 @@ void EventGenerator::generateEnergyEvent(EventFactory* factory_event_on_player){
     Position* position = this->getPositionFreeCell();
 
     //set energy event
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_player->createEvent3());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_player->createEvent3(this->mediator));
 
     //set energy event view
     EventView* ev = new EventView(position->x, position->y, ENERGY);
@@ -62,7 +63,7 @@ void EventGenerator::generateEnergyEvent(EventFactory* factory_event_on_player){
 //generate and set win game event and his appearance
 void EventGenerator::generateWinGameEvent(Position* position, EventFactory* factory_event_on_game){
     //set win event
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_game->createEvent1());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_game->createEvent1(this->mediator));
 
     //set win event view
     EventView* ev = new EventView(position->x, position->y, WIN);
@@ -74,7 +75,7 @@ void EventGenerator::generateEndGameEvent(EventFactory* factory_event_on_game){
     Position* position = this->getPositionFreeCell();
 
     //set end game event
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_game->createEvent2());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_game->createEvent2(this->mediator));
 
     //set end game event view
     EventView* ev = new EventView(position->x, position->y, FIRE);
@@ -87,7 +88,7 @@ void EventGenerator::generateSetWallEvent(EventFactory* factory_event_on_map){
     Position* position = this->getPositionFreeCell();
 
     //set change map event
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_map->createEvent1());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_map->createEvent1(this->mediator));
 
     //set change map event view
     EventView* ev = new EventView(position->x, position->y, SECRET);
@@ -100,7 +101,7 @@ void EventGenerator::generateSetWinGameEvent(EventFactory* factory_event_on_map)
     Position* position = this->getPositionFreeCell();
 
     //set SetWinGameEvent
-    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_map->createEvent2());
+    (this->map->getCell(position->x, position->y))->setEvent(factory_event_on_map->createEvent2(this->mediator));
 
     //set SetWinGameEvent view
     EventView* ev = new EventView(position->x, position->y, SECRET);

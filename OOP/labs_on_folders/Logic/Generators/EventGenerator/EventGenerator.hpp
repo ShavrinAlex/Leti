@@ -10,9 +10,10 @@ class EventGenerator: public Generator{
         FactoryEventOnPlayer* factory_event_on_player;
         FactoryEventOnGame* factory_event_on_game;
         FactoryEventOnMap* factory_event_on_map;
+        Mediator<Log*>* mediator;
     public:
         //initialization
-        EventGenerator(Map* map, MapView* map_view);
+        EventGenerator(Map* map, MapView* map_view, Mediator<Log*>* mediator);
 
         //set factories
         void setFactories(FactoryEventOnPlayer* factory_event_on_player, FactoryEventOnGame* factory_event_on_game, FactoryEventOnMap* factory_event_on_map);

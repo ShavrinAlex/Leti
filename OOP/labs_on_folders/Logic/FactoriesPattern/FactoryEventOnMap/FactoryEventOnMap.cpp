@@ -10,17 +10,21 @@ FactoryEventOnMap::FactoryEventOnMap(Map* map, EventFactory* factory_event_on_ga
 };
 
 //create set wall event
-Event* FactoryEventOnMap::createEvent1(){
-    return new SetWallEvent(this->map, this->event_generator);
+Event* FactoryEventOnMap::createEvent1(Mediator<Log*>* mediator){
+    SetWallEvent* swe = new SetWallEvent(this->map, this->event_generator);
+    swe->setMediator(mediator);
+    return swe;
 };
 
 //create set end game event
-Event* FactoryEventOnMap::createEvent2(){
-    return new SetWinGameEvent(this->map, this->factory_event_on_game, this->event_generator);
+Event* FactoryEventOnMap::createEvent2(Mediator<Log*>* mediator){
+    SetWinGameEvent* swge = new SetWinGameEvent(this->map, this->factory_event_on_game, this->event_generator);
+    swge->setMediator(mediator);
+    return swge;
 };
 
 //create none event
-Event* FactoryEventOnMap::createEvent3(){
+Event* FactoryEventOnMap::createEvent3(Mediator<Log*>* mediator){
     return nullptr;
 };
 

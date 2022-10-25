@@ -1,10 +1,10 @@
 #include "Game.hpp"
+#include "../MediatorPattern/LogMediator/LogMediator.hpp"
 #include "../Entities/Player/Player.hpp"
 #include "../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
 #include "../CommandReader/CommandReader.hpp"
 #include "../Utility/Enumerations.hpp"
 #include "../StartDialog/StartDialog.hpp"
-#include "../Controllers/EntitiesControllers/PlayerController/PlayerController.hpp"
 #include "../Controllers/EntitiesControllers/EnemiesController/EnemiesController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
 #include "../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
@@ -12,12 +12,13 @@
 #include "../FactoriesPattern/FactoryEventOnGame/FactoryEventOnGame.hpp"
 #include "../Generators/EventGenerator/EventGenerator.hpp"
 #include "../Generators/EnemyGenerator/EnemyGenerator.hpp"
+#include "../Controllers/LogController/LogController.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
 #define PLAYER_IMAGE "./Graphic/Images/Entities/Player/hero1.png"
-
 #include <iostream>
+
 //initialization
 Game::Game(){
     StartDialog start_dialog = StartDialog();
@@ -46,32 +47,44 @@ int Game::startGame(){
     map3 = map4;
     map4 = std::move(map3);
     */
-    //create map
-    Map map = Map(this->map_width, this->map_height);
-    MapView map_view = MapView(&map);
+
+    //create command reader
+    CommandReader com_reader = CommandReader();
+
+    //create log controller
+    LogController log_controller = LogController();
+
+    //create log mediator
+    LogMediator log_mediator = LogMediator(&log_controller);
 
     //create player
     Player player = Player();
     player.setSpeed(1);
     player.setDamage(50);
+    player.setMediator(&log_mediator);
+
+    //create map
+    Map map = Map(this->map_width, this->map_height);
     map.setPlayer(&player);
+
+    //create map view
+    MapView map_view = MapView(&map);
+
+    //create player view
     PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, map.getPlayerPosition(), PLAYER_IMAGE);
 
-    //create command reader
-    CommandReader com_reader = CommandReader();
-
-    //create controllers
+    //create player and game controllers
     GameController game_controller = GameController(this, &player);
     PlayerController player_controller = PlayerController(&player, &map, &player_view);
 
-    //create mediator
-    CommandReaderMediator com_reader_mediator = CommandReaderMediator(&com_reader, &player_controller, &game_controller);
+    //create command reader mediator
+    CommandReaderMediator com_reader_mediator = CommandReaderMediator(&player_controller, &game_controller, &log_controller);
 
-    //set mediator
+    //set command reader mediator
     com_reader.setMediator(&com_reader_mediator);
 
     //create event generator
-    EventGenerator event_generator = EventGenerator(&map, &map_view);
+    EventGenerator event_generator = EventGenerator(&map, &map_view, &log_mediator);
 
     //create event fabrics
     FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
@@ -89,8 +102,9 @@ int Game::startGame(){
     //create enemies controller
     EnemiesController enemies_controller = EnemiesController(&map, &map_view);
 
+    //set player and enemies controllers on map
     map.setControllers(&player_controller, &enemies_controller);
-    
+
     //main loop
     while (graphic_arts->isOpen() && this->game_status == Continues){
         //check close window

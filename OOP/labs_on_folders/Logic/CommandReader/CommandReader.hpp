@@ -1,8 +1,7 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../GameElement/GameElement.hpp"
+#include "../MediatorPattern/GameElement/GameElementDescription.hpp"
 
-class CommandReader: public GameElement{
+class CommandReader: public GameElement<std::string>{
     public:
         //read kyboard
         void getPressedKey();

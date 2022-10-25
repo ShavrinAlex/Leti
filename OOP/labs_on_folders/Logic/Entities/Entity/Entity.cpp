@@ -18,6 +18,9 @@ void Entity::setHealth(int health){
     
     //notify observers
     this->notify();
+
+    //notifi loger
+    //this->mediator->send(new Log(Processes, "entity's health changed"));
 };
 
 //speed
@@ -26,6 +29,9 @@ int Entity::getSpeed(){
 };
 void Entity::setSpeed(float speed){
     this->speed = speed;
+
+    //notifi loger
+    //this->mediator->send(new Log(Processes, "entity's speed changed"));
 };
 
 //damage
@@ -34,6 +40,9 @@ int Entity::getDamage(){
 };
 void Entity::setDamage(int damage){
     this->damage = damage;
+
+    //notifi loger
+    //this->mediator->send(new Log(Processes, "entity's damage value changed"));
 };
 
 //direction
@@ -42,6 +51,11 @@ Direction Entity::getDirection(){
 };
 void Entity::setDirection(Direction direction){
     this->direction = direction;
+
     //notify observer
     this->notify();
+
+    //notifi loger
+    //std::string message = "entity's direction changed";
+    //this->mediator->send(new Log(Processes, message));
 };

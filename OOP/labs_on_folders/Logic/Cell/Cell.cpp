@@ -87,7 +87,7 @@ void Cell::setPlayer(){
         }
     }
 
-    //notify observer
+    //notify observers
     this->notify();
 };
 void Cell::removePlayer(){

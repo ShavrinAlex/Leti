@@ -10,6 +10,12 @@ SetWinGameEvent::SetWinGameEvent(Map* map, EventFactory* factory_event_on_game, 
 EventStatus SetWinGameEvent::execute(){
     Position* pos = this->generator->getPositionFreeCell();
     this->event_generator->generateWinGameEvent(pos, factory_event_on_game);
+
+    //logging
+    Log* log = new Log(Processes, "Set win game event was execute");
+    this->mediator->send(log);
+    delete log;
+
     return Delete;
 };
 

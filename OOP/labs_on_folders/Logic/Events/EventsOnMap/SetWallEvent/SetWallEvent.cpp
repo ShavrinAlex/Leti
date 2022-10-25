@@ -10,5 +10,10 @@ EventStatus SetWallEvent::execute(){
     Cell* cell = this->map->getCell(pos->x, pos->y);
     cell->setWall();
 
+    //logging
+    Log* log = new Log(Processes, "Set wall event was execute");
+    this->mediator->send(log);
+    delete log;
+
     return Delete;
 };

@@ -1,9 +1,9 @@
 #pragma once
-class GameElement;
 #include <iostream>
 
+template <typename T>
 class Mediator{
     public:
-        virtual void send(std::string message, GameElement* element) = 0;
+        virtual void send(T message) = 0;
         virtual ~Mediator(){};
 };

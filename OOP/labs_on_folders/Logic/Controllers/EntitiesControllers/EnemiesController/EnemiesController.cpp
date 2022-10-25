@@ -34,7 +34,7 @@ void EnemiesController::move(){
     this->clock.restart();
     this->time = time/800;
     this->timer += time;
-    if (this->timer >= 2000){
+    if (this->timer >= 1350){
         for (size_t i = 0; i < map->getEnemies().size(); i++){
             //get enemy and here apperance
             Entity* enemy = map->getEnemies().at(i).entity;

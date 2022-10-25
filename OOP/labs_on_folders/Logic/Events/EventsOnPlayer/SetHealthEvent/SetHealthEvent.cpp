@@ -22,6 +22,12 @@ EventStatus SetHealthEvent::execute(){
         } else{
             player->setHealth(player_health);
         }
+
+        //logging
+        Log* log = new Log(Processes, "Set health event was execute");
+        this->mediator->send(log);
+        delete log;
+
         return Delete;
     }
     return Leave;

@@ -10,9 +10,9 @@ class FactoryEventOnPlayer: public EventFactory{
         FactoryEventOnPlayer(Player* player);
 
         //create event
-        Event* createEvent1() override;
-        Event* createEvent2() override;
-        Event* createEvent3() override;
+        Event* createEvent1(Mediator<Log*>* mediator) override;
+        Event* createEvent2(Mediator<Log*>* mediator) override;
+        Event* createEvent3(Mediator<Log*>* mediator) override;
 
         //destruction
         ~FactoryEventOnPlayer();

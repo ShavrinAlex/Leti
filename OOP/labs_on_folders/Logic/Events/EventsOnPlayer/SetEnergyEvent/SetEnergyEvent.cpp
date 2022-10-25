@@ -22,6 +22,12 @@ EventStatus SetEnergyEvent::execute(){
         } else{
             player->setEnergy(player_energy);
         }
+
+        //logging
+        Log* log = new Log(Processes, "Set energy event was execute");
+        this->mediator->send(log);
+        delete log;
+
         return Delete;
     }
     return Leave;

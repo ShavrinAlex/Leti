@@ -34,12 +34,11 @@ int StartDialog::executor(){
     char map_answer;
     int map_height, map_width;
 
-    std::cout<<"Хотите задать свои значения поля? [y/n]: ";
+    std::cout<<"Хотите задать свои значения поля (вместо "<<START_MAP_WIDTH<<" на "<<START_MAP_HEIGHT<<")? [y]: ";
     std::cin>>map_answer;
 
     if (map_answer == 'y'){
-        std::cout<<"Минимальный размер поля: 3 на 3 клеток\n";
-        std::cout<<"Введите размеры поля (n на m клеток):\n";
+        std::cout<<"Минимальный размер поля: "<<MIN_SIZE<<" на "<<MIN_SIZE<<" клеток\n";
         std::cout<<"Высота: ";
         std::cin>>map_height;
         std::cout<<"Ширина: ";
