@@ -5,6 +5,8 @@
 #include "../Utility/Position.hpp"
 #include "../Utility/Enumerations.hpp"
 #include "../Controllers/EntitiesControllers/EntityController.hpp"
+#include "../MediatorPattern/GameElement/GameElementDescription.hpp"
+#include "../Logging/Log/Log.hpp"
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
@@ -19,7 +21,7 @@ typedef struct EntityElem{
 } EntityElem;
 typedef std::vector <EntityElem> Enemies;
 
-class Map{
+class Map: public GameElement<Log*>{
     private:
         //player
         PlayerElem* player;
@@ -46,7 +48,7 @@ class Map{
     public:
         //initialization
         Map();
-        Map(int width, int height); 
+        Map(int width, int height, Mediator<Log*>* mediator = NULL); 
 
         //set player
         void setPlayer(Player* player);

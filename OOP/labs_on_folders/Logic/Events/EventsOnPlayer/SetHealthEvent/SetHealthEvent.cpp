@@ -24,7 +24,7 @@ EventStatus SetHealthEvent::execute(){
         }
 
         //logging
-        Log* log = new Log(Processes, "Set health event was execute");
+        Log* log = new Log(Processes, "Event (set health) was execute");
         this->mediator->send(log);
         delete log;
 

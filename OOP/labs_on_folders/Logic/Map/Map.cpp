@@ -39,7 +39,8 @@ void Map::createPlayerElem(){
 
 //initialization
 Map::Map():Map(WIDTH, HEIGHT){};
-Map::Map(int width, int height){
+Map::Map(int width, int height, Mediator<Log*>* mediator){
+    this->setMediator(mediator);
     //std::cout<<"map "<<this<<" constr\n";
     this->width = width;
     this->height = height;
@@ -48,11 +49,21 @@ Map::Map(int width, int height){
     createPlayerElem();
 
     createMap();
+
+    //logging
+    Log* log = new Log(Processes, "Map was create");
+    this->mediator->send(log);
+    delete log;
 };
 
 //set player
 void Map::setPlayer(Player* player){
     this->player->entity = player;
+
+    //logging
+    Log* log = new Log(Processes, "Map got a plyer");
+    this->mediator->send(log);
+    delete log;
 };
 
 //coping
@@ -147,6 +158,11 @@ void Map::addEnemy(Entity* enemy, Position* pos){
 
     //add enemy
     this->enemies.emplace_back(*en);
+
+    //logging
+    Log* log = new Log(Processes, "Enemy has been added to the map");
+    this->mediator->send(log);
+    delete log;
 };
 
 //remove enemy
@@ -160,6 +176,11 @@ void Map::removeEnemy(Entity* enemy){
             this->enemies.erase(iter + i);
         }
     }
+
+    //logging
+    Log* log = new Log(Processes, "Enemy has been removed from the map");
+    this->mediator->send(log);
+    delete log;
 };
 
 //get enemies

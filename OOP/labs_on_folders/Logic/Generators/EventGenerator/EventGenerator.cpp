@@ -7,11 +7,10 @@
 #define ENERGY "./Graphic/Images/Events/EventsOnPlayer/energy.png"
 
 //initialization
-EventGenerator::EventGenerator(Map* map, MapView* map_view, Mediator<Log*>* mediator):Generator(map, map_view){
+EventGenerator::EventGenerator(Map* map, MapView* map_view):Generator(map, map_view){
     this->factory_event_on_player = nullptr;
     this->factory_event_on_game = nullptr;
     this->factory_event_on_map = nullptr;
-    this->mediator = mediator;
 };
 
 //set factories

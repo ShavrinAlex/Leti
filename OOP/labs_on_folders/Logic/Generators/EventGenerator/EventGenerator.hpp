@@ -5,15 +5,14 @@
 #include "../../FactoriesPattern/FactoryEventOnMap/FactoryEventOnMap.hpp"
 #include "../../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
 
-class EventGenerator: public Generator{
+class EventGenerator: public Generator, public GameElement<Log*>{
     private:
         FactoryEventOnPlayer* factory_event_on_player;
         FactoryEventOnGame* factory_event_on_game;
         FactoryEventOnMap* factory_event_on_map;
-        Mediator<Log*>* mediator;
     public:
         //initialization
-        EventGenerator(Map* map, MapView* map_view, Mediator<Log*>* mediator);
+        EventGenerator(Map* map, MapView* map_view);
 
         //set factories
         void setFactories(FactoryEventOnPlayer* factory_event_on_player, FactoryEventOnGame* factory_event_on_game, FactoryEventOnMap* factory_event_on_map);

@@ -81,8 +81,10 @@ void LogController::setParametrs(){
 LogController::LogController(){
     this->console_logger = new ConsoleLogger();
     this->file_logger = new FileLogger("Logs.txt");
+    this->levels.emplace_back(GameStates);
     this->levels.emplace_back(Processes);
     this->log_cout.emplace_back(Console);
+    this->log_cout.emplace_back(File);
     //this->setParametrs();
 };
 

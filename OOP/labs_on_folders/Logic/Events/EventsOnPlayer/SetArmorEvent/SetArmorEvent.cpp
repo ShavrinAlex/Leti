@@ -14,7 +14,7 @@ EventStatus SetArmorEvent::execute(){
         this->player->setArmor();
 
         //logging
-        Log* log = new Log(Processes, "Set armor event was execute");
+        Log* log = new Log(Processes, "Event (set armor) was execute");
         this->mediator->send(log);
         delete log;
 

@@ -12,7 +12,7 @@ EventStatus SetWinGameEvent::execute(){
     this->event_generator->generateWinGameEvent(pos, factory_event_on_game);
 
     //logging
-    Log* log = new Log(Processes, "Set win game event was execute");
+    Log* log = new Log(Processes, "Event (set win game) was execute");
     this->mediator->send(log);
     delete log;
 

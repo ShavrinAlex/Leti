@@ -9,7 +9,7 @@ EventStatus WinGameEvent::execute(){
     game_controller->setGameStatus(Win);
 
     //logging
-    Log* log = new Log(Processes, "Win game event was execute");
+    Log* log = new Log(Processes, "Event (win game) was execute");
     this->mediator->send(log);
     delete log;
 

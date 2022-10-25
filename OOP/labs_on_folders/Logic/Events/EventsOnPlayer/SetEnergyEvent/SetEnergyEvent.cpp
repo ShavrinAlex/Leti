@@ -24,7 +24,7 @@ EventStatus SetEnergyEvent::execute(){
         }
 
         //logging
-        Log* log = new Log(Processes, "Set energy event was execute");
+        Log* log = new Log(Processes, "Event (set energy) was execute");
         this->mediator->send(log);
         delete log;
 

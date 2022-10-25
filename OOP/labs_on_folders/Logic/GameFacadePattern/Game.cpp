@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "../MediatorPattern/LogMediator/LogMediator.hpp"
 #include "../Entities/Player/Player.hpp"
 #include "../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
 #include "../CommandReader/CommandReader.hpp"
@@ -12,7 +11,6 @@
 #include "../FactoriesPattern/FactoryEventOnGame/FactoryEventOnGame.hpp"
 #include "../Generators/EventGenerator/EventGenerator.hpp"
 #include "../Generators/EnemyGenerator/EnemyGenerator.hpp"
-#include "../Controllers/LogController/LogController.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
@@ -21,6 +19,10 @@
 
 //initialization
 Game::Game(){
+    //create log controller and mediator
+    this->log_controller = new LogController();
+    this->mediator = new LogMediator(log_controller);
+
     StartDialog start_dialog = StartDialog();
     this->map_width = start_dialog.getWidth();
     this->map_height = start_dialog.getHeight();
@@ -30,6 +32,10 @@ Game::Game(){
 
 //game start
 int Game::startGame(){
+    //logging
+    Log* log = new Log(GameStates, "Game was started");
+    this->mediator->send(log);
+    delete log;
     /*
     Cell cell1 = Cell(true, true);
     Cell cell2 = std::move(cell1);
@@ -51,12 +57,6 @@ int Game::startGame(){
     //create command reader
     CommandReader com_reader = CommandReader();
 
-    //create log controller
-    LogController log_controller = LogController();
-
-    //create log mediator
-    LogMediator log_mediator = LogMediator(&log_controller);
-
     //create player
     Player player = Player();
     player.setSpeed(1);
@@ -64,7 +64,7 @@ int Game::startGame(){
     //player.setMediator(&log_mediator);
 
     //create map
-    Map map = Map(this->map_width, this->map_height);
+    Map map = Map(this->map_width, this->map_height, this->mediator);
     map.setPlayer(&player);
 
     //create map view
@@ -78,13 +78,14 @@ int Game::startGame(){
     PlayerController player_controller = PlayerController(&player, &map, &player_view);
 
     //create command reader mediator
-    CommandReaderMediator com_reader_mediator = CommandReaderMediator(&player_controller, &game_controller, &log_controller);
+    CommandReaderMediator com_reader_mediator = CommandReaderMediator(&player_controller, &game_controller, log_controller);
 
     //set command reader mediator
     com_reader.setMediator(&com_reader_mediator);
 
     //create event generator
-    EventGenerator event_generator = EventGenerator(&map, &map_view, &log_mediator);
+    EventGenerator event_generator = EventGenerator(&map, &map_view);
+    event_generator.setMediator(this->mediator);
 
     //create event fabrics
     FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
@@ -122,6 +123,12 @@ int Game::startGame(){
         this->graphic_arts->drawPlayer(player_view);
         this->graphic_arts->display();
     }
+
+    //logging
+    log = new Log(GameStates, "Game was end");
+    this->mediator->send(log);
+    delete log;
+
     return 0;
 };
 

@@ -11,7 +11,7 @@ EventStatus SetWallEvent::execute(){
     cell->setWall();
 
     //logging
-    Log* log = new Log(Processes, "Set wall event was execute");
+    Log* log = new Log(Processes, "Event (set wall) was execute");
     this->mediator->send(log);
     delete log;
 

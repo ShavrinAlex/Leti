@@ -9,7 +9,7 @@ EventStatus EndGameEvent::execute(){
     game_controller->setGameStatus(Loose);
 
     //logging
-    Log* log = new Log(Processes, "End game event was execute");
+    Log* log = new Log(Processes, "Event (end game) was execute");
     this->mediator->send(log);
     delete log;
     
