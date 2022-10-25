@@ -108,21 +108,23 @@ int Game::startGame(){
     map.setControllers(&player_controller, &enemies_controller);
 
     //main loop
-    while (graphic_arts->isOpen() && this->game_status == Continues){
-        //check close window
-        this->graphic_arts->pollEvent();
-        
-        //player actions
-        com_reader.getPressedKey();
+    while (graphic_arts->isOpen() && (this->game_status == Continues || this->game_status == Pause)){
+        if (this->game_status == Continues){
+            //check close window
+            this->graphic_arts->pollEvent();
+            
+            //player actions
+            com_reader.getPressedKey();
 
-        //enemies actions
-        enemies_controller.move();
-    
-        //draw all
-        this->graphic_arts->clear();
-        this->graphic_arts->drawMap(map_view);
-        this->graphic_arts->drawPlayer(player_view);
-        this->graphic_arts->display();
+            //enemies actions
+            enemies_controller.move();
+        
+            //draw all
+            this->graphic_arts->clear();
+            this->graphic_arts->drawMap(map_view);
+            this->graphic_arts->drawPlayer(player_view);
+            this->graphic_arts->display();
+        }
     }
 
     //logging

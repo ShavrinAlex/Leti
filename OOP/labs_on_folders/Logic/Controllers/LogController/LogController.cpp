@@ -20,11 +20,6 @@ void LogController::convertLevels(std::string user_levels){
                 break;
         }
     }
-    std::cout<<"levels:\n";
-    for (size_t i = 0; i < this->levels.size(); i++){
-        std::cout<<"level "<<this->levels.at(i);
-    }
-    std::cout<<"\n";
 };
 
 void LogController::convertStreams(std::string user_streams){
@@ -38,11 +33,6 @@ void LogController::convertStreams(std::string user_streams){
                 break;
         }
     }
-    std::cout<<"streams:\n";
-    for (size_t i = 0; i < this->log_cout.size(); i++){
-        std::cout<<"streams "<<this->log_cout.at(i);
-    }
-    std::cout<<"\n";
 };
 
 //user dialog
@@ -83,6 +73,8 @@ int LogController::userDialog(bool& f1, bool& f2){
 
 //set log parameters
 void LogController::setParametrs(){
+    this->levels.clear();
+    this->log_cout.clear();
     bool is_levels_set = false;
     bool is_streams_set = false;
 
@@ -102,38 +94,14 @@ void LogController::setParametrs(){
         //this->log_cout.emplace_back(Console);
         this->log_cout.emplace_back(File);
     }
-    /*
-    if (is_levels_set == false || this->levels.empty()){
-        this->convertLevels("errors;game_states;processes");
-    }
-    if (is_streams_set == false || this->log_cout.empty()){
-        this->convertStreams("console;file");
-    }
-    */
 };
 
 //initialization
 LogController::LogController(){
     this->console_logger = new ConsoleLogger();
     this->file_logger = new FileLogger("Logs.txt");
-    //this->levels.emplace_back(GameStates);
-    //this->levels.emplace_back(Processes);
-    //this->levels.emplace_back(Errors);
-    //this->log_cout.emplace_back(Console);
-    //this->log_cout.emplace_back(File);
+
     this->setParametrs();
-};
-
-//set handle log levels
-void LogController::setHandleLogLevels(Levels levels){
-    this->levels.clear();
-    this->levels = levels;
-};
-
-//set output streams
-void LogController::setOutputStreams(OutputStreams cout){
-    this->log_cout.clear();
-    this->log_cout = cout;
 };
 
 //handle log message

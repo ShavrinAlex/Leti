@@ -29,12 +29,6 @@ class LogController{
         //set log parameters
         void setParametrs();
 
-        //set handle log levels
-        void setHandleLogLevels(Levels levels);
-
-        //set output streams
-        void setOutputStreams(OutputStreams cout);
-
         //handle log message
         void handleLog(Log* log);
 

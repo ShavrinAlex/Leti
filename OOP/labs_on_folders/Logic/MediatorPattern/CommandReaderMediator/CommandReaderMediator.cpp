@@ -21,8 +21,10 @@ void CommandReaderMediator::send(std::string message){
         this->player_controller->shoot();
     if (message == "Quit")
         this->game_controller->setGameStatus(Quit);
-    if (message == "Logging")
+    if (message == "Logging"){
         this->log_controller->setParametrs();
+    }
+        
 };
 
 //destruction
