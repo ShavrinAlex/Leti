@@ -19,6 +19,9 @@ class LogController{
         //convert user requests
         void convertLevels(std::string user_levels);
         void convertStreams(std::string user_streams);
+
+        //user dialog
+        int userDialog(bool& f1, bool& f2);
     public:
         //initialization
         LogController();
