@@ -108,15 +108,15 @@ void LogController::setParametrs(){
     std::cout<<"Удалить уровень логирования:\nF9 - errors\tF1 - processes\tF2 - game states\n";
     std::cout<<"Добавить поток логирования:\n6 - console\t7 - file\n";
     std::cout<<"Удалить поток логирования:\nF6 - console\tF7 - processes\tF2 - game states\n";
+    
     if (is_levels_set == false){
         //this->levels.emplace_back(GameStates);
         //this->levels.emplace_back(Processes);
         this->levels.emplace_back(Errors);
-        
-        //this->log_cout.emplace_back(File);
     }
     if (is_streams_set == false){
         this->log_cout.emplace_back(Console);
+        //this->log_cout.emplace_back(File);
     }
 };
 

@@ -54,11 +54,10 @@ void PlayerController::shoot(){
 //take damage
 void PlayerController::takeDamage(int damage, Entity* entity){
     if (entity == this->player){
-        Log* log;
         //check armor
-        //if (this->player->getArmor()){
-        //    this->player->removeArmor();
-        //} else{
+        if (this->player->getArmor()){
+           this->player->removeArmor();
+        } else{
             int health = this->player->getHealth();
 
             //damage player
@@ -69,10 +68,10 @@ void PlayerController::takeDamage(int damage, Entity* entity){
                 this->player->setHealth(health - damage);
             }
             //logging
-            log = new Log(Processes, "Player taked damage");
+            Log* log = new Log(Processes, "Player taked damage");
             this->mediator->send(log);
-        //}
-        delete log;
+            delete log;
+        }
     }
 };
 
