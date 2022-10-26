@@ -29,7 +29,6 @@ void PlayerController::shoot(){
     this->time = time/800;
     this->timer += time;
     if (this->timer >= 350){
-        Log* log;
         //erraise energy
         int player_energy = this->player->getEnergy();
         if (player_energy >= SHOOT_ENERGY){
@@ -39,15 +38,16 @@ void PlayerController::shoot(){
             this->timer = 0;
 
             //logging
-            log = new Log(Processes, "Player hit");
+            Log* log = new Log(Processes, "Player hit");
             this->mediator->send(log);
+            delete log;
         } else{
-            //logging
-            log = new Log(Errors, "Error!!! Player tried to hit without energy");
-            this->mediator->send(log);
             this->timer = 0;
+            //logging
+            Log* log = new Log(Errors, "Error!!! Player tried to hit without energy");
+            this->mediator->send(log);
+            delete log;
         }
-        delete log;
     }
 };
 

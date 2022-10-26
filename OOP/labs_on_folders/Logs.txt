@@ -1,0 +1,3 @@
+LogLevel: 0 ; Message: Error!!! Player tried to move to an impassable cell or an enemy
+LogLevel: 0 ; Message: Error!!! Player tried to hit without energy
+LogLevel: 2 ; Message: Game was end

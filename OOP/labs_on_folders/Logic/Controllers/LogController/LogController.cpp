@@ -3,7 +3,7 @@
 //add parameters
 void LogController::addLevel(LogLevels level){
     bool check = false;
-    for (size_t i; i < this->levels.size(); i++){
+    for (size_t i = 0; i < this->levels.size(); i++){
         if (this->levels[i] == level){
             check = true;
         }
@@ -14,7 +14,7 @@ void LogController::addLevel(LogLevels level){
 };
 void LogController::addStream(LogCout stream){
     bool check = false;
-    for (size_t i; i < this->log_cout.size(); i++){
+    for (size_t i = 0; i < this->log_cout.size(); i++){
         if (this->log_cout[i] == stream){
             check = true;
         }
@@ -126,12 +126,14 @@ LogController::LogController(){
     this->file_logger = new FileLogger("Logs.txt");
 
     this->setParametrs();
+    /*
     for (size_t i = 0; i < this->levels.size(); i++){
         std::cout<<"level = "<<this->levels.at(i)<<'\n';
     }
     for (size_t i = 0; i < this->log_cout.size(); i++){
         std::cout<<"stream = "<<this->log_cout.at(i)<<'\n';
     }
+    */
 };
 
 //remove paremetrs
@@ -155,7 +157,7 @@ void LogController::removeStream(LogCout stream){
 //handle log message
 void LogController::handleLog(Log* log){
     bool tracked = false;
-    
+
     //checking if this log level is tracked
     for (size_t level_index = 0; level_index < this->levels.size(); level_index++){
         if (this->levels[level_index] == log->getLevel()){
