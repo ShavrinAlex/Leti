@@ -22,12 +22,20 @@ class LogController{
 
         //user dialog
         int userDialog(bool& f1, bool& f2);
+
+        //set log parameters
+        void setParametrs();
     public:
         //initialization
         LogController();
 
-        //set log parameters
-        void setParametrs();
+        //add parameters
+        void addLevel(LogLevels level);
+        void addStream(LogCout stream);
+
+        //remove paremetrs
+        void removeLevel(LogLevels level);
+        void removeStream(LogCout stream);
 
         //handle log message
         void handleLog(Log* log);

@@ -45,6 +45,7 @@ void PlayerController::shoot(){
             //logging
             log = new Log(Errors, "Error!!! Player tried to hit without energy");
             this->mediator->send(log);
+            this->timer = 0;
         }
         delete log;
     }
@@ -55,21 +56,22 @@ void PlayerController::takeDamage(int damage, Entity* entity){
     if (entity == this->player){
         Log* log;
         //check armor
-        if (this->player->getArmor()){
-            this->player->removeArmor();
-        } else{
+        //if (this->player->getArmor()){
+        //    this->player->removeArmor();
+        //} else{
             int health = this->player->getHealth();
 
             //damage player
             if (health - damage <= 0){
                 this->player->setHealth(0);
+
             } else{
                 this->player->setHealth(health - damage);
             }
             //logging
             log = new Log(Processes, "Player taked damage");
             this->mediator->send(log);
-        }
+        //}
         delete log;
     }
 };

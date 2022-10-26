@@ -1,35 +1,53 @@
 #include "LogController.hpp"
 
+//add parameters
+void LogController::addLevel(LogLevels level){
+    bool check = false;
+    for (size_t i; i < this->levels.size(); i++){
+        if (this->levels[i] == level){
+            check = true;
+        }
+    }
+    if (check == false){
+        this->levels.emplace_back(level);
+    }
+};
+void LogController::addStream(LogCout stream){
+    bool check = false;
+    for (size_t i; i < this->log_cout.size(); i++){
+        if (this->log_cout[i] == stream){
+            check = true;
+        }
+    }
+    if (check == false){
+        this->log_cout.emplace_back(stream);
+    }
+};
+
 //convert user requests
 void LogController::convertLevels(std::string user_levels){
-    std::cout<<user_levels<<'\n';
-    std::cout<<user_levels.size()<<'\n';
-    for (int i = 0; i < user_levels.size(); i++){
+    for (size_t i = 0; i < user_levels.size(); i++){
         switch(user_levels[i]){
             case '0':
-                std::cout<<"case 0\n";
-                this->levels.emplace_back(Errors);
+                this->addLevel(Errors);
                 break;
             case '1':
-                std::cout<<"case 1\n";
-                this->levels.emplace_back(Processes);
+                this->addLevel(Processes);
                 break;
             case '2':
-                std::cout<<"case 2\n";
-                this->levels.emplace_back(GameStates);
+                this->addLevel(GameStates);
                 break;
         }
     }
 };
-
 void LogController::convertStreams(std::string user_streams){
-    for (int i = 0; i < user_streams.size(); i++){
+    for (size_t i = 0; i < user_streams.size(); i++){
         switch(user_streams[i]){
             case '0':
-                this->log_cout.emplace_back(Console);
+                this->addStream(Console);
                 break;
             case '1':
-                this->log_cout.emplace_back(File);
+                this->addStream(File);
                 break;
         }
     }
@@ -38,7 +56,7 @@ void LogController::convertStreams(std::string user_streams){
 //user dialog
 int LogController::userDialog(bool& f1, bool& f2){
     char user_answer1;
-    std::cout<<"Хотите задать уровни логирования? (По умолчанию все: errors) [y]: ";
+    std::cout<<"Хотите задать уровни логирования? (По умолчанию: errors) [y]: ";
     std::cin>>user_answer1;
 
     if (user_answer1 == 'y'){
@@ -53,7 +71,7 @@ int LogController::userDialog(bool& f1, bool& f2){
         f1 = true;
     }
     char user_answer2;
-    std::cout<<"Хотите задать куда выводить логи? (По умолчанию все: file) [y]: ";
+    std::cout<<"Хотите задать куда выводить логи? (По умолчанию: console) [y]: ";
     std::cin>>user_answer2;
 
     if (user_answer2 == 'y'){
@@ -73,8 +91,6 @@ int LogController::userDialog(bool& f1, bool& f2){
 
 //set log parameters
 void LogController::setParametrs(){
-    this->levels.clear();
-    this->log_cout.clear();
     bool is_levels_set = false;
     bool is_streams_set = false;
 
@@ -86,13 +102,21 @@ void LogController::setParametrs(){
 
         std::cout<<"Вы ввели значения неправильно. Повторите снова\n";
     }
-
-    if (is_levels_set == false && is_streams_set == false){
+    
+    std::cout<<"По ходу программы можно задавать параметры логирования с помощью клавиатуры.\n";
+    std::cout<<"Добавить уровень логирования:\n0 - errors\t1 - processes\t2 - game states\n";
+    std::cout<<"Удалить уровень логирования:\nF9 - errors\tF1 - processes\tF2 - game states\n";
+    std::cout<<"Добавить поток логирования:\n6 - console\t7 - file\n";
+    std::cout<<"Удалить поток логирования:\nF6 - console\tF7 - processes\tF2 - game states\n";
+    if (is_levels_set == false){
         //this->levels.emplace_back(GameStates);
         //this->levels.emplace_back(Processes);
         this->levels.emplace_back(Errors);
-        //this->log_cout.emplace_back(Console);
-        this->log_cout.emplace_back(File);
+        
+        //this->log_cout.emplace_back(File);
+    }
+    if (is_streams_set == false){
+        this->log_cout.emplace_back(Console);
     }
 };
 
@@ -102,6 +126,30 @@ LogController::LogController(){
     this->file_logger = new FileLogger("Logs.txt");
 
     this->setParametrs();
+    for (size_t i = 0; i < this->levels.size(); i++){
+        std::cout<<"level = "<<this->levels.at(i)<<'\n';
+    }
+    for (size_t i = 0; i < this->log_cout.size(); i++){
+        std::cout<<"stream = "<<this->log_cout.at(i)<<'\n';
+    }
+};
+
+//remove paremetrs
+void LogController::removeLevel(LogLevels level){
+    for (size_t i = 0; i < this->levels.size(); i++){
+        if (this->levels[i] == level){
+            auto iter = this->levels.begin();
+            this->levels.erase(iter + i);
+        }
+    }
+};
+void LogController::removeStream(LogCout stream){
+    for (size_t i = 0; i < this->log_cout.size(); i++){
+        if (this->log_cout[i] == stream){
+            auto iter = this->log_cout.begin();
+            this->log_cout.erase(iter + i);
+        }
+    }
 };
 
 //handle log message

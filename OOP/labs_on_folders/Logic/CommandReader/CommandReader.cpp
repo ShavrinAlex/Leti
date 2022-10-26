@@ -3,6 +3,7 @@
 
 //read kyboard
 void CommandReader::getPressedKey(){
+    //_____________________________________________PLAYER______________________________________________________
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))){
         this->mediator->send("Right");
     }
@@ -18,10 +19,40 @@ void CommandReader::getPressedKey(){
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space))){
         this->mediator->send("Shoot");
     }
+    //_______________________________________________GAME______________________________________________________
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
         this->mediator->send("Quit");
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)){
-        this->mediator->send("Logging");
+    //_____________________________________________LOG_LEVEL___________________________________________________
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0)){
+        this->mediator->send("AddErrorsLogLevel");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F9)){
+        this->mediator->send("RemoveErrorsLogLevel");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)){
+        this->mediator->send("AddProcessesLogLevel");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)){
+        this->mediator->send("RemoveProcessesLogLevel");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)){
+        this->mediator->send("AddGameStatesLogLevel");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)){
+        this->mediator->send("RemoveGameStatesLogLevel");
+    }
+    //_____________________________________________LOG_STREAM__________________________________________________
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)){
+        this->mediator->send("AddCnsoleLogStream");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F6)){
+        this->mediator->send("RemoveCnsoleLogStream");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)){
+        this->mediator->send("AddFileLogStream");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F7)){
+        this->mediator->send("RemoveFileLogStream");
     }
 };
