@@ -28,14 +28,12 @@ void LogController::addStream(LogCout stream){
 void LogController::convertLevels(std::string user_levels){
     for (size_t i = 0; i < user_levels.size(); i++){
         switch(user_levels[i]){
-            case '0':
-                this->addLevel(Errors);
-                break;
-            case '1':
-                this->addLevel(Processes);
-                break;
             case '2':
                 this->addLevel(GameStates);
+            case '1':
+                this->addLevel(Processes);
+            case '0':
+                this->addLevel(Errors);
                 break;
         }
     }
@@ -107,7 +105,7 @@ void LogController::setParametrs(){
     std::cout<<"Добавить уровень логирования:\n0 - errors\t1 - processes\t2 - game states\n";
     std::cout<<"Удалить уровень логирования:\nF9 - errors\tF1 - processes\tF2 - game states\n";
     std::cout<<"Добавить поток логирования:\n6 - console\t7 - file\n";
-    std::cout<<"Удалить поток логирования:\nF6 - console\tF7 - processes\tF2 - game states\n";
+    std::cout<<"Удалить поток логирования:\nF6 - console\tF7 - processes\n";
     
     if (is_levels_set == false){
         //this->levels.emplace_back(GameStates);

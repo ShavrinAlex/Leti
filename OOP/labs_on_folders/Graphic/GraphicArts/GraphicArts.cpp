@@ -29,13 +29,15 @@ void GraphicArts::closeWindow(){
 };
 
 //poll event
-void GraphicArts::pollEvent(){
-    sf::Event event;
-    while (this->window.pollEvent(event)){
-        if (event.type == sf::Event::Closed){
+std::shared_ptr<sf::Event> GraphicArts::pollEvent(){
+    auto event = std::make_shared<sf::Event>();
+    while (this->window.pollEvent(*event)){
+        if (event->type == sf::Event::Closed){
             this->window.close();
         }
     }
+    
+    return event;
 };
 
 //draw player

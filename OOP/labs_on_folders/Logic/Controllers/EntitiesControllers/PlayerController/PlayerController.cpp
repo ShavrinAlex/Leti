@@ -10,44 +10,29 @@ PlayerController::PlayerController(Player* player, Map* map, PlayerView* player_
 
 //move player
 void PlayerController::move(Direction dir){
-    this->time = this->clock.getElapsedTime().asMicroseconds();
-    this->clock.restart();
-    this->time = time/800;
-    this->timer += time;
-    if (this->timer >= 350){
-        this->player->setDirection(dir);
-        this->map->moveEntity(this->player);
-        this->player_view->setPosition(map->getPlayerPosition());
-        this->timer = 0;
-    }
+    this->player->setDirection(dir);
+    this->map->moveEntity(this->player);
+    this->player_view->setPosition(map->getPlayerPosition());
 };
 
 //shoot
 void PlayerController::shoot(){
-    this->time = this->clock.getElapsedTime().asMicroseconds();
-    this->clock.restart();
-    this->time = time/800;
-    this->timer += time;
-    if (this->timer >= 350){
-        //erraise energy
-        int player_energy = this->player->getEnergy();
-        if (player_energy >= SHOOT_ENERGY){
-            this->player->setEnergy(player_energy - SHOOT_ENERGY);
+    //erraise energy
+    int player_energy = this->player->getEnergy();
+    if (player_energy >= SHOOT_ENERGY){
+        this->player->setEnergy(player_energy - SHOOT_ENERGY);
 
-            this->map->makeDamage(this->player);
-            this->timer = 0;
+        this->map->makeDamage(this->player);
 
-            //logging
-            Log* log = new Log(Processes, "Player hit");
-            this->mediator->send(log);
-            delete log;
-        } else{
-            this->timer = 0;
-            //logging
-            Log* log = new Log(Errors, "Error!!! Player tried to hit without energy");
-            this->mediator->send(log);
-            delete log;
-        }
+        //logging
+        Log* log = new Log(Processes, "Player hit");
+        this->mediator->send(log);
+        delete log;
+    } else{
+        //logging
+        Log* log = new Log(Errors, "Error!!! Player tried to hit without energy");
+        this->mediator->send(log);
+        delete log;
     }
 };
 

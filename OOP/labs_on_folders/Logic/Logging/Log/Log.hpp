@@ -13,9 +13,6 @@ class Log{
         //get log level
         LogLevels getLevel();
 
-        //get log message
-        std::string getLogMessage();
-
         //reloading output into a stream
         friend std::ostream& operator << (std::ostream& out, const Log& log);
 };

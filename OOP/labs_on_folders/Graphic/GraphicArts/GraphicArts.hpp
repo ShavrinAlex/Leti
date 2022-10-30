@@ -5,6 +5,7 @@
 #include "../EntitiesView/EntityView/EntityView.hpp"
 #include "../EntitiesView/PlayerView/PlayerView.hpp"
 #include <string>
+#include <memory>
 #define WINDOW_NAME "My game"
 
 class GraphicArts{
@@ -25,7 +26,7 @@ class GraphicArts{
         void closeWindow();
 
         //poll event
-        void pollEvent();
+        std::shared_ptr<sf::Event> pollEvent();
 
         //draw entity
         void drawEntity(EntityView& entity_view);

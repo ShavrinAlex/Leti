@@ -11,10 +11,6 @@ class PlayerController: public EntityController{
         
         Map* map;
         PlayerView* player_view;
-
-        sf::Clock clock;
-        float time;
-        float timer;
     public:
         //initialization
         PlayerController(Player* player, Map* map, PlayerView* player_view);

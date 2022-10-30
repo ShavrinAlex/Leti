@@ -111,10 +111,10 @@ int Game::startGame(){
     while (graphic_arts->isOpen() && (this->game_status == Continues || this->game_status == Pause)){
         if (this->game_status == Continues){
             //check close window
-            this->graphic_arts->pollEvent();
+            
             
             //player actions
-            com_reader.getPressedKey();
+            com_reader.getPressedKey((this->graphic_arts)->pollEvent());
 
             //enemies actions
             enemies_controller.move();

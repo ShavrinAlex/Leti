@@ -11,11 +11,6 @@ LogLevels Log::getLevel(){
     return this->level;
 };
 
-//get log message
-std::string Log::getLogMessage(){
-    return this->log_message;
-};
-
 //reloading output into a stream
 std::ostream& operator << (std::ostream& out, const Log& log){
     out<<(log.log_message)<<std::endl;
