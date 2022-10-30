@@ -1,6 +1,5 @@
 #include "CommandReader.hpp"
 
-
 //read kyboard
 void CommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
     if (event->type == sf::Event::KeyReleased){
@@ -31,22 +30,13 @@ void CommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
                 break;
         //_____________________________________________LOG_LEVEL___________________________________________________
             case sf::Keyboard::Num0:
-                this->mediator->send("AddErrorsLogLevel");
-                break;
-            case sf::Keyboard::F9:
-                this->mediator->send("RemoveErrorsLogLevel");
+                this->mediator->send("SetErrorsLogLevel");
                 break;
             case sf::Keyboard::Num1:
-                this->mediator->send("AddProcessesLogLevel");
-                break;
-            case sf::Keyboard::F1:
-                this->mediator->send("RemoveProcessesLogLevel");
+                this->mediator->send("SetProcessesLogLevel");
                 break;
             case sf::Keyboard::Num2:
-                this->mediator->send("AddGameStatesLogLevel");
-                break;
-            case sf::Keyboard::F2:
-                this->mediator->send("RemoveGameStatesLogLevel");
+                this->mediator->send("SetGameStatesLogLevel");
                 break;
         //_____________________________________________LOG_STREAM__________________________________________________
             case sf::Keyboard::Num6:
@@ -62,7 +52,6 @@ void CommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
                 this->mediator->send("RemoveFileLogStream");
                 break;
             default:
-                std::cout<<"default\n";
                 break;
         }
     }

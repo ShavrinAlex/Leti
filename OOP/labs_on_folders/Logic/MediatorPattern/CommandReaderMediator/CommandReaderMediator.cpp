@@ -24,23 +24,14 @@ void CommandReaderMediator::send(std::string message){
     if (message == "Quit")
         this->game_controller->setGameStatus(Quit);
     //________________LOG_LEVEL_______________
-    if (message == "AddErrorsLogLevel"){
-        this->log_controller->addLevel(Errors);
+    if (message == "SetErrorsLogLevel"){
+        this->log_controller->setLevel(Errors);
     }
-    if (message == "RemoveErrorsLogLevel"){
-        this->log_controller->removeLevel(Errors);
+    if (message == "SetProcessesLogLevel"){
+        this->log_controller->setLevel(Processes);
     }
-    if (message == "AddProcessesLogLevel"){
-        this->log_controller->addLevel(Processes);
-    }
-    if (message == "RemoveProcessesLogLevel"){
-        this->log_controller->removeLevel(Processes);
-    }
-    if (message == "AddGameStatesLogLevel"){
-        this->log_controller->addLevel(GameStates);
-    }
-    if (message == "RemoveGameStatesLogLevel"){
-        this->log_controller->removeLevel(GameStates);
+    if (message == "SetGameStatesLogLevel"){
+        this->log_controller->setLevel(GameStates);
     }
     //________________LOG_STREAM_______________
     if (message == "AddCnsoleLogStream"){

@@ -4,7 +4,6 @@
 #include "../../Utility/Enumerations.hpp"
 #include <vector>
 
-typedef std::vector <LogLevels> Levels;
 typedef std::vector <LogCout> OutputStreams;
 
 class LogController{
@@ -12,13 +11,13 @@ class LogController{
         ConsoleLogger* console_logger;
         FileLogger* file_logger;
 
-        Levels levels;
+        LogLevels level;
 
         OutputStreams log_cout;
 
         //convert user requests
-        void convertLevels(std::string user_levels);
-        void convertStreams(std::string user_streams);
+        int convertLevel(char user_level);
+        int convertStreams(std::string user_streams);
 
         //user dialog
         int userDialog(bool& f1, bool& f2);
@@ -30,11 +29,10 @@ class LogController{
         LogController();
 
         //add parameters
-        void addLevel(LogLevels level);
+        void setLevel(LogLevels level);
         void addStream(LogCout stream);
 
         //remove paremetrs
-        void removeLevel(LogLevels level);
         void removeStream(LogCout stream);
 
         //handle log message
