@@ -123,7 +123,6 @@ int Game::startGame(){
             this->graphic_arts->display();
         }
     }
-
     //logging
     log = new Log(GameStates, "Game ended");
     this->mediator->send(log);
