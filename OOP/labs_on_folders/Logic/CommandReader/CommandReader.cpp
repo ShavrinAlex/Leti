@@ -3,6 +3,8 @@
 //read kyboard
 void CommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
     if (event->type == sf::Event::KeyReleased){
+        this->mediator->send(event->key.code);
+        /*
         switch (event->key.code){
         //_____________________________________________PLAYER______________________________________________________
             case sf::Keyboard::Right:
@@ -54,5 +56,6 @@ void CommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
             default:
                 break;
         }
+        */
     }
 };

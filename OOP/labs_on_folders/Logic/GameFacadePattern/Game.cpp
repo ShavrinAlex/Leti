@@ -33,7 +33,7 @@ Game::Game(){
 //game start
 int Game::startGame(){
     //logging
-    Log* log = new Log(GameStates, "Game was started");
+    Log* log = new Log(GameStates, "Game started");
     this->mediator->send(log);
     delete log;
     /*
@@ -110,9 +110,6 @@ int Game::startGame(){
     //main loop
     while (graphic_arts->isOpen() && (this->game_status == Continues || this->game_status == Pause)){
         if (this->game_status == Continues){
-            //check close window
-            
-            
             //player actions
             com_reader.getPressedKey((this->graphic_arts)->pollEvent());
 
@@ -128,7 +125,7 @@ int Game::startGame(){
     }
 
     //logging
-    log = new Log(GameStates, "Game was end");
+    log = new Log(GameStates, "Game ended");
     this->mediator->send(log);
     delete log;
 
