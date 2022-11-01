@@ -13,7 +13,13 @@ void GameControllCommandsConverter::setCommand(std::string command_line){
     if (pos_eq != std::string::npos){
         std::string command = command_line.substr(0, pos_eq - 1);
         std::string key = command_line.substr(pos_eq + 2);
-        this->commands.emplace(command, this->convert(key));
+
+        auto key_to_find = this->commands.find(command);
+        if (key_to_find != this->commands.end()){
+            this->commands[command] = this->convert(key);
+        } else{
+            this->commands.emplace(command, this->convert(key));
+        }
     }
 };
 
