@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "../Entities/Player/Player.hpp"
 #include "../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
-#include "../CommandReader/CommandReader.hpp"
+#include "../CommandReader/KeyboardCommandReader/KeyboardCommandReader.hpp"
 #include "../Utility/Enumerations.hpp"
 #include "../StartDialog/StartDialog.hpp"
 #include "../Controllers/EntitiesControllers/EnemiesController/EnemiesController.hpp"
@@ -36,26 +36,9 @@ int Game::startGame(){
     Log* log = new Log(GameStates, "Game started");
     this->mediator->send(log);
     delete log;
-    /*
-    Cell cell1 = Cell(true, true);
-    Cell cell2 = std::move(cell1);
 
-    Cell cell3(false, true);
-    Cell cell4(cell3);
-    cell3 = cell4;
-    cell4 = std::move(cell3);
-
-    Map map1 = Map();
-    Map map2 = std::move(map2);
-
-    Map map3 = Map();
-    Map map4 = map3;
-    map3 = map4;
-    map4 = std::move(map3);
-    */
-
-    //create command reader
-    CommandReader com_reader = CommandReader();
+    //create keyboard command reader
+    KeyboardCommandReader com_reader = KeyboardCommandReader();
 
     //create player
     Player player = Player();

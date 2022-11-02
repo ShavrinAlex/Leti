@@ -1,7 +1,7 @@
-#include "CommandReader.hpp"
+#include "KeyboardCommandReader.hpp"
 
 //read kyboard
-void CommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
+void KeyboardCommandReader::getPressedKey(std::shared_ptr<sf::Event> event){
     if (event->type == sf::Event::KeyReleased){
         this->mediator->send(event->key.code);
         /*

@@ -1,1 +1,1 @@
-Right = F
+Up = Q

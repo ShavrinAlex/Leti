@@ -28,7 +28,7 @@ class LogController{
         //initialization
         LogController();
 
-        //add parameters
+        //set parameters
         void setLevel(LogLevels level);
         void addStream(LogCout stream);
 

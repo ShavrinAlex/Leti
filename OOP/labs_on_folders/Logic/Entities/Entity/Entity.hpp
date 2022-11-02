@@ -4,7 +4,7 @@
 #include "../../Logging/Log/Log.hpp"
 #include "../../MediatorPattern/GameElement/GameElementDescription.hpp"
 
-class Entity: public Observable, public GameElement<Log*>{
+class Entity: public Observable{
     protected:
         int health;
         int speed;
