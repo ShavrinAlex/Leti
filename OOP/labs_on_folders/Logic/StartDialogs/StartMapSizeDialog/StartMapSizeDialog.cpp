@@ -1,42 +1,17 @@
-#include "StartDialog.hpp"
+#include "StartMapSizeDialog.hpp"
 #include <iostream>
 #define MIN_SIZE 5
 #define START_MAP_WIDTH 5
 #define START_MAP_HEIGHT 5
 
 //initialization
-StartDialog::StartDialog(Mediator<Log*>* mediator){
+StartMapSizeDialog::StartMapSizeDialog(Mediator<Log*>* mediator){
     this->setMediator(mediator);
-
     this->is_size_set = false;
-
-    while (executor() != 0){
-        //logging
-        Log* log = new Log(Errors, "Error!!! Entered invalid map sizes");
-        this->mediator->send(log);
-        delete log;
-        std::cout<<"Вы ввели недопустимый размер поля. Повторите снова\n";
-    }
-
-    if (this->is_size_set == false){
-        this->map_width = START_MAP_WIDTH;
-        this->map_height = START_MAP_HEIGHT;
-    }
 };
 
-//map
-int StartDialog::getHeight(){
-    return this->map_height;
-};
-int StartDialog::getWidth(){
-    return this->map_width;
-};
-bool StartDialog::getIsSizeSet(){
-    return is_size_set;
-};
-
-//executor
-int StartDialog::executor(){
+//user dialog
+int StartMapSizeDialog::userDialog(){
     char map_answer;
     int map_height, map_width;
 
@@ -59,4 +34,29 @@ int StartDialog::executor(){
         this->is_size_set = true;
     }
     return 0;
+};
+
+//executor
+void StartMapSizeDialog::executor(){
+    while (this->userDialog() != 0){
+        //logging
+        Log* log = new Log(Errors, "Error!!! Entered invalid map sizes");
+        this->mediator->send(log);
+        delete log;
+        std::cout<<"Вы ввели недопустимый размер поля. Повторите снова\n";
+    }
+
+    //set default size
+    if (this->is_size_set == false){
+        this->map_width = START_MAP_WIDTH;
+        this->map_height = START_MAP_HEIGHT;
+    }
+};
+
+//map
+int StartMapSizeDialog::getHeight(){
+    return this->map_height;
+};
+int StartMapSizeDialog::getWidth(){
+    return this->map_width;
 };

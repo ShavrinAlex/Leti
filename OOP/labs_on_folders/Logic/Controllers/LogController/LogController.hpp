@@ -12,18 +12,7 @@ class LogController{
         FileLogger* file_logger;
 
         LogLevels level;
-
         OutputStreams log_cout;
-
-        //convert user requests
-        int convertLevel(char user_level);
-        int convertStreams(std::string user_streams);
-
-        //user dialog
-        int userDialog(bool& f1, bool& f2);
-
-        //set log parameters
-        void setParametrs();
     public:
         //initialization
         LogController();

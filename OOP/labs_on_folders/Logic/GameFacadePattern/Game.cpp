@@ -3,7 +3,7 @@
 #include "../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
 #include "../CommandReader/KeyboardCommandReader/KeyboardCommandReader.hpp"
 #include "../Utility/Enumerations.hpp"
-#include "../StartDialog/StartDialog.hpp"
+#include "../StartDialogs/StartMapSizeDialog/StartMapSizeDialog.hpp"
 #include "../Controllers/EntitiesControllers/EnemiesController/EnemiesController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
 #include "../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
@@ -23,9 +23,12 @@ Game::Game(){
     this->log_controller = new LogController();
     this->mediator = new LogMediator(log_controller);
 
-    StartDialog start_dialog = StartDialog(this->mediator);
-    this->map_width = start_dialog.getWidth();
-    this->map_height = start_dialog.getHeight();
+    StartMapSizeDialog start_map_size_dialog = StartMapSizeDialog(this->mediator);
+    start_map_size_dialog.executor();
+
+    this->map_width = start_map_size_dialog.getWidth();
+    this->map_height = start_map_size_dialog.getHeight();
+    
     this->graphic_arts = new GraphicArts(this->map_width, this->map_height);
     this->game_status = Continues;
 };
