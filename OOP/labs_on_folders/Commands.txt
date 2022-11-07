@@ -1,1 +1,4 @@
-Up = W
+Up = E
+Down = D
+Left = S
+Right = F

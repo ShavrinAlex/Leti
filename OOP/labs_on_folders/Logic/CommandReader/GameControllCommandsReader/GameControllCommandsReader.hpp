@@ -1,12 +1,12 @@
 #include <string>
 #include <fstream>
-#include "../GameControllCommandsConverter/GameControllCommandsConverter.hpp"
+#include "../GameControllCommandsCreator/GameControllCommandsCreator.hpp"
 
 // this class read file with game controll commands an convert there to comands in mediator
 class GameControllCommandsReader{
     private:
         std::ifstream file;
-        GameControllCommandsConverter converter;
+        GameControllCommandsCreator commands_creator;
     public:
         //initialization
         GameControllCommandsReader(std::string file_name);

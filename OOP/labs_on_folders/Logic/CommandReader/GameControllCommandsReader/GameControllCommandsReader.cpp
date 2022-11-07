@@ -1,5 +1,5 @@
 #include "GameControllCommandsReader.hpp"
-#include <iostream>
+
 //initialization
 GameControllCommandsReader::GameControllCommandsReader(std::string file_name){
     this->file.open(file_name);
@@ -10,10 +10,10 @@ Commands GameControllCommandsReader::readCommands(){
     std::string line;
     
     while (getline(file, line)){
-        this->converter.setCommand(line);
+        this->commands_creator.setCommand(line);
     }
 
-    return converter.getCommands();
+    return commands_creator.getCommands();
 };
 
 //destruction
