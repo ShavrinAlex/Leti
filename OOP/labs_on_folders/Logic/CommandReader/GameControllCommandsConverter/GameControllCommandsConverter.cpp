@@ -2,19 +2,28 @@
 
 //initialization
 GameControllCommandsConverter::GameControllCommandsConverter(){
-    this->createDictionary();
+    this->createCommandDictionary();
+    this->createCommandNameDictionary();
 };
 
 //converte string key to sf::Keyboard::Key
-sf::Keyboard::Key GameControllCommandsConverter::convert(std::string key){
+sf::Keyboard::Key GameControllCommandsConverter::convertCommand(std::string key){
     auto search = this->dict_commands.find(key);
     if (search != this->dict_commands.end()){
         return search->second;
     }
 };
 
+//convert string name command to enum
+GameControllCommands GameControllCommandsConverter::convertCommandName(std::string command){
+    auto search = this->dict_commands_name.find(command);
+    if (search != this->dict_commands_name.end()){
+        return search->second;
+    }
+};
+
 //filling dict_commands
-void GameControllCommandsConverter::createDictionary(){
+void GameControllCommandsConverter::createCommandDictionary(){
     //first line
     this->dict_commands.emplace("Q", sf::Keyboard::Q);
     this->dict_commands.emplace("W", sf::Keyboard::W);
@@ -78,4 +87,24 @@ void GameControllCommandsConverter::createDictionary(){
     this->dict_commands.emplace("Down", sf::Keyboard::Down);
     this->dict_commands.emplace("Left", sf::Keyboard::Left);
     this->dict_commands.emplace("Right", sf::Keyboard::Right);
+};
+
+//filling dict_commands_name
+void GameControllCommandsConverter::createCommandNameDictionary(){
+    //player commands
+    this->dict_commands_name.emplace("Right", MovePlayerRight);
+    this->dict_commands_name.emplace("Left", MovePlayerLeft);
+    this->dict_commands_name.emplace("Up", MovePlayerUp);
+    this->dict_commands_name.emplace("Down", MovePlayerDown);
+    this->dict_commands_name.emplace("Shoot", PlayerShoot);
+    //log commands
+    this->dict_commands_name.emplace("SetErrorsLogLevel", SetErrorsLogLevel);
+    this->dict_commands_name.emplace("SetProcessesLogLevel", SetProcessesLogLevel);
+    this->dict_commands_name.emplace("SetGameSatesLogLevel", SetGameStatesLogLevel);
+    this->dict_commands_name.emplace("AddConsoleLogStream", AddConsoleLogStream);
+    this->dict_commands_name.emplace("AddFileLogStream", AddFileLogStream);
+    this->dict_commands_name.emplace("RemoveConsoleLogStream", RemoveConsoleLogStream);
+    this->dict_commands_name.emplace("RemoveFileLogStream", RemoveFileLogStream);
+    //game commands
+    this->dict_commands_name.emplace("QuitGame", QuitGame);
 };

@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../GameControllCommandsConverter/GameControllCommandsConverter.hpp"
 
-typedef std::map <std::string, sf::Keyboard::Key> Commands;
+typedef std::map <GameControllCommands, sf::Keyboard::Key> Commands;
 
 //this class set commands to game in commands in mediator
 class GameControllCommandsCreator{

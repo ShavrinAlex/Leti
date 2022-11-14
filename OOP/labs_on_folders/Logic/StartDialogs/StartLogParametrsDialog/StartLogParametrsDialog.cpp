@@ -82,13 +82,13 @@ void StartLogParametrDialog::executor(){
     while (this->userDialog() != 0){
         std::cout<<"Вы ввели значения неправильно. Повторите снова\n";
     }
-    
+    /*
     //instruction how set parametrs in runtime
     std::cout<<"По ходу программы можно задавать параметры логирования с помощью клавиатуры.\n";
     std::cout<<"Установить уровень логирования:\n0 - errors\t1 - processes\t2 - game states\n";
     std::cout<<"Добавить поток логирования:\n6 - console\t7 - file\n";
     std::cout<<"Удалить поток логирования:\nF6 - console\tF7 - processes\n";
-    
+    */
     //set default parametrs
     if (this->is_levels_set == false){
         this->log_controller->setLevel(Errors);
