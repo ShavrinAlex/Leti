@@ -10,8 +10,8 @@ double truncRound(double x, double Eps){
 };
 
 double F(double x, double c){
-    //return 1/(c*sin(x))+1;
-    return truncRound(1/(c*sin(x))+1, 0.1);
+    return 1/(c*sin(x))+1;
+    //return truncRound(1/(c*sin(x))+1, 0.1);
 };
 
 double BISECT(double Left, double Right, double Eps, double c, int &N){
@@ -212,9 +212,9 @@ int main(){
     std::cout<<"eps = ";
     std::cin>>eps;
     
-    double X = BISECT(-M_PI+0.15, -M_PI+0.35, eps, c, N);  
+    //double X = BISECT(-M_PI+0.3, -M_PI+0.35, eps, c, N);  
     //double X = BISECT_2(-M_PI+0.15, -M_PI+0.35, eps, c, N);
-    //double X = HORDA(-M_PI+0.15, -M_PI+0.35, eps, c, N);     
+    double X = HORDA(-M_PI+0.15, -M_PI+0.35, eps, c, N);     
     //double X = HORDA_2(-M_PI+0.15, -M_PI+0.35, eps, c, N);
     
     std::cout<<"X = "<<X<<'\n';
