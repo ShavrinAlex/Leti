@@ -17,12 +17,12 @@ AStack SEGMENT STACK
 AStack ENDS
 
 DATA SEGMENT
-    a DW 3
-    b DW 3
-    i DW 1
+    a DW 6
+    b DW 5
+    i DW 2
     i1 DW 0
     i2 DW 0
-    k DW 3
+    k DW 0
     res DW 0
 DATA ENDS
 
@@ -37,11 +37,11 @@ Main    PROC FAR
     mov DS, AX
                 ; запись в регистры i с побитовым сдвигом
     mov CX, i   ; cx = i
-    neg CX      ; cx = -i
-    mov BX, CX  ; bx = -i
-    sal BX, 1   ; bx = -2*i
-    mov DX, BX  ; dx = -2*i
-    sal DX, 1   ; dx = -4*i
+    sal CX, 1   ; cx = 2*i
+    mov BX, CX  ; bx = 2*i
+    add BX, i   ; bx = 3*i
+    mov DX, BX  ; dx = 3*i
+    sal DX, 1   ; dx = 6*i
 
                 ; вычисление fn1 и fn2
     mov AX, a   ; ax = a
@@ -50,8 +50,6 @@ Main    PROC FAR
                 ; else (a <= b) продолжить
 
                 ; fn1 (a <= b)
-    add BX, CX  ; bx = -3*i
-    neg BX      ; bx = 3*i
     add BX, 4   ; bx = 3*i + 4
                 ; fn2 (a <= b)
     mov DX, BX  ; dx = 3*i + 4
@@ -60,10 +58,12 @@ Main    PROC FAR
     jmp F2
 
 F1:             ; fn1 (a > b)
+    mov BX, CX  ; bx = 2*i
+    neg BX      ; bx = -2*i
     add BX, 15  ; bx = -2*i + 15
                 ; fn2 (a > b)
-    add DX, BX  ; dx = -4*i -2*i + 15
-    add DX, -11  ; dx = -6*i + 4
+    neg DX      ; dx = -6*i
+    add DX, 4  ; dx = -6*i + 4
 
 F2:             ; вычисление fn3
     mov i1, BX  ; i1 = fn1
