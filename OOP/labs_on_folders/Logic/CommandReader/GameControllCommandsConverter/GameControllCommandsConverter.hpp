@@ -22,6 +22,12 @@ class GameControllCommandsConverter{
         //initialization
         GameControllCommandsConverter();
 
+        //check correct command name
+        bool isCorrectCommandName(std::string command);
+
+        //check correct command
+        bool isCorrectCommand(std::string command);
+
         //convert string key to sf::Keyboard::Key
         sf::Keyboard::Key convertCommand(std::string key);
 

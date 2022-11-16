@@ -1,2 +1,0 @@
-LogLevel: 1 ; Message: Event (win game) was execute
-LogLevel: 2 ; Message: Game ended

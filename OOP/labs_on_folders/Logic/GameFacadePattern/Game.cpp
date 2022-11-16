@@ -11,6 +11,7 @@
 #include "../FactoriesPattern/FactoryEventOnGame/FactoryEventOnGame.hpp"
 #include "../Generators/EventGenerator/EventGenerator.hpp"
 #include "../Generators/EnemyGenerator/EnemyGenerator.hpp"
+#include "../CommandReader/CommandAdapterPattern/CommandAdapter.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
@@ -40,8 +41,11 @@ int Game::startGame(){
     this->mediator->send(log);
     delete log;
 
+    //create keyboard command adapter
+    CommandAdapter com_adapter = CommandAdapter(this->mediator);
+
     //create keyboard command reader
-    KeyboardCommandReader com_reader = KeyboardCommandReader();
+    KeyboardCommandReader com_reader = KeyboardCommandReader(&com_adapter);
 
     //create player
     Player player = Player();

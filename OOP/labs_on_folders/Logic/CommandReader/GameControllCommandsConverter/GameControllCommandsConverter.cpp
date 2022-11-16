@@ -6,6 +6,24 @@ GameControllCommandsConverter::GameControllCommandsConverter(){
     this->createCommandNameDictionary();
 };
 
+//check correct command name
+bool GameControllCommandsConverter::isCorrectCommandName(std::string command){
+    auto search = this->dict_commands_name.find(command);
+    if (search != this->dict_commands_name.end()){
+        return true;
+    }
+    return false;
+};
+
+//check correct command
+bool GameControllCommandsConverter::isCorrectCommand(std::string key){
+    auto search = this->dict_commands.find(key);
+    if (search != this->dict_commands.end()){
+        return true;
+    }
+    return false;
+};
+
 //converte string key to sf::Keyboard::Key
 sf::Keyboard::Key GameControllCommandsConverter::convertCommand(std::string key){
     auto search = this->dict_commands.find(key);
@@ -65,18 +83,18 @@ void GameControllCommandsConverter::createCommandDictionary(){
     this->dict_commands.emplace("8", sf::Keyboard::Num8);
     this->dict_commands.emplace("9", sf::Keyboard::Num9);
     //f numbers
-    this->dict_commands.emplace("f1", sf::Keyboard::F1);
-    this->dict_commands.emplace("f2", sf::Keyboard::F2);
-    this->dict_commands.emplace("f3", sf::Keyboard::F3);
-    this->dict_commands.emplace("f4", sf::Keyboard::F4);
-    this->dict_commands.emplace("f5", sf::Keyboard::F5);
-    this->dict_commands.emplace("f6", sf::Keyboard::F6);
-    this->dict_commands.emplace("f7", sf::Keyboard::F7);
-    this->dict_commands.emplace("f8", sf::Keyboard::F8);
-    this->dict_commands.emplace("f9", sf::Keyboard::F9);
-    this->dict_commands.emplace("f10", sf::Keyboard::F10);
-    this->dict_commands.emplace("f11", sf::Keyboard::F11);
-    this->dict_commands.emplace("f12", sf::Keyboard::F12);
+    this->dict_commands.emplace("F1", sf::Keyboard::F1);
+    this->dict_commands.emplace("F2", sf::Keyboard::F2);
+    this->dict_commands.emplace("F3", sf::Keyboard::F3);
+    this->dict_commands.emplace("F4", sf::Keyboard::F4);
+    this->dict_commands.emplace("F5", sf::Keyboard::F5);
+    this->dict_commands.emplace("F6", sf::Keyboard::F6);
+    this->dict_commands.emplace("F7", sf::Keyboard::F7);
+    this->dict_commands.emplace("F8", sf::Keyboard::F8);
+    this->dict_commands.emplace("F9", sf::Keyboard::F9);
+    this->dict_commands.emplace("F10", sf::Keyboard::F10);
+    this->dict_commands.emplace("F11", sf::Keyboard::F11);
+    this->dict_commands.emplace("F12", sf::Keyboard::F12);
     //special symbols
     this->dict_commands.emplace("Space", sf::Keyboard::Space);
     this->dict_commands.emplace("Tab", sf::Keyboard::Tab);
