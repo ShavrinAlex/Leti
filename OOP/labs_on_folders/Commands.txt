@@ -10,4 +10,4 @@ AddConsoleLogStream = 6
 AddFileLogStream = 7
 RemoveConsoleLogStream = F6
 RemoveFileLogStream = F7
-QuitGame =
+QuitGame = Q

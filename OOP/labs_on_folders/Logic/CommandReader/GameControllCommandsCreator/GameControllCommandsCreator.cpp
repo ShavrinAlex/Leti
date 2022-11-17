@@ -31,7 +31,7 @@ bool GameControllCommandsCreator::isFullCommands(Commands commands){
 int GameControllCommandsCreator::setCommand(std::string command_line){
     //std::cout<<"setCommand\n";
     size_t pos_eq = command_line.find('=');
-    if (pos_eq != std::string::npos && pos_eq != command_line.length() - 1 && pos_eq != 0){
+    if (pos_eq != std::string::npos && pos_eq != command_line.length() - 1 && pos_eq != 0 && command_line.length() != 1){
         std::string command = command_line.substr(0, pos_eq - 1);
         std::string key = command_line.substr(pos_eq + 2);
 
@@ -60,7 +60,11 @@ int GameControllCommandsCreator::setCommand(std::string command_line){
         }
         
         if (!this->isRepeatCommand(sf_key)){
-            this->file_commands.emplace(enum_command, sf_key);
+            if (this->file_commands.find(enum_command) != this->file_commands.end()){
+                this->file_commands.at(enum_command) = sf_key;
+            } else{
+                this->file_commands.emplace(enum_command, sf_key);
+            }
         } else{
             //logging
             Log* log = new Log(Errors, "Error!!! Trying to assign one key to two commands");
