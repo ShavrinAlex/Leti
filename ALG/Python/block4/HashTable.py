@@ -1,3 +1,4 @@
+#python
 class HashTable():
     def __init__(self):
         self.size = 0
@@ -7,6 +8,7 @@ class HashTable():
         is_found = False
         for i in range(self.size):
             if self.table[i][0] == number:
+                self.table[i][1] = name
                 is_found = True
                 break
         if not is_found:
@@ -20,7 +22,7 @@ class HashTable():
                 result = self.table[i][1]
         return result
 
-    def dell(self, number):
+    def delete(self, number):
         for i in range(self.size):
             if self.table[i][0] == number:
                 del self.table[i]

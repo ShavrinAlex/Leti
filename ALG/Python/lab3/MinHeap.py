@@ -40,20 +40,27 @@ class MinHeap:
             self.siftDown(min_index)
 
     def parallelProcessing(self, tasks):
-        for cur_task in tasks:
-            cur_time = self.data[0][0]
-            processor = self.data[0][1]
-            print(processor, cur_time)
-            self.result.append([processor, cur_time])
-            self.data[0][0] += cur_task
-            self.siftDown(0)
+        if (self.data != []):
+            for cur_task in tasks:
+                cur_time = self.data[0][0]
+                processor = self.data[0][1]
+                print(processor, cur_time)
+                self.result.append([processor, cur_time])
+                self.data[0][0] += cur_task
+                self.siftDown(0)
 
-if __name__ == "__main__":
-    n, m = map(int, input().split())
+def main(n, m):
     processors = [[0, i] for i in range(n)]
-    tasks = list(map(int, input().split(' ')))
+    if m <= 0:
+        tasks = []
+    else:
+        tasks = list(map(int, input().split(' ')))
 
     min_heap = MinHeap(processors)
     min_heap.parallelProcessing(tasks)
+
+if __name__ == "__main__":
+    n, m = map(int, input().split())
+    main(n, m)
 
     #print(min_heap.getResult())
