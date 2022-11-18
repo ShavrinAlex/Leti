@@ -16,8 +16,8 @@ double truncRound(double x, double Eps){
 };
 
 double F(double x, double c){
-    return 1/(c*sin(x))+1;
-    //return truncRound(1/(c*sin(x))+1, 0.00001);
+    //return 1/(c*sin(x))+1;
+    return truncRound(1/(c*sin(x))+1, 0.0000001);
 };
 
 double Round(double X, double Delta){
@@ -36,7 +36,7 @@ double searchx0(double a, double b, double c){
     double x0 = a;
     for (double i = a; i <= b; i += 0.01){
         if (F(i, c)*F_double_derivative(i, c) > 0){
-            //std::cout<<i<<endl;
+            std::cout<<i<<endl;
             x0 = i;
         }
     }
@@ -71,13 +71,14 @@ double NEWTON(double X, double Eps, double delta, double c, int& N) {
     N = 0;
     double m1 = m_min(3.5, 4, delta, c); // наименьшее значение модуля 1-ой производной
     double M2 = M_maxNEWTON(3.5, 4, delta, c); // наибольшее значение модуля 2-ой производной
-    Eps0 = sqrt(2 * m1 * Eps / M2);
     do {
         Y = F(X, c);
         std::cout<<X<<' '<<Y<<'\n';
+        /*
         if (Y == 0.0) {
            return X;
         }
+        */
         Y1 = F_derivative(X, c);
         if (Y1 == 0.0) {
             puts("Производная обратилась в ноль\n");
@@ -86,15 +87,15 @@ double NEWTON(double X, double Eps, double delta, double c, int& N) {
         DX = Y / Y1;
         X -= DX;
         N++;
-    } //while (N<80);
-    while (fabs(DX) >= Eps0);
+    } while (N<80);
+    //while (fabs(DX) >= Eps0);
     return X;
 }
 
 double M_maxITER(double a, double b, double delta, double c){
-    double max_ = fabs(F_derivative(a, c));
+    double max_ = F_derivative(a, c);
     for (double i = a; i <= b; i += delta){
-        double elem = fabs(F_derivative(i, c));
+        double elem = F_derivative(i, c);
         if(elem > max_ && elem != INFINITY ){
             max_ = elem;
         }
@@ -141,8 +142,8 @@ double ITER(double X0, double Eps, int& N, double a, double b, double delta, dou
 int main(){
     int N;
     double delta, eps, c;
-    double A = -M_PI+0.3;
-    double B = -M_PI+0.35;
+    double A = -2.84;
+    double B = -2.79;
 
     std::cout<<"c = ";
     std::cin>>c;
@@ -151,23 +152,23 @@ int main(){
     std::cout<<"eps = ";
     std::cin>>eps;
 
-    //searchx0(a, b, c);
+    //searchx0(A, B, c);
     //std::cout<<"m_min = "<<m_min(A, B, delta, c)<<'\n'<<"m_max = "<<M_maxNEWTON(A, B, delta, c)<<'\n';
     /*
     double m1 = m_min(3.5, 4, delta, c); // наименьшее значение модуля 1-ой производной
     double M2 = M_maxNEWTON(3.5, 4, delta, c); // наибольшее значение модуля 2-ой производной
     std::cout<<"Eps0 = "<<sqrt(2 * m1 * eps / M2)<<'\n';
     */
-    //double X = NEWTON(searchx0(A, B, c), eps, delta, c, N);
+    double X = NEWTON(searchx0(A, B, c), eps, delta, c, N);
     
     //std::cout<<"m_min = "<<m_min(A, B, delta, c)<<'\n'<<"m_max = "<<M_maxITER(A, B, delta, c)<<'\n';
-    double X = ITER(searchx0(A, B, c), eps, N, A, B, delta, c);
+    //double X = ITER(searchx0(A, B, c), eps, N, A, B, delta, c);
     
     std::cout<<"X = "<<X<<'\n';
     std::cout<<"F(X) = "<<F(X, c)<<'\n';
     std::cout<<"N = "<<N<<'\n';
-    //std::cout<<"Nu_delta = "<<fabs(1/F_derivative(X, c))<<'\n';
-    std::cout<<"Nu_delta = "<<1/fabs(1 - fi_derivative(A, B, X, delta, c))<<'\n';
+    std::cout<<"Nu_delta = "<<fabs(1/F_derivative(X, c))<<'\n';
+    //std::cout<<"Nu_delta = "<<1/fabs(1 - fi_derivative(A, B, X, delta, c))<<'\n';
     std::cout<<"Nu_delta_max = "<<eps/delta<<'\n';
     
     return 0;
