@@ -1,8 +1,8 @@
 #include "EntityView.hpp"
 #define SCALE_HEIGHT 5
-#include <iostream>
+
 //initialization
-EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image){
+EntityView::EntityView(Entity* entity, int width, int height, std::string file_image){
     //logic entity
     this->entity = entity;
     this->entity->addObserver(this);
@@ -11,21 +11,11 @@ EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std
     this->width = width;
     this->height = height;
 
-    //position
-    this->position.x = pos->x * this->width;
-    this->position.y = pos->y * this->height;
-
     //create sprite
-    createSprite(file_image);
+    this->createSprite(file_image);
     
     //create health scale
     this->createHealthScale();
-
-    //update heakth scale position and size
-    updateHealthScale();
-
-    //update sprite direction
-    updateSprite();
 };
 
 //set position

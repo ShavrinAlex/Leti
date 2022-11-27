@@ -2,13 +2,18 @@
 #include "../../Logic/Map/Map.hpp"
 #include "../CellView/CellView.hpp"
 #include "../EntitiesView/EntityView/EntityView.hpp"
+#include "../EntitiesView/PlayerView/PlayerView.hpp"
+#include "../../Logic/ObserverPattern/Observer.hpp"
 #include <vector>
 
 typedef std::vector <std::vector <CellView*>> CellViewMatrix;
 typedef std::vector <EntityView*> EnemiesView;
 
-class MapView{
+typedef std::vector <EntityElem> Enemies;
+
+class MapView: public Observer{
     private:
+        PlayerView* player_view;
         CellViewMatrix map_view;
         EnemiesView enemies_view;
 
@@ -22,6 +27,12 @@ class MapView{
         //initialization
         MapView(Map* map);
 
+        //set player view
+        void setPlayerView(PlayerView* player_view);
+
+        //get player view
+        PlayerView* getPlayerView();
+
         //add enemy view
         void addEnemyView(EntityView* enemy_view);
 
@@ -33,6 +44,9 @@ class MapView{
 
         //get cell view
         CellView* getCellView(int pos_x, int pos_y);
+
+        //update
+        void update() override;
 
         //destruction
         ~MapView();

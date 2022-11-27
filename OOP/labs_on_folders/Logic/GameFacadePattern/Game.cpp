@@ -56,12 +56,17 @@ int Game::startGame(){
     //create map
     Map map = Map(this->map_width, this->map_height, this->mediator);
     map.setPlayer(&player);
+    Position *pos = new Position;
+    pos->x = 1;
+    pos->y = 1;
+    map.setPlayerPosition(pos);
+
+    //create player view
+    PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, PLAYER_IMAGE);
 
     //create map view
     MapView map_view = MapView(&map);
-
-    //create player view
-    PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, map.getPlayerPosition(), PLAYER_IMAGE);
+    map_view.setPlayerView(&player_view);
 
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
@@ -109,7 +114,7 @@ int Game::startGame(){
             //draw all
             this->graphic_arts->clear();
             this->graphic_arts->drawMap(map_view);
-            this->graphic_arts->drawPlayer(player_view);
+            //this->graphic_arts->drawPlayer(player_view);
             this->graphic_arts->display();
         }
     }

@@ -14,13 +14,13 @@ void EnemyGenerator::generateEnemy(){
     Position* position = this->getPositionFreeCell();
     Entity* ent = new Entity();
     ent->setSpeed(1);
+
+    //set enemy view
+    EntityView* ev = new EntityView(ent, ENEMY_WIDTH, ENEMY_HEIGHT, ENEMY_IMAGE);
+    (this->map_view)->addEnemyView(ev);
     
     //set enemy
     (this->map)->addEnemy(ent, position);
-
-    //set enemy view
-    EntityView* ev = new EntityView(ent, ENEMY_WIDTH, ENEMY_HEIGHT, position, ENEMY_IMAGE);
-    (this->map_view)->addEnemyView(ev);
 };
 
 //generate all enemy

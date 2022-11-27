@@ -12,7 +12,6 @@ PlayerController::PlayerController(Player* player, Map* map, PlayerView* player_
 void PlayerController::move(Direction dir){
     this->player->setDirection(dir);
     this->map->moveEntity(this->player);
-    this->player_view->setPosition(map->getPlayerPosition());
 };
 
 //shoot

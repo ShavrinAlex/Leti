@@ -1,4 +1,5 @@
 #pragma once
+#include "../ObserverPattern/Observable/Observable.hpp"
 #include "../Entities/Entity/Entity.hpp"
 #include "../Entities/Player/Player.hpp"
 #include "../Cell/Cell.hpp"
@@ -10,21 +11,18 @@
 #include <vector>
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
-typedef struct PlayerElem{
-    Player* entity;
-    Position* pos;
-} PlayerElem;
 
 typedef struct EntityElem{
     Entity* entity;
     Position* pos;
 } EntityElem;
+
 typedef std::vector <EntityElem> Enemies;
 
-class Map: public GameElement<Log*>{
+class Map: public GameElement<Log*>, public Observable{
     private:
         //player
-        PlayerElem* player;
+        EntityElem* player;
         
         //map
         int width, height;
@@ -52,6 +50,7 @@ class Map: public GameElement<Log*>{
 
         //set player
         void setPlayer(Player* player);
+        void setPlayerPosition(Position* pos);
 
         //coping
         Map(const Map& obj);

@@ -15,8 +15,21 @@ void MapView::createMapView(){
 
 //initialization
 MapView::MapView(Map* map){
+    //logic map
     this->map = map;
+    this->map->addObserver(this);
+
     createMapView();
+};
+
+//set player view
+void MapView::setPlayerView(PlayerView* player_view){
+    this->player_view = player_view;
+};
+
+//get player view
+PlayerView* MapView::getPlayerView(){
+    return this->player_view;
 };
 
 //add enemy view
@@ -38,6 +51,17 @@ EnemiesView MapView::getEnemiesView(){
 //get cell view
 CellView* MapView::getCellView(int pos_x, int pos_y){
     return this->map_view.at(pos_y).at(pos_x);
+};
+
+//update
+void MapView::update(){
+    //update player view position
+    this->player_view->setPosition(this->map->getPlayerPosition());
+
+    //update enemies view positions
+    for (size_t i = 0; i < this->enemies_view.size(); i++){
+        this->enemies_view[i]->setPosition(this->map->getEnemies()[i].pos);
+    }
 };
 
 //destruction

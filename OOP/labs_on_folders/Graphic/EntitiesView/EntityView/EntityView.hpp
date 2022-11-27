@@ -38,7 +38,7 @@ class EntityView: public Observer{
         void updateHealthScale();
     public:
         //initialization
-        EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image);
+        EntityView(Entity* entity, int width, int height, std::string file_image);
 
         //set position
         void setPosition(Position* entity_position);

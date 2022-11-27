@@ -27,7 +27,7 @@ class PlayerView: public EntityView{
 
     public:
         //initialization
-        PlayerView(Player* player, int width, int height, Position* pos, std::string file_image);
+        PlayerView(Player* player, int width, int height, std::string file_image);
 
         //get energy scale
         sf::RectangleShape* getEnergyScale();

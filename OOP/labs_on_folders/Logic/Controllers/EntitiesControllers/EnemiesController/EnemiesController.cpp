@@ -38,12 +38,10 @@ void EnemiesController::move(){
         for (size_t i = 0; i < map->getEnemies().size(); i++){
             //get enemy and here apperance
             Entity* enemy = map->getEnemies().at(i).entity;
-            EntityView* enemy_view = map_view->getEnemiesView().at(i);
 
             //move
             enemy->setDirection(this->getDirection(enemy));
             this->map->moveEntity(enemy);
-            enemy_view->setPosition(map->getEnemyPosition(enemy));
 
             //shoot
             this->shoot(enemy);

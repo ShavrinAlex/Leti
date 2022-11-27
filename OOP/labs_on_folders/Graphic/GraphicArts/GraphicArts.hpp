@@ -14,6 +14,12 @@ class GraphicArts{
         int height;
         std::string window_name;
         sf::RenderWindow window;
+
+        //draw entity
+        void drawEntity(EntityView& entity_view);
+
+        //draw player
+        void drawPlayer(PlayerView& player_view);
     public:
         //initialization
         GraphicArts();
@@ -27,12 +33,6 @@ class GraphicArts{
 
         //poll event
         std::shared_ptr<sf::Event> pollEvent();
-
-        //draw entity
-        void drawEntity(EntityView& entity_view);
-
-        //draw player
-        void drawPlayer(PlayerView& player_view);
 
         //draw map
         void drawMap(MapView& map_view);

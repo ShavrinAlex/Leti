@@ -91,6 +91,9 @@ void GraphicArts::drawMap(MapView& map_view){
     for(size_t i = 0; i < map_view.getEnemiesView().size(); i++){
         this->drawEntity(*(map_view.getEnemiesView()).at(i));
     }
+
+    //draw player
+    this->drawPlayer(*map_view.getPlayerView());
 };
 
 //window clear

@@ -32,7 +32,7 @@ class EventGenerator: public Generator, public GameElement<Log*>{
         //generate and set end game event and his appearance
         void generateEndGameEvent(EventFactory* factory_event_on_game);
 
-        //generate and set wall event event and his appearance
+        //generate and set wiun game event and his appearance
         void generateSetWallEvent(EventFactory* factory_event_on_map);
 
         //generate and set wall event and his appearance

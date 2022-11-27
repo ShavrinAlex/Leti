@@ -3,7 +3,6 @@
 #define HEIGHT 5
 #define START_POSITION_X 0
 #define START_POSITION_Y 0
-#include <iostream>
 
 //create map
 void Map::createMap(){
@@ -29,7 +28,7 @@ void Map::createMap(){
 
 //create player elem
 void Map::createPlayerElem(){
-    this->player = new PlayerElem;
+    this->player = new EntityElem;
     this->player->entity = nullptr;
     Position* pos = new Position;
     pos->x = START_POSITION_X;
@@ -64,6 +63,20 @@ void Map::setPlayer(Player* player){
     Log* log = new Log(Processes, "Map got a plyer");
     this->mediator->send(log);
     delete log;
+};
+void Map::setPlayerPosition(Position* pos){
+    //remove player from old cell
+    this->map.at(this->player->pos->y).at(this->player->pos->x)->removePlayer();
+
+    //set player position parametr
+    this->player->pos->x = pos->x;
+    this->player->pos->y = pos->y;
+
+    //set player on new cell
+    this->map.at(this->player->pos->y).at(this->player->pos->x)->setPlayer();
+
+    //notify observers
+    this->notify();
 };
 
 //coping
@@ -158,6 +171,9 @@ void Map::addEnemy(Entity* enemy, Position* pos){
 
     //add enemy
     this->enemies.emplace_back(*en);
+
+    //notify observers
+    this->notify();
 
     //logging
     Log* log = new Log(Processes, "Enemy has been added to the map");
@@ -283,21 +299,16 @@ void Map::moveEntity(Entity* entity){
 
     //move entity on new position
     if (entity == this->player->entity){
-        //delete reaction on player
-        map.at(this->player->pos->y).at(this->player->pos->x)->removePlayer();
-
-        //set new position
-        this->player->pos->x = next_position->x;
-        this->player->pos->y = next_position->y;
-
-        //set reaction on player
-        map.at(this->player->pos->y).at(this->player->pos->x)->setPlayer();
+        this->setPlayerPosition(next_position);
     } else{
         //search entity
         for (size_t i = 0; i < this->enemies.size(); i++){
             if (this->enemies.at(i).entity == entity){
                 this->enemies.at(i).pos->x = next_position->x;
                 this->enemies.at(i).pos->y = next_position->y;
+
+                //notify observers
+                this->notify();
             }
         }
     }
