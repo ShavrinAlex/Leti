@@ -1,8 +1,9 @@
 #pragma once
 #include "../EventFactory.hpp"
 #include "../../Controllers/GameController/GameController.hpp"
+#include "../../MediatorPattern/GameElement/GameElementDescription.hpp"
 
-class FactoryEventOnGame: public EventFactory{
+class FactoryEventOnGame: public EventFactory, public GameElement<Log*>{
     private:
         GameController* game_controller;
     public:
@@ -10,9 +11,9 @@ class FactoryEventOnGame: public EventFactory{
         FactoryEventOnGame(GameController* game_controller);
 
         //create event
-        Event* createEvent1(Mediator<Log*>* mediator) override;
-        Event* createEvent2(Mediator<Log*>* mediator) override;
-        Event* createEvent3(Mediator<Log*>* mediator) override;
+        Event* createEvent1() override;
+        Event* createEvent2() override;
+        Event* createEvent3() override;
 
         //destruction
         ~FactoryEventOnGame();

@@ -2,7 +2,7 @@
 #define SCALE_HEIGHT 5
 
 //initialization
-EntityView::EntityView(Entity* entity, int width, int height, std::string file_image){
+EntityView::EntityView(Entity* entity, int width, int height, Position* pos, std::string file_image){
     //logic entity
     this->entity = entity;
     this->entity->addObserver(this);
@@ -16,6 +16,9 @@ EntityView::EntityView(Entity* entity, int width, int height, std::string file_i
     
     //create health scale
     this->createHealthScale();
+
+    //set position
+    this->setPosition(pos);
 };
 
 //set position
@@ -100,6 +103,11 @@ sf::RectangleShape* EntityView::getHealthScale(){
 //get health scale
 sf::RectangleShape* EntityView::getHealthScaleStroke(){
     return this->health_scale_stroke;
+};
+
+//get logic entity
+Entity* EntityView::getLogicEntity(){
+    return this->entity;
 };
 
 //update

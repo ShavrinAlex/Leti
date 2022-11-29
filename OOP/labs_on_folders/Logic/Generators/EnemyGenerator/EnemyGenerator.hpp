@@ -4,7 +4,7 @@
 class EnemyGenerator: public Generator{
     public:
         //initialization
-        EnemyGenerator(Map* map, MapView* map_view);
+        EnemyGenerator(Map* map);
 
         //geterate enemy
         void generateEnemy();

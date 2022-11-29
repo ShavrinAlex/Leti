@@ -22,6 +22,27 @@ class MapView: public Observer{
 
         //create map view
         void createMapView();
+
+        //create enemies view
+        void createEnemiesView();
+
+        //create player view
+        void createPlayerView();
+
+        //update player position
+        void updatePlayerPosition();
+
+        //update enemies positions
+        void updateEnemiesPositions();
+
+        //update count enemies
+        void updateCountEnemies();
+
+        //update events
+        void updateEvents();
+
+        //create event view
+        EventView* createEventView(Event* event, int x, int y);
         
     public:
         //initialization

@@ -8,12 +8,10 @@
 class PlayerController: public EntityController{
     private:
         Player* player;
-        
         Map* map;
-        PlayerView* player_view;
     public:
         //initialization
-        PlayerController(Player* player, Map* map, PlayerView* player_view);
+        PlayerController(Player* player, Map* map);
 
         //move player
         void move(Direction dir);

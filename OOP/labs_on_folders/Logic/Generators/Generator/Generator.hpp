@@ -6,10 +6,9 @@
 class Generator{
     protected:
         Map* map;
-        MapView* map_view;
     public:
         //initialization
-        Generator(Map* map, MapView* map_view);
+        Generator(Map* map);
 
         //get position random free cell
         Position* getPositionFreeCell();

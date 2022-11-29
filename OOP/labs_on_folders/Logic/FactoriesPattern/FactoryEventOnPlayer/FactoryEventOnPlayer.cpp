@@ -9,23 +9,23 @@ FactoryEventOnPlayer::FactoryEventOnPlayer(Player* player){
 };
 
 //create health event
-Event* FactoryEventOnPlayer::createEvent1(Mediator<Log*>* mediator){
+Event* FactoryEventOnPlayer::createEvent1(){
     SetHealthEvent* she = new SetHealthEvent(this->player);
-    she->setMediator(mediator);
+    she->setMediator(this->mediator);
     return she;
 };
 
 //create armor event
-Event* FactoryEventOnPlayer::createEvent2(Mediator<Log*>* mediator){
+Event* FactoryEventOnPlayer::createEvent2(){
     SetArmorEvent* sae = new SetArmorEvent(this->player);
-    sae->setMediator(mediator);
+    sae->setMediator(this->mediator);
     return sae;
 };
 
 //create energy event
-Event* FactoryEventOnPlayer::createEvent3(Mediator<Log*>* mediator){
+Event* FactoryEventOnPlayer::createEvent3(){
     SetEnergyEvent* see = new SetEnergyEvent(this->player);
-    see->setMediator(mediator);
+    see->setMediator(this->mediator);
     return see;
 };
 

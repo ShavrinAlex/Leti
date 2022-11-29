@@ -1,9 +1,8 @@
 #include "Generator.hpp"
 
 //initialization
-Generator::Generator(Map* map, MapView* map_view){
+Generator::Generator(Map* map){
     this->map = map;
-    this->map_view = map_view;
 };
 
 //get position random free cell
@@ -21,5 +20,4 @@ Position* Generator::getPositionFreeCell(){
 //destruction
 Generator::~Generator(){
     this->map = nullptr;
-    this->map_view = nullptr;
 };

@@ -2,7 +2,7 @@
 #define SCALE_HEIGHT 5
 
 //initialization
-PlayerView::PlayerView(Player* player, int width, int height, std::string file_image):EntityView(player, width, height, file_image){
+PlayerView::PlayerView(Player* player, int width, int height, Position* pos, std::string file_image):EntityView(player, width, height, pos, file_image){
     //create armor scale
     createArmorScale();
 

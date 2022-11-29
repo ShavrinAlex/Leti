@@ -41,17 +41,10 @@ int Game::startGame(){
     this->mediator->send(log);
     delete log;
 
-    //create keyboard command adapter
-    CommandAdapter com_adapter = CommandAdapter(this->mediator);
-
-    //create keyboard command reader
-    KeyboardCommandReader com_reader = KeyboardCommandReader(&com_adapter);
-
     //create player
     Player player = Player();
     player.setSpeed(1);
     player.setDamage(50);
-    //player.setMediator(&log_mediator);
 
     //create map
     Map map = Map(this->map_width, this->map_height, this->mediator);
@@ -61,43 +54,44 @@ int Game::startGame(){
     pos->y = 1;
     map.setPlayerPosition(pos);
 
-    //create player view
-    PlayerView player_view = PlayerView(&player, PLAYER_W, PLAYER_H, PLAYER_IMAGE);
-
-    //create map view
-    MapView map_view = MapView(&map);
-    map_view.setPlayerView(&player_view);
-
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
-    PlayerController player_controller = PlayerController(&player, &map, &player_view);
+    PlayerController player_controller = PlayerController(&player, &map);
     player_controller.setMediator(this->mediator);
 
     //create command reader mediator
     CommandReaderMediator com_reader_mediator = CommandReaderMediator(&player_controller, &game_controller, log_controller);
-
+    //create keyboard command adapter
+    CommandAdapter com_adapter = CommandAdapter(this->mediator);
+    //create keyboard command reader
+    KeyboardCommandReader com_reader = KeyboardCommandReader(&com_adapter);
     //set command reader mediator
     com_reader.setMediator(&com_reader_mediator);
 
     //create event generator
-    EventGenerator event_generator = EventGenerator(&map, &map_view);
-    event_generator.setMediator(this->mediator);
+    EventGenerator event_generator = EventGenerator(&map);
 
     //create event fabrics
     FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
+    factory_event_on_player.setMediator(this->mediator);
     FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(&game_controller);
+    factory_event_on_game.setMediator(this->mediator);
     FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game, &event_generator);
+    factory_event_on_map.setMediator(this->mediator);
 
     //create events
     event_generator.setFactories(&factory_event_on_player, &factory_event_on_game, &factory_event_on_map);
     event_generator.generate(this->map_height, this->map_width);
 
     //create enemy generator
-    EnemyGenerator enemy_generator = EnemyGenerator(&map, &map_view);
+    EnemyGenerator enemy_generator = EnemyGenerator(&map);
     enemy_generator.generate(this->map_height, this->map_width);
 
+    //create map view
+    MapView map_view = MapView(&map);
+    
     //create enemies controller
-    EnemiesController enemies_controller = EnemiesController(&map, &map_view);
+    EnemiesController enemies_controller = EnemiesController(&map);
 
     //set player and enemies controllers on map
     map.setControllers(&player_controller, &enemies_controller);
@@ -114,7 +108,6 @@ int Game::startGame(){
             //draw all
             this->graphic_arts->clear();
             this->graphic_arts->drawMap(map_view);
-            //this->graphic_arts->drawPlayer(player_view);
             this->graphic_arts->display();
         }
     }

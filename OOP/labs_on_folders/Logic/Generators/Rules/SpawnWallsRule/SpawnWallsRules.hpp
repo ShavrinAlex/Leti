@@ -13,9 +13,10 @@ void SpawnWallsRule<magic_number1, magic_number2>::apply(Map* map){
             if (this->player->pos->x == x && this->player->pos->y == y){
                 continue;
             }
-            if (rand() % magic_number1 > magic_number2){
+            if (rand() % magic_number1 > magic_number2 && map->count_wals < map->getHeight()*map->getWidth()){
                 Cell* cell = map->getCell(x, y);
                 cell->setWall();
+                map->count_wals += 1;
             }
         }
     }

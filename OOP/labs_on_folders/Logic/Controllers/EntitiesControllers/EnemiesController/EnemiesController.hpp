@@ -9,7 +9,6 @@
 class EnemiesController: public EntityController{
     private:
         Map* map;
-        MapView* map_view;
 
         sf::Clock clock;
         float time;
@@ -19,7 +18,7 @@ class EnemiesController: public EntityController{
         Direction getDirection(Entity* enemy);
     public:
         //initialization
-        EnemiesController(Map* map, MapView* map_view);
+        EnemiesController(Map* map);
 
         //move enemy
         void move();

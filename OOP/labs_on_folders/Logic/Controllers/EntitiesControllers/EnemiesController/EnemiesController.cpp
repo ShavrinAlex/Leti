@@ -3,9 +3,8 @@
 #define ENEMY_DAMAGE 25
 
 //initialization
-EnemiesController::EnemiesController(Map* map, MapView* map_view){
+EnemiesController::EnemiesController(Map* map){
     this->map = map;
-    this->map_view = map_view;
 };
 
 //get direction
@@ -67,7 +66,6 @@ void EnemiesController::takeDamage(int damage, Entity* entity){
 
                 //remove enemy
                 this->map->removeEnemy(enemies.at(i).entity);
-                this->map_view->removeEnemyView(i);
             } else{
                 enemies.at(i).entity->setHealth(health - damage);
             }

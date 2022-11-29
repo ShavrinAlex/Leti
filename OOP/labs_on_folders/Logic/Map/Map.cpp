@@ -49,10 +49,20 @@ Map::Map(int width, int height, Mediator<Log*>* mediator){
 
     createMap();
 
+    //things
+    this->count_wals = 0;
+    this->count_events = 0;
+    this->count_enemies = 0;
+
     //logging
     Log* log = new Log(Processes, "Map was create");
     this->mediator->send(log);
     delete log;
+};
+
+//set map
+void Map::setMap(CellMatrix map){
+    this->map = map;
 };
 
 //set player
@@ -172,8 +182,7 @@ void Map::addEnemy(Entity* enemy, Position* pos){
     //add enemy
     this->enemies.emplace_back(*en);
 
-    //notify observers
-    this->notify();
+    this->count_enemies += 1;
 
     //logging
     Log* log = new Log(Processes, "Enemy has been added to the map");
@@ -192,6 +201,11 @@ void Map::removeEnemy(Entity* enemy){
             this->enemies.erase(iter + i);
         }
     }
+
+    this->count_enemies -= 1;
+
+    //notify observers
+    this->notify();
 
     //logging
     Log* log = new Log(Processes, "Enemy has been removed from the map");
@@ -345,6 +359,10 @@ void Map::makeDamage(Entity* entity){
 //get player position
 Position* Map::getPlayerPosition(){
     return this->player->pos;
+};
+//get player
+Entity* Map::getPlayer(){
+    return this->player->entity;
 };
 
 //get enemy position

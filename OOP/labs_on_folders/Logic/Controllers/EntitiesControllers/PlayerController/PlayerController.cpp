@@ -2,10 +2,9 @@
 #define SHOOT_ENERGY 25
 
 //initialization
-PlayerController::PlayerController(Player* player, Map* map, PlayerView* player_view){
+PlayerController::PlayerController(Player* player, Map* map){
     this->player = player;
     this->map = map;
-    this->player_view = player_view;
 };
 
 //move player
@@ -63,5 +62,4 @@ void PlayerController::takeDamage(int damage, Entity* entity){
 PlayerController::~PlayerController(){
     this->player = nullptr;
     this->map = nullptr;
-    this->player_view = nullptr;
 };
