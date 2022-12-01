@@ -6,12 +6,11 @@
 #include "../StartDialogs/StartMapSizeDialog/StartMapSizeDialog.hpp"
 #include "../Controllers/EntitiesControllers/EnemiesController/EnemiesController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
-#include "../FactoriesPattern/FactoryEventOnPlayer/FactoryEventOnPlayer.hpp"
-#include "../FactoriesPattern/FactoryEventOnMap/FactoryEventOnMap.hpp"
-#include "../FactoriesPattern/FactoryEventOnGame/FactoryEventOnGame.hpp"
 #include "../Generators/EventGenerator/EventGenerator.hpp"
 #include "../Generators/EnemyGenerator/EnemyGenerator.hpp"
 #include "../CommandReader/CommandAdapterPattern/CommandAdapter.hpp"
+#include "../Generators/Strategies/LevelOne/LevelOne.hpp"
+#include "../Generators/Strategies/LevelTwo/LevelTwo.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
@@ -40,12 +39,13 @@ int Game::startGame(){
     Log* log = new Log(GameStates, "Game started");
     this->mediator->send(log);
     delete log;
-
+    
     //create player
     Player player = Player();
     player.setSpeed(1);
     player.setDamage(50);
 
+/*
     //create map
     Map map = Map(this->map_width, this->map_height, this->mediator);
     map.setPlayer(&player);
@@ -53,10 +53,19 @@ int Game::startGame(){
     pos->x = 1;
     pos->y = 1;
     map.setPlayerPosition(pos);
-
+    */
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
-    PlayerController player_controller = PlayerController(&player, &map);
+    /*
+    LevelOne level = LevelOne(&game_controller, &player, this->mediator);
+    Map* map = level.generateLevel();
+    std::cout<<"level created\n";
+    */
+    LevelTwo level = LevelTwo(&game_controller, &player, this->mediator);
+    Map* map = level.generateLevel();
+    std::cout<<"level created\n";
+
+    PlayerController player_controller = PlayerController(&player, map);
     player_controller.setMediator(this->mediator);
 
     //create command reader mediator
@@ -67,16 +76,16 @@ int Game::startGame(){
     KeyboardCommandReader com_reader = KeyboardCommandReader(&com_adapter);
     //set command reader mediator
     com_reader.setMediator(&com_reader_mediator);
-
+/*
     //create event generator
-    EventGenerator event_generator = EventGenerator(&map);
+    EventGenerator event_generator = EventGenerator(map);
 
     //create event fabrics
     FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
     factory_event_on_player.setMediator(this->mediator);
     FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(&game_controller);
     factory_event_on_game.setMediator(this->mediator);
-    FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game, &event_generator);
+    FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game);
     factory_event_on_map.setMediator(this->mediator);
 
     //create events
@@ -84,17 +93,17 @@ int Game::startGame(){
     event_generator.generate(this->map_height, this->map_width);
 
     //create enemy generator
-    EnemyGenerator enemy_generator = EnemyGenerator(&map);
+    EnemyGenerator enemy_generator = EnemyGenerator(map);
     enemy_generator.generate(this->map_height, this->map_width);
-
+*/
     //create map view
-    MapView map_view = MapView(&map);
+    MapView map_view = MapView(map);
     
     //create enemies controller
-    EnemiesController enemies_controller = EnemiesController(&map);
+    EnemiesController enemies_controller = EnemiesController(map);
 
     //set player and enemies controllers on map
-    map.setControllers(&player_controller, &enemies_controller);
+    map->setControllers(&player_controller, &enemies_controller);
 
     //main loop
     while (graphic_arts->isOpen() && (this->game_status == Continues || this->game_status == Pause)){

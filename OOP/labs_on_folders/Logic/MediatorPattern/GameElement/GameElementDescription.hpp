@@ -10,7 +10,10 @@ class GameElement{
         GameElement();
 
         //set mediator
-        void setMediator(Mediator<T>* mediator);    
+        void setMediator(Mediator<T>* mediator); 
+
+        //get mediator
+        Mediator<T>* getMediator();  
 
         //destruction
         ~GameElement();

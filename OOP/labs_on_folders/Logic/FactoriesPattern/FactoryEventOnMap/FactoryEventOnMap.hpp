@@ -8,10 +8,9 @@ class FactoryEventOnMap: public EventFactory, public GameElement<Log*>{
     private:
         Map* map;
         EventFactory* factory_event_on_game;
-        EventGenerator* event_generator;
     public:
         //initialization
-        FactoryEventOnMap(Map* map, EventFactory* factory_event_on_game, EventGenerator* event_generator);
+        FactoryEventOnMap(Map* map, EventFactory* factory_event_on_game);
 
         //create event
         Event* createEvent1() override;

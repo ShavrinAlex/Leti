@@ -1,15 +1,25 @@
 #include "SetWinGameEvent.hpp"
+#include "../../EventsOnGame/WinGameEvent/WinGameEvent.hpp"
 
 //initialization
-SetWinGameEvent::SetWinGameEvent(Map* map, EventFactory* factory_event_on_game, EventGenerator* event_generator):EventOnMap(map, event_generator){
-    this->factory_event_on_game = factory_event_on_game;
-    this->event_generator = event_generator;
+SetWinGameEvent::SetWinGameEvent(Map* map, GameController* game_controller):EventOnMap(map){
+    this->game_controller = game_controller;
 };
 
 //execute
 EventStatus SetWinGameEvent::execute(){
-    Position* pos = this->generator->getPositionFreeCell();
-    this->event_generator->generateWinGameEvent(pos, factory_event_on_game);
+    Position* position = new Position();
+    Cell* cell = nullptr;
+    
+    do{
+        position->x = rand() % this->map->getWidth();
+        position->y = rand() % this->map->getHeight();
+        cell = this->map->getCell(position->x, position->y);
+    } while (cell->isWall() || cell->getEvent() != nullptr || cell->isHerePlayer() || this->map->isHereEnemy(position->x, position->y));
+
+    Event* event = new WinGameEvent(this->game_controller);
+    event->setMediator(this->mediator);
+    this->map->getCell(position->x, position->y)->setEvent(event);
 
     //logging
     Log* log = new Log(Processes, "Event (set win game) was execute");
@@ -21,6 +31,5 @@ EventStatus SetWinGameEvent::execute(){
 
 //destruction
 SetWinGameEvent::~SetWinGameEvent(){
-    this->event_generator = nullptr;
-    this->factory_event_on_game = nullptr;
+    this->game_controller = nullptr;
 };

@@ -11,6 +11,7 @@ void Map::createMap(){
         this->map.emplace_back(std::vector <Cell*>());
         this->map.at(y).reserve(this->width);
         for (int x = 0; x < this->width; x++){
+            /*
             //create cell
             bool is_here_player = false;
             bool is_wall = false;
@@ -20,7 +21,8 @@ void Map::createMap(){
             if (rand() % 10 > 7 && is_here_player == false){
                 is_wall = true;
             }
-            Cell *cl = new Cell(is_wall, is_here_player);
+            */
+            Cell *cl = new Cell();
             this->map.back().push_back(cl);
         }
     }
@@ -166,6 +168,14 @@ int Map::getWidth(){
     return this->width;
 };
 
+//set game controller
+void Map::setGameController(GameController* controller){
+    this->game_controller = controller;
+};
+GameController* Map::getGameController(){
+    return this->game_controller;
+};
+
 //set controllers
 void Map::setControllers(EntityController* player_controller, EntityController* enemies_controller){
     this->player_controller = player_controller;
@@ -195,14 +205,17 @@ void Map::removeEnemy(Entity* enemy){
     //search enemy
     for (size_t i = 0; i < this->enemies.size(); i++){
         if (this->enemies.at(i).entity == enemy){
+            //clear memory
             delete this->enemies.at(i).entity;
             delete this->enemies.at(i).pos;
+            
+            //erase enemies vector
             auto iter = this->enemies.begin();
             this->enemies.erase(iter + i);
+
+            break;
         }
     }
-
-    this->count_enemies -= 1;
 
     //notify observers
     this->notify();
@@ -224,7 +237,7 @@ Cell* Map::getCell(int pos_x, int pos_y){
 };
 
 //check enemy on cell
-bool Map::isHereEnemy(Position* pos){
+bool Map::isHereEnemy(int pos_x, int pos_y){
     //check absence enemies
     if (this->enemies.size() == 0){
         return false;
@@ -232,7 +245,7 @@ bool Map::isHereEnemy(Position* pos){
 
     //check position all enemies
     for (size_t i = 0; i < this->enemies.size(); i++){
-        if (this->enemies.at(i).pos->x == pos->x && this->enemies.at(i).pos->y == pos->y){
+        if (this->enemies.at(i).pos->x == pos_x && this->enemies.at(i).pos->y == pos_y){
             return true;
         }
     }
@@ -300,7 +313,7 @@ void Map::moveEntity(Entity* entity){
     Position* next_position = this->calculateNextEntityPosition(entity);
     
     //check cell on wall and on enemy
-    if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEnemy(next_position) || (this->player->pos->x == next_position->x && this->player->pos->y == next_position->y)){
+    if (map.at(next_position->y).at(next_position->x)->isWall() || this->isHereEnemy(next_position->x, next_position->y) || (this->player->pos->x == next_position->x && this->player->pos->y == next_position->y)){
         if (entity == this->player->entity){
             //logging
             Log* log = new Log(Errors, "Error!!! Player tried to move to an impassable cell or an enemy");
@@ -338,7 +351,7 @@ void Map::makeDamage(Entity* entity){
     //check entity agressor
     if (entity == this->player->entity){
         //check entity on damage position
-        if (this->isHereEnemy(damage_position)){
+        if (this->isHereEnemy(damage_position->x, damage_position->y)){
             for (size_t i = 0; i < this->enemies.size(); i++){
                 if (this->enemies.at(i).pos->x == damage_position->x && this->enemies.at(i).pos->y == damage_position->y){
                     this->enemies_controller->takeDamage(entity->getDamage(), this->enemies.at(i).entity);

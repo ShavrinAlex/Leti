@@ -1,3 +1,4 @@
+#pragma once
 #include "../EventOnPlayer/EventOnPlayer.hpp"
 
 class SetHealthEvent: public EventOnPlayer{

@@ -1,10 +1,4 @@
 #include "EventGenerator.hpp"
-#define FIRE "./Graphic/Images/Events/EventsOnGame//fire.png"
-#define WIN "./Graphic/Images/Events/EventsOnGame/win.png"
-#define SECRET "./Graphic/Images/Events/EventsOnMap/secret.png"
-#define HEALTH "./Graphic/Images/Events/EventsOnPlayer/health.png"
-#define ARMOR "./Graphic/Images/Events/EventsOnPlayer/armor.png"
-#define ENERGY "./Graphic/Images/Events/EventsOnPlayer/energy.png"
 
 //initialization
 EventGenerator::EventGenerator(Map* map):Generator(map){

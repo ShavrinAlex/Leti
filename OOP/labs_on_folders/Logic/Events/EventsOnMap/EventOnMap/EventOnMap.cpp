@@ -1,9 +1,8 @@
 #include "EventOnMap.hpp"
 
 //initialization
-EventOnMap::EventOnMap(Map* map, Generator* generator){
+EventOnMap::EventOnMap(Map* map){
     this->map = map;
-    this->generator = generator;
 };
 
 //destruction

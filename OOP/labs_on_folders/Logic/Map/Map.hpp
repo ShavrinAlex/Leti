@@ -8,7 +8,10 @@
 #include "../Controllers/EntitiesControllers/EntityController.hpp"
 #include "../MediatorPattern/GameElement/GameElementDescription.hpp"
 #include "../Logging/Log/Log.hpp"
+
 #include <vector>
+
+class GameController;
 
 typedef std::vector < std::vector <Cell*> > CellMatrix;
 
@@ -21,12 +24,17 @@ typedef std::vector <EntityElem> Enemies;
 
 class Map: public GameElement<Log*>, public Observable{
     private:
-        //player
-        EntityElem* player;
-        
+        GameController* game_controller;
+
         //map
         int width, height;
         CellMatrix map;
+
+        //win cell position
+        Position win_pos;
+
+        //player
+        EntityElem* player;
 
         //enemies
         Enemies enemies;
@@ -73,23 +81,30 @@ class Map: public GameElement<Log*>, public Observable{
         int getHeight();
         int getWidth();
 
+        //set game controller
+        void setGameController(GameController* controller);
+        GameController* getGameController();
         //set controllers
         void setControllers(EntityController* player_controller, EntityController* enemies_controller);
 
+        //check enemy on cell
+        bool isHereEnemy(int pos_x, int pos_y);
         //add enemy
         void addEnemy(Entity* enemy, Position* pos);
-
         //remove enemy
         void removeEnemy(Entity* enemy);
-
         //get enemies
         Enemies getEnemies();
+        //get enemy position
+        Position* getEnemyPosition(Entity* entity);
+
+        //get player
+        Entity* getPlayer();
+        //get player position
+        Position* getPlayerPosition();
 
         //get cell
         Cell* getCell(int pos_x, int pos_y);
-
-        //check enemy on cell
-        bool isHereEnemy(Position* pos);
 
         //calculate next entity position
         Position* calculateNextEntityPosition(Entity* entity);
@@ -99,14 +114,6 @@ class Map: public GameElement<Log*>, public Observable{
 
         //make damage
         void makeDamage(Entity* entity);
-
-        //get player position
-        Position* getPlayerPosition();
-        //get player
-        Entity* getPlayer();
-
-        //get enemy position
-        Position* getEnemyPosition(Entity* entity);
 
         //destruction
         ~Map();

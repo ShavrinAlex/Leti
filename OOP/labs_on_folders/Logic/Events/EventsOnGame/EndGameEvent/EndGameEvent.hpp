@@ -1,3 +1,4 @@
+#pragma once
 #include "../EventOnGame/EventOnGame.hpp"
 
 class EndGameEvent: public EventOnGame{

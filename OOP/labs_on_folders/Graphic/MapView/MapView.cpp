@@ -104,6 +104,8 @@ void MapView::addEnemyView(EntityView* enemy_view){
 
 //remove enemy view
 void MapView::removeEnemyView(int index){
+    delete this->enemies_view.at(index);
+
     auto iter = this->enemies_view.begin();
     this->enemies_view.erase(iter + index);
 };
@@ -127,14 +129,27 @@ void MapView::updatePlayerPosition(){
 //update count enemies
 void MapView::updateCountEnemies(){
     bool is_remove = false;
-    for (size_t i = 0; i < this->map->getEnemies().size(); i++){
-        if (this->enemies_view.at(i)->getLogicEntity() != this->map->getEnemies().at(i).entity){
-            this->removeEnemyView(i);
-            is_remove = true;
+
+    if (this->map->getEnemies().size() != this->enemies_view.size()){
+        //check last enemy view
+        if (this->map->getEnemies().size() == 0 && this->enemies_view.size() != 0){
+            this->removeEnemyView(0);
+            return;
         }
-    }
-    if (is_remove == false && this->enemies_view.size() > this->map->getEnemies().size()){
-        this->removeEnemyView(this->enemies_view.size() + 1);
+
+        //check all enemy without end
+        for (size_t i = 0; i < this->map->getEnemies().size(); i++){
+            if (this->enemies_view.at(i)->getLogicEntity() != this->map->getEnemies().at(i).entity){
+                this->removeEnemyView(i);
+                is_remove = true;
+                break;
+            }
+        }
+
+        //remove end enemy
+        if (is_remove == false && this->enemies_view.size() > this->map->getEnemies().size()){
+            this->removeEnemyView(this->enemies_view.size()-1);
+        }
     }
 };
 
@@ -150,9 +165,6 @@ void MapView::updateEnemiesPositions(){
 void MapView::updateEvents(){
     for (int y = 0; y < this->map->getHeight(); y++){
         for (int x = 0; x < this->map->getWidth(); x++){
-            CellView *cl = new CellView(this->map->getCell(x, y), x, y);
-            this->map_view.back().push_back(cl);
-
             Event* event = this->map->getCell(x, y)->getEvent();
 
             if (event != nullptr && this->getCellView(x, y)->getEventView() == nullptr){
