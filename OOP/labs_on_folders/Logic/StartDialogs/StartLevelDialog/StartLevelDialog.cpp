@@ -7,8 +7,10 @@
 #define LEVEL_TWO_MAP_HEIGHT 8
 
 //initialization
-StartLevelDialog::StartLevelDialog(Mediator<Log*>* mediator){
-    this->setMediator(mediator);
+StartLevelDialog::StartLevelDialog(){
+    this->map_height = 5;
+    this->map_width = 5;
+    this->level = One;
 };
 
 //user dialog

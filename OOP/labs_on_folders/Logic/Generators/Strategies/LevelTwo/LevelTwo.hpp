@@ -14,10 +14,10 @@ class LevelTwo: public LevelStrategy{
         Map* map;
 
         LevelGenerator <SpawnWallsRule2<2123>,
-                        SpawnEnemiesRule2 <517, 2>,
-                        SpawnEventsRule2 <2, 2, SetHealth>,
+                        SpawnEnemiesRule2 <517, 3>,
+                        SpawnEventsRule2 <2, 5, SetHealth>,
                         SpawnEventsRule2 <1290, 2, SetArmor>,
-                        SpawnEventsRule2 <122, 2, SetEnergy>,
+                        SpawnEventsRule2 <122, 5, SetEnergy>,
                         SpawnEventsRule2 <54, 5, EndGame>,
                         SpawnEventsRule2 <123, 1, SetWinGame>,
                         SpawnEventsRule2 <20, 3, SetWall>,

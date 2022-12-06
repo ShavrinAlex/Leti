@@ -14,7 +14,6 @@
 #include "../Generators/Strategies/LevelContext/LevelContext.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
-#define START_POSITION {1, 1}
 #define PLAYER_IMAGE "./Graphic/Images/Entities/Player/hero1.png"
 #include <iostream>
 
@@ -24,7 +23,8 @@ Game::Game(){
     this->log_controller = new LogController();
     this->mediator = new LogMediator(log_controller);
 
-    StartLevelDialog start_level_dialog = StartLevelDialog(this->mediator);
+    StartLevelDialog start_level_dialog = StartLevelDialog();
+    start_level_dialog.setMediator(mediator);
     start_level_dialog.executor();
 
     this->map_width = start_level_dialog.getWidth();

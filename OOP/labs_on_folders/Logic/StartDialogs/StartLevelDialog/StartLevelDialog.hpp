@@ -11,7 +11,7 @@ class StartLevelDialog: public GameElement<Log*>{
         int userDialog();
     public:
         //initialization
-        StartLevelDialog(Mediator<Log*>* mediator);
+        StartLevelDialog();
 
         //executor
         void executor();
