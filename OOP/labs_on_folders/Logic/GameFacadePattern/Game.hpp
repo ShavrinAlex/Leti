@@ -16,6 +16,9 @@ class Game: public GameElement<Log*>{
         //initialization
         Game();
 
+        //crreate level
+        Map* createLevel(GameController* game_controller, Player* player);
+
         //game start
         int startGame();
 

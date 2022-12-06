@@ -11,6 +11,7 @@
 #include "../CommandReader/CommandAdapterPattern/CommandAdapter.hpp"
 #include "../Generators/Strategies/LevelOne/LevelOne.hpp"
 #include "../Generators/Strategies/LevelTwo/LevelTwo.hpp"
+#include "../Generators/Strategies/LevelContext/LevelContext.hpp"
 #define PLAYER_W 98
 #define PLAYER_H 98
 #define START_POSITION {1, 1}
@@ -34,6 +35,21 @@ Game::Game(){
     this->game_status = Continues;
 };
 
+//crreate level
+Map* Game::createLevel(GameController* game_controller, Player* player){
+    //create level
+    LevelContext level_context = LevelContext();
+    switch (this->level){
+        case One:
+            level_context.setStrategy(new LevelOne(game_controller, player, this->mediator, this->map_height, this->map_width));
+            break;
+        case Two:
+            level_context.setStrategy(new LevelTwo(game_controller, player, this->mediator, this->map_height, this->map_width));
+            break;
+    }
+    return level_context.createLevel();
+};
+
 //game start
 int Game::startGame(){
     //logging
@@ -48,18 +64,9 @@ int Game::startGame(){
 
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
-    Map* map = nullptr;
-    LevelStrategy* some_level = nullptr;
+
     //create level
-    switch (this->level){
-        case One:
-            some_level = new LevelOne(&game_controller, &player, this->mediator, this->map_height, this->map_width);
-            break;
-        case Two:
-            some_level = new LevelTwo(&game_controller, &player, this->mediator, this->map_height, this->map_width);
-            break;
-    }
-    map = some_level->generateLevel();
+    Map* map = this->createLevel(&game_controller, &player);
 
     //create player controller
     PlayerController player_controller = PlayerController(&player, map);
