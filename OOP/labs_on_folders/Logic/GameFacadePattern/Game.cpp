@@ -56,11 +56,11 @@ int Game::startGame(){
     */
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
-    /*
+/*    
     LevelOne level = LevelOne(&game_controller, &player, this->mediator);
     Map* map = level.generateLevel();
     std::cout<<"level created\n";
-    */
+*/    
     LevelTwo level = LevelTwo(&game_controller, &player, this->mediator);
     Map* map = level.generateLevel();
     std::cout<<"level created\n";

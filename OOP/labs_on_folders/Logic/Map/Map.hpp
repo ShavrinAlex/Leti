@@ -52,17 +52,9 @@ class Map: public GameElement<Log*>, public Observable{
         //convert entity position
         void convertEntityPosition(Position* position);
     public:
-        //things
-        int count_wals;
-        int count_events;
-        int count_enemies;
-        
         //initialization
         Map();
         Map(int width, int height, Mediator<Log*>* mediator = NULL); 
-
-        //set map
-        void setMap(CellMatrix map);
 
         //set player
         void setPlayer(Player* player);
@@ -102,6 +94,11 @@ class Map: public GameElement<Log*>, public Observable{
         Entity* getPlayer();
         //get player position
         Position* getPlayerPosition();
+
+        //check is win position
+        bool isWinPosition(int pos_x, int pos_y);
+        //get win position
+        Position* getWinPosition();
 
         //get cell
         Cell* getCell(int pos_x, int pos_y);

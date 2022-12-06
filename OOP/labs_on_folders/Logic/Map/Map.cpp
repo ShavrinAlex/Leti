@@ -11,17 +11,6 @@ void Map::createMap(){
         this->map.emplace_back(std::vector <Cell*>());
         this->map.at(y).reserve(this->width);
         for (int x = 0; x < this->width; x++){
-            /*
-            //create cell
-            bool is_here_player = false;
-            bool is_wall = false;
-            if (this->player->pos->x == x && this->player->pos->y == y){
-                is_here_player = true;
-            }
-            if (rand() % 10 > 7 && is_here_player == false){
-                is_wall = true;
-            }
-            */
             Cell *cl = new Cell();
             this->map.back().push_back(cl);
         }
@@ -49,22 +38,17 @@ Map::Map(int width, int height, Mediator<Log*>* mediator){
     //create player
     createPlayerElem();
 
+    //create map
     createMap();
 
-    //things
-    this->count_wals = 0;
-    this->count_events = 0;
-    this->count_enemies = 0;
+    //set win cell
+    this->win_pos.x = this->width / 2;
+    this->win_pos.y = this->height / 2;
 
     //logging
     Log* log = new Log(Processes, "Map was create");
     this->mediator->send(log);
     delete log;
-};
-
-//set map
-void Map::setMap(CellMatrix map){
-    this->map = map;
 };
 
 //set player
@@ -191,8 +175,6 @@ void Map::addEnemy(Entity* enemy, Position* pos){
 
     //add enemy
     this->enemies.emplace_back(*en);
-
-    this->count_enemies += 1;
 
     //logging
     Log* log = new Log(Processes, "Enemy has been added to the map");
@@ -376,6 +358,15 @@ Position* Map::getPlayerPosition(){
 //get player
 Entity* Map::getPlayer(){
     return this->player->entity;
+};
+
+ //check is win position
+bool Map::isWinPosition(int pos_x, int pos_y){
+    return (this->win_pos.x == pos_x && this->win_pos.y == pos_y);
+};
+//get win position
+Position* Map::getWinPosition(){
+    return &this->win_pos;
 };
 
 //get enemy position

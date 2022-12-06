@@ -1,9 +1,10 @@
+#pragma once
 #include "../../../Map/Map.hpp"
 
 template <int magic_number>
 class SpawnWallsRule2{
     public:
-        static void apply(Map* map);
+        void apply(Map* map);
 };
 
 template <int magic_number>
@@ -25,11 +26,9 @@ void SpawnWallsRule2<magic_number>::apply(Map* map){
                 continue;
             }
 
-            if ((x == 0 || x == map->getWidth()) && (y == 0 || y == map->getHeight()) && magic_number % 2 == 0 && magic_number % 2 == 0){
+            if (((y == 0 || y == map->getHeight() - 1) && (magic_number + x) % 2 == 0) || ((x == 0 || x == map->getWidth() - 1) && (magic_number + y) % 2 == 0)){
                 map->getCell(x, y)->setWall();
-                map->count_wals += 1;
             }
         }
     }
-    std::cout<<"end\n";
 };

@@ -1,9 +1,10 @@
+#pragma once
 #include "../../../Map/Map.hpp"
 
 template <int core>
 class SpawnPlayerRule2{
     public:
-        static void apply(Map* map);
+        void apply(Map* map);
 };
 
 template <int core>
@@ -20,5 +21,4 @@ void SpawnPlayerRule2<core>::apply(Map* map){
     }
 
     map->setPlayerPosition(pos);
-    std::cout<<"end\n";
 };

@@ -1,14 +1,14 @@
+#pragma once
 #include "../../../Map/Map.hpp"
 
 template <int magic_number>
 class SpawnWallsRule1{
     public:
-        static void apply(Map* map);
+        void apply(Map* map);
 };
 
 template <int magic_number>
 void SpawnWallsRule1<magic_number>::apply(Map* map){
-    std::cout<<"spawn wals\n";
     for (int y = 0; y < map->getHeight(); y++){
         for (int x = 0; x < map->getWidth(); x++){
             //check if is player position
@@ -28,9 +28,7 @@ void SpawnWallsRule1<magic_number>::apply(Map* map){
 
             if (magic_number*x % 2 == 0 && (y != 0 && y != 1 && y != map->getHeight() - 1 && y != map->getHeight() - 2)){
                 map->getCell(x, y)->setWall();
-                map->count_wals += 1;
             }
         }
     }
-    std::cout<<"end spawn wals\n";
 };
