@@ -22,7 +22,7 @@ void SpawnWallsRule1<magic_number>::apply(Map* map){
             }
 
             //check if is event position
-            if (map->getCell(x, y)->getEvent() != nullptr){
+            if (map->getCell(x, y)->getEvent() != nullptr || map->isWinPosition(x, y)){
                 continue;
             }
 

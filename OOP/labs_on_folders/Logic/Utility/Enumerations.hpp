@@ -7,3 +7,4 @@ enum EventStatus {Delete, Leave};
 enum LogLevels {Errors, Processes, GameStates};
 enum LogCout {Console, File};
 enum Events {EndGame, WinGame, SetWall, SetWinGame, SetHealth, SetArmor, SetEnergy};
+enum Levels {One, Two};

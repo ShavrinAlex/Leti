@@ -1,11 +1,9 @@
 #include "LevelTwo.hpp"
-#define MAP_WIDTH 8
-#define MAP_HEIGHT 8
 
 //initialization
-LevelTwo::LevelTwo(GameController* game_controller, Player* player, Mediator<Log*>* mediator){
+LevelTwo::LevelTwo(GameController* game_controller, Player* player, Mediator<Log*>* mediator, int map_height, int map_width){
     //create map
-    this->map = new Map(MAP_WIDTH, MAP_HEIGHT, mediator);
+    this->map = new Map(map_width, map_height, mediator);
     map->setPlayer(player);
     
     map->setGameController(game_controller);

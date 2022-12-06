@@ -8,6 +8,7 @@ class Game: public GameElement<Log*>{
     private:
         int map_width;
         int map_height;
+        Levels level;
         GraphicArts* graphic_arts;
         GameStatus game_status;
         LogController* log_controller;

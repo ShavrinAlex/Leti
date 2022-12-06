@@ -3,7 +3,7 @@
 #include "../../Graphic/EntitiesView/PlayerView/PlayerView.hpp"
 #include "../CommandReader/KeyboardCommandReader/KeyboardCommandReader.hpp"
 #include "../Utility/Enumerations.hpp"
-#include "../StartDialogs/StartMapSizeDialog/StartMapSizeDialog.hpp"
+#include "../StartDialogs/StartLevelDialog/StartLevelDialog.hpp"
 #include "../Controllers/EntitiesControllers/EnemiesController/EnemiesController.hpp"
 #include "../MediatorPattern/CommandReaderMediator/CommandReaderMediator.hpp"
 #include "../Generators/EventGenerator/EventGenerator.hpp"
@@ -23,11 +23,12 @@ Game::Game(){
     this->log_controller = new LogController();
     this->mediator = new LogMediator(log_controller);
 
-    StartMapSizeDialog start_map_size_dialog = StartMapSizeDialog(this->mediator);
-    start_map_size_dialog.executor();
+    StartLevelDialog start_level_dialog = StartLevelDialog(this->mediator);
+    start_level_dialog.executor();
 
-    this->map_width = start_map_size_dialog.getWidth();
-    this->map_height = start_map_size_dialog.getHeight();
+    this->map_width = start_level_dialog.getWidth();
+    this->map_height = start_level_dialog.getHeight();
+    this->level = start_level_dialog.getLevel();
     
     this->graphic_arts = new GraphicArts(this->map_width, this->map_height);
     this->game_status = Continues;
@@ -45,26 +46,22 @@ int Game::startGame(){
     player.setSpeed(1);
     player.setDamage(50);
 
-/*
-    //create map
-    Map map = Map(this->map_width, this->map_height, this->mediator);
-    map.setPlayer(&player);
-    Position *pos = new Position;
-    pos->x = 1;
-    pos->y = 1;
-    map.setPlayerPosition(pos);
-    */
     //create player and game controllers
     GameController game_controller = GameController(this, &player);
-/*    
-    LevelOne level = LevelOne(&game_controller, &player, this->mediator);
-    Map* map = level.generateLevel();
-    std::cout<<"level created\n";
-*/    
-    LevelTwo level = LevelTwo(&game_controller, &player, this->mediator);
-    Map* map = level.generateLevel();
-    std::cout<<"level created\n";
+    Map* map = nullptr;
+    LevelStrategy* some_level = nullptr;
+    //create level
+    switch (this->level){
+        case One:
+            some_level = new LevelOne(&game_controller, &player, this->mediator, this->map_height, this->map_width);
+            break;
+        case Two:
+            some_level = new LevelTwo(&game_controller, &player, this->mediator, this->map_height, this->map_width);
+            break;
+    }
+    map = some_level->generateLevel();
 
+    //create player controller
     PlayerController player_controller = PlayerController(&player, map);
     player_controller.setMediator(this->mediator);
 
@@ -76,26 +73,7 @@ int Game::startGame(){
     KeyboardCommandReader com_reader = KeyboardCommandReader(&com_adapter);
     //set command reader mediator
     com_reader.setMediator(&com_reader_mediator);
-/*
-    //create event generator
-    EventGenerator event_generator = EventGenerator(map);
 
-    //create event fabrics
-    FactoryEventOnPlayer factory_event_on_player = FactoryEventOnPlayer(&player);
-    factory_event_on_player.setMediator(this->mediator);
-    FactoryEventOnGame factory_event_on_game = FactoryEventOnGame(&game_controller);
-    factory_event_on_game.setMediator(this->mediator);
-    FactoryEventOnMap factory_event_on_map = FactoryEventOnMap(&map, &factory_event_on_game);
-    factory_event_on_map.setMediator(this->mediator);
-
-    //create events
-    event_generator.setFactories(&factory_event_on_player, &factory_event_on_game, &factory_event_on_map);
-    event_generator.generate(this->map_height, this->map_width);
-
-    //create enemy generator
-    EnemyGenerator enemy_generator = EnemyGenerator(map);
-    enemy_generator.generate(this->map_height, this->map_width);
-*/
     //create map view
     MapView map_view = MapView(map);
     

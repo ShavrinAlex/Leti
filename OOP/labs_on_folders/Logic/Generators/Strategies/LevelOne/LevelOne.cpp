@@ -1,11 +1,9 @@
 #include "LevelOne.hpp"
-#define MAP_WIDTH 5
-#define MAP_HEIGHT 5
 
 //initialization
-LevelOne::LevelOne(GameController* game_controller, Player* player, Mediator<Log*>* mediator){
+LevelOne::LevelOne(GameController* game_controller, Player* player, Mediator<Log*>* mediator, int map_height, int map_width){
     //create map
-    this->map = new Map(MAP_WIDTH, MAP_HEIGHT, mediator);
+    this->map = new Map(map_width, map_height, mediator);
     map->setPlayer(player);
     
     map->setGameController(game_controller);

@@ -25,7 +25,7 @@ class LevelTwo: public LevelStrategy{
                         > level_generator;
     public:
         //initialization
-        LevelTwo(GameController* game_controller, Player* player, Mediator<Log*>* mediator);
+        LevelTwo(GameController* game_controller, Player* player, Mediator<Log*>* mediator, int map_height, int map_width);
 
         //generate level
         Map* generateLevel();
