@@ -11,8 +11,6 @@
 
 class LevelTwo: public LevelStrategy{
     private:
-        Map* map;
-
         LevelGenerator <SpawnWallsRule2<2123>,
                         SpawnEnemiesRule2 <517, 3>,
                         SpawnEventsRule2 <2, 5, SetHealth>,

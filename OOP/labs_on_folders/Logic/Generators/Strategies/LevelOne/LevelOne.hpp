@@ -11,8 +11,6 @@
 
 class LevelOne: public LevelStrategy{
     private:
-        Map* map;
-
         LevelGenerator <SpawnPlayerRule1 <1, 1>,
                         SpawnWallsRule1 <123>,
                         SpawnEnemiesRule1 <1, 5>,
