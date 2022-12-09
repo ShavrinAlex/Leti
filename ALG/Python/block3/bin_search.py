@@ -15,4 +15,4 @@ def solve(L, x):
             else:
                 low_index = mid + 1
 
-    return result;
+    return result
