@@ -280,25 +280,25 @@ int main() {
 
 
     std::srand(std::time(nullptr));
-    double x1=std::rand()%100/1000.0;
-    double x2=std::rand()%100/1000.0;
-    double x3=std::rand()%100/1000.0;
-    double x4=std::rand()%100/1000.0;
-    double b[]={10+x1,9+x2,5+x3,6+x4};
-    std::cout<<"dB: "<<(fabs(10.0+b[0])+fabs(9.0-b[1])+fabs(5.0-b[2])+fabs(6.0-b[3]))/(30.0)<<"\n";
-    //double b[]={10, 9, 5, 6};
+    // double x1=std::rand()%100/1000.0;
+    // double x2=std::rand()%100/1000.0;
+    // double x3=std::rand()%100/1000.0;
+    // double x4=std::rand()%100/1000.0;
+    // double b[]={10+x1,9+x2,5+x3,6+x4};
+    // std::cout<<"dB: "<<(fabs(10.0+b[0])+fabs(9.0-b[1])+fabs(5.0-b[2])+fabs(6.0-b[3]))/(30.0)<<"\n";
+    double b[]={10, 9, 5, 6};
     
     double bb[4];
     for(int i=0;i<SIZE;i++)
         bb[i]=b[i];
     for(int i=0;i<SIZE;i++){
         for(int j=0;j<SIZE;j++){
-            matr[i][j] = m[i][j];
-            dmatr[i][j] = m[i][j];
-            rev_matr[i][j] = m[i][j];
+            matr[i][j] = bad[i][j];
+            dmatr[i][j] = bad[i][j];
+            rev_matr[i][j] = bad[i][j];
             std::cout<<matr[i][j]<<" ";
         }
-        std::cout<<"\n";
+        std::cout<<"\t | "<<b[i]<<'\n';
     }
     std::cout<<"\n";
 
@@ -328,25 +328,23 @@ int main() {
    
 
     double norm=0.0;
-    for(int i=0;i<SIZE;i++)
+    for(int j=0;j<SIZE;j++)
     {
         double temp=0.0;
-        for(int j=0;j<SIZE;j++)
-            //temp+=(double)fabs(mm[i][j]);
-            temp+=(double)fabs(mm[i][j]-m[i][j]);
-            //temp+=(double)fabs(mm[i][j]-bad[i][j]);
-            //temp+=(double)fabs(matr[i][j]);
+        for(int i=0;i<SIZE;i++)
+            temp+=(double)fabs(bad[i][j]);
+            //temp+=(double)fabs(mm[i][j] - m[i][j]);
+            //temp+=(double)fabs(mm[i][j] - bad[i][j]);
         if(temp>norm)
             norm=temp;
     }
 
     double norm2=0.0;
-    for(int i=0;i<SIZE;i++)
+    for(int j=0;j<SIZE;j++)
     {
         double temp=0.0;
-        for(int j=0;j<SIZE;j++)
-            temp+=(double)fabs(mm[i][j]);
-            //temp+=(double)fabs(rev_matr[i][j]);
+        for(int i=0;i<SIZE;i++)
+            temp+=(double)fabs(rev_matr[i][j]);
         if(temp>norm2)
             norm2=temp;
 
@@ -357,12 +355,24 @@ int main() {
 // X3: 1.16393
 // X4: 0.360656
 
-    std::cout<<"dA: "<<norm/norm2<<"\n";
-    //std::cout<<"condA: "<<norm*norm2<<"\n";
-    //std::cout<<"norma matr: "<<norm<<'\n';
-    //std::cout<<"norma rev_matr: "<<norm2<<'\n';
-    //std::cout<<"ectectvennoe obusl: "<<norm2*30/(2.87822-0.906323+1.16393+ 0.360656)<<"\n";
-    std::cout<<"dX: "<<(fabs(2.87822-x[0])+fabs(-0.906323-x[1])+fabs(1.16393-x[2])+fabs( 0.360656-x[3]))/(2.87822-0.906323+1.16393+ 0.360656)<<"\n";
+//||X|| = 5,309129
+
+//||A|| = 11
+
+    std::cout<<"dA (otnosit): "<<norm/11<<"\n";
+    std::cout<<"norm: "<<norm<<"\n";
+    std::cout<<"condA: "<<norm*norm2<<"\n";
+    std::cout<<"norma rev_matr (absolut nu): "<<norm2<<'\n';
+    std::cout<<"Delta X (absolut): "<<(fabs(2.87822-x[0])+fabs(0.906323-x[1])+fabs(1.16393-x[2])+fabs( 0.360656-x[3]))<<'\n';
+    std::cout<<"dX (otnosit): "<<(fabs(2.87822-x[0])+fabs(0.906323-x[1])+fabs(1.16393-x[2])+fabs( 0.360656-x[3]))/(2.87822+0.906323+1.16393+0.360656)<<"\n";
+
+    double norm_x = 0;
+    double norm_b = 0;
+    for(int i = 0; i < SIZE; i++){
+        norm_x += fabs(x[i]);
+        norm_b += fabs(b[i]);
+    }
+    std::cout<<"Otnosit (esstestv) nu: "<<norm2 * norm_b / norm_x << '\n';
 
     for(int i=0;i<SIZE;i++){
         delete matr[i];
