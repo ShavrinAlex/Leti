@@ -1,0 +1,4 @@
+./labyrinth/add/add/file.txt
+./labyrinth/add/mul/add/file4.txt
+./labyrinth/add/mul/file2.txt
+./labyrinth/add/mul/file3.txt
