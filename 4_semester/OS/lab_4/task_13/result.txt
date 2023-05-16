@@ -1,0 +1,12 @@
+   PPID     PID    PGID     SID TTY        TPGID STAT   UID   TIME COMMAND
+   5426    5452    5452    5452 pts/0       7900 Ss    1000   0:00  |   \_ bash
+   5452    7900    7900    5452 pts/0       7900 S+    1000   0:00  |       \_ ./father result.txt
+   7900    7901    7900    5452 pts/0       7900 S+    1000   0:00  |           \_ son1
+   7900    7902    7900    5452 pts/0       7900 S+    1000   0:00  |           \_ son2 result.txt
+   7900    7903    7900    5452 pts/0       7900 Z+    1000   0:00  |           \_ [son3] <defunct>
+   7900    7904    7900    5452 pts/0       7900 S+    1000   0:00  |           \_ sh -c ps xjf | grep "STAT\|5452" > result.txt
+   7904    7905    7900    5452 pts/0       7900 R+    1000   0:00  |               \_ ps xjf
+   7904    7906    7900    5452 pts/0       7900 S+    1000   0:00  |               \_ grep STAT\|5452
+   1156    7902    7900    5452 pts/0       5452 S     1000   0:00  \_ son2 result.txt
+   7902    7909    7900    5452 pts/0       5452 S     1000   0:00      \_ sh -c ps xjf | grep son2 >> result.txt
+   7909    7911    7900    5452 pts/0       5452 S     1000   0:00          \_ grep son2

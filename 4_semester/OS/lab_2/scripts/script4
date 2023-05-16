@@ -1,0 +1,16 @@
+#!/bin/bash
+
+> new.txt
+echo "Created new regular file" > result.txt
+od -tc new.txt >> result.txt
+
+echo "asDf\trrreWq\n1352" >> new.txt
+echo "File changed:" >> result.txt
+od -tc new.txt >> result.txt
+
+echo "asdgJsd\n" > new.txt
+echo "File changed:" >> result.txt
+od -tc new.txt >> result.txt
+
+echo "Another format:" >> result.txt
+od -b new.txt >> result.txt
