@@ -209,14 +209,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-"""
-NTAG
-3
-TAGT
-TAG
-T
-ACTANCA
-A$$A$
-$
-"""

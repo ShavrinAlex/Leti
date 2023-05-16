@@ -52,6 +52,12 @@
         "unordered_set": "cpp",
         "iomanip": "cpp",
         "sstream": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "queue": "cpp",
+        "fstream": "cpp",
+        "unistd.h": "c",
+        "pthread.h": "c",
+        "types.h": "c",
+        "stdio.h": "c"
     }
 }
