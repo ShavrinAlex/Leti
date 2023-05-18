@@ -5,8 +5,9 @@
 #include <sys/sem.h>
 #include <sys/shm.h>
 #include "shm.h"
-int* buf;
+
 int main(int argc, char** argv) {
+    Message* p_msg;
     char keyFile[100];
     bzero(keyFile,100);
     if(argc < 2) {
@@ -24,12 +25,12 @@ int main(int argc, char** argv) {
         exit(1);
     }
     //создаем shm
-    if((shmemory = shmget(key, (BUF_SIZE+1)*sizeof(int), 0666)) < 0) {
+    if((shmemory = shmget(key, sizeof(Message), 0666)) < 0) {
         printf("Can't create shm\n");
         exit(1);
     }
     //присоединяем shm в наше адресное пространство
-    if((buf = (int*)shmat(shmemory, 0, 0)) < 0) {
+    if((p_msg = (Message*)shmat(shmemory, 0, 0)) < 0) {
         printf("Error while attaching shm\n");
         exit(1);
     }
@@ -37,36 +38,31 @@ int main(int argc, char** argv) {
         printf("Error while creating semaphore\n");
         exit(1);
     }
-    printf("Press enter to start working\n");
-    getchar();
-    int send = 0;
-    char tb[10];
-    int i = 0;
-    for(i = 0; i < 10;++i) {
-        //ждем, пока будет хоть одна свободная ячейка
-        if(semop(semaphore, waitNotFull, 1) < 0) {
+    char buf[100];
+    for(;;) {
+        bzero(buf,100);
+        printf("Type message to serever. Empty string to finish\n");
+        fgets(buf,100,stdin);
+        if(strlen(buf) == 1 && buf[0] == '\n') {
+            printf("bye-bye\n");
+            exit(0);
+        }
+        //хотим отправить сообщение
+        if(semop(semaphore, writeEna, 1) < 0) {
             printf("Can't execute a operation\n");
             exit(1);
         }
-        // ждем доступа к разделяемой памяти
-        if(semop(semaphore, mem_lock, 1) < 0) {
-            printf("Can't execute a operation\n");
-            exit(1);
-        }
-        printf("Add %d to cell %d\n",send,buf[BUF_SIZE]+1);
-        ++buf[BUF_SIZE];
-        buf[buf[BUF_SIZE]] = send++;
-        //освобождаем доступ к памяти
-        if(semop(semaphore, mem_unlock, 1) < 0) {
-            printf("Can't execute a operation\n");
-            exit(11);
-        }
-        //увеличиваем число занятых ячеек
-        if(semop(semaphore, releaseFull, 1) < 0) {
+        //запись сообщения в разделяемую память
+        sprintf(p_msg->buf,"%s", buf);
+        //говорим серверу, что он может читать
+        if(semop(semaphore, setReadEna, 1) < 0) {
             printf("Can't execute a operation\n");
             exit(11);
         }
     }
     //отключение от области разделяемой памяти
-    shmdt(buf);
+    if(shmdt(p_msg) < 0) {
+        printf("Error while detaching shm\n");
+        exit(1);
+    }
 }
