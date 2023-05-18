@@ -134,7 +134,7 @@ SCHED_FIFO);
     {
         if (shared_memory_proc[i] == -1)
             break;
-        printf("%d\n", shared_memory_proc[i]);
+        printf("%d ", shared_memory_proc[i]);
     }
     for (int i = 0; i < THREADS_AMOUNT; i++)
     {

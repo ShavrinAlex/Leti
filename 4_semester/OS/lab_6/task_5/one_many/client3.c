@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #define DEF_PORT 8888
-#define DEF_IP "192.168.224.135"
+#define DEF_IP "192.168.31.149"
 
 int main(int argc, char **argv) {
     char *addr;
@@ -40,14 +40,39 @@ int main(int argc, char **argv) {
     for (;;) {
         printf("Input request (empty to exit)\n");
         if (first_msg == 0){
-            bzero(buf, 100);
+             bzero(buf, 100);
             fgets(buf, 100, stdin);
             buf[strlen(buf) - 1] = '\0';
         }
         else{
-            strcpy(buf, argv[1]);
+        for (int k = 0; k < 10;k++){
+        	buf[0] = argv[1][6];
+            for (int i = 1; i < 90; i++){
+                char j = i%10 + '0';
+                buf[i] = j;
             buf[strlen(buf)] = '\0';
             first_msg = 0;
+            if (strlen(buf) == 0) {
+		    printf("Bye-bye\n");
+		    return 0;
+		}
+		res = sendFix(sock, buf, 0);
+		if (res <= 0) {
+		    perror("Error while sending:");
+		    exit(1);
+		}
+		bzero(buf, 100);
+        	res = readFix(sock, buf, 100, 0);
+        	if (res <= 0) {
+            		perror("Error while receiving:");
+            		exit(1);
+        	}
+            }
+            bzero(buf, 100);
+           }
+            //strcpy(buf, argv[1]);
+            //buf[strlen(buf)] = '\0';
+            //first_msg = 0;
         }
         if (strlen(buf) == 0) {
             printf("Bye-bye\n");
