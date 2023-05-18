@@ -7,7 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 #define DEF_PORT 8888
-#define DEF_IP "192.168.224.135"
+#define DEF_IP "192.168.31.149"
 
 int main(int argc, char **argv)
 {
@@ -44,9 +44,32 @@ int main(int argc, char **argv)
             buf[strlen(buf)-1] = '\0';
         }
         else{
-            strcpy(buf, argv[1]);
+        for (int k = 0; k < 10;k++){
+        	buf[0] = argv[1][10];
+            for (int i = 1; i < 90; i++){
+                char j = i%10 + '0';
+                buf[i] = j;
             buf[strlen(buf)] = '\0';
             first_msg = 0;
+            if (strlen(buf) == 0)
+            {
+                printf("Bye-bye\n");
+                return 0;
+            }
+            // Отправляем запрос на сервер
+            int res = sendto(sock, buf, strlen(buf), 0, (struct sockaddr *)&peer, sizeof(peer));
+            if (res <= 0)
+            {
+                perror("Error while sending:");
+                exit(1);
+            }
+            }
+            bzero(buf, 100);
+           }
+            
+            //strcpy(buf, argv[1]);
+            //buf[strlen(buf)] = '\0';
+            //first_msg = 0;
         }
         if (strlen(buf) == 0)
         {

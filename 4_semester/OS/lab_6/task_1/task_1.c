@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
         if(!res)
             break;
         printf("Read from pipe: %s\n",buf);
-        fwrite(buf,sizeof(char),res,f);
+        fprintf("test.txt", buf);
         }
     fclose(f);
     close(filedes[0]);
