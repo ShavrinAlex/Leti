@@ -6,6 +6,7 @@
 #include <sys/vfs.h>
 #include <sys/utsname.h>
 #include <sys/resource.h>
+#include <libcpuid/libcpuid.h>
 
 
 #define COUNT_TITLE_SYMB 75
@@ -116,11 +117,34 @@ void disk_information(){
 	printf("\n\n");
 }
 
+void cpu_information(){
+//---------------------------cpu information-----------------------------------------
+	title("CPU INFORMATION");
+	struct cpu_raw_data_t raw;
+    struct cpu_id_t data;
+
+    if (cpuid_get_raw_data(&raw) < 0) {
+    	perror("Failed to get raw CPU data");
+    	return -1;
+    }
+
+    if (cpu_identify(&raw, &data) < 0) {
+    	perror("Failed to identify CPU");
+    	return -1;
+    }
+
+	printf("\033[36mCPU vendor:\033[0m\t%s\n", data.vendor_str);
+    printf("\033[36mCPU model:\033[0m\t%s\n", data.brand_str);
+	printf("\033[36mCPU code name:\033[0m\t%s\n", data.cpu_codename);
+	printf("\n\n");
+}
+
 int main(){
 	system_information();
 	processor_information();
 	limit_information();
 	memory_information();
 	disk_information();
+	cpu_information();
 	return 0;
 }

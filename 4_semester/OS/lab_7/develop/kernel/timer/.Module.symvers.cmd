@@ -1,1 +1,1 @@
-cmd_/home/alex/develop/kernel/timer/Module.symvers := sed 's/ko$$/o/' /home/alex/develop/kernel/timer/modules.order | scripts/mod/modpost -m -a  -o /home/alex/develop/kernel/timer/Module.symvers -e -i Module.symvers   -T -
+cmd_/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/Module.symvers := sed 's/ko$$/o/' /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/modules.order | scripts/mod/modpost -m -a  -o /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/Module.symvers -e -i Module.symvers   -T -

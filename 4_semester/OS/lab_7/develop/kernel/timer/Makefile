@@ -1,4 +1,4 @@
-obj-m += t-1.o
+obj-m += timer-1.o
  
 PWD := $(CURDIR) 
  
