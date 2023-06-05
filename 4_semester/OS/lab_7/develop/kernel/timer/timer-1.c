@@ -11,7 +11,7 @@ MODULE_DESCRIPTION("A sample timer interrupt module");
  
 static irqreturn_t timer_isr(int irq, void *dev_id){
    static long long unsigned count = 0;
-   if(count < 1000){
+   if(count < 700){
    	pr_info("Tick %llu handled\n", count++);
    }
    return IRQ_HANDLED;
