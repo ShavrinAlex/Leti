@@ -1,1 +1,1 @@
-cmd_/home/alex/develop/kernel/keyboard/modules.order := {   echo /home/alex/develop/kernel/keyboard/keyboard-1.ko; :; } | awk '!x[$$0]++' - > /home/alex/develop/kernel/keyboard/modules.order
+cmd_/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/keyboard/modules.order := {   echo /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/keyboard/keyboard-1.ko; :; } | awk '!x[$$0]++' - > /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/keyboard/modules.order
