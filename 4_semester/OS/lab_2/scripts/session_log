@@ -1,14 +1,0 @@
-Script started on 2023-03-16 17:27:00+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="105" LINES="23"]
-[?2004h]0;alex@alex-VirtualBox: ~/Leti/4_semester/OS/lab_2/scripts[01;32malex@alex-VirtualBox[00m:[01;34m~/Leti/4_semester/OS/lab_2/scripts[00m$ pwd
-[?2004l/home/alex/Leti/4_semester/OS/lab_2/scripts
-[?2004h]0;alex@alex-VirtualBox: ~/Leti/4_semester/OS/lab_2/scripts[01;32malex@alex-VirtualBox[00m:[01;34m~/Leti/4_semester/OS/lab_2/scripts[00m$ whoami
-[?2004lalex
-[?2004h]0;alex@alex-VirtualBox: ~/Leti/4_semester/OS/lab_2/scripts[01;32malex@alex-VirtualBox[00m:[01;34m~/Leti/4_semester/OS/lab_2/scripts[00m$ pc
-[?2004lКоманда «pc» не найдена, но может быть установлена с помощью:
-sudo apt install fp-compiler-3.2.2
-[?2004h]0;alex@alex-VirtualBox: ~/Leti/4_semester/OS/lab_2/scripts[01;32malex@alex-VirtualBox[00m:[01;34m~/Leti/4_semester/OS/lab_2/scripts[00m$ pc[Ks
-[?2004l    PID TTY          TIME CMD
-  23481 pts/2    00:00:00 bash
-  23509 pts/2    00:00:00 ps
-[?2004h]0;alex@alex-VirtualBox: ~/Leti/4_semester/OS/lab_2/scripts[01;32malex@alex-VirtualBox[00m:[01;34m~/Leti/4_semester/OS/lab_2/scripts[00m$ [?2004l
-exit

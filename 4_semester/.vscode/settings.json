@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "unistd.h": "c",
-        "string.h": "c",
-        "sched.h": "c",
-        "libcpuid.h": "c"
-    }
-}

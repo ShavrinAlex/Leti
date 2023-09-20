@@ -1,1 +1,0 @@
-cmd_/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/modules.order := {   echo /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.ko; :; } | awk '!x[$$0]++' - > /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/modules.order
