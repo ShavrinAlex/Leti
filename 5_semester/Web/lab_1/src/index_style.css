@@ -29,7 +29,7 @@ body
     text-align: center;
 
     background-color: rgba(1, 8, 89, 0.5);
-    box-shadow: -40px 40px 40px #000a66;
+    box-shadow: -40px 40px 40px #21265c;
 
     outline: 10px solid #ffffff;
     border-radius: 25px;
@@ -59,7 +59,7 @@ body
     border-radius: 5px;
 }
 
-.start_button
+.log_in_button
 {
     text-align: center;
     font-size: 22px;
@@ -67,7 +67,6 @@ body
     color: #000a66;
     background-color: #69cdf8;
 
-    border: 0px;
     border-radius: 5px;
     padding: 5px;
     margin: 10px;
@@ -76,44 +75,20 @@ body
     box-shadow: -5px 5px 5px #000a66;
 }
 
-.start_button:hover
+.log_in_button:hover
 {
     color: #000a66;
     background-color: #69cdf8;
 }
 
-.start_button:disabled
+.log_in_button:disabled
 {
     color: #000a665b;
     background-color: #69cdf886;
 }
 
-.start_button:active
+.log_in_button:active
 {
     color: #000000;
     background-color: #ffffff;
-}
-
-
-  
-.grid {
-    display: grid;
-    grid-template-columns: 320px 200px;
-}
-
-.right-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.game-board {
-    border: solid 2px;
-}
-
-.play-button {
-    background-color: #4caf50;
-    font-size: 16px;
-    padding: 15px 30px;
-    cursor: pointer;
 }

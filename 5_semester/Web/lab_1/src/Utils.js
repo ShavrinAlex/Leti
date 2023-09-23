@@ -1,15 +1,19 @@
-export const PLAYFIELD_ROWS = 20;
-export const PLAYFIELD_COLUMNS = 10;
-export const BLOCK_SIZE = 30;
-export const TETROMINO_NAMES = ['I', 'J', 'L', 'O', 'S', 'Z', 'T'];
-export const TEROMINO_COLORS = {
-    'I': 1, 
-    'J': 2, 
-    'L': 3,
-    'O': 4,
-    'S': 5,
-    'Z': 6,
-    'T': 7
+export const PLAYFIELD_ROWS = 20
+export const PLAYFIELD_COLUMNS = 10
+export const BLOCK_SIZE = 35
+export const MIN_LEVEL = 1
+export const MAX_LEVEL = 20
+export const LEVEL_TIME_INCREASE = 50
+export const MOVEMENT_ACTIVITIES = {Rotate: 0, Down: 1, Left: 2, Right: 3, Drop: 4}
+export const TETROMINO_NAMES = ['I', 'J', 'L', 'O', 'S', 'Z', 'T']
+export const TETROMINO_COLORS = {
+    I: ["rgba(107, 225, 236, 1)", "rgba(107, 225, 236, 0.2)"], 
+    J: ["rgba(94, 176, 243, 1)", "rgba(94, 176, 243, 0.2)"], 
+    L: ["rgba(242, 195, 91, 1)", "rgba(242, 195, 91, 0.2)"], 
+    O: ["rgba(247, 229, 98, 1)", "rgba(247, 229, 98, 0.2)"], 
+    S: ["rgba(123, 225, 123, 1)", "rgba(123, 225, 123, 0.2)"], 
+    Z: ["rgba(222, 92, 107, 1)", "rgba(222, 92, 107, 0.2)"], 
+    T: ["rgba(178, 118, 243, 1)", "rgba(178, 118, 243, 0.2)"]
 }
 export const TETROMINO_SHAPES = {
     'I': [
@@ -47,4 +51,4 @@ export const TETROMINO_SHAPES = {
         [1, 1, 1],
         [0, 0, 0]
     ]
-};
+}

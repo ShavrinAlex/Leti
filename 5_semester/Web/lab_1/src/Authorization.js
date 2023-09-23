@@ -1,5 +1,5 @@
 let username_element = document.getElementById("username_input")
-let start_button_element = document.getElementById("start_button")
+let log_in_button_element = document.getElementById("log_in_button")
 let form_element = document.getElementById("authorization_form")
 
 username_element.addEventListener("input", checkUsernameInput)
@@ -9,10 +9,10 @@ function checkUsernameInput(event)
 {
     if (username_element.value.length === 0)
     {
-        start_button_element.setAttribute("disabled", "disable")
+        log_in_button_element.setAttribute("disabled", "disable")
     } else
     {
-        start_button_element.removeAttribute("disabled")
+        log_in_button_element.removeAttribute("disabled")
     }
 }
 

@@ -1,23 +1,24 @@
-import { TETROMINO_NAMES, TETROMINO_COLORS, TETROMINO_SHAPES, PLAYFIELD_COLUMNS } from "./Utils.js";
+import { TETROMINO_SHAPES, TETROMINO_NAMES } from "./Utils.js"
 
 export class Tetromino {
-    constructor (tetromino_name) {
-        this.name = tetromino_name in TETROMINO_NAMES ? tetromino_name : TETROMINO_NAMES[1];
-        this.color = TETROMINO_COLORS[this.name];
-        this.shape = TETROMINO_SHAPES[this.name];
-
-        this.coordinates = {x: Math.floor(PLAYFIELD_COLUMNS / 2) - Math.floor(this.shape.length / 2), y: 0};
+    constructor (tetromino_name, is_clone = false) {
+        this.name = tetromino_name !== undefined ? tetromino_name: TETROMINO_NAMES[0]
+        this.is_clone = is_clone
+        this.shape = TETROMINO_SHAPES[this.name]
+        
+        /*this.coordinates = {x: Math.floor(PLAYFIELD_COLUMNS / 2) - Math.floor(this.shape.length / 2), y: 0}*/
+        this.coordinates = {x: 3, y: 0}
     }
 
     rotate () {
-        const N = this.shape.length;
-        const rotated_matrix = [];
+        const N = this.shape.length
+        const rotated_matrix = []
         for (let i = 0; i < N; i++) {
-            rotated_matrix[i] = [];
+            rotated_matrix[i] = []
             for (let j = 0; j < N; j++) {
-            rotated_matrix[i][j] = matrix[N - j - 1][i];
+                rotated_matrix[i][j] = this.shape[N - j - 1][i]
             }
         }
-        this.shape = rotated_matrix;
+        this.shape = rotated_matrix
     }
 }
