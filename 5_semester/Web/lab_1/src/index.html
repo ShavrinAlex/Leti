@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html land="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <script type="module" src="./Authorization.js"></script>
+
+    <title>Тетрис на JS</title>
+</head>
+
+<body>
+    <div class="authorization">
+        <h1 class="preview_text">Welcome to Tetris</h1>
+        <div class="preview_img">
+            <img src="./prev.png" alt="Tetris" width="300px" height="300px">
+        </div>
+        <form id="authorization_form" action="./main.html" method="get">
+            <label>
+                <input class="username_input" id="username_input" placeholder="Enter your username"><br>
+            </label>
+            <br>
+            <input class="log_in_button" id="log_in_button" disabled="disabled" type="submit" value="Log in">
+        </form>
+    </div>
+</body>
