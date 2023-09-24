@@ -15,6 +15,10 @@ export class Canvas {
         /* For drawing tetromino */
         this.left_up_gap = 1 / BLOCK_SIZE
         this.right_down_gap = 2 * this.left_up_gap 
+
+        this.level = document.getElementById("level")
+        this.score = document.getElementById("score")
+        this.lines = document.getElementById("lines")
     }
 
     drawPlayFieldGrid(width, height)
@@ -41,7 +45,6 @@ export class Canvas {
             filled_rows.forEach(row => {
                 this.dropRowsAbove(row)
             })
-            console.log(this.canvas.width, filled_rows.length * BLOCK_SIZE)
             this.drawPlayFieldGrid(this.canvas.width, filled_rows.length * BLOCK_SIZE)
         }
     }
@@ -112,5 +115,12 @@ export class Canvas {
                 })
             })
         }
+    }
+
+    updateData(level, score, lines)
+    {
+        this.level.innerText = `${level}`
+        this.score.innerText = `${score}`
+        this.lines.innerText = `${lines}`
     }
 }

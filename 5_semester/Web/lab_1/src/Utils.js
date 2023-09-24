@@ -6,7 +6,6 @@ export const NT_WINDOW_COLUMNS= 4
 
 export const BLOCK_SIZE = 35
 
-export const MIN_LEVEL = 1
 export const MAX_LEVEL = 20
 export const LEVEL_TIME_INCREASE = 50
 

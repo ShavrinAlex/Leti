@@ -1,11 +1,11 @@
 import { PlayField } from "./PlayField.js"
 import { Tetromino } from "./Tetromino.js"
-import { PLAYFIELD_ROWS, PLAYFIELD_COLUMNS, TETROMINO_NAMES, MOVEMENT_ACTIVITIES, MIN_LEVEL, LEVEL_TIME_INCREASE} from "./Utils.js"
+import { PLAYFIELD_ROWS, PLAYFIELD_COLUMNS, TETROMINO_NAMES, MOVEMENT_ACTIVITIES, LEVEL_TIME_INCREASE, MAX_LEVEL} from "./Utils.js"
 
 
 export class Tetris {
     constructor(canvas) {
-        this.current_level = MIN_LEVEL
+        this.level = 0
         this.score = 0
         this.lines = 0
 
@@ -28,8 +28,9 @@ export class Tetris {
         this.drawNextTetromino()
     }
 
-    restartFallTetrominoTimeout(timeout = 1000 - LEVEL_TIME_INCREASE * this.current_level)
+    restartFallTetrominoTimeout(timeout = (MAX_LEVEL * LEVEL_TIME_INCREASE) - (LEVEL_TIME_INCREASE * this.level))
     {
+        console.log(timeout)
         clearTimeout(this.timeout_id)
         this.timeout_id = setTimeout(() => this.moveTetromino(MOVEMENT_ACTIVITIES.Down), timeout)
     }
@@ -222,5 +223,28 @@ export class Tetris {
         const filled_lines = this.play_field.findFilledRows()
         this.play_field.removeFilledRows(filled_lines)
         this.canvas.removeFilledRows(filled_lines)
+        this.updateData(filled_lines.length)
+    }
+
+    calculateScore(count_removed_rows)
+    {
+        if (count_removed_rows == 1)
+        {
+            return 100
+        }
+        return 2 * this.calculateScore(count_removed_rows - 1) + 100
+    }
+
+    updateData(count_removed_rows)
+    {
+        if (count_removed_rows > 0){
+            this.score += this.calculateScore(count_removed_rows)
+            console.log('s', this.score)
+            this.lines += count_removed_rows
+            console.log('l', this.lines)
+            this.level = Math.min(MAX_LEVEL, Math.floor(this.score / 100))
+            console.log('lev', this.level)
+            this.canvas.updateData(this.level, this.score, this.lines)
+        }
     }
 }
