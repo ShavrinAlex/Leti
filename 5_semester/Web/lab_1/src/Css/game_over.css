@@ -1,0 +1,93 @@
+* 
+{
+    font-family: 'Press Start 2P';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body
+{
+    min-height: 100vh;
+    background: linear-gradient(90deg, #395492,  #0099c0, #3dd5a8);
+    display: flex; 
+    justify-content: center;
+    align-items: center
+}
+
+.game_over
+{
+    width: 800px;
+    height: 600px;
+
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    
+    
+    text-align: center;
+
+    background-color: rgba(1, 8, 89, 0.5);
+    box-shadow: -40px 40px 40px #21265c;
+
+    outline: 10px solid #ffffff;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+.game_over_text
+{
+    color: #ffffff;
+    text-shadow: -5px 5px 5px #000a66;
+    padding: 10px;
+}
+
+.score_table_text
+{
+    color: #ffffff;
+    text-shadow: -5px 5px 5px #000a66;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.game_over_grid 
+{
+    min-width: 60%;
+    min-height: 60%;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, min-content);
+    grid-template-rows: max-content;
+    column-gap:10px;
+    padding: 20px;
+}
+
+.column
+{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid #ffff;
+}
+
+.column_name
+{
+    padding: 10px;
+    font-size: 22px;
+    color: #ffff;
+    text-shadow: -5px 5px 5px #000a66;
+    text-decoration: underline;
+}
+
+.row
+{
+    font-size: large;
+    color: #ffff;
+    margin: 7px;
+    padding: 5px;
+    text-shadow: -2px 2px 4px #000a66;
+}
+

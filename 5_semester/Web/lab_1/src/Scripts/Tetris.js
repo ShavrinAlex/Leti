@@ -30,7 +30,6 @@ export class Tetris {
 
     restartFallTetrominoTimeout(timeout = (MAX_LEVEL * LEVEL_TIME_INCREASE) - (LEVEL_TIME_INCREASE * this.level))
     {
-        console.log(timeout)
         clearTimeout(this.timeout_id)
         this.timeout_id = setTimeout(() => this.moveTetromino(MOVEMENT_ACTIVITIES.Down), timeout)
     }
@@ -196,7 +195,27 @@ export class Tetris {
     }
 
     gameOver(){
-        window.location = "./game_over.html"
+        let score_table = JSON.parse(localStorage["tetris.score_table"])
+        let isExistsUsername = false
+        for (let i = 0; i < score_table.length; i++)
+        {
+            if (score_table[i].name == localStorage["tetris.username"])
+            {
+                score_table[i].score = this.score
+                isExistsUsername = true
+                break
+            }
+        }
+        if (!isExistsUsername)
+        {
+            score_table.push({
+                name: localStorage["tetris.username"],
+                score: this.score
+            })
+        }
+        
+        localStorage["tetris.score_table"] = JSON.stringify(score_table)
+        window.location = "../game_over.html"
     }
 
     drawNextTetromino() 
