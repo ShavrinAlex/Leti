@@ -6,6 +6,8 @@ import { PLAYFIELD_ROWS, PLAYFIELD_COLUMNS, TETROMINO_NAMES, MOVEMENT_ACTIVITIES
 export class Tetris {
     constructor(canvas) {
         this.current_level = MIN_LEVEL
+        this.score = 0
+        this.lines = 0
 
         this.play_field = new PlayField(PLAYFIELD_ROWS, PLAYFIELD_COLUMNS)
 
@@ -21,6 +23,9 @@ export class Tetris {
 
         this.timeout_id = null
         this.restartFallTetrominoTimeout()
+
+        this.next_tetromino_cells = document.querySelectorAll('.next_tetromino_grid>div')
+        this.drawNextTetromino()
     }
 
     restartFallTetrominoTimeout(timeout = 1000 - LEVEL_TIME_INCREASE * this.current_level)
@@ -40,39 +45,71 @@ export class Tetris {
         return new Tetromino(this.current_tetromino.name, true)
     }
 
-    isAbilityCurrentTetrominoPosition()
+    isOccupiedCurrentTetrominoPosition()
     {
-        let isAbility = true
+        let isOccupied = false
+
         if (this.current_tetromino !== undefined && this.current_tetromino.shape !== undefined)
         {
             let start_x = this.current_tetromino.coordinates.x
             let start_y = this.current_tetromino.coordinates.y
-        
+            const size = this.current_tetromino.shape.length
+
             labelCancelLoops:
-            for (let y = 0; y < this.current_tetromino.shape.length; y++)
+            for (let y = 0; y < size; y++)
             {
-                for (let x = 0; x < this.current_tetromino.shape.length; x++)
+                for (let x = 0; x < size; x++)
                 {
-                    if (this.current_tetromino.shape[y][x] > 0)
+                    let current_x = start_x + x
+                    let current_y = start_y + y
+                    if (this.current_tetromino.shape[y][x] > 0 && !this.play_field.isFreeCell(current_x, current_y))
                     {
-                        let current_x = start_x + x
-                        let current_y = start_y + y
-                        /* Check for leaving the field */
-                        if (current_y < 0 || current_x < 0 || current_y >= PLAYFIELD_ROWS || current_x >= PLAYFIELD_COLUMNS)
-                        {
-                            isAbility = false
-                            break labelCancelLoops
-                        }
-                        /* Field occupancy check */
-                        if (!this.play_field.ifFreeCell(current_x, current_y))
-                        {
-                            isAbility = false
-                            break labelCancelLoops
-                        }
-                    }  
-                }
+                        isOccupied = true
+                        break labelCancelLoops
+                    }
+                }  
             }
-            return isAbility
+            return isOccupied
+        }
+        return isOccupied
+    }
+
+    isBelongingFieldCurrentTetrominoPosition()
+    {
+        let isBelonging = true
+
+        let start_x = this.current_tetromino.coordinates.x
+        let start_y = this.current_tetromino.coordinates.y
+        const size = this.current_tetromino.shape.length
+    
+        labelCancelLoops:
+        for (let y = 0; y < size; y++)
+        {
+            for (let x = 0; x < size; x++)
+            {
+                let current_x = start_x + x
+                let current_y = start_y + y
+                if (this.current_tetromino.shape[y][x] > 0 && !this.play_field.isBelongingFieldCoordinates(current_x, current_y))
+                {
+                    isBelonging = false
+                    break labelCancelLoops
+                }  
+            }
+        }
+        return isBelonging
+    }
+
+
+    isAbilityCurrentTetrominoPosition()
+    {
+        let isAbility = true
+
+        if (this.current_tetromino !== undefined && this.current_tetromino.shape !== undefined)
+        {
+            if (this.isBelongingFieldCurrentTetrominoPosition() && !this.isOccupiedCurrentTetrominoPosition())
+            {
+                return isAbility
+            }
         }
         return false
     }
@@ -141,11 +178,49 @@ export class Tetris {
     updatePlayField()
     {
         this.play_field.placeTetromino(this.current_tetromino)
+        this.processFilledRows()
         this.current_tetromino = this.next_tetromino
-        this.shadow_current_tetromino = this.generateShadowCurrentTetromino()
-        this.calculateShadowTetraminoPosition()
-        this.next_tetromino = this.generateTetromino()
-        this.canvas.drawTetromino(this.current_tetromino)
-        this.canvas.drawTetromino(this.shadow_current_tetromino)
+        if (this.isOccupiedCurrentTetrominoPosition())
+        {
+            this.gameOver()
+        } else {
+            this.shadow_current_tetromino = this.generateShadowCurrentTetromino()
+            this.calculateShadowTetraminoPosition()
+            this.next_tetromino = this.generateTetromino()
+            this.canvas.drawTetromino(this.current_tetromino)
+            this.canvas.drawTetromino(this.shadow_current_tetromino)
+            this.drawNextTetromino()
+        }
+        
+    }
+
+    gameOver(){
+        window.location = "./game_over.html"
+    }
+
+    drawNextTetromino() 
+    {
+        if (this.next_tetromino.shape !== undefined)
+        {
+            this.next_tetromino_cells.forEach(cell => cell.removeAttribute("class"))
+
+            const size = this.next_tetromino.shape.length
+            for (let y = 0; y < size; y++)
+            {
+                for (let x = 0; x < size; x++) 
+                {
+                    if (!this.next_tetromino.shape[y][x]) continue
+                    const cell_index = y * 4 + x
+                    this.next_tetromino_cells[cell_index].classList.add(this.next_tetromino.name)
+                }
+            }
+        }
+    }
+
+    processFilledRows()
+    {
+        const filled_lines = this.play_field.findFilledRows()
+        this.play_field.removeFilledRows(filled_lines)
+        this.canvas.removeFilledRows(filled_lines)
     }
 }

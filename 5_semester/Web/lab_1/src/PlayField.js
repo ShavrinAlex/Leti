@@ -4,7 +4,6 @@ export class PlayField {
         this.columns = count_columns
         this.play_field = this.generateEmptyPlayField()
          // наглядное представление матрицы игрового поля
-        //console.table(this.play_field)
     }
 
     generateEmptyPlayField() 
@@ -13,9 +12,19 @@ export class PlayField {
         .map(() => new Array(this.columns).fill(0))
     }
 
-    ifFreeCell(x, y)
+    isFreeCell(x, y)
     {
-        return this.play_field[y][x] == false
+        return this.play_field[y][x] === 0
+    }
+
+    isBelongingFieldCoordinates(x, y)
+    {
+        let isBelonging = true
+        if (y < 0 || x < 0 || y >= this.rows || x >= this.columns)
+        {
+            isBelonging = false
+        }
+        return isBelonging
     }
 
     placeTetromino(tetromino)
@@ -39,4 +48,36 @@ export class PlayField {
             })
         }
     }
+
+    findFilledRows()
+    {
+        const filled_rows = new Array()
+        for (let row = 0; row < this.rows; row++)
+        {
+            if (this.play_field[row].every(cell => Boolean(cell)))
+            {
+                filled_rows.push(row)
+            }
+        }
+        return filled_rows
+    }
+
+    removeFilledRows(filled_rows)
+    {
+        if (filled_rows !== undefined)
+        {
+            filled_rows.forEach(row => {
+                this.dropRowsAbove(row)
+            })
+        }
+    }
+
+    dropRowsAbove(row_to_delete){
+        for (let row = row_to_delete; row > 0; row--)
+        {
+            this.play_field[row] = this.play_field[row - 1]
+        }
+        this.play_field[0] = new Array(this.columns).fill(0)
+    }
+
 }
