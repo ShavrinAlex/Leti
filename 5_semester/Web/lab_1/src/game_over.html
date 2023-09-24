@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./game_over_style.css">
+    <link rel="stylesheet" type="text/css" href="./Css/game_over.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
-    <!--<script type="module" src="./Authorization.js"></script>-->
+    <script type="module" src="./Scripts/GameOver.js"></script>
 
     <title>Тетрис на JS</title>
 </head>
@@ -14,14 +14,19 @@
     <div class="game_over">
         <h1 class="game_over_text">GAME OVER</h1>
         <div class="game_over_img">
-            <img src="./game_over.png" alt="game_over_img" width="100px" height="100px">
+            <img src="./Images/game_over.png" alt="game_over_img" width="100px" height="100px">
         </div>
-        <form id="authorization_form" action="./main.html" method="get">
-            <label>
-                <input class="username_input" id="username_input" placeholder="Enter your username"><br>
-            </label>
-            <br>
-            <input class="log_in_button" id="log_in_button" disabled="disabled" type="submit" value="Log in">
-        </form>
+        <h2 class="score_table_text">SCORE TABLE</h2>
+        <div class="game_over_grid">
+            <div class="column" id="numbers_column">
+                <div class="column_name">№</div>
+            </div>
+            <div class="column" id="names_column">
+                <div class="column_name">Username</div>
+            </div>
+            <div class="column" id="scores_column">
+                <div class="column_name">Score</div>
+            </div>
+        </div>
     </div>
 </body>
