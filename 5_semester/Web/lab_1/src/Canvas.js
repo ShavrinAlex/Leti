@@ -9,33 +9,73 @@ export class Canvas {
         this.canvas.width = PLAYFIELD_COLUMNS * BLOCK_SIZE
         this.canvas.height = PLAYFIELD_ROWS * BLOCK_SIZE
        
-        this.drawPlayFieldGrid()
         this.context.scale(BLOCK_SIZE, BLOCK_SIZE)
+        this.drawPlayFieldGrid(this.canvas.width, this.canvas.height)
 
         /* For drawing tetromino */
         this.left_up_gap = 1 / BLOCK_SIZE
         this.right_down_gap = 2 * this.left_up_gap 
     }
 
-    drawPlayFieldGrid()
+    drawPlayFieldGrid(width, height)
     {
+        this.context.scale(1 / BLOCK_SIZE, 1 / BLOCK_SIZE)
         this.context.lineWidth = 1
         this.context.strokeStyle = "rgba(0, 0, 0, 0.3)"
         
         /* Drawing rows */
-        for (let y = 0; y <= this.canvas.height; y += BLOCK_SIZE)
+        for (let y = 0; y <= height; y += BLOCK_SIZE)
         {
             this.context.moveTo(0, y)
-            this.context.lineTo(this.canvas.width, y)
+            this.context.lineTo(width, y)
         }
 
         /* Drawing columns */
-        for (let x = 0; x <= this.canvas.width; x += BLOCK_SIZE)
+        for (let x = 0; x <= width; x += BLOCK_SIZE)
         {
             this.context.moveTo(x, 0)
-            this.context.lineTo(x, this.canvas.height)
+            this.context.lineTo(x, height)
         }   
         this.context.stroke()
+        this.context.scale(BLOCK_SIZE, BLOCK_SIZE)
+    }
+
+    removeFilledRows(filled_rows)
+    {
+        if (filled_rows !== undefined)
+        {
+            filled_rows.forEach(row => {
+                this.dropRowsAbove(row)
+            })
+            this.drawPlayFieldGrid(this.canvas.width, filled_rows.length * BLOCK_SIZE)
+        }
+    }
+
+    dropRowsAbove(row_to_delete)
+    {
+        this.context.scale(1/BLOCK_SIZE, 1/BLOCK_SIZE)
+        for (let row = row_to_delete; row > 0; row--)
+        {
+            let source_x = 0, source_y = (row - 1) * BLOCK_SIZE
+            let source_width = this.canvas.width, source_height = 1 * BLOCK_SIZE
+            let destination_x = 0, destination_y = row * BLOCK_SIZE
+            let destination_width = this.canvas.width, destination_height = 1 * BLOCK_SIZE
+            
+            this.context.clearRect(destination_x, destination_y, destination_width, destination_height)
+            this.context.drawImage(
+                this.canvas,         
+                source_x,
+                source_y,
+                source_width,
+                source_height,
+                destination_x,  
+                destination_y ,
+                destination_width,    
+                destination_height  
+            )
+        }
+        this.context.clearRect(0, 0, this.canvas.width, BLOCK_SIZE)
+        this.context.scale(BLOCK_SIZE, BLOCK_SIZE)
     }
 
     drawTetromino(tetromino)

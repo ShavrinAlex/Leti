@@ -1,13 +1,11 @@
-import { TETROMINO_SHAPES, TETROMINO_NAMES } from "./Utils.js"
+import { TETROMINO_SHAPES, TETROMINO_NAMES, PLAYFIELD_COLUMNS} from "./Utils.js"
 
 export class Tetromino {
     constructor (tetromino_name, is_clone = false) {
         this.name = tetromino_name !== undefined ? tetromino_name: TETROMINO_NAMES[0]
         this.is_clone = is_clone
         this.shape = TETROMINO_SHAPES[this.name]
-        
-        /*this.coordinates = {x: Math.floor(PLAYFIELD_COLUMNS / 2) - Math.floor(this.shape.length / 2), y: 0}*/
-        this.coordinates = {x: 3, y: 0}
+        this.coordinates = {x: Math.floor(PLAYFIELD_COLUMNS / 2) - 2, y: 0}
     }
 
     rotate () {
