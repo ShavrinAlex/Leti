@@ -64,7 +64,7 @@ export class PlayField {
 
     removeFilledRows(filled_rows)
     {
-        if (filled_rows !== undefined)
+        if (filled_rows.length != 0)
         {
             filled_rows.forEach(row => {
                 this.dropRowsAbove(row)
