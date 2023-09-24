@@ -21,32 +21,27 @@ export class Canvas {
     {
         this.context.scale(1 / BLOCK_SIZE, 1 / BLOCK_SIZE)
         this.context.lineWidth = 1
-        this.context.strokeStyle = "rgba(0, 0, 0, 0.3)"
+        this.context.strokeStyle = "rgba(0, 0, 0, 0.15)"
         
-        /* Drawing rows */
-        for (let y = 0; y <= height; y += BLOCK_SIZE)
+        for (let y = 0; y < height; y += BLOCK_SIZE)
         {
-            this.context.moveTo(0, y)
-            this.context.lineTo(width, y)
+            for (let x = 0; x < width; x += BLOCK_SIZE)
+            {
+                this.context.strokeRect(x, y, BLOCK_SIZE, BLOCK_SIZE)
+            }   
         }
 
-        /* Drawing columns */
-        for (let x = 0; x <= width; x += BLOCK_SIZE)
-        {
-            this.context.moveTo(x, 0)
-            this.context.lineTo(x, height)
-        }   
-        this.context.stroke()
         this.context.scale(BLOCK_SIZE, BLOCK_SIZE)
     }
 
     removeFilledRows(filled_rows)
     {
-        if (filled_rows !== undefined)
+        if (filled_rows.length != 0)
         {
             filled_rows.forEach(row => {
                 this.dropRowsAbove(row)
             })
+            console.log(this.canvas.width, filled_rows.length * BLOCK_SIZE)
             this.drawPlayFieldGrid(this.canvas.width, filled_rows.length * BLOCK_SIZE)
         }
     }
