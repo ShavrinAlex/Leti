@@ -7,6 +7,8 @@ form_element.addEventListener("submit", saveUsername)
 
 function checkUsernameInput(event)
 {
+    /* This function activates and disables the button depending on the user's name input */
+    
     if (username_element.value.length === 0)
     {
         log_in_button_element.setAttribute("disabled", "disable")
@@ -18,6 +20,11 @@ function checkUsernameInput(event)
 
 function saveUsername(event)
 {
+    /* 
+    This function saves the username to local memory 
+    and creates an entry for the high score table as needed 
+    */
+
     localStorage["tetris.username"] = username_element.value
     if (localStorage["tetris.score_table"] === undefined)
     {

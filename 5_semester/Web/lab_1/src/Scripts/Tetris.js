@@ -4,6 +4,8 @@ import { PLAYFIELD_ROWS, PLAYFIELD_COLUMNS, TETROMINO_NAMES, MOVEMENT_ACTIVITIES
 
 
 export class Tetris {
+    /* This is the Tetris class that controls the entire game */
+
     constructor(canvas) {
         this.level = 0
         this.score = 0
@@ -11,44 +13,48 @@ export class Tetris {
 
         this.play_field = new PlayField(PLAYFIELD_ROWS, PLAYFIELD_COLUMNS)
 
+        this.canvas = canvas
         this.current_tetromino = this.generateTetromino()
         this.shadow_current_tetromino = this.generateShadowCurrentTetromino()
         this.calculateShadowTetraminoPosition()
         this.next_tetromino = this.generateTetromino()
 
-        this.canvas = canvas
-        
         this.canvas.drawTetromino(this.current_tetromino)
         this.canvas.drawTetromino(this.shadow_current_tetromino)
+        this.canvas.drawNextTetromino(this.next_tetromino)
 
         this.timeout_id = null
         this.restartFallTetrominoTimeout()
-
-        this.next_tetromino_cells = document.querySelectorAll('.next_tetromino_grid>div')
-        this.drawNextTetromino()
     }
 
     restartFallTetrominoTimeout(timeout = (MAX_LEVEL * LEVEL_TIME_INCREASE) - (LEVEL_TIME_INCREASE * this.level))
     {
+        /* This method moves the figure according to timeout */
+
         clearTimeout(this.timeout_id)
         this.timeout_id = setTimeout(() => this.moveTetromino(MOVEMENT_ACTIVITIES.Down), timeout)
     }
     
     generateTetromino() 
     {
+        /* This method creates tetrominoes */
+
         let random_tetromino_name_index = Math.floor(Math.random() * TETROMINO_NAMES.length)
         return new Tetromino(TETROMINO_NAMES[random_tetromino_name_index])
     }
 
     generateShadowCurrentTetromino()
     {
+        /* This method creates shadow current tetromino*/
+
         return new Tetromino(this.current_tetromino.name, true)
     }
 
     isOccupiedCurrentTetrominoPosition()
     {
-        let isOccupied = false
+        /* This method checks whether the position of the current tetrominoe is occupied */
 
+        let isOccupied = false
         if (this.current_tetromino !== undefined && this.current_tetromino.shape !== undefined)
         {
             let start_x = this.current_tetromino.coordinates.x
@@ -76,8 +82,9 @@ export class Tetris {
 
     isBelongingFieldCurrentTetrominoPosition()
     {
-        let isBelonging = true
+        /* This method checks whether the position of the current tetromino belongs to the field */
 
+        let isBelonging = true
         let start_x = this.current_tetromino.coordinates.x
         let start_y = this.current_tetromino.coordinates.y
         const size = this.current_tetromino.shape.length
@@ -102,8 +109,9 @@ export class Tetris {
 
     isAbilityCurrentTetrominoPosition()
     {
-        let isAbility = true
+        /* This method checks the possibility of placing tetrominoes with the current position */
 
+        let isAbility = true
         if (this.current_tetromino !== undefined && this.current_tetromino.shape !== undefined)
         {
             if (this.isBelongingFieldCurrentTetrominoPosition() && !this.isOccupiedCurrentTetrominoPosition())
@@ -116,6 +124,7 @@ export class Tetris {
 
     moveTetromino(movement_activity)
     {
+        /* This method implements the movement of tetrominoes */
         this.canvas.clearTetromino(this.current_tetromino)
         this.canvas.clearTetromino(this.shadow_current_tetromino)
 
@@ -152,10 +161,12 @@ export class Tetris {
             this.current_tetromino.shape = old_shape
             this.shadow_current_tetromino.shape = old_shape
         }
+        /* Draw tetrominoes */
         this.canvas.drawTetromino(this.current_tetromino)
         this.calculateShadowTetraminoPosition()
         this.canvas.drawTetromino(this.shadow_current_tetromino)
-        /* Check update need*/
+
+        /* Check update needed*/
         if ((movement_activity === MOVEMENT_ACTIVITIES.Down || movement_activity === MOVEMENT_ACTIVITIES.Drop) && (!isAbilityMove))
         {
             this.updatePlayField()
@@ -164,6 +175,8 @@ export class Tetris {
 
     calculateShadowTetraminoPosition()
     {
+        /* This method calculates the position for the shadow tetromino */
+
         let current_tetromino_coordinates = {x: this.current_tetromino.coordinates.x, y: this.current_tetromino.coordinates.y}
         while (this.isAbilityCurrentTetrominoPosition())
         {
@@ -177,9 +190,13 @@ export class Tetris {
 
     updatePlayField()
     {
+        /* This method places a tetromino on the field and moves on to the next tetromino */
+
         this.play_field.placeTetromino(this.current_tetromino)
         this.processFilledRows()
         this.current_tetromino = this.next_tetromino
+
+        /* Game over check */
         if (this.isOccupiedCurrentTetrominoPosition())
         {
             this.gameOver()
@@ -189,14 +206,17 @@ export class Tetris {
             this.next_tetromino = this.generateTetromino()
             this.canvas.drawTetromino(this.current_tetromino)
             this.canvas.drawTetromino(this.shadow_current_tetromino)
-            this.drawNextTetromino()
+            this.canvas.drawNextTetromino(this.next_tetromino)
         }
-        
     }
 
     gameOver(){
+        /* This method saves data at the end of the game to local memory and moves to a new page */
+
         let score_table = JSON.parse(localStorage["tetris.score_table"])
         let isExistsUsername = false
+
+        /* Updating a user's result or creating a new entry */
         for (let i = 0; i < score_table.length; i++)
         {
             if (score_table[i].name == localStorage["tetris.username"])
@@ -218,27 +238,10 @@ export class Tetris {
         window.location = "../game_over.html"
     }
 
-    drawNextTetromino() 
-    {
-        if (this.next_tetromino.shape !== undefined)
-        {
-            this.next_tetromino_cells.forEach(cell => cell.removeAttribute("class"))
-
-            const size = this.next_tetromino.shape.length
-            for (let y = 0; y < size; y++)
-            {
-                for (let x = 0; x < size; x++) 
-                {
-                    if (!this.next_tetromino.shape[y][x]) continue
-                    const cell_index = y * 4 + x
-                    this.next_tetromino_cells[cell_index].classList.add(this.next_tetromino.name)
-                }
-            }
-        }
-    }
-
     processFilledRows()
     {
+        /* This method removes filled lines */
+
         const filled_lines = this.play_field.findFilledRows()
         this.play_field.removeFilledRows(filled_lines)
         this.canvas.removeFilledRows(filled_lines)
@@ -247,6 +250,8 @@ export class Tetris {
 
     calculateScore(count_removed_rows)
     {
+        /* This method calculates the score */
+
         if (count_removed_rows == 1)
         {
             return 100
@@ -256,13 +261,12 @@ export class Tetris {
 
     updateData(count_removed_rows)
     {
+        /* This method updates the game data */
+
         if (count_removed_rows > 0){
             this.score += this.calculateScore(count_removed_rows)
-            console.log('s', this.score)
             this.lines += count_removed_rows
-            console.log('l', this.lines)
             this.level = Math.min(MAX_LEVEL, Math.floor(this.score / 100))
-            console.log('lev', this.level)
             this.canvas.updateData(this.level, this.score, this.lines)
         }
     }

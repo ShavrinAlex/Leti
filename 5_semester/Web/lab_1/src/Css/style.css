@@ -44,8 +44,15 @@ body
 
 .game_name
 {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-shadow: -3px 3px 3px #005266;
+}
+
+#username
+{
+    text-shadow: -2px 2px 2px #005266;
+    padding: 5px;
+    margin-left: 5px;
 }
 
 .game_info_row

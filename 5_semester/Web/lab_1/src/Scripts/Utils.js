@@ -1,16 +1,20 @@
+/* play field consts */
 export const PLAYFIELD_ROWS = 20
 export const PLAYFIELD_COLUMNS = 10
+export const BLOCK_SIZE = 35
 
+/* next tetromino window consts*/
 export const NT_WINDOW_ROWS = 4
 export const NT_WINDOW_COLUMNS= 4
 
-export const BLOCK_SIZE = 35
-
+/* level consts */
 export const MAX_LEVEL = 20
 export const LEVEL_TIME_INCREASE = 50
 
+/* movement enum */
 export const MOVEMENT_ACTIVITIES = {Rotate: 0, Down: 1, Left: 2, Right: 3, Drop: 4}
 
+/* tetromino enums */
 export const TETROMINO_NAMES = ['I', 'J', 'L', 'O', 'S', 'Z', 'T']
 export const TETROMINO_COLORS = {
     I: ["rgba(107, 225, 236, 1)", "rgba(107, 225, 236, 0.3)"], 

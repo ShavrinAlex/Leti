@@ -10,6 +10,7 @@ function compare(left, right)
     return -1
 }
 
+/* Display of the table of records (only the first 5) */
 let numbers_column = document.getElementById("numbers_column")
 let names_column = document.getElementById("names_column")
 let scores_column = document.getElementById("scores_column")
