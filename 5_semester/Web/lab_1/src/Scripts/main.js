@@ -6,10 +6,15 @@ import { MOVEMENT_ACTIVITIES } from "./Utils.js"
 let play_button_element = document.getElementById("play_button")
 play_button_element.addEventListener("click", play)
 
+let username_element = document.getElementById("username")
+username_element.innerText = `${localStorage["tetris.username"]}`
+
 
 const canvas = new Canvas()
 
 function play() {  
+    /* This function launches the game */
+
     /* Disable the button */
     play_button_element.setAttribute("disabled", "disable")
     play_button_element.blur()
@@ -20,6 +25,7 @@ function play() {
 
     function onKeydown(event)
     {
+        /* This function handles key presses */
         switch (event.key){
             case 'ArrowDown':
             case 's':
