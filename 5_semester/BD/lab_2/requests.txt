@@ -1,0 +1,14 @@
+SELECT breed.ring_number, breed.breed_name, dog.dog_number, dog.nickname, owner.surname, owner.name, owner.patronymic
+  FROM owner
+       INNER JOIN dog ON owner.passport == dog.owner_passport
+       INNER JOIN breed USING(breed_name)
+ORDER BY breed.ring_number, breed.breed_name, dog.dog_number, dog.nickname, owner.surname, owner.name, owner.patronymic
+ 
+
+SELECT club.club_id, dog.breed_name
+  FROM club
+       INNER JOIN club_numbers USING(club_id)
+       INNER JOIN dog USING(dog_number)
+ORDER BY club.club_id, dog.breed_name
+
+
