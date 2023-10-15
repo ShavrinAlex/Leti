@@ -36,7 +36,6 @@ router.post("/", (req, res) => {
     let last_index = data["books"].length - 1
     let id = data["books"][last_index].id + 1
     req.body.id = id
-    console.log(data["books"].length, last_index, id)
     data["books"].push(req.body)
     res.send("succes post")
 })
@@ -64,14 +63,20 @@ router.put("/:id([0-9]{1,})", (req, res) => {
     }).indexOf(parseInt(req.params.id))
 
     let new_body = req.body
-    if (req.body.what_change === "book"){
+    let response = "not put"
+    if (new_body.change === "book"){
         data["books"][change_index]["name"] = new_body.name
         data["books"][change_index]["author"] = new_body.author
         data["books"][change_index]["genre"] = new_body.genre
         data["books"][change_index]["publication_date"] = new_body.publication_date
         data["books"][change_index]["description"] = new_body.description
-    } else if (req.body.what_change === "user"){
-        data["books"][change_index]["is_in_library"] = new_body.is_in_library
+        response = "succes put"
+    } else if (new_body.change === "reader"){
+        data["books"][change_index]["state"]["is_in_library"] = new_body.state.is_in_library
+        data["books"][change_index]["state"]["is_overdue"] = new_body.state.is_overdue
+        data["books"][change_index]["state"]["reader_username"] = new_body.state.reader_username
+        data["books"][change_index]["state"]["back_date"] = new_body.state.back_date
+        response = "succes put"
     }
-    res.send("succes put")
+    res.send(response)
 })

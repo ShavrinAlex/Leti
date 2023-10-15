@@ -108,7 +108,7 @@
             let publication_date = document.getElementById("add_date").value
             let genre = document.getElementById("add_genre").value
             let description = document.getElementById("add_description").value
-            if (name && author && publication_date.match(/^\d{2}.\d{2}.\d{4}$/) && description && genre) {
+            if (name && author && publication_date.match(/^\d{4}-\d{2}-\d{2}$/) && description && genre) {
                 const book = {
                     "id":  0,
                     "name": name,
