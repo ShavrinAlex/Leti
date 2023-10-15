@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Library</title>
+    <link rel="stylesheet" href="../public/style.css" type="text/css"/>
+
+</head>
+
+<dialog id = "add_book_dialog" class = "book_dialog">
+    <form class="book_dialog_form">
+        <div class="dialog_row">
+            <label for="add_name" class="lable_text">Название:</label><br>
+            <input type="text" id="add_name" class = "input_text">
+        </div>
+        <div class="dialog_row">
+            <label for="add_author" class="lable_text">Автор:</label><br>
+            <input type="text" id="add_author" class = "input_text">
+        </div>
+        <div class="dialog_row">
+            <label for="add_date" class="lable_text">Дата:</label><br>
+            <input type="text" id="add_date" class = "input_text">
+        </div>
+        <div class="dialog_row">
+            <label for="add_genre" class="lable_text">Жанр:</label><br>
+            <input type="text" id="add_genre" class = "input_text">
+        </div>
+        <div class="dialog_row">
+            <label for="add_description" class="lable_text">Описание:</label><br>
+            <input type="text" id="add_description" class = "input_text">
+        </div>
+    </form>
+    <button id ="close_button" onclick="add_book()">Добавить</button>
+</dialog>
+
+<body>
+    <header>
+        <div class="site_info_container">
+            <img id="site_image" src="../public/site_image.png"/>
+            <div id="site_name">Home Library</div>
+        </div>
+        <div class="user_info_container">
+            <div id="user_image"></div>
+            <div id="user_name">Username</div>
+        </div>
+    </header>
+    
+    <div class="main_container">
+        <div class="book_table_container">
+            <div class="book_list_title_container">
+                <div class="list_title_data">Название</div>
+                <div class="list_title_data">Автор</div>
+                <div class="list_title_data">Наличие</div>
+                <div class="list_title_data">Возврат</div>
+                <div class="list_title_data">Действие</div>
+            </div>
+
+            <div id="book_list_container" class="book_list_container">
+                <div class="book_info_container"></div>
+            </div>
+
+            <div class="button_container">
+                <button class="button" onclick="book_dialog()">Добавить книгу</button>
+            </div>
+        </div>
+        <div class="filter_container">
+            <div class="filter_title">Фильтрация</div>
+            <div class="filter_buttons_container">
+                <div>
+                    <input type="radio" id="contactChoice1" name="contact" value="all" checked/>
+                    <label for="contactChoice3">Все</label>
+                </div>
+                <div>
+                    <input type="radio" id="contactChoice2" name="contact" value="in_library"/>
+                    <label for="contactChoice1">В наличии</label>
+                </div>
+                <div>
+                    <input type="radio" id="contactChoice3" name="contact" value="overdue"/>
+                    <label for="contactChoice2">Просроченные</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer></footer>
+    <script>
+        async function go_to_book_card(button){
+            let book_id = button.id
+            try {
+                let response = await fetch(`/${book_id}`, {method: "GET"})
+                window.location = `/${book_id}`
+            } catch (error){
+                console.error("Ошибка:", error)
+            }
+        }
+
+        function book_dialog(){
+            const book_dialog = document.getElementById("add_book_dialog")
+            book_dialog.show()
+        }
+
+        async function add_book(){
+            const book_dialog = document.getElementById("add_book_dialog")
+            book_dialog.close()
+
+            let name = document.getElementById("add_name").value
+            let author = document.getElementById("add_author").value
+            let publication_date = document.getElementById("add_date").value
+            let genre = document.getElementById("add_genre").value
+            let description = document.getElementById("add_description").value
+            if (name && author && publication_date.match(/^\d{2}.\d{2}.\d{4}$/) && description && genre) {
+                const book = {
+                    "id":  0,
+                    "name": name,
+                    "author": author,
+                    "publication_date": publication_date,
+                    "genre": genre,
+                    "description": description,
+                    "state": {
+                        "is_in_library": true,
+                        "is_overdue": false,
+                        "reader_username": "",
+                        "back_date": ""
+                    }
+                }
+                try {
+                    let response = await fetch("/", {method: "POST", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                    let text_response = await response.text()
+                    console.log(text_response)
+                    await init_book_list("all")
+                } catch (error){
+                    console.error("Ошибка:", error)
+                }
+            }
+        }
+
+        async function delete_book(book_id){
+            let agree = confirm("Вы уверены?")
+
+            if (agree){
+                try {
+                    let response = await fetch("/", {method: "DELETE", body: JSON.stringify({"id": book_id}), headers: {'Content-Type': 'application/json'}})
+                    let text_response = await response.text()
+                    console.log(text_response)
+                    await init_book_list("all")
+                } catch (error){
+                    console.error("Ошибка:", error)
+                }
+            }
+        }
+        
+
+    init_book_list("all")
+    var radio_buttons = document.querySelectorAll("input[type=radio]")
+    let enabled_settings = []
+    radio_buttons.forEach((radio) => {
+        radio.addEventListener("change", async () => {
+            enabled_settings = Array.from(radio_buttons).filter(i => i.checked).map(i => i.value)[0] 
+            await init_book_list(enabled_settings)
+        })
+    })
+
+    async function init_book_list(state) {
+        document.getElementById("book_list_container").innerHTML = ``
+        try {
+            let response = await fetch("http://localhost:3000/filter?state="+state, {method: "GET"})
+            let text_response = await response.text()
+            JSON.parse(text_response).forEach((el) => {
+                if (el !== null) {
+                    document.getElementById("book_list_container").innerHTML += `
+                        <div class="book_info_container">
+                            <div id=${el.id} class="card_link" onclick="go_to_book_card(this)">
+                                <div class="book_data">${el.name}</div>
+                                <div class="book_data">${el.author}</div>
+                                <div class="book_data">${(el.state.is_in_library) ? "есть в наличии" : "отсутствует"}</div>
+                                <div class="book_data">${(el.state.is_overdue) ? "возврат просрочен" : "не просрочен"}</div>
+                            </div>
+                            <div class="dell_button_container">
+                                <button id="del_book_button" onclick="delete_book(${el.id})">Удалить книгу</button>
+                            </div>
+                        </div>
+                    `
+                }
+            })
+        } catch (error){
+            console.error("Ошибка:", error)
+        }
+    }
+    </script>
+    
+</body>
+
+</html>
