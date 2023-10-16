@@ -4,11 +4,42 @@ import data from "./data.json" assert { type: "json" }
 export const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.render("index.ejs")
+    res.redirect("/authorization")
+    //res.render("index.ejs")
 })
 
-router.get("/book_card/", (req, res) => {
-    res.render("book_card.ejs")
+router.get("/authorization", (req, res)=>{
+    //res.redirect("/library")
+    res.render("authorization.ejs")
+})
+
+router.post("/authorization", (req, res) => {
+    console.log(req.body.name, req.body.password)
+    let user = data["users"].filter((user) =>{
+        if (user.name == req.body.name){
+            return true
+        }
+    })[0]
+    console.log(user)
+    if (user && user.password === req.body.password) {
+        //req.session.user = user
+        res.redirect('/library')
+    } else if (user && user.password !== req.body.password) {
+        res.send("Пользователь уже существует или пароль не верный")
+    } else if (!user){
+        let new_user = {
+            "name": req.body.name,
+            "password": req.body.password,
+            "is_admin": false 
+        }
+        data["users"].push(new_user)
+        //req.session.user = new_user
+        res.redirect('/library')
+    }
+})
+
+router.get("/library", (req, res) => {
+    res.render("index.ejs")
 })
 
 router.get("/filter", (req, res) => {
@@ -31,7 +62,7 @@ router.get("/filter", (req, res) => {
     }
 })
 
-router.post("/", (req, res) => {
+router.post("/library", (req, res) => {
     
     let last_index = data["books"].length - 1
     let id = data["books"][last_index].id + 1
@@ -40,7 +71,7 @@ router.post("/", (req, res) => {
     res.send("succes post")
 })
 
-router.delete("/", (req, res) => {
+router.delete("/library", (req, res) => {
     const remove_index = data["books"].map((b) => {
         return parseInt(b.id)
     }).indexOf(parseInt(req.body.id))
@@ -48,7 +79,7 @@ router.delete("/", (req, res) => {
     res.send("succes delete")
 })
 
-router.get("/:id([0-9]{1,})", (req, res) => {
+router.get("/library/:id([0-9]{1,})", (req, res) => {
     const book = data["books"].filter((el) => { 
         if (el.id == req.params.id) {
             return true
@@ -57,7 +88,7 @@ router.get("/:id([0-9]{1,})", (req, res) => {
     res.render("book_card.ejs", {book: book[0]})
 })
 
-router.put("/:id([0-9]{1,})", (req, res) => {
+router.put("/library/:id([0-9]{1,})", (req, res) => {
     const change_index = data["books"].map((b) => {
         return parseInt(b.id);
     }).indexOf(parseInt(req.params.id))

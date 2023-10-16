@@ -142,9 +142,15 @@
         }
     ],
     "users": [
-        
-    ],
-    "admins": [
-
+        {
+            "name": "admin",
+            "password": "admin",
+            "is_admin": true
+        },
+        {
+            "name": "user",
+            "password": "user",
+            "is_admin": false
+        }
     ]
 }

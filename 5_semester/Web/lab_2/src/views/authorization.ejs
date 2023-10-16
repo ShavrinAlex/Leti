@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Library</title>
+    <link rel="stylesheet" href="../public/style.css" type="text/css"/>
+
+</head>
+
+<body>
+    <header>
+        <div class="site_info_container">
+            <img id="site_image" src="../public/site_image.png"/>
+            <div id="site_name">Home Library</div>
+        </div>
+        <div class="user_info_container">
+            <div id="user_image"></div>
+            <div id="user_name">Username</div>
+        </div>
+    </header>
+    
+    <form id="authorization_form">
+        <div>
+            <lable for="login_name" class="lable_text">Username:</label>
+            <input id="authorization_name" class="authorization_input" required placeholder="Username">
+        </div>
+        <div>
+            <lable for="login_password" class="lable_text">Password:</label>
+            <input id="authorization_password" class="authorization_input" type="password" required placeholder="Password">
+        </div>
+        <button id="authorization_button" onclick="authorization()">Авторизоваться</button>
+    </form>
+
+    <footer></footer>
+    <script>
+        async function authorization() {
+            let name = document.getElementById("authorization_name").value
+            let password = document.getElementById("authorization_password").value
+            if (name && password){
+                body = {
+                    "name": name,
+                    "password": password
+                }
+                try {
+                    let response = await fetch("/authorization", {method: "POST", body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}})
+                    let text_response = await response.text()
+                    await console.log(text_response)
+                } catch {
+
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

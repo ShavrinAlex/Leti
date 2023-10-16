@@ -68,15 +68,15 @@
             <div class="filter_buttons_container">
                 <div>
                     <input type="radio" id="contactChoice1" name="contact" value="all" checked/>
-                    <label for="contactChoice3">Все</label>
+                    <label for="contactChoice1">Все</label>
                 </div>
                 <div>
                     <input type="radio" id="contactChoice2" name="contact" value="in_library"/>
-                    <label for="contactChoice1">В наличии</label>
+                    <label for="contactChoice2">В наличии</label>
                 </div>
                 <div>
                     <input type="radio" id="contactChoice3" name="contact" value="overdue"/>
-                    <label for="contactChoice2">Просроченные</label>
+                    <label for="contactChoice3">Просроченные</label>
                 </div>
             </div>
         </div>
@@ -87,8 +87,8 @@
         async function go_to_book_card(button){
             let book_id = button.id
             try {
-                let response = await fetch(`/${book_id}`, {method: "GET"})
-                window.location = `/${book_id}`
+                let response = await fetch(`/library/${book_id}`, {method: "GET"})
+                window.location = `/library/${book_id}`
             } catch (error){
                 console.error("Ошибка:", error)
             }
@@ -124,25 +124,24 @@
                     }
                 }
                 try {
-                    let response = await fetch("/", {method: "POST", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                    let response = await fetch("/library", {method: "POST", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
                     let text_response = await response.text()
                     console.log(text_response)
-                    await init_book_list("all")
+                    await init_book_list(enabled_settings)
                 } catch (error){
                     console.error("Ошибка:", error)
                 }
             }
         }
-
         async function delete_book(book_id){
             let agree = confirm("Вы уверены?")
 
             if (agree){
                 try {
-                    let response = await fetch("/", {method: "DELETE", body: JSON.stringify({"id": book_id}), headers: {'Content-Type': 'application/json'}})
+                    let response = await fetch("/library", {method: "DELETE", body: JSON.stringify({"id": book_id}), headers: {'Content-Type': 'application/json'}})
                     let text_response = await response.text()
                     console.log(text_response)
-                    await init_book_list("all")
+                    await init_book_list(enabled_settings)
                 } catch (error){
                     console.error("Ошибка:", error)
                 }
@@ -152,7 +151,7 @@
 
     init_book_list("all")
     var radio_buttons = document.querySelectorAll("input[type=radio]")
-    let enabled_settings = []
+    var enabled_settings = []
     radio_buttons.forEach((radio) => {
         radio.addEventListener("change", async () => {
             enabled_settings = Array.from(radio_buttons).filter(i => i.checked).map(i => i.value)[0] 

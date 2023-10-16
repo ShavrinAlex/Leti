@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Home Library</title>
     <link rel="stylesheet" href="../public/style.css" type="text/css"/>
-    <link rel="stylesheet" href="">
-
 </head>
 
 <dialog id = "change_book_data_dialog" class = "book_dialog">
@@ -32,6 +30,16 @@
         </div>
     </form>
     <button id ="close_button" onclick="change_book_data(<%=book.id%>)">Изменить</button>
+</dialog>
+
+<dialog id="take_book" class = "book_dialog">
+    <form class="book_dialog_form">
+        <div class="dialog_row">
+            <label for="reader_username">Имя пользователя:</label>
+            <input type="text" id="reader_username" class ="input_text">
+        </div>
+    </form>
+    <button id ="close_button" onclick="take_book_close(<%=book.id%>)">Изменить</button>
 </dialog>
 
 <body>
@@ -82,30 +90,36 @@
     <div class="button_container">
         <button class="button" onclick="change_book_data_dialog()">Изменить данные</button>
         <% if (book.state.is_in_library) { %>
-        <button class="button" onclick="take_book(<%=book.id %>)">Взять книгу</button>
+        <button class="button" onclick="take_book()">Взять книгу</button>
         <% } else if (book.state.reader_username) {%>
         <button class="button" onclick="return_book(<%=book.id %>)">Вернуть книгу</button>
         <% } %>
     </div>
     <footer></footer>
     <script>
-        async function take_book(book_id) {
+        function take_book() {
+            const take_book = document.getElementById("take_book")
+            take_book.show()
+        }
+
+        async function take_book_close(book_id) {
             let date = new Date()
             date.setDate(date.getDate() + 15)
+            let username = document.getElementById("reader_username").value
             const book = {
                 "change": "reader",
                 "state": {
                     "is_in_library": false,
                     "is_overdue": false,
-                    "reader_username": "username",
+                    "reader_username": username,
                     "back_date": date.toJSON().slice(0, 10)
                 }
             }
             try {
-                let response = await fetch(`/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
                 let text_response = await response.text()
                 console.log(text_response)
-                window.location = `/${book_id}`
+                window.location = `/library/${book_id}`
             } catch (error) {
                 console.error("Ошибка:", error)
             }
@@ -121,10 +135,10 @@
                 }
             }
             try {
-                let response = await fetch(`/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
                 let text_response = await response.text()
                 console.log(text_response)
-                window.location = `/${book_id}`
+                window.location = `/library/${book_id}`
             } catch (error) {
                 console.error("Ошибка:", error)
             }
@@ -152,10 +166,10 @@
                     "description": description
                 }
                 try {
-                    let response = await fetch(`/${book_id}`, {method: "PUT", body: JSON.stringify(change_book), headers: {'Content-Type': 'application/json'}})
+                    let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(change_book), headers: {'Content-Type': 'application/json'}})
                     let text_response = await response.text()
                     console.log(text_response)
-                    window.location = `/${book_id}`
+                    window.location = `/library/${book_id}`
                 } catch (error) {
                     console.error("Ошибка:", error)
                 }
