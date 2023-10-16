@@ -4,38 +4,7 @@ import data from "./data.json" assert { type: "json" }
 export const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.redirect("/authorization")
-    //res.render("index.ejs")
-})
-
-router.get("/authorization", (req, res)=>{
-    //res.redirect("/library")
-    res.render("authorization.ejs")
-})
-
-router.post("/authorization", (req, res) => {
-    console.log(req.body.name, req.body.password)
-    let user = data["users"].filter((user) =>{
-        if (user.name == req.body.name){
-            return true
-        }
-    })[0]
-    console.log(user)
-    if (user && user.password === req.body.password) {
-        //req.session.user = user
-        res.redirect('/library')
-    } else if (user && user.password !== req.body.password) {
-        res.send("Пользователь уже существует или пароль не верный")
-    } else if (!user){
-        let new_user = {
-            "name": req.body.name,
-            "password": req.body.password,
-            "is_admin": false 
-        }
-        data["users"].push(new_user)
-        //req.session.user = new_user
-        res.redirect('/library')
-    }
+    res.redirect("/library")
 })
 
 router.get("/library", (req, res) => {
