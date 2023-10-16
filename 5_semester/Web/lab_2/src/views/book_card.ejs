@@ -1,57 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home Library</title>
-    <link rel="stylesheet" href="../public/style.css" type="text/css"/>
+    <%- include("./partials/head.ejs") %>
 </head>
 
-<dialog id = "change_book_data_dialog" class = "book_dialog">
-    <form class="book_dialog_form">
-        <div class="dialog_row">
-            <label for="change_name">Название:</label>
-            <input type="text" id="change_name" class = "input_text" value="<%=book.name%>">
-        </div>
-        <div class="dialog_row">
-            <label for="change_author">Автор:</label>
-            <input type="text" id="change_author" class = "input_text" value="<%=book.author%>">
-        </div>
-        <div class="dialog_row">
-            <label for="change_date">Дата:</label>
-            <input type="text" id="change_date" class = "input_text" value="<%=book.publication_date%>">
-        </div>
-        <div class="dialog_row">
-            <label for="change_genre">Жанр:</label>
-            <input type="text" id="change_genre" class = "input_text" value="<%=book.genre%>">
-        </div>
-        <div class="dialog_row">
-            <label for="change_description">Описание:</label>
-            <input type="text" id="change_description" class = "input_text" value="<%=book.description%>">
-        </div>
-    </form>
-    <button id ="close_button" onclick="change_book_data(<%=book.id%>)">Изменить</button>
-</dialog>
-
-<dialog id="take_book" class = "book_dialog">
-    <form class="book_dialog_form">
-        <div class="dialog_row">
-            <label for="reader_username">Имя пользователя:</label>
-            <input type="text" id="reader_username" class ="input_text">
-        </div>
-    </form>
-    <button id ="close_button" onclick="take_book_close(<%=book.id%>)">Изменить</button>
-</dialog>
+<%- include("./partials/dialogs/change_book_dialog.ejs") %>
+<%- include("./partials/dialogs/take_book_dialog.ejs") %>
 
 <body>
     <header>
-        <div class="site_info_container">
-            <img id="site_image" src="../public/site_image.png"/>
-            <div id="site_name">Home Library</div>
-        </div>
-        <div class="user_info_container">
-            <div id="user_image"></div>
-            <div id="user_name">Username</div>
-        </div>
+        <%- include("./partials/header.ejs") %>
     </header>
     
     <div class="book_card_info_container">
@@ -88,14 +46,25 @@
     </div>
     
     <div class="button_container">
-        <button class="button" onclick="change_book_data_dialog()">Изменить данные</button>
+        <button class="button" onclick="change_book_data_dialog()">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            Изменить данные
+        </button>
         <% if (book.state.is_in_library) { %>
-        <button class="button" onclick="take_book()">Взять книгу</button>
+        <button class="button" onclick="take_book()">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            Взять книгу
+        </button>
         <% } else if (book.state.reader_username) {%>
-        <button class="button" onclick="return_book(<%=book.id %>)">Вернуть книгу</button>
+        <button class="button" onclick="return_book(<%=book.id %>)">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Вернуть книгу
+        </button>
         <% } %>
     </div>
-    <footer></footer>
+    <footer>
+        <%- include("./partials/footer.ejs") %>
+    </footer>
     <script>
         function take_book() {
             const take_book = document.getElementById("take_book")
@@ -103,25 +72,29 @@
         }
 
         async function take_book_close(book_id) {
+            const take_book = document.getElementById("take_book")
+            take_book.close()
             let date = new Date()
             date.setDate(date.getDate() + 15)
             let username = document.getElementById("reader_username").value
-            const book = {
-                "change": "reader",
-                "state": {
-                    "is_in_library": false,
-                    "is_overdue": false,
-                    "reader_username": username,
-                    "back_date": date.toJSON().slice(0, 10)
+            if (username) {
+                const book = {
+                    "change": "reader",
+                    "state": {
+                        "is_in_library": false,
+                        "is_overdue": false,
+                        "reader_username": username,
+                        "back_date": date.toJSON().slice(0, 10)
+                    }
                 }
-            }
-            try {
-                let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
-                let text_response = await response.text()
-                console.log(text_response)
-                window.location = `/library/${book_id}`
-            } catch (error) {
-                console.error("Ошибка:", error)
+                try {
+                    let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                    let text_response = await response.text()
+                    console.log(text_response)
+                    window.location = `/library/${book_id}`
+                } catch (error) {
+                    console.error("Ошибка:", error)
+                }
             }
         }
         async function return_book(book_id) {
