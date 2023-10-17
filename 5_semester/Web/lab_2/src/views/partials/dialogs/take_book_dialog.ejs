@@ -1,0 +1,12 @@
+<dialog id="take_book" class = "book_dialog">
+    <form class="book_dialog_form">
+        <div class="dialog_row">
+            <label for="reader_username" class="lable_text">Имя пользователя:</label>
+            <input type="text" id="reader_username" class ="input_text">
+        </div>
+    </form>
+    <button id ="close_button" onclick="take_book_close(<%=book.id%>)">
+        <i class="fa fa-book" aria-hidden="true"></i>
+        Взять
+    </button>
+</dialog>
