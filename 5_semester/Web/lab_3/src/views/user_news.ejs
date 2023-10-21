@@ -11,7 +11,7 @@
         <% news.forEach( (current_news) => { %>
             <div class="news_card">
                 <div class="news_header">
-                    <img src="" alt="avatar"/>
+                    <img src="<%= friends.filter((friend) => {return friend.id == current_news.user_id})[0].avatar %>" alt="avatar"/>
                     <div class="news_username"><%= friends.filter((friend) => {return friend.id == current_news.user_id})[0].name %></div>
                     <div class="news_time"><%= new Date(current_news.time_create).toUTCString() %></div>
                 </div>
