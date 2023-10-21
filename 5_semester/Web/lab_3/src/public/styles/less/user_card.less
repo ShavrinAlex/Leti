@@ -1,0 +1,146 @@
+@main_background_color: #000000;
+@main_background_gradient: linear-gradient(45deg, #ff005542, #000000, #0099ff71);
+@user_info_height: min(70vh, 70vw);
+@elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+
+.background (@color: @main_background_color, @gradient: @main_background_gradient) {
+    background-color: @color;
+    background-image: @gradient;
+}
+
+.size(@width: auto, @height: auto) {
+    width: @width;
+    height: @height;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    .size(100vw, 100vh);
+    .background();
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+
+    .scrollable {
+        .size(80vw, 100vh);
+        overflow-y: scroll;
+
+        .user_info_container {
+            .size(100%, @user_info_height);
+            background: #00000054;
+            display: grid;
+            grid-template-columns: 32% 15% 52%;
+            grid-template-rows: repeat(5, 20%);
+            padding: min(3vh, 3vw);
+
+            img {
+                grid-column: 1;
+                grid-row-start: 1;
+                grid-row-end: 5;
+                background: #fff;
+                color: #000;
+            }
+
+            .user_data {
+                grid-column: 3;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: min(3vh, 3vw);
+                text-shadow:  0px 0px 30px #0bffeb;
+                padding: min(2vh, 2vw);
+
+                select {
+                    margin-left: min(2vw, 2vh);
+                    font-size: min(3vh, 3vw);
+                }
+
+                button {
+                    margin-left: min(2vw, 2vh);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #0000006e;
+                    border-radius: min(1vh, 1vw);
+                    color: #fff;
+                    font-size: min(3vh, 3vw);
+
+                    &:hover {
+                        background-image: @elem_background_gradient;
+                        box-shadow: 0px 0px 2vh #ffffff8f;
+                    }
+                }
+            }
+        }
+
+        .user_news {
+            .size(100%, 100%);
+            font-size: min(1.75vh, 1.75vw);
+            .news_card {
+                margin: min(3vh, 3vw);
+                .size(95%, auto);
+                background: #0000004f;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .news_header {
+                    .size(100%, min(8vh, 8vw));
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-around;
+                    border-bottom: min(0.3vh, 0.3vw) solid #ffffff63;
+
+                    img {
+                        @image_size: min(5vh, 5vw);
+                        .size(@image_size, @image_size);
+                        background: #000;
+                        border-radius: 100%;
+                    }
+                }
+                .news_data {
+                    padding: min(3vh, 3vw);
+                }
+            }
+        }
+    }
+
+    .sidebar{
+        .size(20vw, 100vh);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        button {
+            .size(max(12vw, 9vh), min(10vw, 10vh));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0000006e;
+            border-radius: min(3vh, 3vw);
+            color: #fff;
+            font-size: min(3vh, 3vw);
+
+            &:hover {
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh #ffffff8f;
+            }
+        }
+    }
+}
+
+.dialog {
+    position: absolute;
+    .size(10vw, 10vh);
+    background: #000;
+    background-image: @elem_background_gradient;
+}

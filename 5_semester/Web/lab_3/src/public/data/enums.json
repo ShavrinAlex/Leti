@@ -1,0 +1,4 @@
+{
+    "role": ["user", "admin"], 
+    "status": ["unverified", "verified", "blocked"] 
+}
