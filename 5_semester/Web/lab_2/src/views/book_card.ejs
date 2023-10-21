@@ -46,6 +46,10 @@
     </div>
     
     <div class="button_container">
+        <button class="button" onclick="return_back()">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Вернуться
+        </button>
         <button class="button" onclick="change_book_data_dialog()">
             <i class="fa fa-pencil" aria-hidden="true"></i>
             Изменить данные
@@ -66,6 +70,9 @@
         <%- include("./partials/footer.ejs") %>
     </footer>
     <script>
+        function return_back(){
+            window.location = "/library"
+        }
         function take_book() {
             const take_book = document.getElementById("take_book")
             take_book.show()

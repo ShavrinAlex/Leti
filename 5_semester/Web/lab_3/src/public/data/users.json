@@ -1,0 +1,42 @@
+[
+    {
+        "id": 0,
+        "name": "Shavrin Alex",
+        "birth_date": "2003-01-18",
+        "email": "apshavrin@stud.etu.ru",
+        "avatar": "https://vk.com/shavrin_aleksey?z=photo243461794_457244987%2Falbum243461794_0%2Frev",
+        "role": "admin",
+        "status": "verified",
+        "friends": [1, 2, 3]
+    },
+    {
+        "id": 1,
+        "name": "Shavrin Anton",
+        "birth_date": "2005-03-07",
+        "email": "apshavrin@yandex.ru",
+        "avatar": "/path/to/file",
+        "role": "user",
+        "status": "verified",
+        "friends": [0, 2, 3]
+    },
+    {
+        "id": 2,
+        "name": "Kardash Iaroslav Evgenievitch",
+        "birth_date": "2003-07-24",
+        "email": "iekardash@yandex.ru",
+        "avatar": "/path/to/file",
+        "role": "user",
+        "status": "blocked",
+        "friends": [0, 1, 3]
+    },
+    {
+        "id": 3,
+        "name": "Deshura Dmitri",
+        "birth_date": "2003-10-01",
+        "email": "dddeshura@mail.ru",
+        "avatar": "/path/to/file",
+        "role": "user",
+        "status": "unverified",
+        "friends": [0, 1, 2]
+    }
+]
