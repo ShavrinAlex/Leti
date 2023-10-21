@@ -9,7 +9,7 @@
 <body>
     <div class="scrollable">
         <div class="user_info_container">
-           <img scr="" alt="avatar"/>
+           <img src="<%= user.avatar %>" alt="avatar"/>
            <div class="user_data">Username: <%= user.name %></div>
            <div class="user_data">Birthday: <%= user.birth_date %></div>
            <div class="user_data">Email: <%= user.email %></div>
@@ -26,7 +26,7 @@
             <% news.forEach( (current_news) => { %>
                 <div class="news_card">
                     <div class="news_header">
-                        <img src="" alt="avatar"/>
+                        <img src="<%= user.avatar %>" alt="avatar"/>
                         <div class="news_username"><%= user.name %></div>
                         <div class="news_time"><%= new Date(current_news.time_create).toUTCString() %></div>
                     </div>

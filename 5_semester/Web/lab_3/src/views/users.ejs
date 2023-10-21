@@ -11,14 +11,14 @@
     <div class="scrollable">
         <% users.forEach( (user) => { %>
             <div id="<%= user.id %>" class="user_container">
-                <img scr="<%= user.avatar %>" alt="avatar"/>
+                <img src="<%= user.avatar %>" alt="avatar"/>
                 <div><%= user.name %></div>
                 <div><%= user.email %></div>
                 <div><%= user.role %></div>
                 <div><%= user.status %></div>
             </div>
        <% }) %>
-    <div>
+    </div>
     
     
 </body>
