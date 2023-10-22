@@ -2,7 +2,7 @@ import express from "express"
 import https from "https"
 import fs from "fs"
 import {router} from "./router.js"
-import body_parser from 'body-parser'
+
 
 const app = express()
 
@@ -14,7 +14,6 @@ app.set("views", `./views`)
 app.use("/public", express.static("public")) // Указание статической папки public
 app.use(express.json())                      // Обработка параметров в body
 app.use("/", router)                         // Использование маршрутизации 
-app.use(body_parser)
 
 //Настройка https сервера
 const https_server = https.createServer({

@@ -52,5 +52,47 @@
         "user_id": 3,
         "time_create": "2023-10-21T16:10:19.268Z",
         "data": "It's amazing"
+    },
+    {
+        "news_id": 9,
+        "user_id": 4,
+        "time_create": "2023-10-22T15:10:19.268Z",
+        "data": "VOLOGDA TOP ZA SVOI DENGY!"
+    },
+    {
+        "news_id": 10,
+        "user_id": 4,
+        "time_create": "2023-10-22T16:12:19.268Z",
+        "data": "THIS SOCIAL NETWORK SO GOOD"
+    },
+    {
+        "news_id": 11,
+        "user_id": 5,
+        "time_create": "2023-10-19T16:12:19.268Z",
+        "data": "I love my cats!"
+    },
+    {
+        "news_id": 12,
+        "user_id": 5,
+        "time_create": "2023-10-21T16:12:19.268Z",
+        "data": "So funny)"
+    },
+    {
+        "news_id": 13,
+        "user_id": 5,
+        "time_create": "2023-10-20T17:13:19.268Z",
+        "data": "Alex is my friend!"
+    },
+    {
+        "news_id": 14,
+        "user_id": 6,
+        "time_create": "2023-10-18T22:13:19.268Z",
+        "data": "WOW!!!!"
+    },
+    {
+        "news_id": 15,
+        "user_id": 6,
+        "time_create": "2023-10-19T00:00:01.268Z",
+        "data": "I am here!"
     }
 ]
