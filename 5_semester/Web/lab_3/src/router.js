@@ -1,5 +1,5 @@
 import express from "express"
-import enums from "./public/data/enums.json" assert { type: "json" }
+import body_parser from 'body-parser'
 import users from "./public/data/users.json" assert { type: "json" }
 import news from "./public/data/news.json" assert { type: "json" }
 import fs from "fs"
@@ -30,13 +30,23 @@ router.get("/admin_module/users/:id([0-9]{1,})", (req, res) => {
     res.render("user_card.ejs", {user: user, news: user_news})
 })
 
-router.post("/admin_module/users/:id([0-9]{1,})", (req, res) => {
-    const user = users.filter((user) => { 
+router.post("/admin_module/users/:id([0-9]{1,})", body_parser.json(), (req, res) => {
+    let user = users.filter((user) => { 
         return user.id == req.params.id
     })[0]
-    const data = req.body
-    console.log(req.params.id, user, data)
-    //res.render("user_card.ejs", {user: user, news: user_news})
+
+    switch (req.body.param){
+        case "role": 
+            user.role = req.body.user_data 
+            break
+        case "status": 
+            user.status = req.body.user_data
+            break
+    }
+
+    fs.writeFile("./public/data/users.json", JSON.stringify(users), function (err) {
+        if (err) console.log("Write JSON error!");
+    })
 })
 
 router.get("/admin_module/users/:id([0-9]{1,})/friends", (req, res) => {

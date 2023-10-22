@@ -1,36 +1,41 @@
 export default {
-    entry: {
-        script: "./public/js/script.js",
-        userCardScript: "./public/js/userScript.js"
+    mode: "development",
+    entry : {
+        users: './public/scripts/users.js',
+        user_card: './public/scripts/user_card.js',
     },
     output: {
-        filename: "[name].js",
-        path: "./public/webpack"
+        filename: './[name].bundle.js'
     },
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test : /.css$/,
                 exclude: /node_modules/,
-                use:  ["style-loader", "css-loader"],
+                use : [
+                    'style-loader',
+                    'css-loader'
+                ]
             },
             {
-                test: /\.less$/,
+                test : /.less$/,
                 exclude: /node_modules/,
-                use: ["style-loader","css-loader","less-loader"],
+                use : [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
+                ]
             },
             {
-                test: /\.(?:js|mjs|cjs)$/,
-                exclude: /node_modules/,
+                test: /.js$/,
+                exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                     options: {
-                        presets: [
-                            ['@babel/preset-env', { targets: "defaults" }]
-                        ]
+                        presets: ['@babel/preset-env']
                     }
                 }
             }
-        ],
-    },
+        ]
+    }
 }
