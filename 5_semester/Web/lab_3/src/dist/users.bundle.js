@@ -10,13 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./public/scripts/users.js":
-/*!*********************************!*\
-  !*** ./public/scripts/users.js ***!
-  \*********************************/
+/***/ "./public/scripts/js/users.js":
+/*!************************************!*\
+  !*** ./public/scripts/js/users.js ***!
+  \************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n$(function () {\n  $(\".user_container\").on(\"click\", function () {\n    $.get(\"/admin_module/users/\".concat(this.id));\n    window.location = \"/admin_module/users/\".concat(this.id);\n  });\n});\n\n//# sourceURL=webpack://lab_3/./public/scripts/users.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n$(function () {\n  $(\".user_container\").on(\"click\", function () {\n    $.get(\"/admin_module/users/\".concat(this.id));\n    window.location = \"/admin_module/users/\".concat(this.id);\n  });\n});\n\n//# sourceURL=webpack://@shavrin_alex/lab_3/./public/scripts/js/users.js?");
 
 /***/ })
 
@@ -43,7 +43,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n$(function () {\n  $(\".user_
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./public/scripts/users.js"](0, __webpack_exports__, __webpack_require__);
+/******/ 	__webpack_modules__["./public/scripts/js/users.js"](0, __webpack_exports__, __webpack_require__);
 /******/ 	
 /******/ })()
 ;

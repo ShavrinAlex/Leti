@@ -1,6 +1,6 @@
 {
-  "name": "lab_3",
-  "version": "1.0.0",
+  "name": "@shavrin_alex/lab_3",
+  "version": "1.0.1",
   "description": "",
   "main": "server.js",
   "type": "module",
@@ -36,5 +36,8 @@
     "@babel/core": "^7.23.2",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.23.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

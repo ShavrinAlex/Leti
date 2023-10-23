@@ -26,8 +26,8 @@ gulp.task("style", async () => {
 
 gulp.task("build", async () => {
     gulp.src(paths.scripts.src)
-    .pipe(babel())                  // Обработать js
-    .pipe(uglify())                 // Минификация js
+    .pipe(babel({presets: ["@babel/preset-env"]}))  // Обработать js
+    .pipe(uglify())                                 // Минификация js
     .pipe(gulp.dest(paths.scripts.dest))
 })
 
