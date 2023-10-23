@@ -81,5 +81,5 @@ router.get("/admin_module/users/:id([0-9]{1,})/news", (req, res) => {
     friend_news.sort((first_news, second_news) => {
         return new Date(second_news.time_create) - new Date(first_news.time_create)
     })
-    res.render("user_news.ejs", {friends: friends, news: friend_news})
+    res.render("user_news.ejs", {friends: friends, news: friend_news, user: main_user})
 })

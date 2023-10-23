@@ -3,6 +3,7 @@
 <head>
     <%- include("./partials/head.ejs") %>
     <link rel="stylesheet" type="text/css" href="/../public/styles/gulp_css/friend_news.css"/>
+    <script type="module" src="/../public/scripts/js/user_news.js"></script>
 </head>
 
 
@@ -18,6 +19,12 @@
                 <div class="news_data"><%= current_news.data %></div>
             </div>
         <% }) %>
+    </div>
+    <div class="sidebar">
+        <button class="return_button" id="<%= user.id %>">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Return
+        </button>
     </div>
 </body>
 
