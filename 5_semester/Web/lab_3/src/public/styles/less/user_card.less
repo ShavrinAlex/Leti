@@ -82,34 +82,58 @@ body {
                 }
             }
         }
+        .accordion {
+            margin: min(1vh, 1vw);
+            padding: min(2vh, 2vw);
+            
+            .accordion_header {
+                .size(100%, min(10vh, 10vw));
+                background-color: #00000054;
+                color: #fff;
 
-        .user_news {
-            .size(100%, 100%);
-            font-size: min(1.75vh, 1.75vw);
-            .news_card {
-                margin: min(3vh, 3vw);
-                .size(95%, auto);
-                background: #0000004f;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                .news_header {
-                    .size(100%, min(8vh, 8vw));
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-around;
-                    border-bottom: min(0.3vh, 0.3vw) solid #ffffff63;
+                align-items: center;
+                justify-content: center;
+                font-size: min(5vh, 5vw);
+                border-radius: min(1vh, 1vw);
 
-                    img {
-                        @image_size: min(5vh, 5vw);
-                        .size(@image_size, @image_size);
-                        background: #000;
-                        border-radius: 100%;
-                    }
+                &:hover {
+                    background-image: @main_background_gradient;
+                    background-image: @elem_background_gradient;
+                    box-shadow: 0px 0px 2vh #ffffff8f;
                 }
-                .news_data {
-                    padding: min(3vh, 3vw);
+            }
+
+            .user_news {
+                .size(100%, 100%);
+                font-size: min(1.75vh, 1.75vw);
+                .news_card {
+                    @news_card_margin: min(3vh, 3vw);
+                    margin-top: @news_card_margin;
+                    margin-bottom: @news_card_margin; 
+                    .size(100%, auto);
+                    background: #0000004f;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    .news_header {
+                        .size(100%, min(8vh, 8vw));
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-around;
+                        border-bottom: min(0.3vh, 0.3vw) solid #ffffff63;
+    
+                        img {
+                            @image_size: min(5vh, 5vw);
+                            .size(@image_size, @image_size);
+                            background: #000;
+                            border-radius: 100%;
+                        }
+                    }
+                    .news_data {
+                        padding: min(3vh, 3vw);
+                    }
                 }
             }
         }

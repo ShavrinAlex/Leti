@@ -1,6 +1,7 @@
 $(() => {
+    //$.get("{/admin_module/users")
     $(".return_button").on("click", function () {
-        $.get("{/admin_module/users")
+        
         window.location = "/admin_module/users"
     })
 
@@ -10,7 +11,6 @@ $(() => {
     })
     
     $(document).on("click", ".change_data_button", function () {
-        console.log("change")
         let data = ``
         let html_text = ``
         if (this.id == "role") {
@@ -36,7 +36,7 @@ $(() => {
 
     $(document).on("click", ".submit_button",  function () {
         let user_data = $(`[class="select"][data="${this.id}"]`).val()
-        console.log(this.id, user_data)
+
         $.ajax({
             type: "POST",
             url: "", 
@@ -50,5 +50,9 @@ $(() => {
             ${data} ${user_data}
             <button class="change_data_button" id="${this.id}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
         `)
+    })
+
+    $(".accordion").accordion({
+        collapsible: true
     })
 })
