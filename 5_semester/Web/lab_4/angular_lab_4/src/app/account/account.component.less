@@ -1,0 +1,40 @@
+@elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+
+.size(@width: auto, @height: auto) {
+    width: @width;
+    height: @height;
+}
+
+.main_window {
+    .size(1700px, 100vh);
+    background-color: #00000060;
+    display: flex;
+    flex-direction: row;
+
+    .sidebar {
+        .size(10%, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 2px solid #6b6b6b42;
+
+        .sidebar_elem {
+            .size(100%, auto);
+            padding: 20px 0px 20px 0px;
+            color: #fff;
+            margin: 50px 0px 0px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #8080802a;
+            }
+        }
+    }
+
+    .main_container {
+        .size(90%, 100%);
+    }
+}
