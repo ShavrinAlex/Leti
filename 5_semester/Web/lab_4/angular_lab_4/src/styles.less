@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@app_background_color: #000000;
+@app_background_gradient: linear-gradient(45deg, #ff005542, #000000, #0099ff71);
+
+.size(@width: auto, @height: auto) {
+    width: @width;
+    height: @height;
+}
+
+.background (@color: @app_background_color, @gradient: @app_background_gradient) {
+    background-color: @color;
+    background-image: @gradient;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    .size(100vw, 100vh);
+    .background();
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}

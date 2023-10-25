@@ -1,0 +1,59 @@
+@elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+
+.size(@width: auto, @height: auto) {
+    width: @width;
+    height: @height;
+}
+
+.login_container {
+    .size(100%, 300px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: rgba(157, 148, 168, 0.199);
+    border-radius: 50px;
+    .authorization_header {
+        .size(100%, auto);
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 35px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0px 0px 5px #cffffd7e;
+    }
+    
+    .authorization_inputs {
+        .size(100%, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        input {
+            font-size: 25px;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        button {
+            font-size: 25px;
+            border-radius: 30px;
+            padding: 10px 20px 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #00000025;
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh #ffffff8f;
+            }
+        }
+    }
+}
