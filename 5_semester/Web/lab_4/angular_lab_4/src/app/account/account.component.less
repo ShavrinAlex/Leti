@@ -1,4 +1,5 @@
 @elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+@shadow: #ffffff8f;
 
 .size(@width: auto, @height: auto) {
     width: @width;
@@ -7,34 +8,54 @@
 
 .main_window {
     .size(1700px, 100vh);
-    background-color: #00000060;
+    
     display: flex;
     flex-direction: row;
+    background-color: #74747459;
+    border-radius: 20px;
 
     .sidebar {
         .size(10%, 100%);
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 2px solid #6b6b6b42;
+        background-color: rgba(157, 148, 168, 0.205);
+        border-radius: 20px 0px 0px 20px;
+        border: 3px solid #9494947c;
 
-        .sidebar_elem {
-            .size(100%, auto);
-            padding: 20px 0px 20px 0px;
+        button {
+            i {
+                margin-right: 10px;
+            }
+            .size(160px, 50px);
             color: #fff;
+            background: #00000025;
             margin: 50px 0px 0px 0px;
+            font-size: 25px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
 
             &:hover {
-                background-color: #8080802a;
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh @shadow;
             }
+        }
+        #quit {
+            &:hover{
+                background: #69121288;
+            } 
         }
     }
 
     .main_container {
         .size(90%, 100%);
+        border-radius: 0px 20px 20px 0px;
+        border: 3px solid #9494947c;
+        border-left: none;
+        display: flex;
+        flex-direction: column;
     }
 }

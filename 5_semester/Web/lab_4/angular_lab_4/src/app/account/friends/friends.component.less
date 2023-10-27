@@ -1,0 +1,78 @@
+@elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+@shadow: #ffffff8f;
+
+.size(@width: auto, @height: auto) {
+    width: @width;
+    height: @height;
+}
+
+.friends_container {
+    .size(auto, 100%);
+    overflow-y: scroll;
+    color: #fff;
+    padding: 0px 20px 0px 20px;
+   
+
+    .friend_card {
+        background-color: #74747459;
+        cursor: pointer;
+        .size(100%, auto);
+        margin: 20px 0px 20px 0px;
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        outline: 2px solid #ffffffa9;
+        
+        border-radius: 20px;
+        padding-right: 50px;
+
+        .friend_info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 15px 20px 15px 50px;
+
+            img {
+                @avatar_size: 80px;
+                margin-right: 20px;
+                .size(@avatar_size, @avatar_size);
+                background: #000;
+                border-radius: 100%;
+                border: min(0.3vw, 0.3vh) solid #fff;
+                
+            }
+            div {
+                padding: 15px;
+            }
+        }
+
+        button {
+            i {
+                padding-right: 10px;
+            }
+            
+            padding: 10px 20px 10px 20px;
+            font-size: 25px;
+            border-radius: 30px;
+            background: #00000025;
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh @shadow;
+            }
+        }
+
+        &:hover {
+            box-shadow: 0px 0px 2vh @shadow;
+            text-shadow: 0px 0px 20px @shadow;
+            background-color: rgba(157, 148, 168, 0.397);
+            img {
+                box-shadow: 0px 0px 30px @shadow;
+            }
+        }
+    }
+}

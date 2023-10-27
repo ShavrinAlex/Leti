@@ -1,10 +1,13 @@
 <div class="signup_container">
     <div class="authorization_header">Sign up</div>
     <div class="authorization_inputs">
-        <input placeholder="username">
-        <input placeholder="e-mail">
-        <input type="password" placeholder="password"> 
-        <input type="password" placeholder="repeat password"> 
-        <button>Sign up</button>
+        <input [(ngModel)]="username" placeholder="username">
+        <input [(ngModel)]="email" placeholder="e-mail">
+        <input [(ngModel)]="birth" placeholder="birth">
+        <input [(ngModel)]="password" type="password" placeholder="password"> 
+        <button (click)="onSignUp()">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Sign up
+        </button>
     </div>
 </div>
