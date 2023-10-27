@@ -1,17 +1,25 @@
 <div class="main_window">
     <div class="sidebar">
-        <div id="user_page" class="sidebar_elem">
+        <button id="user_page" (click)="showComponent('./user_page')">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
             account
-        </div>
-        <div id="friends" class="sidebar_elem">
+        </button>
+        <button id="friends" (click)="showComponent('./friends')">
+            <i class="fa fa-users" aria-hidden="true"></i>
             friends
-        </div>
-        <div id="messages" class="sidebar_elem">
+        </button>
+        <button id="messages" (click)="showComponent('./messages')">
+            <i class="fa fa-comment" aria-hidden="true"></i>
             messages
-        </div>
-        <div id="news" class="sidebar_elem">
+        </button>
+        <button id="news" (click)="showComponent('./news')">
+            <i class="fa fa-hashtag" aria-hidden="true"></i>
             news
-        </div>
+        </button>
+        <button id="quit" (click)="quit()">
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+            quit
+        </button>
     </div>
     <div class="main_container">
         <router-outlet></router-outlet>

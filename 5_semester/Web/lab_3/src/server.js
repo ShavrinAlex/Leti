@@ -1,5 +1,6 @@
 import express from "express"
 import https from "https"
+import http from "http"
 import fs from "fs"
 import {router} from "./router.js"
 
@@ -21,5 +22,8 @@ const https_server = https.createServer({
   key: fs.readFileSync('public/ssl_certs/private_key.key', 'utf8')
 }, app)
 
+const http_server = http.createServer(app)
+
 // Задание порта
 https_server.listen(7443)
+http_server.listen(8080)

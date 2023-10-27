@@ -6,7 +6,6 @@ import { AuthorizationModule } from './authorization/authorization.module';
 import { AppRoutingModule } from './app-routing.module';
 
 
-
 @NgModule({
   imports: [
     BrowserModule,

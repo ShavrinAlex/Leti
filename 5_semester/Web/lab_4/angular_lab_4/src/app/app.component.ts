@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,7 @@ import { Router } from '@angular/router';
 <router-outlet></router-outlet>`
 })
 export class AppComponent {
+  constructor () {
+    console.log('constr app comp')
+  }
 }
