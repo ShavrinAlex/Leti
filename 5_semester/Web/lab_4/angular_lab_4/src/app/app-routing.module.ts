@@ -13,7 +13,7 @@ const appRoutes: Routes = [
         loadChildren: () => AuthorizationModule
     },
     {
-        path: 'account/:id',
+        path: 'account',
         loadChildren: () => AccountModule
     }
 ];

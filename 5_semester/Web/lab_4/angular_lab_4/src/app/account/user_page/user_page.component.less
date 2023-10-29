@@ -26,7 +26,8 @@
         img {
             .size(100%, 100%);
             object-fit: scale-down;
-            grid-column: 1;
+            grid-column-start: 1;
+            grid-column-end: 3;
             grid-row-start: 1;
             grid-row-end: 6;
             background: transparent;
@@ -63,6 +64,10 @@
                 background-image: @elem_background_gradient;
                 box-shadow: 0px 0px 2vh @shadow;
             }
+        }
+        #admin_button {
+            .size(auto, auto);
+            padding: 10px 20px 10px 20px;
         }
     }
     

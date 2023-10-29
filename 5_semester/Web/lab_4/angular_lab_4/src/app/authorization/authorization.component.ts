@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./authorization.component.less']
 })
 export class AuthorizationComponent {
+
 }

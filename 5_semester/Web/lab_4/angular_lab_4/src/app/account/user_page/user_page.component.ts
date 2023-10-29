@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
+import { AppService } from 'src/app/app-service.component';
 
 
 @Component({
@@ -10,20 +11,33 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserPageComponent {
   user_id: number = -1;
+  user: any;
+  user_news: any;
+  
 
-  constructor (private route: ActivatedRoute, private http: HttpClient){
-    this.route.queryParams.subscribe(param => {this.user_id = param["user_id"]})
-    console.log('user_page', this.user_id)
+  constructor (private route: ActivatedRoute, private http: HttpClient, private app_service: AppService){
+    //this.route.queryParams.subscribe(param => {this.user_id = param["user_id"]})
+    this.user_id = this.app_service.user_id;
+    console.log('user_page', this.user_id);
 
     const headers = new HttpHeaders();
 
-    this.http.get<any>("http://localhost:8080/account/:id/user_page", { headers: headers })
+    const params = new HttpParams()
+      .set('id', this.user_id);
+    /*
+    const data = this.app_service.getUserPageData();
+    this.user = data.user;
+    this.user_news = data.news;*/
+
+    this.http.get<any>("http://localhost:8080/account/user_page", { headers: headers, params: params })
       .subscribe(value => {
         switch (value.state){
           case "success": 
-            console.log(value.state, value.user_id)
+            this.user = value.user;
+            this.user_news = value.news;
+            console.log(value.state, this.user, this.user_news)
             break
-          case "error":
+          case "unknown user":
             console.log(value.state)
             break
         }
@@ -31,5 +45,9 @@ export class UserPageComponent {
       error => {
         console.log(error)
       })
+  }
+
+  goToAdminModule() {
+    window.location.href = "http://localhost:8080/admin_module/users"
   }
 }

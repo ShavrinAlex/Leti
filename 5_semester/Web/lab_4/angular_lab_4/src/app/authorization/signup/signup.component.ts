@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app-service.component';
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ export class SignupComponent {
   email: string = '';
   birth: string = '';
   password: string = '';
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private app_servise: AppService) { }
 
   onSignUp(): void {
     const body = {
@@ -27,7 +29,8 @@ export class SignupComponent {
         switch (value.state){
           case "success": 
             console.log(value.state, value.user_id);
-            this.router.navigate(['/account', `${value.user_id}`]);
+            sessionStorage["social_network.user_id"] = value.user_id
+            this.app_servise.registration(value.user_id)
             break
           case "user is exists":
             console.log(value.state);

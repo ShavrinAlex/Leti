@@ -1,3 +1,7 @@
+@elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+@shadow: #ffffff8f;
+@gray_background: #7e7e7e79;
+
 .size(@width: auto, @height: auto) {
     width: @width;
     height: @height;
@@ -9,6 +13,45 @@
     overflow-y: scroll;
     padding: 0px 20px 0px 20px;
 
+    .input_container {
+        .size(100%, auto);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 50px 10px 50px;
+        background: @gray_background;
+        border-radius: 0px 0px 20px 20px;
+        border: 2px solid #ffffff63;
+        border-top: none;
+
+        input {
+            .size(90%, auto);
+            font-size: 20px;
+            padding: 7px;
+            border-radius: 10px;
+        }
+
+        button {
+            i {
+                margin-right: 10px;
+            }
+            .size(80px, 35px);
+            color: #fff;
+            background: #00000025;
+            font-size: 18px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover {
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh @shadow;
+            }
+        }
+    }
     .news_card {
         margin: 20px 0px 20px 0px;
         .size(100%, auto);
