@@ -66,23 +66,30 @@
         overflow-y: scroll;
         color: #fff;
 
-        .user_message {
-            .size(auto, auto);
-            max-width: 45%;
-            padding: 10px;
-            border-radius: 30px;
-            background: #7586ac91;
-            margin: 10px 20px 10px 20px;
-            margin-left: 50%;
-        }
-        .companion_message {
-            .size(auto, auto);
-            max-width: 45%;
-            padding: 10px;
-            border-radius: 30px;
-            background: @gray_background;
-            margin: 10px 20px 10px 20px;
-
+        .message_line {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            .user_message {
+                grid-column: 2;
+                justify-self: end;
+                .size(fit-content, auto);
+                max-width: 100%;
+                padding: 15px 20px 15px 20px;
+                border-radius: 30px;
+                background: #7586ac91;
+                margin: 10px 20px 10px 20px;
+            }
+            .companion_message {
+                grid-column: 1;
+                align-self: center;
+                justify-self: start;
+                .size(fit-content, auto);
+                max-width: 100%;
+                padding: 15px 20px 15px 20px;
+                border-radius: 30px;
+                background: @gray_background;
+                margin: 10px 20px 10px 20px;
+            }
         }
     }
 

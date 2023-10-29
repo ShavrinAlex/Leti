@@ -1,34 +1,19 @@
 <div class="news_container">
-    <!--<div *ngFor = 'let current_news of news'>
-        <div class="news_card">
-            <div class="news_header">
-                <img src = 'img' alt="avatar"/>
-                <div class="header_info">
-                    <div class="news_username">uname</div>
-                    <div class="news_time">time</div>
-                </div>
-            </div>
-            <div class="news_data">data</div>
-        </div>
-    </div>-->
-    <div class="news_card">
-        <div class="news_header">
-            <img src = 'img' alt="avatar"/>
-            <div class="header_info">
-                <div class="news_username">uname</div>
-                <div class="news_time">time</div>
-            </div>
-        </div>
-        <div class="news_data">data</div>
+    <div class="input_container">
+        <input class="news_input" #NewsInput placeholder="Anything new?">
+        <button class="post_news_btn" (click)="createNews(NewsInput)">
+            <i class="fa fa-share" aria-hidden="true"></i>
+            post
+        </button>
     </div>
-    <div class="news_card">
+    <div *ngFor = 'let current_news of news' class="news_card">
         <div class="news_header">
-            <img src = 'img' alt="avatar"/>
+            <img src="{{getNewsOwnerParam(current_news.user_id, 'avatar')}}" alt="avatar"/>
             <div class="header_info">
-                <div class="news_username">uname</div>
-                <div class="news_time">time</div>
+                <div class="news_username">{{getNewsOwnerParam(current_news.user_id, 'name')}}</div>
+                <div class="news_time">{{current_news.time_create}}</div>
             </div>
         </div>
-        <div class="news_data">data</div>
+        <div class="news_data">{{current_news.data}}</div>
     </div>
 </div>

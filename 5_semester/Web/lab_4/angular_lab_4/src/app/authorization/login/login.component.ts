@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app-service.component';
+
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  constructor(private http: HttpClient, private router: Router) { }
+
+  constructor(private http: HttpClient, private router: Router, private app_servise: AppService) { }
 
   onLogIn(): void {
     const headers = new HttpHeaders();
@@ -24,7 +27,8 @@ export class LoginComponent {
         switch (value.state){
           case "correct": 
             console.log(value.state, value.user_id)
-            this.router.navigate(['/account', `${value.user_id}`]);
+            sessionStorage["social_network.user_id"] = value.user_id
+            this.app_servise.registration(value.user_id)
             break
           case "wrong password":
             console.log(value.state)

@@ -16,14 +16,8 @@ const authorizationRoutes: Routes = [
             { path: 'user_page', component: UserPageComponent},
             { path: 'news', component: NewsComponent },
             { path: 'friends', component: FriendsComponent },
-            { 
-                path: 'messages', 
-                component: MessagesComponent
-            },
-            { 
-                path: 'dialog', 
-                component: DialogComponent  
-            }
+            { path: 'messages', component: MessagesComponent },
+            { path: 'dialog', component: DialogComponent }
         ]
     }
 
