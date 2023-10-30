@@ -12,6 +12,7 @@ import { AppService } from 'src/app/app-service.component';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  server_answer: string = '';
 
   constructor(private http: HttpClient, private router: Router, private app_servise: AppService) { }
 
@@ -24,6 +25,7 @@ export class LoginComponent {
 
     this.http.get<any>("http://localhost:8080/authorization/login", { headers: headers , params: params})
       .subscribe(value => {
+        this.server_answer = value.state;
         switch (value.state){
           case "correct": 
             console.log(value.state, value.user_id)

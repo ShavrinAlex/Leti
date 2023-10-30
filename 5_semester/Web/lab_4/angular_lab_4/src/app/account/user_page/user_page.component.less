@@ -6,6 +6,51 @@
     height: @height;
 }
 
+.change_image_dialog {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 300px;
+    background-color: #929292;
+    border-radius: 10px;
+    border: 2px solid #616161;
+    padding: 20px;
+    .size(700px, 70px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    input {
+        font-size: 18px;
+        padding: 5px 10px 5px 10px;
+    }
+
+    button {
+        i {
+            padding-right: 10px;
+        }
+        color: #fff;
+        background: #00000025;
+        font-size: 18px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px 10px 20px;
+        cursor: pointer;
+
+        &:hover {
+            background-image: @elem_background_gradient;
+            box-shadow: 0px 0px 2vh @shadow;
+        }
+    }
+    #cancel_btn {
+        &:hover{
+            background: #69121288;
+        } 
+    }
+}
+
 .scrollable {
     .size(100%, 100%);
     overflow-y: scroll;
@@ -31,6 +76,9 @@
             grid-row-start: 1;
             grid-row-end: 6;
             background: transparent;
+            display:flex;
+            align-items: center;
+            justify-content: center;
             color: #000;
         }
 
@@ -66,6 +114,7 @@
             }
         }
         #admin_button {
+            grid-column: 3;
             .size(auto, auto);
             padding: 10px 20px 10px 20px;
         }
@@ -102,6 +151,10 @@
                     background: #000;
                     border-radius: 100%;
                     border: 1px solid #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 14px;
                 }
     
                 .header_info {
