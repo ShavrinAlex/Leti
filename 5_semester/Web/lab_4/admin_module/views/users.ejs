@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <link rel="stylesheet"  type="text/css" href="/../public/styles/gulp_css/users.css"/>
+    <script type="module" src="/../public/scripts/js/users.js"></script>
+</head>
+
+
+<body>
+    <div class="scrollable">
+        <% users.forEach( (user) => { %>
+            <div id="<%= user.id %>" class="user_container">
+                <img src="<%= user.avatar %>" alt="avatar"/>
+                <div><%= user.name %></div>
+                <div><%= user.email %></div>
+                <div><%= user.role %></div>
+                <div><%= user.status %></div>
+            </div>
+       <% }) %>
+    </div>
+    
+    
+</body>
+
+</html>
