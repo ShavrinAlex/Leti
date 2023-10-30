@@ -14,6 +14,8 @@ export class SignupComponent {
   email: string = '';
   birth: string = '';
   password: string = '';
+  server_answer: string = '';
+
   constructor(private http: HttpClient, private router: Router, private app_servise: AppService) { }
 
   onSignUp(): void {
@@ -26,6 +28,7 @@ export class SignupComponent {
 
     this.http.post<any>("http://localhost:8080/authorization/signup", body)
       .subscribe(value => {
+        this.server_answer = value.state
         switch (value.state){
           case "success": 
             console.log(value.state, value.user_id);

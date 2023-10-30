@@ -18,6 +18,10 @@ export class FriendsComponent {
     this.route.queryParams.subscribe(param => {this.user_id = param["user_id"]})
     console.log('friends', this.user_id)
 
+    this.httpRequest()
+  }
+
+  httpRequest() {
     const headers = new HttpHeaders();
 
     const params = new HttpParams()
@@ -63,5 +67,55 @@ export class FriendsComponent {
       error => {
         console.log(error)
       })
+  }
+
+  addFriend(FriendInput: any) {
+    let friend_name = FriendInput.value
+
+    const body = {
+      'user_id': this.user_id,
+      'friend_username': friend_name
+    }
+
+    this.http.post<any>("http://localhost:8080/account/friends/add_friend", body)
+    .subscribe(value => {
+      switch (value.state){
+        case "success": 
+          console.log(value.state)
+          this.httpRequest()
+          break
+        case "unknown user":
+          console.log(value.state)
+          break
+      }
+    },
+    error => {
+      console.log(error)
+    })
+
+    FriendInput.value = ''
+  }
+
+  deleteFriend(friend_id: string) {
+    const body = {
+      'user_id': Number(this.user_id),
+      'friend_id': Number(friend_id)
+    }
+
+    this.http.post<any>("http://localhost:8080/account/friends/delete_friend", body)
+    .subscribe(value => {
+      switch (value.state){
+        case "success": 
+          console.log(value.state)
+          this.httpRequest()
+          break
+        case "unknown user":
+          console.log(value.state)
+          break
+      }
+    },
+    error => {
+      console.log(error)
+    })
   }
 }

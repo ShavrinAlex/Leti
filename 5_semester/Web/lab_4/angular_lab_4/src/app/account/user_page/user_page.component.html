@@ -1,11 +1,25 @@
+<dialog #ImageDialog class="change_image_dialog" [ngStyle] = "{'display': 'none'}">
+    <label for="reader_username" class="lable_text">Avatar URL:</label>
+    <input #ImageInput id="reader_username" class ="input_avatar_url">
+    <button (click)="saveImage(ImageDialog, ImageInput)">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        Change
+    </button>
+    <button (click)="cancelImage(ImageDialog)" id="cancel_btn">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        cancel
+    </button>
+</dialog>
+
 <div class="scrollable">
     <div class="user_info_container">
-       <img [src]="user.avatar" alt="avatar"/>
+       <img [src]="user.avatar" alt="avatar" (click)="changeAvatar(ImageDialog)"/>
        <div class="user_data">Username: {{user.name}}</div>
        <div class="user_data">Birthday: {{user.birth_date}}</div>
        <div class="user_data">Email: {{user.email}}</div>
        <div class="user_data">Role: {{user.role}}</div>
        <div class="user_data">Status: {{user.status}}</div>
+       <!--
        <button id="message_button">
             <i class="fa fa-envelope" aria-hidden="true"></i>
             message
@@ -13,7 +27,7 @@
        <button id="friends_button">
             <i class="fa fa-users" aria-hidden="true"></i>
             friends
-        </button>
+        </button>-->
         <button id="admin_button" *ngIf = "user.role == 'admin'" (click)="goToAdminModule()">
             <i class="fa fa-key" aria-hidden="true"></i>
             admin module

@@ -4,7 +4,7 @@
         <div class="dialog_info">
             <div class="dialog_username">{{getDialogCompanionParam(current_dialog.first_user_id, current_dialog.second_user_id, 'name')}}</div>
             <div class="last_message_info">
-                <img [hidden]="isCompanionLastMessage(current_dialog.messages[current_dialog.messages.length-1])" src="{{getLastMessageUserParam(current_dialog.messages[current_dialog.messages.length-1], 'avatar')}}" alt="avatar">
+                <img src="{{getLastMessageUserParam(current_dialog.messages[current_dialog.messages.length-1], 'avatar')}}" alt="avatar">
                 <div class="dialog_data">{{getLastMessageParam(current_dialog.messages[current_dialog.messages.length-1], 'data')}}</div>
             </div>
         </div>

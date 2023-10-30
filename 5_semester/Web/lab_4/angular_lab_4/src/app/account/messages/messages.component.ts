@@ -112,18 +112,15 @@ export class MessagesComponent {
     
     return answer
   }
-
+/*
   isCompanionLastMessage(last_message_id: number) {
     const last_message = this.last_messages.filter((message: any) => {
       return message.id == last_message_id
     })[0]
-    let answer = true
-    if (last_message != undefined){
-      answer = (this.user_id != last_message.sender_user_id)
-    }
-    return answer
+    console.log(this.user_id, last_message.sender_user_id, this.user_id != last_message.sender_user_id)
+    return (this.user_id != last_message.sender_user_id)
   }
-
+*/
   goToDialog(path: string, dialog_id: number) {
     console.log('go to ', path, dialog_id)
     
@@ -154,12 +151,10 @@ export class MessagesComponent {
         return dialog.id == data.dialog.id
       })[0]
       if (check_dialog == undefined){
-        console.log('push', data.dialog, data.companions)
         this.httpRequest()
         //this.dialogs.push(data.dialog)
         //this.companions.push(data.companions)
       }
     }
-    console.log(this.companions, this.dialogs)
   }
 }

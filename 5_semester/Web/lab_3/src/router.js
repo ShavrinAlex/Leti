@@ -127,12 +127,15 @@ router.post("/authorization/signup", JsonParser, (req, res) => {
             "avatar": "",
             "role": "user",
             "status": "unverified",
-            "friends": []
+            "friends": [],
+            "dialogs": []
         }
+        console.log(new_user)
         users.push(new_user)
         fs.writeFile("./public/data/users.json", JSON.stringify(users), function (err) {
             if (err) console.log("Write JSON error!");
         })
+        console.log(users)
         res.send({"state": "success", "user_id": new_user.id})
     } else {
         res.send({"state": "user is exists"})
@@ -295,6 +298,65 @@ router.get("/account/friends/go_to_dialog", JsonParser, (req, res) => {
         }
         companions = [main_user, friend]
         res.send({"state" : "success", "dialog": new_dialog, "companions": companions})
+    }
+})
+
+router.post("/account/user_page/change_image", JsonParser, (req, res) => {
+    let user = users.filter((current_user) => {
+        return current_user.id == req.body.user_id
+    })[0]
+
+    if (user !== undefined) {
+        user.avatar = req.body.avatar
+        fs.writeFile("./public/data/users.json", JSON.stringify(users), function (err) {
+            if (err) console.log("Write JSON error!");
+        })
+        res.send({"state": "success"})
+    } else {
+        res.send({"state": "unknown user"})
+    }
+})
+
+router.post("/account/friends/add_friend", JsonParser, (req, res) => {
+    let user = users.filter((current_user) => {
+        return current_user.id == req.body.user_id
+    })[0]
+
+    let friend = users.filter((current_user) => {
+        return current_user.name == req.body.friend_username
+    })[0]
+
+    if (user !== undefined && friend !== undefined) {
+        user.friends.push(friend.id)
+        friend.friends.push(user.id)
+        fs.writeFile("./public/data/users.json", JSON.stringify(users), function (err) {
+            if (err) console.log("Write JSON error!");
+        })
+        res.send({"state": "success"})
+    } else {
+        res.send({"state": "unknown user"})
+    }
+})
+
+router.post("/account/friends/delete_friend", JsonParser, (req, res) => {
+    let user = users.filter((current_user) => {
+        return current_user.id == req.body.user_id
+    })[0]
+
+    let friend = users.filter((current_user) => {
+        return current_user.id == req.body.friend_id
+    })[0]
+
+    if (user !== undefined && friend !== undefined) {
+        user.friends.splice(user.friends.indexOf(friend.id), 1);
+        friend.friends.splice(friend.friends.indexOf(user.id), 1);
+
+        fs.writeFile("./public/data/users.json", JSON.stringify(users), function (err) {
+            if (err) console.log("Write JSON error!");
+        })
+        res.send({"state": "success"})
+    } else {
+        res.send({"state": "unknown user"})
     }
 })
 

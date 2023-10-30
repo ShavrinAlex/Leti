@@ -5,6 +5,7 @@
         <input [(ngModel)]="email" placeholder="e-mail">
         <input [(ngModel)]="birth" placeholder="birth">
         <input [(ngModel)]="password" type="password" placeholder="password"> 
+        <div class="server_answer_container" hidden="{{(server_answer == '') ? true : false}}" id="{{(server_answer == 'success') ? 'correct' : 'wrong'}}">{{server_answer}}</div>
         <button (click)="onSignUp()">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
             Sign up

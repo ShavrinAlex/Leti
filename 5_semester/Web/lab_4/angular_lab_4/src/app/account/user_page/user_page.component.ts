@@ -50,4 +50,38 @@ export class UserPageComponent {
   goToAdminModule() {
     window.location.href = "http://localhost:8080/admin_module/users"
   }
+
+  changeAvatar(Dialog: any) {
+    Dialog.style.display = 'flex';
+  }
+
+  cancelImage(ImageDialog: any) {
+    ImageDialog.style.display = 'none'
+  }
+
+  saveImage(Dialog: any, ImageInput: any) {
+    this.user.avatar =  ImageInput.value
+    const body ={
+      'user_id': this.user_id,
+      'avatar': this.user.avatar
+    }
+
+    this.http.post<any>("http://localhost:8080/account/user_page/change_image", body)
+    .subscribe(value => {
+      switch (value.state){
+        case "success": 
+          console.log(value.state)
+          break
+        case "unknown user":
+          console.log(value.state)
+          break
+      }
+    },
+    error => {
+      console.log(error)
+    })
+
+    Dialog.style.display = 'none'
+    ImageInput.value = ''
+  }
 }
