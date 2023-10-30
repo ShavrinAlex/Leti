@@ -1,0 +1,1 @@
+"use strict";$(function(){$(".return_button").on("click",function(){window.location="/admin_module/users/".concat(this.id)})});

@@ -1,10 +1,10 @@
 <div class="login_container">
     <div class="authorization_header">Log in</div>
     <div class="authorization_inputs">
-        <input [(ngModel)]="email" placeholder="e-mail">
+        <input [(ngModel)]="email" type="email" #Email="ngModel" placeholder="e-mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
         <input type="password" [(ngModel)]="password" placeholder="password" required pattern="[0-9]{3}"> 
         <div class="server_answer_container" hidden="{{(server_answer == '') ? true : false}}" id="{{(server_answer == 'correct') ? 'correct' : 'wrong'}}">{{server_answer}}</div>
-        <button (click)="onLogIn()">
+        <button (click)="onLogIn()" [disabled]="Email.invalid">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
             Log in
         </button>
