@@ -1,0 +1,150 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "level_2.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 2
+        },
+        "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/background2.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/level_1.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 553.5,
+                "y": 427.5
+            }
+        },
+        "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/level_2.tmx": {
+            "scale": 0.9804296874999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 640.0254990238657,
+                "y": 240.2008048129408
+            }
+        },
+        "level_1.json": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 42,
+                "y": 7
+            }
+        },
+        "level_1.json#atlas": {
+            "scaleInDock": 1
+        },
+        "level_1.json#pill": {
+            "scaleInDock": 1
+        },
+        "level_1.json#power": {
+            "scaleInDock": 1
+        },
+        "level_1.json#walls": {
+            "scaleInDock": 1
+        },
+        "level_1.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 414,
+                "y": 344.5
+            }
+        },
+        "level_1.tmx#atlas": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "level_1.tmx#pill": {
+            "scaleInDock": 1
+        },
+        "level_1.tmx#power": {
+            "scaleInDock": 1
+        },
+        "level_1.tmx#walls": {
+            "scaleInDock": 1
+        },
+        "level_2.json": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 426,
+                "y": 432.5
+            }
+        },
+        "level_2.json#atlas": {
+            "scaleInDock": 1
+        },
+        "level_2.json#pill": {
+            "scaleInDock": 1
+        },
+        "level_2.json#power": {
+            "scaleInDock": 1
+        },
+        "level_2.json#walls": {
+            "scaleInDock": 1
+        },
+        "level_2.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 530,
+                "y": 565.5
+            }
+        },
+        "level_2.tmx#atlas": {
+            "scaleInDock": 1
+        },
+        "level_2.tmx#pill": {
+            "scaleInDock": 1
+        },
+        "level_2.tmx#power": {
+            "scaleInDock": 1
+        },
+        "level_2.tmx#walls": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/images/pac-man/pan_man_pill",
+    "map.height": 22,
+    "map.lastUsedFormat": "json",
+    "map.renderOrder": null,
+    "map.width": 32,
+    "openFiles": [
+        "level_2.tmx"
+    ],
+    "project": "course_work.tiled-project",
+    "recentFiles": [
+        "level_2.json",
+        "level_2.tmx",
+        "level_1.json",
+        "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/level_2.tmx",
+        "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/level_1.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
