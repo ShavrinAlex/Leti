@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="left-up" width="32" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="357">
+ <tileset firstgid="1" name="walls" tilewidth="32" tileheight="32" tilecount="66" columns="11">
+  <image source="../images/pac-man/pac_man_tiles/background2.png" width="362" height="199"/>
+ </tileset>
+ <tileset firstgid="67" name="atlas" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="../images/pac-man/pac_man_atlas/atlas.png" width="112" height="128"/>
+ </tileset>
+ <tileset firstgid="79" name="pill" tilewidth="8" tileheight="8" tilecount="1" columns="1">
+  <image source="../images/pac-man/pan_man_pill/simple_pill.png" width="8" height="8"/>
+ </tileset>
+ <tileset firstgid="80" name="power" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="../images/pac-man/pan_man_pill/power_pill.png" width="16" height="16"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="32" height="22">
+  <data encoding="csv">
+3,3,3,3,3,3,3,16,3,3,3,3,3,3,3,16,3,3,3,3,3,3,3,16,3,3,3,3,3,3,3,3,
+0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,
+3,14,0,13,3,14,0,12,0,2,3,3,3,4,0,12,0,2,3,3,3,4,0,12,0,13,3,14,0,13,3,14,
+3,25,0,24,3,25,0,23,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,23,0,24,3,25,0,24,3,25,
+0,0,0,0,0,0,0,0,0,1,0,2,3,4,0,23,0,2,3,4,0,1,0,0,0,0,0,0,0,0,0,0,
+3,4,0,1,0,2,3,16,3,25,0,0,0,0,0,0,0,0,0,0,0,24,3,16,3,4,0,1,0,2,3,3,
+0,0,0,12,0,0,0,12,0,0,0,13,14,0,2,16,4,0,13,14,0,0,0,12,0,0,0,12,0,0,0,0,
+3,14,0,12,0,1,0,23,0,2,3,35,27,0,0,12,0,0,15,35,3,4,0,23,0,1,0,12,0,13,3,16,
+3,27,0,12,0,12,0,0,0,0,0,24,25,0,2,26,4,0,24,25,0,0,0,0,0,12,0,12,0,15,3,35,
+3,25,0,23,0,23,0,13,3,4,0,0,0,0,0,0,0,0,0,0,0,2,3,14,0,23,0,23,0,24,3,26,
+0,0,0,0,0,0,0,12,0,0,0,13,3,3,4,0,2,3,3,14,0,0,0,12,0,0,0,0,0,0,0,0,
+3,14,0,1,0,2,3,25,0,2,3,27,0,0,0,0,0,0,0,15,3,4,0,24,3,4,0,1,0,13,3,16,
+3,27,0,12,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,12,0,15,3,35,
+3,25,0,23,0,2,3,16,3,4,0,24,3,3,3,16,3,3,3,25,0,2,3,16,3,4,0,23,0,24,3,26,
+0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,
+3,14,0,2,3,4,0,23,0,2,3,3,3,4,0,23,0,2,3,3,3,4,0,23,0,2,3,4,0,13,3,14,
+0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,35,12,
+0,23,0,1,0,2,3,16,3,4,0,1,0,2,3,16,3,4,0,1,0,2,3,16,3,4,0,1,0,24,3,25,
+0,0,0,12,0,0,0,12,0,0,0,12,0,0,0,12,0,0,0,12,0,0,0,12,0,0,0,12,0,0,0,0,
+3,3,3,26,3,4,0,23,0,2,3,26,3,4,0,23,0,2,3,26,3,4,0,23,0,2,3,26,3,3,3,3,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
+</data>
+ </layer>
+ <objectgroup id="2" name="my_objects">
+  <object id="2" name="ghost_pink" type="Ghost" gid="76" x="384" y="416" width="32" height="32"/>
+  <object id="3" name="ghost_red" type="Ghost" gid="77" x="416" y="384" width="32" height="32"/>
+  <object id="4" name="ghost_orange" type="Ghost" gid="75" x="480" y="416" width="32" height="32"/>
+  <object id="5" name="ghost_blue" type="Ghost" gid="74" x="576" y="416" width="32" height="32"/>
+  <object id="8" name="ghost_red" type="Ghost" gid="77" x="544.235" y="384" width="32" height="32"/>
+  <object id="9" name="pac_man" type="Player" gid="67" x="480" y="672" width="32" height="32"/>
+  <object id="10" name="cherry" type="Bonus" gid="78" x="64" y="608" width="32" height="32"/>
+  <object id="11" name="cherry" type="Bonus" gid="78" x="384" y="608" width="32" height="32"/>
+  <object id="12" name="cherry" type="Bonus" gid="78" x="800" y="608" width="32" height="32"/>
+  <object id="13" name="cherry" type="Bonus" gid="78" x="160" y="416" width="32" height="32"/>
+  <object id="14" name="cherry" type="Bonus" gid="78" x="736" y="416" width="32" height="32"/>
+  <object id="15" name="cherry" type="Bonus" gid="78" x="32" y="224" width="32" height="32"/>
+  <object id="16" name="cherry" type="Bonus" gid="78" x="192" y="224" width="32" height="32"/>
+  <object id="17" name="cherry" type="Bonus" gid="78" x="416" y="224" width="32" height="32"/>
+  <object id="18" name="cherry" type="Bonus" gid="78" x="672" y="224" width="32" height="32"/>
+  <object id="19" name="cherry" type="Bonus" gid="78" x="896" y="224" width="32" height="32"/>
+  <object id="20" name="cherry" type="Bonus" gid="78" x="64" y="96" width="32" height="32"/>
+  <object id="21" name="cherry" type="Bonus" gid="78" x="448" y="96" width="32" height="32"/>
+  <object id="22" name="cherry" type="Bonus" gid="78" x="768" y="96" width="32" height="32"/>
+  <object id="23" name="cherry" type="Bonus" gid="78" x="512" y="96" width="32" height="32"/>
+  <object id="24" name="cherry" type="Bonus" gid="78" x="640" y="608" width="32" height="32"/>
+  <object id="25" name="power" type="Bonus" gid="80" x="104" y="664" width="16" height="16"/>
+  <object id="26" name="power" type="Bonus" gid="80" x="392" y="664" width="16" height="16"/>
+  <object id="27" name="power" type="Bonus" gid="80" x="744" y="664" width="16" height="16"/>
+  <object id="28" name="power" type="Bonus" gid="80" x="104" y="536" width="16" height="16"/>
+  <object id="29" name="power" type="Bonus" gid="80" x="360" y="536" width="16" height="16"/>
+  <object id="30" name="power" type="Bonus" gid="80" x="616" y="536" width="16" height="16"/>
+  <object id="31" name="power" type="Bonus" gid="80" x="872" y="536" width="16" height="16"/>
+  <object id="32" name="power" type="Bonus" gid="80" x="104" y="344" width="16" height="16"/>
+  <object id="33" name="power" type="Bonus" gid="80" x="264" y="344" width="16" height="16"/>
+  <object id="34" name="power" type="Bonus" gid="80" x="712" y="344" width="16" height="16"/>
+  <object id="35" name="power" type="Bonus" gid="80" x="872" y="344" width="16" height="16"/>
+  <object id="36" name="power" type="Bonus" gid="80" x="104" y="152" width="16" height="16"/>
+  <object id="37" name="power" type="Bonus" gid="80" x="264" y="152" width="16" height="16"/>
+  <object id="38" name="power" type="Bonus" gid="80" x="712" y="152" width="16" height="16"/>
+  <object id="39" name="power" type="Bonus" gid="80" x="872" y="152" width="16" height="16"/>
+  <object id="40" name="power" type="Bonus" gid="80" x="424" y="56" width="16" height="16"/>
+  <object id="41" name="power" type="Bonus" gid="80" x="552" y="56" width="16" height="16"/>
+  <object id="42" name="power" type="Bonus" gid="80" x="136" y="56" width="16" height="16"/>
+  <object id="43" name="power" type="Bonus" gid="80" x="840" y="56" width="16" height="16"/>
+  <object id="44" name="pill" type="Bonus" gid="79" x="12" y="660" width="8" height="8"/>
+  <object id="45" name="pill" type="Bonus" gid="79" x="44" y="660" width="8" height="8"/>
+  <object id="46" name="pill" type="Bonus" gid="79" x="76" y="660" width="8" height="8"/>
+  <object id="47" name="pill" type="Bonus" gid="79" x="140" y="660" width="8" height="8"/>
+  <object id="48" name="pill" type="Bonus" gid="79" x="172" y="660" width="8" height="8"/>
+  <object id="49" name="pill" type="Bonus" gid="79" x="204" y="660" width="8" height="8"/>
+  <object id="50" name="pill" type="Bonus" gid="79" x="236" y="660" width="8" height="8"/>
+  <object id="51" name="pill" type="Bonus" gid="79" x="268" y="660" width="8" height="8"/>
+  <object id="52" name="pill" type="Bonus" gid="79" x="300" y="660" width="8" height="8"/>
+  <object id="53" name="pill" type="Bonus" gid="79" x="332" y="660" width="8" height="8"/>
+  <object id="54" name="pill" type="Bonus" gid="79" x="364" y="660" width="8" height="8"/>
+  <object id="55" name="pill" type="Bonus" gid="79" x="428" y="660" width="8" height="8"/>
+  <object id="56" name="pill" type="Bonus" gid="79" x="460" y="660" width="8" height="8"/>
+  <object id="57" name="pill" type="Bonus" gid="79" x="524" y="660" width="8" height="8"/>
+  <object id="58" name="pill" type="Bonus" gid="79" x="556" y="660" width="8" height="8"/>
+  <object id="59" name="pill" type="Bonus" gid="79" x="588" y="660" width="8" height="8"/>
+  <object id="60" name="pill" type="Bonus" gid="79" x="620" y="660" width="8" height="8"/>
+  <object id="61" name="pill" type="Bonus" gid="79" x="652" y="660" width="8" height="8"/>
+  <object id="62" name="pill" type="Bonus" gid="79" x="685.333" y="660" width="8" height="8"/>
+  <object id="63" name="pill" type="Bonus" gid="79" x="716" y="660" width="8" height="8"/>
+  <object id="64" name="pill" type="Bonus" gid="79" x="780" y="660" width="8" height="8"/>
+  <object id="65" name="pill" type="Bonus" gid="79" x="812" y="660" width="8" height="8"/>
+  <object id="66" name="pill" type="Bonus" gid="79" x="844" y="660" width="8" height="8"/>
+  <object id="67" name="pill" type="Bonus" gid="79" x="876" y="660" width="8" height="8"/>
+  <object id="68" name="pill" type="Bonus" gid="79" x="908" y="660" width="8" height="8"/>
+  <object id="69" name="pill" type="Bonus" gid="79" x="940" y="660" width="8" height="8"/>
+  <object id="70" name="pill" type="Bonus" gid="79" x="972" y="660" width="8" height="8"/>
+  <object id="71" name="pill" type="Bonus" gid="79" x="1004" y="660" width="8" height="8"/>
+  <object id="72" name="pill" type="Bonus" gid="79" x="12" y="596" width="8" height="8"/>
+  <object id="73" name="pill" type="Bonus" gid="79" x="44" y="596" width="8" height="8"/>
+  <object id="74" name="pill" type="Bonus" gid="79" x="12" y="564" width="8" height="8"/>
+  <object id="75" name="pill" type="Bonus" gid="79" x="12" y="532" width="8" height="8"/>
+  <object id="76" name="pill" type="Bonus" gid="79" x="76" y="532" width="8" height="8"/>
+  <object id="77" name="pill" type="Bonus" gid="79" x="140" y="596" width="8" height="8"/>
+  <object id="78" name="pill" type="Bonus" gid="79" x="140" y="564" width="8" height="8"/>
+  <object id="79" name="pill" type="Bonus" gid="79" x="140" y="532" width="8" height="8"/>
+  <object id="80" name="pill" type="Bonus" gid="79" x="172" y="596" width="8" height="8"/>
+  <object id="81" name="pill" type="Bonus" gid="79" x="204" y="596" width="8" height="8"/>
+  <object id="82" name="pill" type="Bonus" gid="79" x="204" y="628" width="8" height="8"/>
+  <object id="83" name="pill" type="Bonus" gid="79" x="172" y="532" width="8" height="8"/>
+  <object id="84" name="pill" type="Bonus" gid="79" x="204" y="532" width="8" height="8"/>
+  <object id="85" name="pill" type="Bonus" gid="79" x="236" y="532" width="8" height="8"/>
+  <object id="86" name="pill" type="Bonus" gid="79" x="268" y="532" width="8" height="8"/>
+  <object id="87" name="pill" type="Bonus" gid="79" x="300" y="532" width="8" height="8"/>
+  <object id="88" name="pill" type="Bonus" gid="79" x="332" y="532" width="8" height="8"/>
+  <object id="89" name="pill" type="Bonus" gid="79" x="332" y="564" width="8" height="8"/>
+  <object id="90" name="pill" type="Bonus" gid="79" x="332" y="596" width="8" height="8"/>
+  <object id="91" name="pill" type="Bonus" gid="79" x="300" y="596" width="8" height="8"/>
+  <object id="92" name="pill" type="Bonus" gid="79" x="268" y="596" width="8" height="8"/>
+  <object id="93" name="pill" type="Bonus" gid="79" x="268" y="628" width="8" height="8"/>
+  <object id="94" name="pill" type="Bonus" gid="79" x="428" y="596" width="8" height="8"/>
+  <object id="95" name="pill" type="Bonus" gid="79" x="460" y="596" width="8" height="8"/>
+  <object id="96" name="pill" type="Bonus" gid="79" x="396" y="532" width="8" height="8"/>
+  <object id="97" name="pill" type="Bonus" gid="79" x="428" y="532" width="8" height="8"/>
+  <object id="98" name="pill" type="Bonus" gid="79" x="460" y="532" width="8" height="8"/>
+  <object id="99" name="pill" type="Bonus" gid="79" x="492" y="532" width="8" height="8"/>
+  <object id="100" name="pill" type="Bonus" gid="79" x="524" y="532" width="8" height="8"/>
+  <object id="101" name="pill" type="Bonus" gid="79" x="556" y="532" width="8" height="8"/>
+  <object id="102" name="pill" type="Bonus" gid="79" x="588" y="532" width="8" height="8"/>
+  <object id="103" name="pill" type="Bonus" gid="79" x="588" y="564" width="8" height="8"/>
+  <object id="104" name="pill" type="Bonus" gid="79" x="588" y="596" width="8" height="8"/>
+  <object id="105" name="pill" type="Bonus" gid="79" x="556" y="596" width="8" height="8"/>
+  <object id="106" name="pill" type="Bonus" gid="79" x="524" y="596" width="8" height="8"/>
+  <object id="107" name="pill" type="Bonus" gid="79" x="652" y="532" width="8" height="8"/>
+  <object id="108" name="pill" type="Bonus" gid="79" x="690.667" y="532" width="8" height="8"/>
+  <object id="109" name="pill" type="Bonus" gid="79" x="716" y="532" width="8" height="8"/>
+  <object id="110" name="pill" type="Bonus" gid="79" x="748" y="532" width="8" height="8"/>
+  <object id="111" name="pill" type="Bonus" gid="79" x="780" y="532" width="8" height="8"/>
+  <object id="112" name="pill" type="Bonus" gid="79" x="812" y="532" width="8" height="8"/>
+  <object id="113" name="pill" type="Bonus" gid="79" x="844" y="532" width="8" height="8"/>
+  <object id="114" name="pill" type="Bonus" gid="79" x="780" y="596" width="8" height="8"/>
+  <object id="115" name="pill" type="Bonus" gid="79" x="716" y="596" width="8" height="8"/>
+  <object id="116" name="pill" type="Bonus" gid="79" x="684" y="596" width="8" height="8"/>
+  <object id="117" name="pill" type="Bonus" gid="79" x="716" y="628" width="8" height="8"/>
+  <object id="118" name="pill" type="Bonus" gid="79" x="780" y="628" width="8" height="8"/>
+  <object id="119" name="pill" type="Bonus" gid="79" x="844" y="596" width="8" height="8"/>
+  <object id="120" name="pill" type="Bonus" gid="79" x="844" y="564" width="8" height="8"/>
+  <object id="121" name="pill" type="Bonus" gid="79" x="908" y="532" width="8" height="8"/>
+  <object id="122" name="pill" type="Bonus" gid="79" x="908" y="564" width="8" height="8"/>
+  <object id="123" name="pill" type="Bonus" gid="79" x="908" y="596" width="8" height="8"/>
+  <object id="124" name="pill" type="Bonus" gid="79" x="940" y="596" width="8" height="8"/>
+  <object id="125" name="pill" type="Bonus" gid="79" x="972" y="596" width="8" height="8"/>
+  <object id="126" name="pill" type="Bonus" gid="79" x="1004" y="596" width="8" height="8"/>
+  <object id="130" name="pill" type="Bonus" gid="79" x="396" y="564" width="8" height="8"/>
+  <object id="131" name="pill" type="Bonus" gid="79" x="460" y="628" width="8" height="8"/>
+  <object id="132" name="pill" type="Bonus" gid="79" x="524" y="628" width="8" height="8"/>
+  <object id="133" name="pill" type="Bonus" gid="79" x="76" y="564" width="8" height="8"/>
+  <object id="134" name="pill" type="Bonus" gid="79" x="652" y="564" width="8" height="8"/>
+  <object id="135" name="pill" type="Bonus" gid="79" x="1004" y="468" width="8" height="8"/>
+  <object id="136" name="pill" type="Bonus" gid="79" x="972" y="468" width="8" height="8"/>
+  <object id="137" name="pill" type="Bonus" gid="79" x="940" y="468" width="8" height="8"/>
+  <object id="138" name="pill" type="Bonus" gid="79" x="908" y="468" width="8" height="8"/>
+  <object id="139" name="pill" type="Bonus" gid="79" x="908" y="500" width="8" height="8"/>
+  <object id="140" name="pill" type="Bonus" gid="79" x="876" y="468" width="8" height="8"/>
+  <object id="141" name="pill" type="Bonus" gid="79" x="844" y="468" width="8" height="8"/>
+  <object id="142" name="pill" type="Bonus" gid="79" x="812" y="468" width="8" height="8"/>
+  <object id="143" name="pill" type="Bonus" gid="79" x="780" y="468" width="8" height="8"/>
+  <object id="144" name="pill" type="Bonus" gid="79" x="780" y="500" width="8" height="8"/>
+  <object id="145" name="pill" type="Bonus" gid="79" x="716" y="500" width="8" height="8"/>
+  <object id="146" name="pill" type="Bonus" gid="79" x="716" y="468" width="8" height="8"/>
+  <object id="147" name="pill" type="Bonus" gid="79" x="683" y="468" width="8" height="8"/>
+  <object id="148" name="pill" type="Bonus" gid="79" x="652" y="468" width="8" height="8"/>
+  <object id="149" name="pill" type="Bonus" gid="79" x="620" y="468" width="8" height="8"/>
+  <object id="150" name="pill" type="Bonus" gid="79" x="588" y="468" width="8" height="8"/>
+  <object id="151" name="pill" type="Bonus" gid="79" x="556" y="468" width="8" height="8"/>
+  <object id="152" name="pill" type="Bonus" gid="79" x="524" y="468" width="8" height="8"/>
+  <object id="153" name="pill" type="Bonus" gid="79" x="524" y="500" width="8" height="8"/>
+  <object id="154" name="pill" type="Bonus" gid="79" x="460" y="500" width="8" height="8"/>
+  <object id="155" name="pill" type="Bonus" gid="79" x="460" y="468" width="8" height="8"/>
+  <object id="156" name="pill" type="Bonus" gid="79" x="268" y="500" width="8" height="8"/>
+  <object id="157" name="pill" type="Bonus" gid="79" x="268" y="468" width="8" height="8"/>
+  <object id="158" name="pill" type="Bonus" gid="79" x="300" y="468" width="8" height="8"/>
+  <object id="159" name="pill" type="Bonus" gid="79" x="332" y="468" width="8" height="8"/>
+  <object id="160" name="pill" type="Bonus" gid="79" x="364" y="468" width="8" height="8"/>
+  <object id="161" name="pill" type="Bonus" gid="79" x="396" y="468" width="8" height="8"/>
+  <object id="162" name="pill" type="Bonus" gid="79" x="428" y="468" width="8" height="8"/>
+  <object id="163" name="pill" type="Bonus" gid="79" x="204" y="500" width="8" height="8"/>
+  <object id="164" name="pill" type="Bonus" gid="79" x="204" y="468" width="8" height="8"/>
+  <object id="165" name="pill" type="Bonus" gid="79" x="76" y="500" width="8" height="8"/>
+  <object id="166" name="pill" type="Bonus" gid="79" x="12" y="468" width="8" height="8"/>
+  <object id="167" name="pill" type="Bonus" gid="79" x="44" y="468" width="8" height="8"/>
+  <object id="168" name="pill" type="Bonus" gid="79" x="76" y="468" width="8" height="8"/>
+  <object id="169" name="pill" type="Bonus" gid="79" x="108" y="468" width="8" height="8"/>
+  <object id="170" name="pill" type="Bonus" gid="79" x="140" y="468" width="8" height="8"/>
+  <object id="171" name="pill" type="Bonus" gid="79" x="172" y="468" width="8" height="8"/>
+  <object id="172" name="pill" type="Bonus" gid="79" x="76" y="436" width="8" height="8"/>
+  <object id="173" name="pill" type="Bonus" gid="79" x="140" y="436" width="8" height="8"/>
+  <object id="174" name="pill" type="Bonus" gid="79" x="76" y="406" width="8" height="8"/>
+  <object id="175" name="pill" type="Bonus" gid="79" x="140" y="406" width="8" height="8"/>
+  <object id="176" name="pill" type="Bonus" gid="79" x="204" y="406" width="8" height="8"/>
+  <object id="177" name="pill" type="Bonus" gid="79" x="236" y="406" width="8" height="8"/>
+  <object id="178" name="pill" type="Bonus" gid="79" x="268" y="406" width="8" height="8"/>
+  <object id="179" name="pill" type="Bonus" gid="79" x="300" y="406" width="8" height="8"/>
+  <object id="180" name="pill" type="Bonus" gid="79" x="332" y="406" width="8" height="8"/>
+  <object id="181" name="pill" type="Bonus" gid="79" x="332" y="436" width="8" height="8"/>
+  <object id="182" name="pill" type="Bonus" gid="79" x="652" y="436" width="8" height="8"/>
+  <object id="183" name="pill" type="Bonus" gid="79" x="652" y="404" width="8" height="8"/>
+  <object id="184" name="pill" type="Bonus" gid="79" x="685" y="404" width="8" height="8"/>
+  <object id="185" name="pill" type="Bonus" gid="79" x="716" y="404" width="8" height="8"/>
+  <object id="186" name="pill" type="Bonus" gid="79" x="780" y="404" width="8" height="8"/>
+  <object id="187" name="pill" type="Bonus" gid="79" x="812" y="404" width="8" height="8"/>
+  <object id="188" name="pill" type="Bonus" gid="79" x="844" y="404" width="8" height="8"/>
+  <object id="189" name="pill" type="Bonus" gid="79" x="844" y="436" width="8" height="8"/>
+  <object id="190" name="pill" type="Bonus" gid="79" x="908" y="436" width="8" height="8"/>
+  <object id="191" name="pill" type="Bonus" gid="79" x="908" y="404" width="8" height="8"/>
+  <object id="192" name="pill" type="Bonus" gid="79" x="12" y="340" width="8" height="8"/>
+  <object id="193" name="pill" type="Bonus" gid="79" x="44" y="340" width="8" height="8"/>
+  <object id="194" name="pill" type="Bonus" gid="79" x="76" y="340" width="8" height="8"/>
+  <object id="195" name="pill" type="Bonus" gid="79" x="76" y="372" width="8" height="8"/>
+  <object id="196" name="pill" type="Bonus" gid="79" x="140" y="340" width="8" height="8"/>
+  <object id="197" name="pill" type="Bonus" gid="79" x="140" y="372" width="8" height="8"/>
+  <object id="198" name="pill" type="Bonus" gid="79" x="172" y="340" width="8" height="8"/>
+  <object id="199" name="pill" type="Bonus" gid="79" x="204" y="340" width="8" height="8"/>
+  <object id="200" name="pill" type="Bonus" gid="79" x="268" y="372" width="8" height="8"/>
+  <object id="201" name="pill" type="Bonus" gid="79" x="300" y="340" width="8" height="8"/>
+  <object id="202" name="pill" type="Bonus" gid="79" x="332" y="340" width="8" height="8"/>
+  <object id="203" name="pill" type="Bonus" gid="79" x="76" y="308" width="8" height="8"/>
+  <object id="204" name="pill" type="Bonus" gid="79" x="140" y="308" width="8" height="8"/>
+  <object id="205" name="pill" type="Bonus" gid="79" x="204" y="308" width="8" height="8"/>
+  <object id="206" name="pill" type="Bonus" gid="79" x="332" y="308" width="8" height="8"/>
+  <object id="207" name="pill" type="Bonus" gid="79" x="364" y="308" width="8" height="8"/>
+  <object id="208" name="pill" type="Bonus" gid="79" x="396" y="308" width="8" height="8"/>
+  <object id="209" name="pill" type="Bonus" gid="79" x="428" y="308" width="8" height="8"/>
+  <object id="210" name="pill" type="Bonus" gid="79" x="460" y="308" width="8" height="8"/>
+  <object id="211" name="pill" type="Bonus" gid="79" x="492" y="308" width="8" height="8"/>
+  <object id="212" name="pill" type="Bonus" gid="79" x="524" y="308" width="8" height="8"/>
+  <object id="213" name="pill" type="Bonus" gid="79" x="556" y="308" width="8" height="8"/>
+  <object id="214" name="pill" type="Bonus" gid="79" x="588" y="308" width="8" height="8"/>
+  <object id="215" name="pill" type="Bonus" gid="79" x="620" y="308" width="8" height="8"/>
+  <object id="216" name="pill" type="Bonus" gid="79" x="652" y="308" width="8" height="8"/>
+  <object id="217" name="pill" type="Bonus" gid="79" x="652" y="340" width="8" height="8"/>
+  <object id="218" name="pill" type="Bonus" gid="79" x="685" y="340" width="8" height="8"/>
+  <object id="219" name="pill" type="Bonus" gid="79" x="716" y="372" width="8" height="8"/>
+  <object id="220" name="pill" type="Bonus" gid="79" x="780" y="340" width="8" height="8"/>
+  <object id="221" name="pill" type="Bonus" gid="79" x="812" y="340" width="8" height="8"/>
+  <object id="222" name="pill" type="Bonus" gid="79" x="844" y="340" width="8" height="8"/>
+  <object id="223" name="pill" type="Bonus" gid="79" x="844" y="372" width="8" height="8"/>
+  <object id="224" name="pill" type="Bonus" gid="79" x="908" y="340" width="8" height="8"/>
+  <object id="225" name="pill" type="Bonus" gid="79" x="908" y="372" width="8" height="8"/>
+  <object id="226" name="pill" type="Bonus" gid="79" x="940" y="340" width="8" height="8"/>
+  <object id="227" name="pill" type="Bonus" gid="79" x="972" y="340" width="8" height="8"/>
+  <object id="228" name="pill" type="Bonus" gid="79" x="780" y="308" width="8" height="8"/>
+  <object id="229" name="pill" type="Bonus" gid="79" x="844" y="308" width="8" height="8"/>
+  <object id="230" name="pill" type="Bonus" gid="79" x="908" y="308" width="8" height="8"/>
+  <object id="231" name="pill" type="Bonus" gid="79" x="76" y="276" width="8" height="8"/>
+  <object id="232" name="pill" type="Bonus" gid="79" x="140" y="276" width="8" height="8"/>
+  <object id="233" name="pill" type="Bonus" gid="79" x="204" y="276" width="8" height="8"/>
+  <object id="234" name="pill" type="Bonus" gid="79" x="236" y="276" width="8" height="8"/>
+  <object id="235" name="pill" type="Bonus" gid="79" x="268" y="276" width="8" height="8"/>
+  <object id="236" name="pill" type="Bonus" gid="79" x="300" y="276" width="8" height="8"/>
+  <object id="237" name="pill" type="Bonus" gid="79" x="332" y="276" width="8" height="8"/>
+  <object id="238" name="pill" type="Bonus" gid="79" x="428" y="276" width="8" height="8"/>
+  <object id="239" name="pill" type="Bonus" gid="79" x="556" y="276" width="8" height="8"/>
+  <object id="240" name="pill" type="Bonus" gid="79" x="652" y="276" width="8" height="8"/>
+  <object id="241" name="pill" type="Bonus" gid="79" x="686" y="276" width="8" height="8"/>
+  <object id="242" name="pill" type="Bonus" gid="79" x="716" y="276" width="8" height="8"/>
+  <object id="243" name="pill" type="Bonus" gid="79" x="748" y="276" width="8" height="8"/>
+  <object id="244" name="pill" type="Bonus" gid="79" x="780" y="276" width="8" height="8"/>
+  <object id="245" name="pill" type="Bonus" gid="79" x="844" y="276" width="8" height="8"/>
+  <object id="246" name="pill" type="Bonus" gid="79" x="908" y="276" width="8" height="8"/>
+  <object id="247" name="pill" type="Bonus" gid="79" x="1004" y="340" width="8" height="8"/>
+  <object id="248" name="pill" type="Bonus" gid="79" x="76" y="244" width="8" height="8"/>
+  <object id="249" name="pill" type="Bonus" gid="79" x="140" y="244" width="8" height="8"/>
+  <object id="250" name="pill" type="Bonus" gid="79" x="204" y="244" width="8" height="8"/>
+  <object id="251" name="pill" type="Bonus" gid="79" x="268" y="244" width="8" height="8"/>
+  <object id="252" name="pill" type="Bonus" gid="79" x="428" y="244" width="8" height="8"/>
+  <object id="253" name="pill" type="Bonus" gid="79" x="460" y="244" width="8" height="8"/>
+  <object id="254" name="pill" type="Bonus" gid="79" x="524" y="244" width="8" height="8"/>
+  <object id="255" name="pill" type="Bonus" gid="79" x="556" y="244" width="8" height="8"/>
+  <object id="256" name="pill" type="Bonus" gid="79" x="556" y="212" width="8" height="8"/>
+  <object id="257" name="pill" type="Bonus" gid="79" x="556" y="180" width="8" height="8"/>
+  <object id="258" name="pill" type="Bonus" gid="79" x="524" y="180" width="8" height="8"/>
+  <object id="259" name="pill" type="Bonus" gid="79" x="492" y="180" width="8" height="8"/>
+  <object id="260" name="pill" type="Bonus" gid="79" x="460" y="180" width="8" height="8"/>
+  <object id="261" name="pill" type="Bonus" gid="79" x="428" y="180" width="8" height="8"/>
+  <object id="262" name="pill" type="Bonus" gid="79" x="396" y="180" width="8" height="8"/>
+  <object id="263" name="pill" type="Bonus" gid="79" x="364" y="180" width="8" height="8"/>
+  <object id="264" name="pill" type="Bonus" gid="79" x="332" y="180" width="8" height="8"/>
+  <object id="265" name="pill" type="Bonus" gid="79" x="332" y="212" width="8" height="8"/>
+  <object id="266" name="pill" type="Bonus" gid="79" x="300" y="212" width="8" height="8"/>
+  <object id="267" name="pill" type="Bonus" gid="79" x="268" y="212" width="8" height="8"/>
+  <object id="268" name="pill" type="Bonus" gid="79" x="172" y="212" width="8" height="8"/>
+  <object id="269" name="pill" type="Bonus" gid="79" x="140" y="212" width="8" height="8"/>
+  <object id="270" name="pill" type="Bonus" gid="79" x="76" y="212" width="8" height="8"/>
+  <object id="271" name="pill" type="Bonus" gid="79" x="12" y="212" width="8" height="8"/>
+  <object id="272" name="pill" type="Bonus" gid="79" x="76" y="180" width="8" height="8"/>
+  <object id="273" name="pill" type="Bonus" gid="79" x="140" y="180" width="8" height="8"/>
+  <object id="274" name="pill" type="Bonus" gid="79" x="588" y="180" width="8" height="8"/>
+  <object id="275" name="pill" type="Bonus" gid="79" x="620" y="180" width="8" height="8"/>
+  <object id="276" name="pill" type="Bonus" gid="79" x="652" y="180" width="8" height="8"/>
+  <object id="277" name="pill" type="Bonus" gid="79" x="652" y="212" width="8" height="8"/>
+  <object id="278" name="pill" type="Bonus" gid="79" x="716" y="212" width="8" height="8"/>
+  <object id="279" name="pill" type="Bonus" gid="79" x="716" y="244" width="8" height="8"/>
+  <object id="280" name="pill" type="Bonus" gid="79" x="780" y="244" width="8" height="8"/>
+  <object id="281" name="pill" type="Bonus" gid="79" x="780" y="212" width="8" height="8"/>
+  <object id="282" name="pill" type="Bonus" gid="79" x="812" y="212" width="8" height="8"/>
+  <object id="283" name="pill" type="Bonus" gid="79" x="844" y="212" width="8" height="8"/>
+  <object id="284" name="pill" type="Bonus" gid="79" x="844" y="244" width="8" height="8"/>
+  <object id="285" name="pill" type="Bonus" gid="79" x="908" y="244" width="8" height="8"/>
+  <object id="286" name="pill" type="Bonus" gid="79" x="940" y="212" width="8" height="8"/>
+  <object id="287" name="pill" type="Bonus" gid="79" x="972" y="212" width="8" height="8"/>
+  <object id="288" name="pill" type="Bonus" gid="79" x="1004" y="212" width="8" height="8"/>
+  <object id="289" name="pill" type="Bonus" gid="79" x="844" y="180" width="8" height="8"/>
+  <object id="290" name="pill" type="Bonus" gid="79" x="908" y="180" width="8" height="8"/>
+  <object id="291" name="pill" type="Bonus" gid="79" x="1004" y="148" width="8" height="8"/>
+  <object id="292" name="pill" type="Bonus" gid="79" x="972" y="148" width="8" height="8"/>
+  <object id="293" name="pill" type="Bonus" gid="79" x="940" y="148" width="8" height="8"/>
+  <object id="294" name="pill" type="Bonus" gid="79" x="908" y="148" width="8" height="8"/>
+  <object id="295" name="pill" type="Bonus" gid="79" x="908" y="116" width="8" height="8"/>
+  <object id="296" name="pill" type="Bonus" gid="79" x="908" y="84" width="8" height="8"/>
+  <object id="297" name="pill" type="Bonus" gid="79" x="908" y="52" width="8" height="8"/>
+  <object id="298" name="pill" type="Bonus" gid="79" x="940" y="52" width="8" height="8"/>
+  <object id="299" name="pill" type="Bonus" gid="79" x="972" y="52" width="8" height="8"/>
+  <object id="300" name="pill" type="Bonus" gid="79" x="1004" y="52" width="8" height="8"/>
+  <object id="301" name="pill" type="Bonus" gid="79" x="876" y="52" width="8" height="8"/>
+  <object id="302" name="pill" type="Bonus" gid="79" x="812" y="52" width="8" height="8"/>
+  <object id="303" name="pill" type="Bonus" gid="79" x="780" y="52" width="8" height="8"/>
+  <object id="304" name="pill" type="Bonus" gid="79" x="780" y="116" width="8" height="8"/>
+  <object id="305" name="pill" type="Bonus" gid="79" x="780" y="148" width="8" height="8"/>
+  <object id="306" name="pill" type="Bonus" gid="79" x="812" y="148" width="8" height="8"/>
+  <object id="307" name="pill" type="Bonus" gid="79" x="844" y="148" width="8" height="8"/>
+  <object id="308" name="pill" type="Bonus" gid="79" x="748" y="148" width="8" height="8"/>
+  <object id="309" name="pill" type="Bonus" gid="79" x="716" y="116" width="8" height="8"/>
+  <object id="310" name="pill" type="Bonus" gid="79" x="682.667" y="116" width="8" height="8"/>
+  <object id="311" name="pill" type="Bonus" gid="79" x="652" y="116" width="8" height="8"/>
+  <object id="312" name="pill" type="Bonus" gid="79" x="652" y="148" width="8" height="8"/>
+  <object id="313" name="pill" type="Bonus" gid="79" x="524" y="148" width="8" height="8"/>
+  <object id="314" name="pill" type="Bonus" gid="79" x="524" y="116" width="8" height="8"/>
+  <object id="315" name="pill" type="Bonus" gid="79" x="556" y="116" width="8" height="8"/>
+  <object id="316" name="pill" type="Bonus" gid="79" x="588" y="116" width="8" height="8"/>
+  <object id="317" name="pill" type="Bonus" gid="79" x="620" y="116" width="8" height="8"/>
+  <object id="318" name="pill" type="Bonus" gid="79" x="524" y="52" width="8" height="8"/>
+  <object id="319" name="pill" type="Bonus" gid="79" x="588" y="52" width="8" height="8"/>
+  <object id="320" name="pill" type="Bonus" gid="79" x="620" y="52" width="8" height="8"/>
+  <object id="321" name="pill" type="Bonus" gid="79" x="652" y="52" width="8" height="8"/>
+  <object id="322" name="pill" type="Bonus" gid="79" x="684" y="52" width="8" height="8"/>
+  <object id="323" name="pill" type="Bonus" gid="79" x="716" y="52" width="8" height="8"/>
+  <object id="324" name="pill" type="Bonus" gid="79" x="716" y="84" width="8" height="8"/>
+  <object id="325" name="pill" type="Bonus" gid="79" x="12" y="148" width="8" height="8"/>
+  <object id="326" name="pill" type="Bonus" gid="79" x="12" y="52" width="8" height="8"/>
+  <object id="327" name="pill" type="Bonus" gid="79" x="44" y="52" width="8" height="8"/>
+  <object id="328" name="pill" type="Bonus" gid="79" x="44" y="148" width="8" height="8"/>
+  <object id="329" name="pill" type="Bonus" gid="79" x="76" y="148" width="8" height="8"/>
+  <object id="330" name="pill" type="Bonus" gid="79" x="76" y="114" width="8" height="8"/>
+  <object id="331" name="pill" type="Bonus" gid="79" x="76" y="52" width="8" height="8"/>
+  <object id="332" name="pill" type="Bonus" gid="79" x="108" y="52" width="8" height="8"/>
+  <object id="333" name="pill" type="Bonus" gid="79" x="140" y="148" width="8" height="8"/>
+  <object id="334" name="pill" type="Bonus" gid="79" x="172" y="148" width="8" height="8"/>
+  <object id="335" name="pill" type="Bonus" gid="79" x="204" y="148" width="8" height="8"/>
+  <object id="336" name="pill" type="Bonus" gid="79" x="236" y="148" width="8" height="8"/>
+  <object id="337" name="pill" type="Bonus" gid="79" x="204" y="114" width="8" height="8"/>
+  <object id="338" name="pill" type="Bonus" gid="79" x="204" y="84" width="8" height="8"/>
+  <object id="339" name="pill" type="Bonus" gid="79" x="204" y="52" width="8" height="8"/>
+  <object id="340" name="pill" type="Bonus" gid="79" x="172" y="52" width="8" height="8"/>
+  <object id="341" name="pill" type="Bonus" gid="79" x="268" y="52" width="8" height="8"/>
+  <object id="342" name="pill" type="Bonus" gid="79" x="268" y="84" width="8" height="8"/>
+  <object id="343" name="pill" type="Bonus" gid="79" x="268" y="114" width="8" height="8"/>
+  <object id="344" name="pill" type="Bonus" gid="79" x="300" y="114" width="8" height="8"/>
+  <object id="345" name="pill" type="Bonus" gid="79" x="300" y="52" width="8" height="8"/>
+  <object id="346" name="pill" type="Bonus" gid="79" x="332" y="52" width="8" height="8"/>
+  <object id="347" name="pill" type="Bonus" gid="79" x="332" y="114" width="8" height="8"/>
+  <object id="348" name="pill" type="Bonus" gid="79" x="332" y="148" width="8" height="8"/>
+  <object id="349" name="pill" type="Bonus" gid="79" x="364" y="52" width="8" height="8"/>
+  <object id="350" name="pill" type="Bonus" gid="79" x="364" y="114" width="8" height="8"/>
+  <object id="351" name="pill" type="Bonus" gid="79" x="396" y="52" width="8" height="8"/>
+  <object id="352" name="pill" type="Bonus" gid="79" x="396" y="114" width="8" height="8"/>
+  <object id="353" name="pill" type="Bonus" gid="79" x="460" y="52" width="8" height="8"/>
+  <object id="354" name="pill" type="Bonus" gid="79" x="460" y="114" width="8" height="8"/>
+  <object id="355" name="pill" type="Bonus" gid="79" x="460" y="148" width="8" height="8"/>
+  <object id="356" name="pill" type="Bonus" gid="79" x="428" y="114" width="8" height="8"/>
+ </objectgroup>
+</map>
