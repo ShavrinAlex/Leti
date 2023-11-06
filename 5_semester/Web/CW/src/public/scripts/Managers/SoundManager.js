@@ -4,13 +4,15 @@ export class SoundManager {
     gainNode = null;
     loaded = false;
 
-    init() { 
+    constructor () { 
         this.context = new AudioContext();
         this.gainNode = this.context.createGain ? this.context.createGain() : this.context.createGainNode();
         this.gainNode.connect(this.context.destination);
     }
 
     load(path, callback) { 
+        let self = this;
+
         if (this.clips[path]) { 
             callback(this.clips[path]); 
             return;
@@ -18,7 +20,7 @@ export class SoundManager {
         let clip = {path: path, buffer: null, loaded: false};
 
         clip.play = function (volume, loop) {
-            soundManager.play(this.path, {looping: loop?loop:false,
+            self.play(this.path, {looping: loop?loop:false,
             volume: volume?volume:1});
         };
         this.clips[path] = clip; 
@@ -26,7 +28,7 @@ export class SoundManager {
         request.open('GET', path, true);
         request.responseType = 'arraybuffer';
         request.onload = function () {
-            soundManager.context.decodeAudioData(request.response, function (buffer) {
+            self.context.decodeAudioData(request.response, function (buffer) {
                 clip.buffer = buffer;
                 clip.loaded = true;
                 callback(clip);
@@ -36,22 +38,26 @@ export class SoundManager {
     }
 
     loadArray(array) { 
+        let self = this;
+
         for (let i = 0; i < array.length; i++) {
-            soundManager.load(array[i], function () {
-                if (array.length ===Object.keys(soundManager.clips).length) {
-                    for (sd in soundManager.clips){
-                        if (!soundManager.clips[sd].loaded) return;
+            this.load(array[i], function () {
+                if (array.length === Object.keys(self.clips).length) {
+                    for (let sd in self.clips){
+                        if (!self.clips[sd].loaded) return;
                     }
-                    soundManager.loaded = true; 
+                    self.loaded = true; 
                 }
             }); 
         } 
     }   
 
     play(path, settings) { 
-        if (!soundManager.loaded) { 
+        let self = this;
+
+        if (!this.loaded) { 
             setTimeout(function () { 
-                soundManager.play(path, settings); 
+                self.play(path, settings); 
             }, 1000);
             return;
         }
@@ -70,11 +76,11 @@ export class SoundManager {
             return false;
         }
 
-        let sound = soundManager.context.createBufferSource();
+        let sound = this.context.createBufferSource();
         sound.buffer = sd.buffer;
-        sound.connect(soundManager.gainNode);
+        sound.connect(this.gainNode);
         sound.loop = looping;
-        soundManager.gainNode.gain.value = volume;
+        this.gainNode.gain.value = volume;
         sound.start(0);
         return true;
     }

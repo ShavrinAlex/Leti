@@ -63,6 +63,11 @@ button {
     cursor: pointer;
     color: black;
     font-size: 24px;
+    box-shadow: 0px 0px 70px #4c368b;
+}
+
+button:disabled{
+    background-color: #696969;
 }
 
 #level_1{
