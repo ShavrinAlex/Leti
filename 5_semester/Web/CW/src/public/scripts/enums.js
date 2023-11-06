@@ -4,16 +4,24 @@ export const Bonuses = {
     'cherry': 'cherry'
 };
 
-export const States = {
-    'move': 1,
-    'stay': 2
+export const PlayerStates = {
+    'move': 0,
+    'stay': 1,
+    'dead': 2
+}
+
+export const GhostStates = {
+    'stay': 0,
+    'search': 1,
+    'chase': 2,
+    'afraid': 3
 }
 
 export const Directions = {
-    'up': 1,
-    'down': 2,
-    'left': 3,
-    'right': 4
+    'up': 0,
+    'down': 1,
+    'left': 2,
+    'right': 3
 };
 
 export const Control = {
@@ -25,9 +33,25 @@ export const Control = {
 }
 
 export const Actions = {
-    'move_up': 1,
-    'move_down': 2,
-    'move_left': 3,
-    'move_right': 4,
-    'stay': 5
+    'move_up': 0,
+    'move_down': 1,
+    'move_left': 2,
+    'move_right': 3,
+    'stay': 4
+}
+
+export const CellStates = {
+    'free': 0
+}
+
+export const SpriteSuffixs = {
+    'up': '_up',
+    'down': '_down',
+    'left': '_left',
+    'right': '_right'
+}
+
+export const Levels = {
+    'level_1': "../public/levels/level_1.json",
+    'level_2': "../public/levels/level_2.json"
 }

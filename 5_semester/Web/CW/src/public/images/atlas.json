@@ -240,7 +240,7 @@
                 "h": 32
             }
         },
-        "pacdeath_left_0": {
+        "pacdeath_right_0": {
             "frame": {
                 "x": 96,
                 "y": 0,
@@ -260,7 +260,7 @@
                 "h": 32
             }
         },
-        "pacdeath_left_1": {
+        "pacdeath_right_1": {
             "frame": {
                 "x": 96,
                 "y": 32,
@@ -280,7 +280,7 @@
                 "h": 32
             }
         },
-        "pacdeath_right_0": {
+        "pacdeath_left_0": {
             "frame": {
                 "x": 96,
                 "y": 64,
@@ -300,7 +300,7 @@
                 "h": 32
             }
         },
-        "pacdeath_right_1": {
+        "pacdeath_left_1": {
             "frame": {
                 "x": 96,
                 "y": 96,

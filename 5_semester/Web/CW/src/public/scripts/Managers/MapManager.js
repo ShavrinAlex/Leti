@@ -182,6 +182,31 @@ export class MapManager {
         }
     }
 
+    parseGhost(game_manager, ghost_id){
+        let self = this
+        if (!this.imgLoaded || !this.jsonLoaded) {
+            // Дожидаемся загрузки карты
+            
+            setTimeout(function () { 
+                self.parseGhost(game_manager, ghost_id); 
+            }, 100);
+        } else {
+            for (let j = 0; j < this.mapData.layers.length; j++) {
+                if(this.mapData.layers[j].type === 'objectgroup') {
+                    let entities = this.mapData.layers[j];
+                    for (let i = 0; i < entities.objects.length; i++) {
+                        if (entities.objects[i].id === ghost_id){
+                            let entity = entities.objects[i];
+
+                            game_manager.createGameObject(entity.type, entity.id, entity.name, entity.x, entity.y, entity.width, entity.height);
+                        }
+                       
+                    } 
+                } 
+            }
+        }
+    }
+
     getTilesetIdx(x, y, round_func){
         /*  */
         
