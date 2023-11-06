@@ -1,7 +1,7 @@
 import { Entity } from "./Entity.js";
 import { Bonus } from "./Bonus.js"
 import { Ghost } from "./Ghost.js"
-import { Bonuses, States } from "../enums.js";
+import { Bonuses, PlayerStates } from "../enums.js";
 
 
 export class Player extends Entity {
@@ -10,7 +10,7 @@ export class Player extends Entity {
     lifetime = 0;
     points = 0;
     power = false;
-    animation_id = 0;
+    state = PlayerStates.stay;
     /*
     constructor (x, y, w, h, lifetime=100) {
         super(x, y, w, h);
@@ -19,7 +19,7 @@ export class Player extends Entity {
     */
 
     kill() { 
-        this.lifetime = 0;
+        this.game_manager.deleteObject(this.id);
     }
 
     take_bonus(bonus){
@@ -28,13 +28,7 @@ export class Player extends Entity {
                 this.points += 100;
                 break;
             case Bonuses.power_pill:
-                let self = this;
-                self.power = true;
-                setTimeout(function (){
-                    self.power = false;
-                    console.log(self.power);
-                }, 1000);
-                console.log(self.power);
+                this.game_manager.power_mode();
                 break;
             case Bonuses.cherry:
                 this.points += 300;
@@ -43,25 +37,21 @@ export class Player extends Entity {
         console.log(bonus.type, this.points);
     }
 
-    onTouchWall(){
-        /* Метод, орабатывающий столкновение со стеной */
-
-        //this.state = States.stay;
-    }
-
     onTouchObjet(obj) {
-        
         if(obj instanceof Bonus) {
             this.take_bonus(obj);
             obj.kill();
         } else if (obj instanceof Ghost) {
-            // this.kill
-            console.log('kill')
+            if (this.power){
+                obj.kill();
+            } else {
+                this.kill();
+            }
         }
     }
 
     draw(ctx) { 
-        this.sprite_manager.drawSprite(ctx, this.name, this.pos_x, this.pos_y, this.direction, this.animation_id);
+        this.sprite_manager.drawSprite(ctx, this);
     }
 
 }

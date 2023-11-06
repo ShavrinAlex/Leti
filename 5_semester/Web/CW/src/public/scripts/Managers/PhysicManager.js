@@ -1,4 +1,4 @@
-import { States, Directions } from "../enums.js";
+import { PlayerStates, Directions, CellStates } from "../enums.js";
 
 
 export class PhysicManager {
@@ -6,8 +6,8 @@ export class PhysicManager {
     game_manager = null;
 
     update(obj) {
-        if(obj.state ===  States.stay){
-            return "stop"; 
+        if(obj.state === PlayerStates.stay || obj.state === PlayerStates.dead){
+            return; 
         }
         //console.log("old ", obj.pos_x, pos_y)
         if (obj.direction !== obj.request_direction){
@@ -19,7 +19,7 @@ export class PhysicManager {
         }
 
         if (this.is_wall_collision(obj.pos_x, obj.pos_y, {'x': obj.speed, 'y': obj.speed}, obj.direction)){
-            return 'break';
+            return;
         }
         let next_position = this.getNextPosition(obj.pos_x, obj.pos_y, obj.speed, obj.direction);
         let object = this.objectAtXY(obj, next_position.x, next_position.y); 
@@ -28,7 +28,6 @@ export class PhysicManager {
         }
         obj.pos_x = next_position.x;
         obj.pos_y = next_position.y;
-    return "move";
     }
 
     getNextPosition(x, y, offset, direction){
@@ -88,32 +87,9 @@ export class PhysicManager {
         }
         //console.log(tile_position)
         //console.log(this.map_manager.getTilesetIdx(tile_position.x, tile_position.y, round_func));
-        return 0 !== this.map_manager.getTilesetIdx(tile_position.x, tile_position.y, round_func);
+        return CellStates.free !== this.map_manager.getTilesetIdx(tile_position.x, tile_position.y, round_func);
     }
-    /*
-    getNextTile(obj, next_position){
-        tile_position = {'x': next_position.x, 'y': next_position.y};
-        console.log(tile_position)
-        switch(obj.direction){
-            case Directions.up:
-                tile_position.y -= 0;
-                break;
-            case Directions.down:
-                tile_position.y += obj.size_y;
-                break;
-            case Directions.left:
-                tile_position.x -= 0;
-                break;
-            case Directions.right:
-                tile_position.x += obj.size_x;
-                break;
-        }
-        tile_position.x %= this.map_manager.mapSize.x;
-        tile_position.y %= this.map_manager.mapSize.y;
-        let tile = his.map_manager.getTilesetIdx(tile_position.x, tile_position.y);
-       //console.log(tile_position, tile)
-    }
-    */
+
     objectAtXY(obj, x, y) { 
         for(let i = 0; i < this.game_manager.objects.length; i++) {
             let e = this.game_manager.objects[i]; 

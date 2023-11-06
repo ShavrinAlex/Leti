@@ -37,9 +37,10 @@ body
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: top;
+    justify-content: space-around;
 
     color: #fff;
+    font-size: 24px;
 }
 
 #play_field
@@ -54,4 +55,40 @@ body
 #source
 {
     display: none;
+}
+
+button {
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: black;
+    font-size: 24px;
+}
+
+#level_1{
+    background-color: #2882be;
+}
+#level_1:hover{
+    background-color: #77d2e9;
+}
+
+#level_2{
+    background-color: #7650e0;
+}
+#level_2:hover{
+    background-color: #c5b4f7;
+}
+
+#start{
+    background-color: #0ea860;
+}
+#start:hover{
+    background-color: #62e7a9;
+}
+
+#stop{
+    background-color: #af2e3f;
+}
+#stop:hover{
+    background-color: #d86574;
 }

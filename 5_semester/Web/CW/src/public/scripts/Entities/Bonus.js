@@ -6,7 +6,7 @@ export class Bonus extends GameObject {
     type = null;
 
     draw(ctx) { 
-        this.sprite_manager.drawSprite(ctx, this.name, this.pos_x, this.pos_y);
+        this.sprite_manager.drawSprite(ctx, this);
     }
 
     kill() { 
