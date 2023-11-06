@@ -55,3 +55,8 @@ export const Levels = {
     'level_1': "../public/levels/level_1.json",
     'level_2': "../public/levels/level_2.json"
 }
+
+export const GameStates  = {
+    'stop': 0,
+    'start': 1
+}

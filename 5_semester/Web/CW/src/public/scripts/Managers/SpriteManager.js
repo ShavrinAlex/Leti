@@ -57,13 +57,14 @@ export class SpriteManager {
             
             
             let sprite = this.getSprite(sprite_name);
+            /*
             if(!this.map_manager.isVisible(x, y, sprite.w, sprite.h)){
                 return;
             }
 
             x -= this.map_manager.view.x;
             y -= this.map_manager.view.y;
-
+            */
             ctx.drawImage(this.image, sprite.x, sprite.y, sprite.w, sprite.h, x, y, sprite.w, sprite.h);
         }
     }

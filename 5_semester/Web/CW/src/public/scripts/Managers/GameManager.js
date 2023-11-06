@@ -1,33 +1,47 @@
 import { MapManager } from "./MapManager.js";
 import { SpriteManager } from "./SpriteManager.js";
-import { events_manager } from "./EventsManager.js";
 import { PhysicManager } from "./PhysicManager.js";
 import { GhostManager } from "./GhostManager.js";
+import { SoundManager } from "./SoundManager.js";
 
 import { Player } from "../Entities/Player.js"
 import { Ghost } from "../Entities/Ghost.js"
 import { Bonus } from "../Entities/Bonus.js"
-import { Actions, Directions, GhostStates, PlayerStates } from "../enums.js";
+import { Actions, Directions, GameStates, GhostStates, PlayerStates } from "../enums.js";
 
 
 export class GameManager { 
     canvas = null;
     ctx = null;
 
-    factory = {};
-    objects = [];
-    player = null;
-    gameIntervalId = null;
-    powerTimerId_1 = null;
-    powerTimerId_2 = null;
-    ghostIntervalId = null;
-    playerIntervalId = null;
+    level = null;
+    state = null;
 
-    map_manager = new MapManager();
+    factory = {};
+
     sprite_manager = new SpriteManager();
-    events_manager = events_manager;
-    physic_manager = new PhysicManager();
-    ghost_manager = new GhostManager();
+    sound_manager = new SoundManager();
+    events_manager = null;
+
+
+    constructor (event_manager) {
+        this.canvas = document.getElementById("play_field");
+        this.ctx = this.canvas.getContext("2d");
+
+        this.factory['Player'] = Player;
+        this.factory['Ghost'] = Ghost;
+        this.factory['Bonus'] = Bonus;
+
+        this.events_manager = event_manager;
+        this.level = event_manager.level;
+        this.state = event_manager.game_state;
+
+        this.sprite_manager.loadAtlas("../public/images/atlas.json", "../public/images/atlas.png");
+
+        this.sound_manager.loadArray(["../public/sounds/waka.wav", "../public/sounds/power_dot.wav", "../public/sounds/eat_ghost.wav"]);
+        //this.sound_manager.play("../public/sounds/waka.wav");
+        this.loadAll();
+    }
 
     initPlayer(obj) { 
         this.player = obj;
@@ -69,7 +83,7 @@ export class GameManager {
         if(obj_type === "Player"){
             this.initPlayer(game_object);
         }
-        //game_object.draw(this.ctx);
+        game_object.draw(this.ctx);
     }
 
     draw(){
@@ -79,6 +93,11 @@ export class GameManager {
     }
 
     update() {
+        this.check_game_state();
+
+        if (this.state === GameStates.stop){
+            return
+        }
         if(this.player === null){
             return;
         }
@@ -117,21 +136,28 @@ export class GameManager {
         });
 
         this.map_manager.draw(this.canvas, this.ctx);
-        this.map_manager.centerAt(this.player.pos_x, this.player.pos_y);
+        //this.map_manager.centerAt(this.player.pos_x, this.player.pos_y);
         this.draw();
     }
 
     loadAll() { 
-        this.canvas = document.getElementById("play_field");
-        this.ctx = this.canvas.getContext("2d");
+        this.objects = [];
+        this.player = null;
+
+        this.gameIntervalId = null;
+        this.powerTimerId_1 = null;
+        this.powerTimerId_2 = null;
+        this.ghostIntervalId = null;
+        this.playerIntervalId = null;
         
-        this.factory['Player'] = Player;
-        this.factory['Ghost'] = Ghost;
-        this.factory['Bonus'] = Bonus;
+        console.log('load all');
+        this.map_manager = new MapManager();
+        this.physic_manager = new PhysicManager();
+        this.ghost_manager = new GhostManager();
 
         // Настройка менеджеров игры
-        this.map_manager.loadMap(this.events_manager.level);
-        this.sprite_manager.loadAtlas("../public/images/atlas.json", "../public/images/atlas.png");
+        this.map_manager.loadMap(this.level);
+        
         this.sprite_manager.map_manager = this.map_manager;
         this.physic_manager.map_manager = this.map_manager;
         this.physic_manager.game_manager = this;
@@ -139,7 +165,8 @@ export class GameManager {
         this.ghost_manager.game_manager = this;
 
         this.map_manager.draw(this.canvas, this.ctx);
-        this.map_manager.parseEntities(this);   
+        this.map_manager.parseEntities(this);
+        this.draw();   
     }
 
     power_mode() {
@@ -203,6 +230,7 @@ export class GameManager {
         let self = this;
         this.gameIntervalId = setInterval(updateWorld, 50);
         let animation_id = 0;
+
         this.playerIntervalId = setInterval(function () {
             self.player.animation_id = animation_id++;
             animation_id %= 3;
@@ -226,6 +254,17 @@ export class GameManager {
         img.onload = function () {
             self.ctx.drawImage(img, self.map_manager.mapSize.x/2-44, self.map_manager.mapSize.y/2-36);
             console.log('end')
+        }
+    }
+
+    check_game_state(){
+        if (this.state !== this.events_manager.game_state){
+            this.state = this.events_manager.game_state;
+        }
+        if (this.level !== this.events_manager.level){
+            console.log('change_level')
+            this.level = this.events_manager.level;
+            this.loadAll();
         }
     }
 }

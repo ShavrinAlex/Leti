@@ -11,7 +11,7 @@ export class MapManager {
     yCount = 0;
     tSize = { x: 32, y: 32 };
     mapSize = { x: 32, y: 32 };
-    view = {x: 0, y: 0, w: 32*40, h: 32*30};
+    //view = {x: 0, y: 0, w: 32*20, h: 32*20};
     tilesets = new Array();
 
     imgLoadCount = 0;
@@ -56,8 +56,8 @@ export class MapManager {
         this.tSize.y = this.mapData.tileheight;
         this.mapSize.x = this.xCount * this.tSize.x;
         this.mapSize.y = this.yCount * this.tSize.y;
-        this.view.w = Math.min(this.mapSize.x, this.view.w);
-        this.view.h = Math.min(this.mapSize.y, this.view.h);
+        //this.view.w = Math.min(this.mapSize.x, this.view.w);
+        //this.view.h = Math.min(this.mapSize.y, this.view.h);
         
         for (let i = 0; i < this.mapData.tilesets.length; i++) {
             // Загрузка всех наборов тайлов
@@ -69,7 +69,7 @@ export class MapManager {
 
                 self.imgLoadCount++;
                 if (self.imgLoadCount === self.mapData.tilesets.length) {
-                    console.log("img", self.imgLoadCount)
+                    //console.log("img", self.imgLoadCount)
                     self.imgLoaded = true;
                 }
             }
@@ -97,16 +97,16 @@ export class MapManager {
         request.open('GET', path, true)
         request.send()
     }
-
+    /*
     isVisible(x, y, width, height) {
-        /* Метод, проверяющий заданную клетку на принадлежность видимой части поля */
+        //Метод, проверяющий заданную клетку на принадлежность видимой части поля
 
         if (x + width < this.view.x || y + height < this.view.y || x > this.view.x + this.view.w || y > this.view.y + this.view.h){
             return false;
         }
         return true;
     }
-
+    */
     draw(canvas, ctx) {
         /* Метод отрисовки карты */
 
@@ -120,9 +120,11 @@ export class MapManager {
             }, 100);
         } else {
 
-            canvas.width = this.view.w;
-            canvas.height = this.view.h;
-            this.centerAt(this.mapSize.x/2, this.mapSize.y/2)
+            //canvas.width = this.view.w;
+            //canvas.height = this.view.h;
+            canvas.width = this.mapSize.x;
+            canvas.height = this.mapSize.y;
+            //this.centerAt(this.mapSize.x/2, this.mapSize.y/2)
             ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -145,13 +147,13 @@ export class MapManager {
                     let tile = this.getTile(this.tLayer.data[i]);
                     let pX = (i % this.xCount) * this.tSize.x;
                     let pY = Math.floor(i / this.xCount) * this.tSize.y;
-
+                    /*
                     if(!this.isVisible(pX, pY, this.tSize.x, this.tSize.y)){
                         continue;
                     }
                     pX -= this.view.x;
                     pY -= this.view.y;
-                    
+                    */
                     ctx.drawImage(tile.img, tile.px, tile.py, self.tSize.x, self.tSize.y, pX, pY, self.tSize.x, self.tSize.y);
                 }
             } 
@@ -217,9 +219,9 @@ export class MapManager {
         //console.log("idx ", idx, this.tLayer.data[idx]);
         return this.tLayer.data[idx];
     }
-
+    /*
     centerAt(x, y) {
-        /* Метод, осуществляющий центровку видимой части поля */
+        //Метод, осуществляющий центровку видимой части поля
 
         if(x < this.view.w / 2) {
             this.view.x = 0;
@@ -240,7 +242,7 @@ export class MapManager {
             }
         }
     }
-            
+    */
 };
 
 
