@@ -1,4 +1,5 @@
 import { Actions, Control, Levels, GameStates } from "../enums.js";
+import { sm } from "./SoundManager.js";
 
 export let events_manager = new class EventsManager {
     /* Класс менеджера собитий */
@@ -29,6 +30,7 @@ export let events_manager = new class EventsManager {
             // Запускаем новое действие
             events_manager.action = Actions[action];
         }
+        //sm.play("../public/sounds/waka.wav");
     }
 
     setLevel_1(event) {

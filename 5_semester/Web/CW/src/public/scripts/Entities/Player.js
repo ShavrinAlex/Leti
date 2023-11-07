@@ -1,7 +1,7 @@
 import { Entity } from "./Entity.js";
 import { Bonus } from "./Bonus.js"
 import { Ghost } from "./Ghost.js"
-import { Bonuses, PlayerStates } from "../enums.js";
+import { Bonuses, PlayerStates, Sounds } from "../enums.js";
 
 
 export class Player extends Entity {
@@ -11,6 +11,7 @@ export class Player extends Entity {
     points = 0;
     power = false;
     state = PlayerStates.stay;
+    sound_manager = null;
     /*
     constructor (x, y, w, h, lifetime=100) {
         super(x, y, w, h);
@@ -26,6 +27,9 @@ export class Player extends Entity {
         switch(bonus.type){
             case Bonuses.simple_pill:
                 this.points += 100;
+                if (!this.power){
+                    this.sound_manager.play(Sounds.pill, {'volume': 0.7});
+                }
                 break;
             case Bonuses.power_pill:
                 this.game_manager.power_mode();
@@ -35,6 +39,7 @@ export class Player extends Entity {
                 break;
         }
         console.log(bonus.type, this.points);
+        
     }
 
     onTouchObjet(obj) {
@@ -44,6 +49,7 @@ export class Player extends Entity {
         } else if (obj instanceof Ghost) {
             if (this.power){
                 obj.kill();
+                this.sound_manager.play(Sounds.ghost);
             } else {
                 this.kill();
             }

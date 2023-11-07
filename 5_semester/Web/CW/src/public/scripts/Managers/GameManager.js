@@ -2,12 +2,12 @@ import { MapManager } from "./MapManager.js";
 import { SpriteManager } from "./SpriteManager.js";
 import { PhysicManager } from "./PhysicManager.js";
 import { GhostManager } from "./GhostManager.js";
-import { SoundManager } from "./SoundManager.js";
+import { sm } from "./SoundManager.js";
 
 import { Player } from "../Entities/Player.js"
 import { Ghost } from "../Entities/Ghost.js"
 import { Bonus } from "../Entities/Bonus.js"
-import { Actions, Directions, GameStates, GhostStates, PlayerStates } from "../enums.js";
+import { Actions, Directions, GameStates, GhostStates, PlayerStates, Sounds } from "../enums.js";
 
 
 export class GameManager { 
@@ -20,7 +20,7 @@ export class GameManager {
     factory = {};
 
     sprite_manager = new SpriteManager();
-    sound_manager = new SoundManager();
+    sound_manager = sm;
     events_manager = null;
 
 
@@ -38,13 +38,13 @@ export class GameManager {
 
         this.sprite_manager.loadAtlas("../public/images/atlas.json", "../public/images/atlas.png");
 
-        this.sound_manager.loadArray(["../public/sounds/waka.wav", "../public/sounds/power_dot.wav", "../public/sounds/eat_ghost.wav"]);
-        //this.sound_manager.play("../public/sounds/waka.wav");
+        this.sound_manager.loadArray([Sounds.pill, Sounds.power, Sounds.ghost, Sounds.win, Sounds.loose]);
         this.loadAll();
     }
 
     initPlayer(obj) { 
         this.player = obj;
+        this.player.sound_manager = this.sound_manager;
     }
 
     deleteObject(id) {
@@ -96,6 +96,7 @@ export class GameManager {
         this.check_game_state();
 
         if (this.state === GameStates.stop){
+            console.log('stop');
             return
         }
         if(this.player === null){
@@ -103,7 +104,7 @@ export class GameManager {
         }
 
         if (this.is_end_game()){
-           this.game_over();
+           this.game_win();
         }
 
         if (this.player.state !== PlayerStates.dead){
@@ -141,6 +142,11 @@ export class GameManager {
     }
 
     loadAll() { 
+        clearTimeout(this.powerTimerId_1);
+        clearTimeout(this.powerTimerId_2);
+        clearInterval(this.ghostIntervalId);
+        clearInterval(this.ghostIntervalId);
+        this.sound_manager.stopAll();
         this.objects = [];
         this.player = null;
 
@@ -166,7 +172,7 @@ export class GameManager {
 
         this.map_manager.draw(this.canvas, this.ctx);
         this.map_manager.parseEntities(this);
-        this.draw();   
+        this.draw(); 
     }
 
     power_mode() {
@@ -176,6 +182,7 @@ export class GameManager {
             clearTimeout(this.powerTimerId_1);
             clearTimeout(this.powerTimerId_2);
             clearInterval(this.ghostIntervalId);
+            this.sound_manager.stopAll();
         }
 
         this.player.power = true;
@@ -185,6 +192,7 @@ export class GameManager {
                 this.objects[i].animation_id = 0;
             }
         }
+        this.sound_manager.play(Sounds.power, {'volume': 0.7, 'looping': true});
         this.powerTimerId_1 = setTimeout(() => {
             let ghost_animation_id = 0;
             this.ghostIntervalId = setInterval(function () {
@@ -204,12 +212,19 @@ export class GameManager {
                 }
                 self.player.power = false;
                 clearInterval(self.ghostIntervalId);
+                this.sound_manager.stopAll();
             }, 3000);
         }, 5000);
     }   
 
     kill_player() {
-        let self = this;
+        console.log('kill')
+        this.sound_manager.play(Sounds.loose, {'volume': 0.7});
+        this.state = GameStates.stop;
+        console.log(this.state === GameStates.stop)
+        clearInterval(this.gameIntervalId);
+        //clearInterval(this.gameIntervalId);
+        /*
         clearInterval(this.playerIntervalId);
         this.player.state = PlayerStates.dead;
         let animation_id = 0;
@@ -217,6 +232,8 @@ export class GameManager {
             self.player.animation_id = animation_id++;
             animation_id %= 2;
         }, 500);
+        */
+
     }
 
     revive_ghost(ghost_id) {
@@ -247,12 +264,15 @@ export class GameManager {
         return is_end_game;
     }
 
-    game_over(){
-        let self = this
+    game_win(){
+        clearInterval(this.gameIntervalId);
+        let self = this;
+        self.sound_manager.stopAll();
         let img = new Image();
         img.src = "../public/images/pac-man/other/pac_man_text/spr_message_2.png"
         img.onload = function () {
             self.ctx.drawImage(img, self.map_manager.mapSize.x/2-44, self.map_manager.mapSize.y/2-36);
+            self.sound_manager.play(Sounds.win, {'volume': 0.7});
             console.log('end')
         }
     }
