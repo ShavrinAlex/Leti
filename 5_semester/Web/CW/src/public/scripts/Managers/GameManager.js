@@ -95,9 +95,9 @@ export class GameManager {
     update() {
         this.check_game_state();
 
-        if (this.state === GameStates.stop){
+        if (this.state == GameStates.stop){
             console.log('stop');
-            return
+            return;
         }
         if(this.player === null){
             return;
@@ -145,16 +145,13 @@ export class GameManager {
         clearTimeout(this.powerTimerId_1);
         clearTimeout(this.powerTimerId_2);
         clearInterval(this.ghostIntervalId);
-        clearInterval(this.ghostIntervalId);
         this.sound_manager.stopAll();
         this.objects = [];
         this.player = null;
 
-        this.gameIntervalId = null;
         this.powerTimerId_1 = null;
         this.powerTimerId_2 = null;
         this.ghostIntervalId = null;
-        this.playerIntervalId = null;
         
         console.log('load all');
         this.map_manager = new MapManager();
@@ -221,8 +218,9 @@ export class GameManager {
         console.log('kill')
         this.sound_manager.play(Sounds.loose, {'volume': 0.7});
         this.state = GameStates.stop;
+        this.events_manager.game_state = this.state;
         console.log(this.state === GameStates.stop)
-        clearInterval(this.gameIntervalId);
+        //clearInterval(this.gameIntervalId);
         //clearInterval(this.gameIntervalId);
         /*
         clearInterval(this.playerIntervalId);
@@ -265,7 +263,9 @@ export class GameManager {
     }
 
     game_win(){
-        clearInterval(this.gameIntervalId);
+        //clearInterval(this.gameIntervalId);
+        this.state = GameStates.stop;
+        this.events_manager.game_state = this.state;
         let self = this;
         self.sound_manager.stopAll();
         let img = new Image();

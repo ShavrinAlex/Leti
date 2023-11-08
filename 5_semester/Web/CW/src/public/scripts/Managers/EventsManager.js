@@ -67,6 +67,7 @@ export let events_manager = new class EventsManager {
     next(event){
         if (events_manager.level === Levels.level_1){
             events_manager.game_state = GameStates.stop;
+            events_manager.action = Actions.move_right;
             events_manager.level = Levels.level_2;
             window.localStorage['pac_man.level'] = 'level_2';
         } else {
