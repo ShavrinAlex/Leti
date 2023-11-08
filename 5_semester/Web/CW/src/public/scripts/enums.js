@@ -60,3 +60,12 @@ export const GameStates  = {
     'stop': 0,
     'start': 1
 }
+
+
+export const Sounds = {
+    'pill': "../public/sounds/waka.wav",
+    'power': "../public/sounds/power_dot.wav",
+    'ghost': "../public/sounds/eat_ghost.wav",
+    'win': "../public/sounds/gameWin.wav",
+    'loose': "../public/sounds/gameOver.wav"
+}

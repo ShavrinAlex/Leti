@@ -43,6 +43,11 @@ body
     font-size: 24px;
 }
 
+.info{
+    width: 400px;
+    overflow-x: scroll;
+}
+
 #play_field
 {
     border-radius: 15px;
@@ -69,7 +74,7 @@ button {
 button:disabled{
     background-color: #696969;
 }
-
+/*
 #level_1{
     background-color: #2882be;
 }
@@ -83,7 +88,7 @@ button:disabled{
 #level_2:hover{
     background-color: #c5b4f7;
 }
-
+*/
 #start{
     background-color: #0ea860;
 }
@@ -91,9 +96,9 @@ button:disabled{
     background-color: #62e7a9;
 }
 
-#stop{
-    background-color: #af2e3f;
+#next{
+    background-color: #7650e0;
 }
-#stop:hover{
-    background-color: #d86574;
+#next:hover{
+    background-color: #c5b4f7;
 }

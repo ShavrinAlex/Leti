@@ -1,8 +1,9 @@
-export class SoundManager {
+export const sm = new class SoundManager {
     clips = {};
     context = null;
     gainNode = null;
     loaded = false;
+    path_array = [];
 
     constructor () { 
         this.context = new AudioContext();
@@ -38,6 +39,7 @@ export class SoundManager {
     }
 
     loadArray(array) { 
+        this.path_array = array;
         let self = this;
 
         for (let i = 0; i < array.length; i++) {
@@ -59,7 +61,6 @@ export class SoundManager {
             setTimeout(function () { 
                 self.play(path, settings); 
             }, 1000);
-            return;
         }
         let looping = false; 
         let volume = 1;
@@ -72,16 +73,25 @@ export class SoundManager {
             }
         }
         let sd = this.clips[path];
-        if (sd === null){
+        if (sd === null)
             return false;
-        }
 
         let sound = this.context.createBufferSource();
         sound.buffer = sd.buffer;
         sound.connect(this.gainNode);
         sound.loop = looping;
         this.gainNode.gain.value = volume;
+        //console.log(volume);
         sound.start(0);
+
         return true;
+    }
+
+    stopAll() {
+        this.gainNode.disconnect();
+        this.gainNode = this.context.createGain ? this.context.createGain() : this.context.createGainNode();
+        this.gainNode.connect(this.context.destination);
+
+        this.loadArray(this.path_array);
     }
 }
