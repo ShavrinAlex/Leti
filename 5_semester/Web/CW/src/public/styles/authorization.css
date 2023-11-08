@@ -1,0 +1,94 @@
+* 
+{
+    font-family: 'Press Start 2P';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body
+{
+    min-height: 100vh;
+    background: linear-gradient(0deg, #000333 0%, #000 40% 60%, #140a30 85%, #420080 100% );
+    display: flex; 
+    justify-content: center;
+    align-items: center
+}
+
+.authorization
+{
+    width: 800px;
+    height: 600px;
+
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    
+    
+    text-align: center;
+
+    background-color: rgba(1, 8, 89, 0.5);
+
+    box-shadow: 0px 0px 100px #3a2770;
+    outline: 10px solid #0e6aa8;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+.preview_text
+{
+    color: #ffffff;
+}
+
+.username_input
+{
+    background-color: #a0e1fd;
+    color: #000a66;
+    font-size: 17px;
+    margin: 10px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+
+.level_btn_container
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: #fff;
+    padding: 10px;
+}
+
+.log_in_button
+{
+    text-align: center;
+    font-size: 22px;
+
+    color: #000a66;
+
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+    margin: 10px;
+    background-color: #69cdf8;
+    cursor: pointer;
+}
+
+.log_in_button:hover
+{
+    color: #000a66;
+    background-color: #9a83d8;
+}
+
+.log_in_button:disabled
+{
+    color: #000a665b;
+    background-color: #69cdf886;
+}
+
+.log_in_button:active
+{
+    color: #000a66;
+    background-color: #6983f8;
+}

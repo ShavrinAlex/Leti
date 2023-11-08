@@ -7,7 +7,7 @@ import { sm } from "./SoundManager.js";
 import { Player } from "../Entities/Player.js"
 import { Ghost } from "../Entities/Ghost.js"
 import { Bonus } from "../Entities/Bonus.js"
-import { Actions, Directions, GameStates, GhostStates, PlayerStates, Sounds } from "../enums.js";
+import { Actions, Directions, GameStates, GhostStates, Levels, PlayerStates, Sounds } from "../enums.js";
 
 
 export class GameManager { 
@@ -283,9 +283,50 @@ export class GameManager {
         }
         if (this.level !== this.events_manager.level){
             console.log('change_level')
+            this.end_level();
             this.level = this.events_manager.level;
             this.loadAll();
         }
+        if (this.events_manager.is_end_game){
+            this.stop_game();
+            this.end_level();
+            window.location = './game_over';
+        }
+    }
+
+    end_level(){
+        let score_table = JSON.parse(localStorage["pac_man.score_table"]);
+        let is_exists_username = false;
+        let level = (this.level == Levels.level_1) ? 1 : 2;
+        let score = this.player.points;
+
+        /* Updating a user's result or creating a new entry */
+        for (let i = 0; i < score_table.length; i++){
+            if (score_table[i].name == localStorage["pac_man.username"] && score_table[i].level == level){
+                score_table[i].score = score;
+                is_exists_username = true;
+                break
+            }
+        }
+
+        if (!is_exists_username){
+            score_table.push({
+                name: localStorage["pac_man.username"],
+                level: level,
+                score: score
+            })
+        }
+        
+        localStorage["pac_man.score_table"] = JSON.stringify(score_table)
+    }
+
+    stop_game(){
+        clearInterval(this.gameIntervalId);
+        clearTimeout(this.powerTimerId_1);
+        clearTimeout(this.powerTimerId_2);
+        clearInterval(this.ghostIntervalId);
+        clearInterval(this.ghostIntervalId);
+        clearInterval(this.playerIntervalId);
     }
 }
 
