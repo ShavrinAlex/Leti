@@ -43,6 +43,11 @@ body
     font-size: 24px;
 }
 
+.info{
+    width: 400px;
+    overflow-x: scroll;
+}
+
 #play_field
 {
     border-radius: 15px;

@@ -93,6 +93,7 @@ export class GameManager {
     }
 
     update() {
+        this.showInfo();
         this.check_game_state();
 
         if (this.state == GameStates.stop){
@@ -327,6 +328,12 @@ export class GameManager {
         clearInterval(this.ghostIntervalId);
         clearInterval(this.ghostIntervalId);
         clearInterval(this.playerIntervalId);
+    }
+
+    showInfo(){
+        document.getElementById('username').innerHTML = `Username: ${window.localStorage['pac_man.username']}`;
+        document.getElementById('level').innerHTML = `Level: ${(this.level === Levels.level_1) ? 1 : 2}`;
+        document.getElementById('score').innerHTML = `Score: ${this.player.points}`;
     }
 }
 

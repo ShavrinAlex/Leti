@@ -5,25 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../public/styles/game_over.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
-    <!--<script type="module" src="./Scripts/GameOver.js"></script>-->
+    <script type="module" src="../public/scripts/game_over.js"></script>
 
     <title>CW</title>
 </head>
 
 <body>
     <div class="game_over">
-        <h1 class="game_over_text">GAME OVER</h1>
-        <h2 class="score_table_text">SCORE TABLE</h2>
-        <div class="game_over_grid">
-            <div class="column" id="numbers_column">
-                <div class="column_name">№</div>
-            </div>
-            <div class="column" id="names_column">
-                <div class="column_name">Username</div>
-            </div>
-            <div class="column" id="scores_column">
-                <div class="column_name">Score</div>
-            </div>
+        <h1 class="game_over_text">Score table</h1>
+        <div class="header">
+            <div>№</div>
+            <div>Username</div>
+            <div>Level</div>
+            <div>Score</div>
+        </div>
+        <div class="game_over_scrollable" id="table">
+           
         </div>
     </div>
 </body>
