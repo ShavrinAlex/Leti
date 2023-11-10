@@ -1,4 +1,5 @@
 import { PlayerStates, Directions, CellStates } from "../enums.js";
+import { Player } from "../Entities/Player.js";
 
 
 export class PhysicManager {
@@ -6,10 +7,10 @@ export class PhysicManager {
     game_manager = null;
 
     update(obj) {
-        if(obj.state === PlayerStates.stay || obj.state === PlayerStates.dead){
+        if(obj instanceof Player && (obj.state === PlayerStates.stay || obj.state === PlayerStates.dead)){
             return; 
         }
-        //console.log("old ", obj.pos_x, pos_y)
+
         if (obj.direction !== obj.request_direction){
             if (obj.pos_x % this.map_manager.tSize.x == 0 && obj.pos_y % this.map_manager.tSize.y == 0){
                 if (!this.is_wall_collision(obj.pos_x, obj.pos_y, {'x': obj.speed, 'y': obj.speed}, obj.request_direction)){

@@ -18,6 +18,9 @@ export class Player extends Entity {
         this.lifetime = lifetime;
     }
     */
+    update() {
+        this.physic_manager.update(this);
+    }
 
     kill() { 
         this.game_manager.deleteObject(this.id);
@@ -33,13 +36,13 @@ export class Player extends Entity {
                 break;
             case Bonuses.power_pill:
                 this.game_manager.power_mode();
+                this.points += 500;
                 break;
             case Bonuses.cherry:
                 this.points += 300;
                 break;
         }
-        console.log(bonus.type, this.points);
-        
+        //console.log(bonus.type, this.points);
     }
 
     onTouchObjet(obj) {

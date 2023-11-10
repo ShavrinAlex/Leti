@@ -4,7 +4,7 @@ import { Tile } from "./HelperClasses/Tile.js"
 
 export class MapManager {
     /* Класс менеджера карты */
-
+    mapMatrix = [];
     mapData = null;
     tLayer = null;
     xCount = 0;
@@ -58,7 +58,11 @@ export class MapManager {
         this.mapSize.y = this.yCount * this.tSize.y;
         //this.view.w = Math.min(this.mapSize.x, this.view.w);
         //this.view.h = Math.min(this.mapSize.y, this.view.h);
-        
+        if (this.mapData !== null){
+            for(let i=0; i < this.mapData.layers[0].data.length;i = i + this.xCount){
+                this.mapMatrix.push(this.mapData.layers[0].data.slice(i, i + this.xCount));
+            }
+        }   
         for (let i = 0; i < this.mapData.tilesets.length; i++) {
             // Загрузка всех наборов тайлов
 
@@ -162,7 +166,7 @@ export class MapManager {
 
     parseEntities(game_manager) {
         /* Метод, осуществляющий расстановку сущностей игры */
-
+        
         let self = this
         if (!this.imgLoaded || !this.jsonLoaded) {
             // Дожидаемся загрузки карты

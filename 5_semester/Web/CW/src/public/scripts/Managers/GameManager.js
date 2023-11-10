@@ -44,7 +44,14 @@ export class GameManager {
 
     initPlayer(obj) { 
         this.player = obj;
+        this.player.speed = 8;
         this.player.sound_manager = this.sound_manager;
+        let self = this;
+        let animation_id = 0;
+        this.playerIntervalId = setInterval(function () {
+            self.player.animation_id = animation_id++;
+            animation_id %= 3;
+        }, 100);
     }
 
     deleteObject(id) {
@@ -79,6 +86,11 @@ export class GameManager {
             game_object.type = name;
         }
 
+        if(obj_type === "Ghost"){
+            game_object.ghost_manager = this.ghost_manager;
+            game_object.speed = 4;
+        }
+
         this.objects.push(game_object)
         if(obj_type === "Player"){
             this.initPlayer(game_object);
@@ -97,7 +109,7 @@ export class GameManager {
         this.check_game_state();
 
         if (this.state == GameStates.stop){
-            console.log('stop');
+            //console.log('stop');
             return;
         }
         if(this.player === null){
@@ -154,7 +166,7 @@ export class GameManager {
         this.powerTimerId_2 = null;
         this.ghostIntervalId = null;
         
-        console.log('load all');
+        //console.log('load all');
         this.map_manager = new MapManager();
         this.physic_manager = new PhysicManager();
         this.ghost_manager = new GhostManager();
@@ -239,18 +251,12 @@ export class GameManager {
         let self = this;
         setTimeout(() => {
             this.map_manager.parseGhost(this, ghost_id);
-        }, 8000);
+        }, 4000);
     }
 
     play(updateWorld) {
         let self = this;
         this.gameIntervalId = setInterval(updateWorld, 50);
-        let animation_id = 0;
-
-        this.playerIntervalId = setInterval(function () {
-            self.player.animation_id = animation_id++;
-            animation_id %= 3;
-        }, 100);
     }
 
     is_end_game(){
@@ -331,9 +337,11 @@ export class GameManager {
     }
 
     showInfo(){
-        document.getElementById('username').innerHTML = `Username: ${window.localStorage['pac_man.username']}`;
-        document.getElementById('level').innerHTML = `Level: ${(this.level === Levels.level_1) ? 1 : 2}`;
-        document.getElementById('score').innerHTML = `Score: ${this.player.points}`;
+        if (this.player){
+            document.getElementById('username').innerHTML = `Username: ${window.localStorage['pac_man.username']}`;
+            document.getElementById('level').innerHTML = `Level: ${(this.level === Levels.level_1) ? 1 : 2}`;
+            document.getElementById('score').innerHTML = `Score: ${this.player.points}`;
+        }
     }
 }
 

@@ -7,10 +7,10 @@ export class Entity extends GameObject {
     direction = Directions.right;
     request_direction = Directions.right;
     animation_id = 0;
-    speed = 8;
+    speed = 0;
     physic_manager = null;
-   
+    /*
     update() {
         this.physic_manager.update(this);
-    }
+    }*/
 }
