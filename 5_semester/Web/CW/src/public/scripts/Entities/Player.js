@@ -12,12 +12,7 @@ export class Player extends Entity {
     power = false;
     state = PlayerStates.stay;
     sound_manager = null;
-    /*
-    constructor (x, y, w, h, lifetime=100) {
-        super(x, y, w, h);
-        this.lifetime = lifetime;
-    }
-    */
+
     update() {
         this.physic_manager.update(this);
     }
@@ -42,7 +37,6 @@ export class Player extends Entity {
                 this.points += 300;
                 break;
         }
-        //console.log(bonus.type, this.points);
     }
 
     onTouchObjet(obj) {

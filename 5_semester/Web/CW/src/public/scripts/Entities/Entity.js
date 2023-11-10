@@ -9,8 +9,4 @@ export class Entity extends GameObject {
     animation_id = 0;
     speed = 0;
     physic_manager = null;
-    /*
-    update() {
-        this.physic_manager.update(this);
-    }*/
 }
