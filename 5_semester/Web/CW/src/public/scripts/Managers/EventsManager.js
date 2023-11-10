@@ -1,5 +1,5 @@
 import { Actions, Control, Levels, GameStates } from "../enums.js";
-import { sm } from "./SoundManager.js";
+
 
 export let events_manager = new class EventsManager {
     /* Класс менеджера собитий */
@@ -24,8 +24,6 @@ export let events_manager = new class EventsManager {
 
         this.btn_lvl_1.addEventListener('click', this.setLevel_1);
         this.btn_lvl_2.addEventListener('click', this.setLevel_2);
-        
-        
         */
     }
 

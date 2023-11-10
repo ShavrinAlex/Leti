@@ -18,6 +18,9 @@ export class Player extends Entity {
         this.lifetime = lifetime;
     }
     */
+    update() {
+        this.physic_manager.update(this);
+    }
 
     kill() { 
         this.game_manager.deleteObject(this.id);

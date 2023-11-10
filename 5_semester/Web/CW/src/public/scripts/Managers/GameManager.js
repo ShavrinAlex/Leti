@@ -2,7 +2,6 @@ import { MapManager } from "./MapManager.js";
 import { SpriteManager } from "./SpriteManager.js";
 import { PhysicManager } from "./PhysicManager.js";
 import { GhostManager } from "./GhostManager.js";
-import { sm } from "./SoundManager.js";
 
 import { Player } from "../Entities/Player.js"
 import { Ghost } from "../Entities/Ghost.js"
@@ -20,11 +19,11 @@ export class GameManager {
     factory = {};
 
     sprite_manager = new SpriteManager();
-    sound_manager = sm;
+    sound_manager = null;
     events_manager = null;
 
 
-    constructor (event_manager) {
+    constructor (event_manager, sound_manager) {
         this.canvas = document.getElementById("play_field");
         this.ctx = this.canvas.getContext("2d");
 
@@ -33,6 +32,7 @@ export class GameManager {
         this.factory['Bonus'] = Bonus;
 
         this.events_manager = event_manager;
+        this.sound_manager = sound_manager;
         this.level = event_manager.level;
         this.state = event_manager.game_state;
 
@@ -77,6 +77,10 @@ export class GameManager {
             game_object.physic_manager = this.physic_manager;
         } else {
             game_object.type = name;
+        }
+
+        if (obj_type === "Ghost"){
+            game_object.ghost_manager = this.ghost_manager;
         }
 
         this.objects.push(game_object)

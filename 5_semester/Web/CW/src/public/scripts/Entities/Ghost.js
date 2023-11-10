@@ -13,7 +13,8 @@ export class Ghost extends Entity{
     }
 
     update() { 
-
+        this.ghost_manager.update(this); //update direction
+        this.physic_manager.update(this);
     }
     
     onTouchEntity(obj) { 

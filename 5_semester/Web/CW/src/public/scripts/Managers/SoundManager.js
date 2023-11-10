@@ -1,4 +1,4 @@
-export const sm = new class SoundManager {
+export let sm = new class SoundManager {
     clips = {};
     context = null;
     gainNode = null;
