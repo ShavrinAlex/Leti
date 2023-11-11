@@ -1,7 +1,5 @@
 import { Op, Sequelize } from 'sequelize'
 import * as models from "./models/models.js"
-import {db} from "./db.js"
-import { waitForDebugger } from 'inspector';
 
 
 export async function request_1() {
