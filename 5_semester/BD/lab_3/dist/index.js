@@ -1,7 +1,7 @@
 import { db } from "./db.js";
 import * as models from "./models/models.js";
 import { fill_db } from "./fill_db.js";
-import { request_1 } from "./requests.js";
+import { request_1, request_2, request_4, request_5 } from "./requests.js";
 try {
     await db.authenticate();
     console.log('aunt: done');
@@ -12,7 +12,10 @@ try {
     await fill_db();
     console.log('fill db: done');
     //console.log(await models.Breed.findAll());
-    console.log(await request_1());
+    await request_1();
+    await request_2();
+    await request_4();
+    await request_5();
     //await models.Breed.findAll();
 }
 catch (error) {
