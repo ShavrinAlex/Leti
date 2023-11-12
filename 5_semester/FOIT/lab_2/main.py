@@ -5,7 +5,7 @@ import copy
 from math import sqrt
 
 
-DIMENSION_SIZE = 1250
+DIMENSION_SIZE = 500
 DELTA = 0.05
 
 X = np.linspace(-6, 6, DIMENSION_SIZE)
@@ -66,12 +66,12 @@ def draw_potential_grid(solve):
     ax.plot_surface(x_values, y_values, np.array(solve, dtype=float), cmap=cm.coolwarm,
                     linewidth=0, antialiased=False)
 
-def draw_potentiales(equipotential_1, equipotential_2):
+def draw_potentiale(equipotential):
     fig, ax = plt.subplots()
-    ax.plot(equipotential_1[0], equipotential_1[1], linestyle="none", marker="o")
-    ax.plot(equipotential_2[0], equipotential_2[1], linestyle="none", marker="o")
+    ax.plot(equipotential[0], equipotential[1], linestyle="none", marker="o")
+    #ax.plot(equipotential_2[0], equipotential_2[1], linestyle="none", marker="o")
 
-def draw_electrodes_and_equipotentiales(equipotential_1, equipotential_2, electrodes):
+def draw_electrodes_and_equipotentiale(equipotential, electrodes):
     fig2, ax2 = plt.subplots()
     x = []
     y = []
@@ -81,8 +81,8 @@ def draw_electrodes_and_equipotentiales(equipotential_1, equipotential_2, electr
                 x.append(X[j])
                 y.append(Y[i])
     ax2.plot(x, y, linestyle="none", marker="o")
-    ax2.plot(equipotential_1[0], equipotential_1[1], linestyle="none", marker="o")
-    ax2.plot(equipotential_2[0], equipotential_2[1], linestyle="none", marker="o")
+    ax2.plot(equipotential[0], equipotential[1], linestyle="none", marker="o")
+    #ax2.plot(equipotential_2[0], equipotential_2[1], linestyle="none", marker="o")
 
 def get_equipotential(potential_grid):
     equipotential = [[], []]
@@ -92,7 +92,7 @@ def get_equipotential(potential_grid):
                 equipotential[0].append(X[x])
                 equipotential[1].append(Y[y])
     return equipotential
-
+'''
 def separate_equipotential(equipotential):
     first_equipotential = [[], []]
     second_equipotential =[[], []]
@@ -104,7 +104,7 @@ def separate_equipotential(equipotential):
             second_equipotential[0].append(equipotential[0][i])
             second_equipotential[1].append(equipotential[1][i])
     return first_equipotential, second_equipotential
-
+'''
 def clear_equipotential(equipotential, equip_func):
     clear_equipotential = [[], []]
     for i in range(len(equipotential[0])):
@@ -169,23 +169,24 @@ def solve(potential_grid, potential_grid_electrode, precision):
     
     equipotential = get_equipotential(potential_grid)
     print("equipotential done")
-    eq_2, eq_1 = separate_equipotential(equipotential)
-    print("separate equipotential done")
+    #eq_2, eq_1 = separate_equipotential(equipotential)
+    #print("separate equipotential done")
 
-    eq_2 = clear_equipotential(eq_2, second_inner_edlectrode)
-    eq_1 = clear_equipotential(eq_1, first_inner_edlectrode)
+    equipotential = clear_equipotential(equipotential, second_inner_edlectrode)
+    equipotential = clear_equipotential(equipotential, first_inner_edlectrode)
     print("clear equipotential done")
 
-    draw_potentiales(eq_1, eq_2)
-    draw_electrodes_and_equipotentiales(eq_1, eq_2, potential_grid_electrode)
+    draw_potentiale(equipotential)
+    draw_electrodes_and_equipotentiale(equipotential, potential_grid_electrode)
 
-    cycle_1 = tsp_greedy(eq_1)
-    cycle_2 = tsp_greedy(eq_2)
+    cycle = tsp_greedy(equipotential)
+    #cycle_2 = tsp_greedy(eq_2)
     print("equipotentials cycles done")
-    dist = calculate_cycle_distance(cycle_1)
+    dist = calculate_cycle_distance(cycle)
     print(dist)
-    dist += calculate_cycle_distance(cycle_2)
-    print(dist)
+
+    #dist += calculate_cycle_distance(cycle_2)
+    #print(dist)
 
 
 
@@ -197,7 +198,7 @@ def main():
     fill_potential_grid(potential_grid, potential_grid_electrode)
     draw_electrodes(potential_grid_electrode)
 
-    solve(potential_grid, potential_grid_electrode, 0.01)
+    solve(potential_grid, potential_grid_electrode, 0.00001)
     
     plt.show()
 
