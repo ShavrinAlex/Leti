@@ -89,6 +89,9 @@ export class GameManager {
         if(obj_type === "Ghost"){
             game_object.ghost_manager = this.ghost_manager;
             game_object.speed = 4;
+            if (this.player && this.player.power){
+                game_object.state = GhostStates.afraid;
+            }
         }
 
         this.objects.push(game_object)
@@ -223,8 +226,8 @@ export class GameManager {
                 self.player.power = false;
                 clearInterval(self.ghostIntervalId);
                 this.sound_manager.stopAll();
-            }, 3000);
-        }, 5000);
+            }, 2000);
+        }, 3000);
     }   
 
     kill_player() {
@@ -251,7 +254,7 @@ export class GameManager {
         let self = this;
         setTimeout(() => {
             this.map_manager.parseGhost(this, ghost_id);
-        }, 4000);
+        }, 5000);
     }
 
     play(updateWorld) {

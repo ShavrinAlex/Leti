@@ -61,8 +61,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 414,
-                "y": 344.5
+                "x": 413,
+                "y": 343.5
             }
         },
         "level_1.tmx#atlas": {
@@ -108,8 +108,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 530,
-                "y": 565.5
+                "x": 515,
+                "y": 431.5
             }
         },
         "level_2.tmx#atlas": {
@@ -132,12 +132,14 @@
     "map.renderOrder": null,
     "map.width": 32,
     "openFiles": [
-        "level_2.tmx"
+        "level_2.tmx",
+        "level_1.tmx"
     ],
     "project": "course_work.tiled-project",
     "recentFiles": [
-        "level_2.json",
+        "level_1.tmx",
         "level_2.tmx",
+        "level_2.json",
         "level_1.json",
         "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/level_2.tmx",
         "/home/alex/Programming/Leti/5_semester/Web/CW/src/public/tiled/level_1.tmx"
