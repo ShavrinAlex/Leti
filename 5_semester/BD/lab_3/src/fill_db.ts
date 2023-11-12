@@ -6,7 +6,6 @@ export async function fill_db(){
     for (let i = 1; i <= 5; i++){
        await models.Ring.create({});
     }
-    //console.log(models.Ring.findAll())
 
     //fill Breeds
     let breeds = [
@@ -21,7 +20,6 @@ export async function fill_db(){
         breeds.map((row) => ({ breed_name: row[0], ring_number: row[1] })), 
         { returning: false }
     );
-    //console.log(await models.Breed.findAll());
 
     //fill clubs
     let clubs = [
@@ -35,7 +33,6 @@ export async function fill_db(){
         clubs.map((row) => ({ club_name: row[0], participants_number: row[1] })), 
         { returning: false }
     );
-    //console.log(await models.Club.findAll());
 
     //fill experts
     let experts = [
@@ -51,7 +48,6 @@ export async function fill_db(){
         experts.map((row) => ({ club_id: row[0], ring_number: row[1], surname: row[2], name: row[3] })), 
         { returning: false }
     );
-    //console.log(await models.Expert.findAll());
 
     //fill owners
     let owners = [
@@ -68,7 +64,6 @@ export async function fill_db(){
         owners.map((row) => ({ passport: row[0], surname: row[1], name: row[2], patronymic: row[3] })), 
         { returning: false }
     );
-    //console.log(await models.Owner.findAll());
 
     //fill dogs
     let dogs = [
@@ -96,7 +91,6 @@ export async function fill_db(){
                             age: row[6], vaccination_date: row[7] })), 
         { returning: false }
     );
-    //console.log(await models.Dog.findAll());
 
     //fill club numbers
     let club_numbers = [
@@ -114,7 +108,6 @@ export async function fill_db(){
         club_numbers.map((row) => ({ dog_number: row[0], club_id: row[1] })), 
         { returning: false }
     );
-    //console.log(await models.ClubNumber.findAll());
 
     //fill dogs experts estimates
     let dogs_experts_estimates = [
@@ -130,5 +123,4 @@ export async function fill_db(){
         dogs_experts_estimates.map((row) => ({ dog_number: row[0], expert_id: row[1], estimate: row[2] })), 
         { returning: false }
     );
-    //console.log(await models.DogExpertEstimate.findAll());
 }

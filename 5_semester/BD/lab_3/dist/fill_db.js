@@ -4,7 +4,6 @@ export async function fill_db() {
     for (let i = 1; i <= 5; i++) {
         await models.Ring.create({});
     }
-    //console.log(models.Ring.findAll())
     //fill Breeds
     let breeds = [
         ['Немецкая овчарка', 1],
@@ -15,7 +14,6 @@ export async function fill_db() {
         ['Пудель', 5]
     ];
     await models.Breed.bulkCreate(breeds.map((row) => ({ breed_name: row[0], ring_number: row[1] })), { returning: false });
-    //console.log(await models.Breed.findAll());
     //fill clubs
     let clubs = [
         ['Фаворит', 4],
@@ -25,7 +23,6 @@ export async function fill_db() {
         ['Победа', 2]
     ];
     await models.Club.bulkCreate(clubs.map((row) => ({ club_name: row[0], participants_number: row[1] })), { returning: false });
-    //console.log(await models.Club.findAll());
     //fill experts
     let experts = [
         [1, 1, 'Кардаш', 'Ярослав'],
@@ -37,7 +34,6 @@ export async function fill_db() {
         [5, 2, 'Лепс', 'Григорий'],
     ];
     await models.Expert.bulkCreate(experts.map((row) => ({ club_id: row[0], ring_number: row[1], surname: row[2], name: row[3] })), { returning: false });
-    //console.log(await models.Expert.findAll());
     //fill owners
     let owners = [
         ['1111 222222', 'Потолов', 'Олег', 'Алексеевич'],
@@ -50,7 +46,6 @@ export async function fill_db() {
         ['8888 999999', 'Данилов', 'Дмитрий', 'Семенович']
     ];
     await models.Owner.bulkCreate(owners.map((row) => ({ passport: row[0], surname: row[1], name: row[2], patronymic: row[3] })), { returning: false });
-    //console.log(await models.Owner.findAll());
     //fill dogs
     let dogs = [
         ['1111 222222', 'Немецкая овчарка', 1111111, 'Элис', 'Арчи', 'Рекс', 5, '2023-10-01'],
@@ -74,7 +69,6 @@ export async function fill_db() {
     await models.Dog.bulkCreate(dogs.map((row) => ({ owner_passport: row[0], breed_name: row[1], pedigree_document_number: row[2],
         mother_nickname: row[3], father_nickname: row[4], nickname: row[5],
         age: row[6], vaccination_date: row[7] })), { returning: false });
-    //console.log(await models.Dog.findAll());
     //fill club numbers
     let club_numbers = [
         [1, 1], [2, 1],
@@ -88,7 +82,6 @@ export async function fill_db() {
         [17, 4]
     ];
     await models.ClubNumber.bulkCreate(club_numbers.map((row) => ({ dog_number: row[0], club_id: row[1] })), { returning: false });
-    //console.log(await models.ClubNumber.findAll());
     //fill dogs experts estimates
     let dogs_experts_estimates = [
         [1, 1, 9], [3, 1, 6], [5, 1, 8], [7, 1, 7],
@@ -100,5 +93,4 @@ export async function fill_db() {
         [13, 7, 10], [15, 7, 10]
     ];
     await models.DogExpertEstimate.bulkCreate(dogs_experts_estimates.map((row) => ({ dog_number: row[0], expert_id: row[1], estimate: row[2] })), { returning: false });
-    //console.log(await models.DogExpertEstimate.findAll());
 }

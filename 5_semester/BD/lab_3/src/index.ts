@@ -3,6 +3,7 @@ import * as models from "./models/models.js"
 import { fill_db } from "./fill_db.js"
 import * as requests from "./requests.js"
 
+
 try{
     await db.authenticate();
     console.log('authenticate: done')

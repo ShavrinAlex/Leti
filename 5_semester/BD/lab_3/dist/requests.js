@@ -28,9 +28,7 @@ export async function request_1() {
         ]
     }).then((result) => {
         console.log('Request 1:');
-        //console.log(result)
         for (let dog of result) {
-            //console.log(dog)
             console.log(dog.breed.dataValues.ring_number, dog.dataValues.dog_number, dog.owner.dataValues.surname, dog.owner.dataValues.name);
         }
     });
@@ -53,32 +51,6 @@ export async function request_2() {
         console.log('Request 2:');
         console.log(result);
     });
-    /*
-    models.ClubNumber.findAll(
-        {
-            attributes: [],
-            include: [
-                {
-                    model: models.Club,
-                    required: true,
-                    attributes: ['club_id'],
-                    
-                },
-                {
-                    model: models.Dog,
-                    required: true,
-                    attributes: ['breed_name']
-                }
-            ],
-            group: ['club.club_id'],
-        }
-    ).then((result) => {
-        console.log('Request 2:');
-        for (let club_number of result) {
-            console.log(club_number)
-            console.log(club_number.club.dataValues.club_id, club_number.dog.dataValues.breed_name)
-        }
-    });*/
 }
 export async function request_3() {
     /*
@@ -133,38 +105,6 @@ export async function request_4() {
         console.log('Request 4:');
         console.log(result);
     });
-    /*
-    models.Dog.findAll(
-        {
-            attributes: ['breed_name'],
-            include: [
-                {
-                    model: models.DogExpertEstimate,
-                    required: true,
-                    include: [
-                        {
-                            model: models.Expert,
-                            required: true,
-                            //attributes: []
-                        }
-                    ]
-                }
-            ],
-            //group: ['dog->dog_expert_estimates.expert.expert_id'],
-            order: ['breed_name']
-        }
-    ).then((result) => {
-        console.log('Request 4:');
-        for (let dog of result) {
-            for (let dog_expert_estimate of dog.dog_expert_estimates){
-                //console.log(dog_expert_estimate)
-                let expert = dog_expert_estimate.expert
-                //console.log(expert)
-                console.log(dog.dataValues.breed_name, expert.dataValues.expert_id, expert.dataValues.name)
-            }
-        }
-    })
-    */
 }
 export async function request_5() {
     /*
