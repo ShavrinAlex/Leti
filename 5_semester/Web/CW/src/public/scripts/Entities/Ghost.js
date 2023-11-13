@@ -14,7 +14,7 @@ export class Ghost extends Entity{
     }
 
     update() {
-        if (Number.isInteger(this.pos_x / 32) && Number.isInteger(this.pos_y / 32)){
+        if (Number.isInteger(this.pos_x / 32) && Number.isInteger(this.pos_y / 32) && this.id != 16){
             this.ghost_manager.update(this);
         }
         this.physic_manager.update(this);

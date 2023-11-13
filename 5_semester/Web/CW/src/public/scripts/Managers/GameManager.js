@@ -123,6 +123,12 @@ export class GameManager {
            this.game_win();
         }
 
+
+        let ghost_16 = this.objects.filter((obj) => {
+            return obj.id == 16;
+        })[0];
+        console.log(ghost_16)
+
         if (this.player.state !== PlayerStates.dead){
             if (this.events_manager.action !== Actions.stay){
                 this.player.state = PlayerStates.move;
@@ -133,15 +139,19 @@ export class GameManager {
             switch (this.events_manager.action) {
                 case Actions.move_up:
                     this.player.request_direction = Directions.up;
+                    ghost_16.request_direction = Directions.up;
                     break;
                 case Actions.move_down:
                     this.player.request_direction = Directions.down;
+                    ghost_16.request_direction = Directions.down;
                     break;
                 case Actions.move_left:
                     this.player.request_direction = Directions.left;
+                    ghost_16.request_direction = Directions.left;
                     break;
                 case Actions.move_right:
                     this.player.request_direction = Directions.right;
+                    ghost_16.request_direction = Directions.right;
                     break;
             }
         }
