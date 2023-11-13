@@ -5,8 +5,9 @@ import copy
 from math import sqrt
 
 
-DIMENSION_SIZE = 500
-DELTA = 0.05
+DIMENSION_SIZE = 300
+DELTA_ELECTRODE = 0.05
+DELTA_EQUIPOTENTIAL = 0.007
 
 X = np.linspace(-6, 6, DIMENSION_SIZE)
 Y = np.linspace(-6, 6, DIMENSION_SIZE)
@@ -34,29 +35,27 @@ def fill_potential_grid(potential_grid, potential_grid_electrode):
             first_inner = first_inner_edlectrode(X[x], Y[y])
             second_inner = second_inner_edlectrode(X[x], Y[y])
 
-            if (abs(external) < DELTA):
+            if (abs(external) < DELTA_ELECTRODE):
                 potential_grid[y][x] = 0
                 potential_grid_electrode[y][x] = True 
                    
-            elif (abs(first_inner) < DELTA):
+            elif (abs(first_inner) < DELTA_ELECTRODE):
                 potential_grid[y][x] = POTENTIAL_1
                 potential_grid_electrode[y][x] = True
                   
-            elif (abs(second_inner) < DELTA):
+            elif (abs(second_inner) < DELTA_ELECTRODE):
                 potential_grid[y][x] = POTENTIAL_2
                 potential_grid_electrode[y][x] = True
-                  
-def draw_electrodes(mesh):
-    x = []
-    y = []
-    for i in range(len(mesh)):
-        for j in range(len(mesh[i])):
-            if mesh[i][j]:
-                x.append(j)
-                y.append(i)
 
+def draw_electrodes(func1, func2, func3):
     fig, ax = plt.subplots()
-    ax.scatter(x, y, color='green')
+    x, y = np.meshgrid(X, Y)
+    f1 = func1(x, y)
+    f2 = func2(x, y)
+    f3 = func3(x, y)
+    ax.contour(x, y, f1, levels=[0])
+    ax.contour(x, y, f2, levels=[0])
+    ax.contour(x, y, f3, levels=[0])
 
 def draw_potential_grid(solve):
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
@@ -68,43 +67,28 @@ def draw_potential_grid(solve):
 
 def draw_potentiale(equipotential):
     fig, ax = plt.subplots()
-    ax.plot(equipotential[0], equipotential[1], linestyle="none", marker="o")
-    #ax.plot(equipotential_2[0], equipotential_2[1], linestyle="none", marker="o")
+    ax.plot(equipotential[0], equipotential[1])
 
-def draw_electrodes_and_equipotentiale(equipotential, electrodes):
-    fig2, ax2 = plt.subplots()
-    x = []
-    y = []
-    for i in range(len(electrodes)):
-        for j in range(len(electrodes[i])):
-            if electrodes[i][j]:
-                x.append(X[j])
-                y.append(Y[i])
-    ax2.plot(x, y, linestyle="none", marker="o")
-    ax2.plot(equipotential[0], equipotential[1], linestyle="none", marker="o")
-    #ax2.plot(equipotential_2[0], equipotential_2[1], linestyle="none", marker="o")
+def draw_electrodes_and_equipotentiale(func1, func2, func3, equipotential):
+    fig, ax = plt.subplots()
+    x, y = np.meshgrid(X, Y)
+    f1 = func1(x, y)
+    f2 = func2(x, y)
+    f3 = func3(x, y)
+    ax.contour(x, y, f1, levels=[0])
+    ax.contour(x, y, f2, levels=[0])
+    ax.contour(x, y, f3, levels=[0])
+    ax.plot(equipotential[0], equipotential[1])
 
 def get_equipotential(potential_grid):
     equipotential = [[], []]
     for y in range(1, DIMENSION_SIZE -1):
         for x in range(1, DIMENSION_SIZE-1):
-            if abs(potential_grid[y][x] - SERCHING_POTENTIAL) < DELTA:
+            if abs(potential_grid[y][x] - SERCHING_POTENTIAL) < DELTA_EQUIPOTENTIAL:
                 equipotential[0].append(X[x])
                 equipotential[1].append(Y[y])
     return equipotential
-'''
-def separate_equipotential(equipotential):
-    first_equipotential = [[], []]
-    second_equipotential =[[], []]
-    for i in range(len(equipotential[0])):
-        if equipotential[0][i] < equipotential[1][i]:
-            first_equipotential[0].append(equipotential[0][i])
-            first_equipotential[1].append(equipotential[1][i])
-        else:
-            second_equipotential[0].append(equipotential[0][i])
-            second_equipotential[1].append(equipotential[1][i])
-    return first_equipotential, second_equipotential
-'''
+
 def clear_equipotential(equipotential, equip_func):
     clear_equipotential = [[], []]
     for i in range(len(equipotential[0])):
@@ -169,36 +153,33 @@ def solve(potential_grid, potential_grid_electrode, precision):
     
     equipotential = get_equipotential(potential_grid)
     print("equipotential done")
-    #eq_2, eq_1 = separate_equipotential(equipotential)
-    #print("separate equipotential done")
 
     equipotential = clear_equipotential(equipotential, second_inner_edlectrode)
     equipotential = clear_equipotential(equipotential, first_inner_edlectrode)
     print("clear equipotential done")
 
-    draw_potentiale(equipotential)
-    draw_electrodes_and_equipotentiale(equipotential, potential_grid_electrode)
-
     cycle = tsp_greedy(equipotential)
-    #cycle_2 = tsp_greedy(eq_2)
     print("equipotentials cycles done")
-    dist = calculate_cycle_distance(cycle)
-    print(dist)
 
-    #dist += calculate_cycle_distance(cycle_2)
-    #print(dist)
+    dist = calculate_cycle_distance(cycle)
+
+    x0 = cycle[0][0]
+    y0 = cycle[1][0]
+    cycle[0].append(x0)
+    cycle[1].append(y0)
+    draw_potentiale(cycle)
+    draw_electrodes_and_equipotentiale(first_inner_edlectrode, second_inner_edlectrode, external_electrode, cycle)
+    print(dist)
 
 
 
 
 def main():
+    draw_electrodes(first_inner_edlectrode, second_inner_edlectrode, external_electrode)
     potential_grid = np.zeros((DIMENSION_SIZE, DIMENSION_SIZE))
     potential_grid_electrode = [[False] * DIMENSION_SIZE for _ in range(DIMENSION_SIZE)]
-
     fill_potential_grid(potential_grid, potential_grid_electrode)
-    draw_electrodes(potential_grid_electrode)
-
-    solve(potential_grid, potential_grid_electrode, 0.00001)
+    solve(potential_grid, potential_grid_electrode, 0.0001)
     
     plt.show()
 
