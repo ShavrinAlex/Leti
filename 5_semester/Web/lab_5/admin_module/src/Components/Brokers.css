@@ -1,0 +1,70 @@
+.brokers_container {
+    margin: 20px;
+}
+
+.scrollable {
+    height: 85vh;
+    overflow-y: scroll;
+}
+
+.broker {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    color: #fff;
+    background: #3a8fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    color: "white";
+    font-size: 20px;
+}
+
+.change_broker_button {
+    font-size: 20px;
+    background-color: #3a57ff;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+}
+
+.delete_broker_button {
+    font-size: 20px;
+    background-color: #ff3a3a;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+}
+
+.broker_info {
+    align-self: center;
+    justify-self: center;
+    width: 95%;
+    overflow-x: hidden;
+}
+
+.add_broker_button {
+    background: #3a57ff;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.add_broker_dialog {
+    border-color: "gray";
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.dialog_input {
+    font-size: 18px;
+}
+
+.confirm_button {
+    font-size: 18px;
+}

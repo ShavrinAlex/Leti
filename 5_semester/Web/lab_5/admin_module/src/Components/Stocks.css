@@ -1,0 +1,17 @@
+.stocks_container {
+    padding-left: 20px;
+}
+
+.stock {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-around;
+    color: #fff;
+    background: #3a8fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    color: "white";
+    font-size: 20px;
+}
