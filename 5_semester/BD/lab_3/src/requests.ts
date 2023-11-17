@@ -49,7 +49,25 @@ export async function request_2(){
     GROUP BY club.club_id, dog.breed_name
     ORDER BY club.club_id, dog.breed_name;
     */
-
+    await models.ClubNumber.findAll(
+        {
+            attributes: ['club_id'],
+            include: [
+                {
+                    model: models.Dog,
+                    required: true,
+                    attributes: ['breed_name']
+                }
+            ],
+            group: ['"ClubNumber"."club_id"', '"dog"."breed_name"', '"dog"."dog_number"'],
+            order: [["club_id", "ASC"]]
+        }
+    ).then((result) => {
+        for (let club_number of result){
+            console.log(club_number.club_id, club_number.dog.dataValues.breed_name);
+        }
+    })
+    /*
     await db.query(
          `SELECT club.club_id, dog.breed_name
             FROM "Clubs" AS club
@@ -62,6 +80,7 @@ export async function request_2(){
         console.log('Request 2:');
         console.log(result);
     })
+    */
 }
 
 

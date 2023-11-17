@@ -17,11 +17,11 @@ try{
     await fill_db();
     console.log('fill db: done')
 
-    await requests.request_1();
+    //await requests.request_1();
     await requests.request_2();
-    await requests.request_3();
-    await requests.request_4();
-    await requests.request_5();
+    //await requests.request_3();
+    //await requests.request_4();
+    //await requests.request_5();
     console.log('requests: done')
 } catch(error) {
     console.log('authenticate: error', error)
