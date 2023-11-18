@@ -1,12 +1,21 @@
 .stocks_container {
-    padding-left: 20px;
+    padding: 20px;
+}
+
+.stocks_selector {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.scrollable {
+    height: 85vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .stock {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
     color: #fff;
     background: #3a8fff;
     padding: 10px;
@@ -15,3 +24,19 @@
     color: "white";
     font-size: 20px;
 }
+
+.stock_info {
+    align-self: center;
+    justify-content: center;
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.trading_target_button {
+    align-self: center;
+    justify-content: center;
+    transform: scale(1.5);
+    opacity: 0.9;
+    cursor: pointer;
+}
+

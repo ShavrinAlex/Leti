@@ -188,3 +188,5 @@ function AddBroker(){
         </div>
     )
 }
+
+export default BrokersComponent;

@@ -1,0 +1,55 @@
+.trading_container {
+    padding: 20px;
+}
+
+.trading_settings {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0px 10px 0px;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form_elem {
+    margin: 0px 20px 0px 20px;
+    font-size: 18px;
+}
+
+#start_button {
+    background-color: aqua;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#stop_button {
+    background-color: brown;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.scrollable_trading {
+    height: auto;
+    max-height: 80vh;
+    overflow-y: scroll;
+    background-color: rgb(58, 143, 255);
+    color: "white";
+    font-size: 18px; 
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.trading_elem {
+    color: #fff;
+    margin: 20px 10px 20px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    padding: 10px;
+    border-bottom: 2px solid #fff;
+}

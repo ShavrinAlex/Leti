@@ -22,7 +22,7 @@
 .change_broker_button {
     font-size: 20px;
     background-color: #3a57ff;
-    border-radius: 10px;
+    border-radius: 15px;
     color: #fff;
     cursor: pointer;
     align-self: center;
@@ -32,7 +32,7 @@
 .delete_broker_button {
     font-size: 20px;
     background-color: #ff3a3a;
-    border-radius: 10px;
+    border-radius: 15px;
     color: #fff;
     cursor: pointer;
     align-self: center;
@@ -48,11 +48,13 @@
 
 .add_broker_button {
     background: #3a57ff;
-    border-radius: 10px;
+    border-radius: 20px;
     font-size: 20px;
     color: #fff;
     cursor: pointer;
+    padding: 5px 30px 5px 30px;
     margin-bottom: 10px;
+    margin-left: 45vw;
 }
 
 .add_broker_dialog {

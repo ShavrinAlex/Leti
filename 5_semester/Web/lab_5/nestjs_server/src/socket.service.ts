@@ -19,19 +19,20 @@ export class SocketService implements OnGatewayConnection{
     private interval: any;
 
     handleConnection(client: any) {
-        console.log(client);
+        //console.log(client);
         console.log("CONNECTED");
     }
 
-    @SubscribeMessage("getData") //start
+    @SubscribeMessage("start")
     handleEvent(@MessageBody() dto: any, @ConnectedSocket() client: any){
         console.log(dto)
-        const res = {type:"send", dto}
+        this.index = Number(dto.index);
+        const res = {type: "send", dto}
         this.interval = setInterval(()=>{
-            this.index += 1
-            console.log(this.index)
-            client.emit("trading", this.index) // лучше вернуть данные
-        }, dto.speed*1000)
+            console.log(this.index);
+            client.emit("trading", this.index);
+            this.index += 1;
+        }, 1000*dto.speed);
     }
 
     @SubscribeMessage("stop")

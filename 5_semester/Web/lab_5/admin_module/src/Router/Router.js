@@ -3,20 +3,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import './Router.css'
 import { BrokersComponent } from "../Components/Brokers.component";
 import { StocksComponent } from "../Components/Stocks.component";
-/*
-import SignIn from "../pages/signin/SignIn";
-import SignUp from "../pages/createuser/CreateUser";
-import ListUser from "../pages/listuser/ListUser";
-import ListStock from '../pages/stock/ListStock'
-import Settings from '../pages/setting/Settings'
-import Graph from "../pages/graph/Graph";
-<Route exact path="/signin" element={<SignIn/>}></Route>
-<Route exact path="/signup" element={<SignUp/>}></Route>
-<Route path="/dashboard" element={<ListUser/>}></Route>
-<Route path="/stocks" element={<ListStock/>}></Route>
-<Route path="/settings" element={<Settings/>}></Route>
-<Route path="/graph/:id" element={<Graph/>}></Route>
-*/
+import { TradingComponent } from "../Components/Trading.component"
+
 
 function Router() {
     return (
@@ -49,11 +37,11 @@ function Stocks() {
 } 
 
 function Trading() { 
-    return <div><h3>Trading</h3></div> 
+    return <TradingComponent/>
 } 
 
 function NoMatch() { 
-    return <div><h3>No match!</h3></div> 
+    return <div><h3>Page no match!</h3></div> 
 }
 
 export default Router;
