@@ -17,12 +17,7 @@ export class AppController {
     //console.log(this.appService.getStocks())
     return this.appService.getStocks();
   }
-  /*
-  @Get("/getBroker")
-  getBrokers(@Query() params: any): string {
-    return this.appService.getBrokers(params);
-  }
-  */
+
   @Post("/addBroker")
   addBroker(@Body() body: any): string {
     //console.log('ADD ')

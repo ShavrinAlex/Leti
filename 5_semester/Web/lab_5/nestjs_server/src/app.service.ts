@@ -14,20 +14,7 @@ export class AppService {
   getStocks(): string {
     return JSON.stringify(STOCKS);
   }
-  /*
-  getBrokers(params: any): string {
-    let elems = JSON.parse(JSON.stringify(BROKERS));
-    let broker = "bad"
 
-    const el = elems.filter((el: any)=>{
-      if(el.id === params.id)
-        return true;
-    });
-
-    console.log(el)
-    return "not ok"
-  }
-  */
   addBroker(body: any): string {
     let last_index = BROKERS.length - 1;
     let id = BROKERS[last_index].id + 1;

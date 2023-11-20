@@ -41,7 +41,8 @@ export const BrokersComponent = () => {
 
 function Broker(props) {
     const [openDialog, setOpenChangeDialog] = useState(false);
-    const [inputAccount, setInputAccount] = useState(0);
+    const [inputAccount, setInputAccount] = useState(props.value.account);
+   // const [account, setAccount] = useState();
 
 
     const openChangeDialog = () => {
@@ -51,6 +52,7 @@ function Broker(props) {
     const changeAccount = (e) => {
         setInputAccount(Number(e.target.value))
     }
+
 
     const confirmChange = async (e) => {
         console.log("new value" + inputAccount);
@@ -113,7 +115,7 @@ function Broker(props) {
             <dialog open={openDialog} style={{borderColor: "gray", borderRadius: 10}}>
                 <p> Change Account: {props.value.name}</p>
                 <form>
-                    <input className='dialog_input' type="number" placeholder="Введите баланс" onChange={changeAccount}/>
+                    <input className='dialog_input' type="number" value={inputAccount} onChange={changeAccount}/>
                     <button className='confirm_button' value={props.value.id} onClick={confirmChange} autoFocus>Изменить</button>
                 </form>
             </dialog>

@@ -19,7 +19,6 @@ export class SocketService implements OnGatewayConnection{
     private interval: any;
 
     handleConnection(client: any) {
-        //console.log(client);
         console.log("CONNECTED");
     }
 

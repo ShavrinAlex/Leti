@@ -20,25 +20,28 @@
 .form_elem {
     margin: 0px 20px 0px 20px;
     font-size: 18px;
+    color: #000;
 }
 
 #start_button {
     background-color: aqua;
     border-radius: 10px;
     cursor: pointer;
+    color:#000;
 }
 
 #stop_button {
     background-color: brown;
     border-radius: 10px;
     cursor: pointer;
+    color:#000;
 }
 
 .scrollable_trading {
     height: auto;
     max-height: 80vh;
     overflow-y: scroll;
-    background-color: rgb(58, 143, 255);
+    background-color: rgb(255, 139, 44);
     color: "white";
     font-size: 18px; 
     padding: 10px;
@@ -46,10 +49,10 @@
 }
 
 .trading_elem {
-    color: #fff;
+    color: #000;
     margin: 20px 10px 20px 10px;
     display: grid;
     grid-template-columns: repeat(3, 33%);
     padding: 10px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #000;
 }

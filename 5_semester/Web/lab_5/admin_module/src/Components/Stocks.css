@@ -16,8 +16,8 @@
 .stock {
     display: grid;
     grid-template-columns: repeat(3, 33%);
-    color: #fff;
-    background: #3a8fff;
+    color: #000;
+    background: rgb(255, 139, 44);
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
