@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import './Brokers.css';
 //import axios from "axios";
 
-const GET_BROKERS_URL = 'http://localhost:8080/getAllBrokers';
-const ADD_BROKER_URL = 'http://localhost:8080/addBroker';
-const CHANGE_BROKER_URL = 'http://localhost:8080/changeBroker/';
-const DELETE_BROKER_URL = 'http://localhost:8080/deleteBroker/';
+const GET_BROKERS_URL = 'http://localhost:8081/getAllBrokers';
+const ADD_BROKER_URL = 'http://localhost:8081/addBroker';
+const CHANGE_BROKER_URL = 'http://localhost:8081/changeBroker/';
+const DELETE_BROKER_URL = 'http://localhost:8081/deleteBroker/';
 
 
 export const BrokersComponent = () => {

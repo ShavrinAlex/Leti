@@ -11,6 +11,15 @@ export class AppService {
     return JSON.stringify(BROKERS);
   }
 
+  getBroker(params: any): string {
+    const broker = BROKERS.filter((broker)=>{
+      if(broker.name === params.name)
+        return true;
+    })[0];
+
+    return JSON.stringify(broker);
+  }
+
   getStocks(): string {
     return JSON.stringify(STOCKS);
   }

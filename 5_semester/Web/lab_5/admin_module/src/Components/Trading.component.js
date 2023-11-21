@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SocketIoService, useConnectSocket } from "../Socket-io.service";
 import "./Trading.css";
 
-const ENDPOINT = 'http://localhost:8080/getStocks';
+const ENDPOINT = 'http://localhost:8081/getStocks';
 
 
 export const TradingComponent = () => {
@@ -28,7 +28,7 @@ export const TradingComponent = () => {
     useEffect(() => {
         SocketIoService.socket.on("trading", (data) => {
             console.log("trading" + data, trading);
-            setChange(data);
+            setChange(JSON.parse(data));
         })
     }, []);
 
@@ -53,6 +53,9 @@ export const TradingComponent = () => {
 
     const clickStart = () => {
         if (speed > 0 && date && trading){
+            console.log(listTradings)
+            SocketIoService.socket.emit("trading_list_done", {listTradings})
+
             let index = -1;
             for (let i = 0; i < trading[0].prices.length; i++){
                 if (new Date(trading[0].prices[i].Date).toDateString() === new Date(date).toDateString()){

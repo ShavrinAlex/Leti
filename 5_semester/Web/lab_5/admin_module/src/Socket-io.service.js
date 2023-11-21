@@ -2,7 +2,7 @@ import * as socketIo from 'socket.io-client';
 import { useEffect } from "react";
 
 
-const SERVER_ERL = "http://localhost:8080/";
+const SERVER_ERL = "http://localhost:8081/";
 
 
 export class SocketIoService{

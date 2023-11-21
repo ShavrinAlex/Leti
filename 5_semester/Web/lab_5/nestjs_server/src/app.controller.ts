@@ -12,6 +12,11 @@ export class AppController {
     return this.appService.getAllBrokers();
   }
 
+  @Get("/getBroker")
+  getBrokers(@Query() params: any): string {
+    return this.appService.getBroker(params);
+  }
+
   @Get("/getStocks")
   getStocks(): string {
     //console.log(this.appService.getStocks())

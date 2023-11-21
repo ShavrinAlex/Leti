@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Graphic from './Chart.component';
 import './Stocks.css';
 
-const ENDPOINT = 'http://localhost:8080/getStocks'
+const ENDPOINT = 'http://localhost:8081/getStocks'
 
 export const StocksComponent = () => {
     const [stocks, setStocks] = useState([]);
