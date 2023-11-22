@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
+    "chart.js": "^4.4.0",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
     "socket.io-client": "^4.7.2",
     "vue": "^3.2.13",
+    "vue-chartjs": "^5.2.0",
     "vue-router": "^4.2.5",
     "vue-socket.io": "^3.0.10",
     "vuex": "^4.1.0"

@@ -18,18 +18,21 @@ export class SocketService implements OnGatewayConnection{
     private index: number = 0;
     private interval: any;
     private wsClients: any[] = [];
+    private list: any[] = [];
 
     handleConnection(client: any) {
-        console.log("CONNECTED");
-        this.wsClients.push(client)
+        if (!this.wsClients.includes(client)){
+            console.log("CONNECTED");
+            this.wsClients.push(client);
+        }
     }
     
     handleDisconnect(client: any) {
-        console.log("DISCONNECTED");
         for (let i = 0; i < this.wsClients.length; i++) {
             if (this.wsClients[i] === client) {
-              this.wsClients.splice(i, 1);
-              break;
+                console.log("DISCONNECTED");
+                this.wsClients.splice(i, 1);
+                break;
             }
         }
     }
@@ -37,14 +40,14 @@ export class SocketService implements OnGatewayConnection{
     private broadcast(event: string, message: any) {
         const broadCastMessage = JSON.stringify(message);
         for (let client of this.wsClients) {
-        //console.log(event, broadCastMessage)
-          client.send(event, broadCastMessage);
+            client.emit(event, broadCastMessage);
         }
     }
     
     @SubscribeMessage("trading_list_done")
     handleTradingListEvent(@MessageBody() dto: any, @ConnectedSocket() client: any){
-        this.broadcast('trading_list', dto.listTradings);
+        this.list = dto
+        this.broadcast('trading_list', dto);
     }
     
     @SubscribeMessage("start")
@@ -54,6 +57,7 @@ export class SocketService implements OnGatewayConnection{
         const res = {type: "send", dto}
         this.interval = setInterval(()=>{
             console.log(this.index);
+            this.broadcast('trading_list', this.list);
             this.broadcast('trading', this.index);
             //client.emit("trading", this.index);
             this.index += 1;
