@@ -90,4 +90,23 @@ export class SocketService implements OnGatewayConnection{
             });
         });
     }
+
+    @SubscribeMessage("sell")
+    handleSellEvent(@MessageBody() dto: any, @ConnectedSocket() client: any){
+        console.log(dto)
+        fetch("http://localhost:8081/sellStock", {
+            method: "POST",
+            body: dto,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res)=> {
+            res.json().then((answer) => {
+                if (answer.mes === "success") {
+                    //console.log(answer.message.data)
+                    this.broadcast("broker_sell", answer.data)
+                }
+            });
+        });
+    }
 }

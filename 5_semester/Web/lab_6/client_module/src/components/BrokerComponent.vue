@@ -17,7 +17,7 @@
                         <div class="FirstColumn" @click="toggleGraphic(stock.id)">
                             <div class="StockName">{{ stock.name }}</div>
                             <div class="MainStockInfo">
-                                <div v-if="broker.stocks[stock.id]" class="Count">{{ broker.stocks[stock.id].count }}</div>
+                                <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].count" class="Count">{{ broker.stocks[stock.id].count }}</div>
                                 <div class="Price">{{ stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1) }}$</div>
                             </div>
                         </div>
@@ -30,9 +30,11 @@
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
                         <div class="LastColumn">
-                            <div v-if="broker.stocks[stock.id]" class="TotalCost">{{ (broker.stocks[stock.id].sum).toFixed(3) }}$</div>
-                            <div v-if="broker.stocks[stock.id]" class="Difference">{{ (Number(stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1)) 
-                                                                                                - broker.stocks[stock.id].sum / broker.stocks[stock.id].count).toFixed(3) }}$</div>
+                            <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].sum" class="TotalCost">{{ (broker.stocks[stock.id].count * Number(stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1))).toFixed(3) }}$</div>
+                            <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].sum">
+                                <div v-if="getDifference(stock) > 0" class="PositiveDifference">{{ getDifference(stock) }}$</div>
+                                <div v-else class="NegativeDifference">{{ getDifference(stock) }}$</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,7 +145,12 @@ export default {
             let broker = JSON.parse(data)
             if (this.broker.id == broker.id) {
                 this.broker = broker
-                
+            }
+        })
+        this.$socket.on("broker_sell", (data) => {
+            let broker = JSON.parse(data)
+            if (this.broker.id == broker.id) {
+                this.broker = broker
             }
         })
     },
@@ -180,8 +187,20 @@ export default {
 
         confirmSell(stock_id) {
             this.showSellDialog = null;
-            console.log(stock_id, this.count)
+            const data = {
+                "index": this.$store.state.index,
+                "broker_id": this.broker.id,
+                "stock_id": stock_id,
+                "stock_count": this.count
+            };
+            this.$socket.emit("sell", JSON.stringify(data));
         },
+
+        getDifference(stock) {
+            let difference = (Number(stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1)) 
+                    - this.broker.stocks[stock.id]?.sum / this.broker.stocks[stock.id]?.count).toFixed(3)
+            return !isNaN(difference) ? difference : 0
+        }
     }
 }
 </script>
@@ -282,10 +301,6 @@ export default {
         justify-content: space-around;
     }
 
-    .BuyButton {
-        
-    }
-
     .LastColumn {
         height: 100%;
         width: 100%;
@@ -293,6 +308,14 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+    }
+
+    .PositiveDifference {
+        color: green;
+    }
+
+    .NegativeDifference {
+        color: red;
     }
 
     .TotalCost {

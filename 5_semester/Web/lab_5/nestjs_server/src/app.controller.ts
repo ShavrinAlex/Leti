@@ -43,4 +43,9 @@ export class AppController {
   buyStock(@Body() body: any): string {
     return this.appService.buyStock(body);
   }
+  
+  @Post("/sellStock")
+  sellStock(@Body() body: any): string {
+    return this.appService.sellStock(body);
+  }
 }
