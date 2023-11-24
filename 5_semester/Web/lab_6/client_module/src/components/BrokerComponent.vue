@@ -32,7 +32,7 @@
                         <div class="LastColumn">
                             <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].sum" class="TotalCost">{{ (broker.stocks[stock.id].count * Number(stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1))).toFixed(3) }}$</div>
                             <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].sum">
-                                <div v-if="getDifference(stock) > 0" class="PositiveDifference">{{ getDifference(stock) }}$</div>
+                                <div v-if="getDifference(stock) > 0" class="PositiveDifference">+{{ getDifference(stock) }}$</div>
                                 <div v-else class="NegativeDifference">{{ getDifference(stock) }}$</div>
                             </div>
                         </div>

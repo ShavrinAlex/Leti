@@ -1,4 +1,3 @@
-
 <template>
     <div v-if="brokers && stocks" class="Brokers">
         <div class="Navigation">
@@ -6,10 +5,14 @@
         </div>
         <div v-for="broker in brokers" v-bind:key = broker.id class="BrokerCard">
             <div class="MainInfo">{{broker.name}}:{{broker.account}}$</div>
-            <div v-for="stock in broker.stocks" v-bind:key = stock.id class="BrokerStock">
-                <div class="StockInfo">Name: {{stock.name}}</div>
-                <div class="StockInfo">Amount: {{stock.amount}}</div>
-                <div class="StockInfo">Разница: {{ (stock.sum - getPriceByStockId(stock.id, currentIndex) * stock.amount)*-1 }}</div>
+            <div v-for="stock in stocks" v-bind:key = stock.id class="BrokerStock">
+                <div v-if="broker.stocks[stock.id]?.count">
+                  <div class="BrokerStockCard">
+                    <div class="StockInfo">Name: {{ stock.name }}</div>
+                    <div class="StockInfo">Count: {{ broker.stocks[stock.id].count }}</div>
+                    <div class="StockInfo">Difference: {{ getDifference(broker, stock) }}$</div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +41,7 @@ export default {
 
   created(){
     axios.get(BROKERS_URL)
-        .then(response => (this.brokers = response.data/*, this.$store.commit("setBrokers", response.data)*/))
+        .then(response => (this.brokers = response.data))
         .catch(error => {
           this.errorMessage = error.message;
           console.error("There was an error!", error);
@@ -53,10 +56,36 @@ export default {
           console.error("There was an error!", error);
         });
   },
+
+  mounted() {
+    this.$socket.on("broker_buy", (data) => {
+          let broker = JSON.parse(data)
+            for (let i = 0; i < this.brokers.length; i++) {
+              if (this.brokers[i].id == broker.id){
+                this.brokers[i] = broker
+              }
+            }
+        })
+        this.$socket.on("broker_sell", (data) => {
+            let broker = JSON.parse(data)
+            for (let i = 0; i < this.brokers.length; i++) {
+              if (this.brokers[i].id == broker.id){
+                this.brokers[i] = broker
+              }
+            }
+        })
+    },
+
   methods: {
     goBack() {
         router.go(-1)
-    }
+    },
+
+    getDifference(broker, stock) {
+            let difference = (Number(stock.data[stock.data?.length-1-this.$store.state.index]?.Open.slice(1)) * broker.stocks[stock.id]?.count
+                    - broker.stocks[stock.id]?.sum).toFixed(3)
+            return !isNaN(difference) ? difference : 0
+        }
   }
 }
 
@@ -95,9 +124,25 @@ export default {
         align-items: center;
         background-color: #fff;
         margin-bottom: 30px;
+        border: 3px solid #054e6b;
+        border-radius: 20px;
     }
 
     .MainInfo {
-        font-size: 24px;
+      width: 99%;
+      font-size: 24px;
+      border-bottom: 3px solid #054e6b;
+    }
+
+    .BrokerStock {
+      width: 100%;
+    }
+
+    .BrokerStockCard {
+      width: 95%;
+      display: grid;
+      grid-template-columns: repeat(3, 33%);
+      margin: 10px 0px 10px 0px;
+      border-bottom: 1px solid #2c3e50;
     }
 </style>
