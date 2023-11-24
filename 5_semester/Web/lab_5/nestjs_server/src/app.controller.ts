@@ -38,4 +38,9 @@ export class AppController {
   deleteBroker(@Param() { id }: any): string {
     return this.appService.deleteBroker(id);
   }
+
+  @Post("/buyStock")
+  buyStock(@Body() body: any): string {
+    return this.appService.buyStock(body);
+  }
 }

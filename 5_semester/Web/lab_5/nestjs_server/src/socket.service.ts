@@ -70,4 +70,24 @@ export class SocketService implements OnGatewayConnection{
         console.log("stop")
         this.index = 0
     }
+
+    @SubscribeMessage("buy")
+    handleBuyEvent(@MessageBody() dto: any, @ConnectedSocket() client: any){
+        console.log(dto)
+        fetch("http://localhost:8081/buyStock", {
+            method: "POST",
+            body: dto,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res)=> {
+            res.json().then((answer) => {
+                
+                if (answer.mes === "success") {
+                    //console.log(answer.message.data)
+                    this.broadcast("broker_buy", answer.data)
+                }
+            });
+        });
+    }
 }

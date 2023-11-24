@@ -76,4 +76,39 @@ export class AppService {
       return JSON.stringify({ "mes": "success" });
     }
   }
+
+  buyStock(body: any): string {
+    const broker = BROKERS.filter((broker)=>{
+      return broker.id == body.broker_id;
+    })[0];
+
+    const stock = STOCKS.filter((stock) => {
+      return stock.id == body.stock_id;
+    })[0];
+    
+
+    const stock_price = Number(stock?.data[stock?.data?.length-1-body.index]?.Open.slice(1));
+    if (broker && stock) {
+      let full_price =  body.stock_count * stock_price;
+      if (broker.account > full_price){
+        if (!broker.stocks[stock.id]) {
+          broker.stocks[stock.id] = {"count": 0, "sum": 0};
+        }
+        broker.stocks[stock.id].count += body.stock_count;
+        broker.stocks[stock.id].sum += full_price;
+        broker.account -= full_price;
+
+        fs.writeFile('src/brokers.json', JSON.stringify(BROKERS), (err) => {
+          if (err) throw err;
+          console.log('The file has been saved!');
+        });
+
+        return JSON.stringify({ "mes": "success", "data": broker});
+      } else {
+        return JSON.stringify({ "mes": "insufficient funds" });
+      }
+    } else {
+      return JSON.stringify({ "mes": "unknown broker" });
+    }
+  }
 }

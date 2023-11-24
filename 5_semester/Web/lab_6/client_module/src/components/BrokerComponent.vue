@@ -6,7 +6,7 @@
         </div>
         <div v-if="broker" class="BrokerInfo">
             <div class="BrokerName">Broker: {{ broker.name }}</div>
-            <div class="BrokerAccount">Account: {{ broker.account }}$</div>
+            <div class="BrokerAccount">Account: {{ (broker.account).toFixed(3) }}$</div>
             <div v-if="stocks" class="Date">Date: {{ stocks[0].data[stocks[0]?.data.length-1-this.$store.state.index]?.Date }}</div>
             <div v-else class="Date">Date: {{ new Date().toLocaleDateString("en-US") }}</div>
         </div>
@@ -17,21 +17,22 @@
                         <div class="FirstColumn" @click="toggleGraphic(stock.id)">
                             <div class="StockName">{{ stock.name }}</div>
                             <div class="MainStockInfo">
-                                <div class="Count">0</div>
-                                <div class="Price">{{stock.data[stock.data.length-1-this.$store.state.index]?.Open}}$</div>
+                                <div v-if="broker.stocks[stock.id]" class="Count">{{ broker.stocks[stock.id].count }}</div>
+                                <div class="Price">{{ stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1) }}$</div>
                             </div>
                         </div>
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
-                        <button class="BuyButton">buy</button>
+                        <button class="BuyButton" v-on:click="buy_stock(stock.id)">buy</button>
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
-                        <button class="SellButton">sell</button>
+                        <button class="SellButton" v-on:click="sell_stock(stock.id)">sell</button>
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
                         <div class="LastColumn">
-                            <div class="TotalCost">0</div>
-                            <div class="Difference">+0.0$</div>
+                            <div v-if="broker.stocks[stock.id]" class="TotalCost">{{ (broker.stocks[stock.id].sum).toFixed(3) }}$</div>
+                            <div v-if="broker.stocks[stock.id]" class="Difference">{{ (Number(stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1)) 
+                                                                                                - broker.stocks[stock.id].sum / broker.stocks[stock.id].count).toFixed(3) }}$</div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +59,17 @@
                             }]
                         }"
                     />
-                    </div>
+                </div>
+                <dialog open v-if="showBuyDialog === stock.id" class="Dialog">
+                    <div class="StockName">{{ stock.id }}</div>
+                    <input type="number" v-model="count"/>
+                    <button class="confirmBuy" v-on:click="confirmBuy(stock.id)">confirm buy</button>
+                </dialog>
+                <dialog open v-if="showSellDialog === stock.id" class="Dialog">
+                    <div class="StockName">{{ stock.id }}</div>
+                    <input type="number" min="0" v-model="count"/>
+                    <button class="confirmBuy" v-on:click="confirmSell(stock.id)">confirm sell</button>
+                </dialog>
             </div>
         </div>
     </div>
@@ -91,7 +102,10 @@ export default {
         return {
             stocks: null,
             broker: null,
-            graphichs: {}
+            graphichs: {},
+            showBuyDialog: null,
+            showSellDialog: null,
+            count: 0
         };
     },
 
@@ -99,9 +113,6 @@ export default {
         axios.get(BROKER_URL + this.$route.params.name)
             .then(response => (
                 this.broker = response.data
-                //this.$store.commit("setBalance", this.broker.balance),
-                //this.$store.commit("setUserStocks", this.broker.stocks)
-                //console.log(response.data)
             ))
             .catch(error => {
                 this.errorMessage = error.message;
@@ -114,7 +125,6 @@ export default {
                 this.stocks.forEach((stock)=>{
                     this.graphichs[stock.id] = false;
                 })
-                console.log(this.graphichs)
             })
             .catch(error => {
                 this.errorMessage = error.message;
@@ -128,13 +138,13 @@ export default {
         })
         this.$socket.on("trading_list", (data) => {
             this.$store.commit("setTradingList", JSON.parse(data).listTradings)
-            /*
-            let new_stocks = []
-            JSON.parse(data).listTradings.forEach((stock_id)=>{
-                new_stocks.push(this.stocks.filter((st)=>{return st.id === stock_id})[0])
-            })
-            this.stocks = new_stocks;
-            */
+        })
+        this.$socket.on("broker_buy", (data) => {
+            let broker = JSON.parse(data)
+            if (this.broker.id == broker.id) {
+                this.broker = broker
+                
+            }
         })
     },
 
@@ -144,11 +154,34 @@ export default {
 
     methods: {
         toggleGraphic(stock_id) {
-            //console.log('toggle', stock_id)
             this.graphichs[stock_id] = !this.graphichs[stock_id]
-            //console.log(this.graphichs)
-        }
-       
+        },
+
+        buy_stock(stock_id) {
+            this.showBuyDialog = stock_id;
+            console.log(stock_id)
+        },
+
+        confirmBuy(stock_id) {
+            this.showBuyDialog = null;
+            const data = {
+                "index": this.$store.state.index,
+                "broker_id": this.broker.id,
+                "stock_id": stock_id,
+                "stock_count": this.count
+            };
+            this.$socket.emit("buy", JSON.stringify(data));
+        },
+
+        sell_stock(stock_id) {
+            this.showSellDialog = stock_id;
+            console.log(stock_id)
+        },
+
+        confirmSell(stock_id) {
+            this.showSellDialog = null;
+            console.log(stock_id, this.count)
+        },
     }
 }
 </script>
@@ -168,7 +201,7 @@ export default {
         background-color: #023A50;
         border-radius: 0px 0px 10px 10px;
         padding-top: 10px;
-        
+        min-height: 40px;
         font-size: 24px;
         width: 400px;
         margin-bottom: 70px;
@@ -211,6 +244,15 @@ export default {
         background-color: #fdfcfc;
         border-radius: 30px;
         margin-bottom: 30px;
+    }
+
+    .Dialog {
+        position: absolute;
+        margin-left: 40vw;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 20px;
     }
 
     .FirstColumn {
