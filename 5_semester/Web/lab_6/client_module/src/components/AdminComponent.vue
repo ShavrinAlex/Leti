@@ -4,7 +4,7 @@
             <ins class="Link" v-on:click="goBack">back</ins>
         </div>
         <div v-for="broker in brokers" v-bind:key = broker.id class="BrokerCard">
-            <div class="MainInfo">{{broker.name}}:{{broker.account}}$</div>
+            <div class="MainInfo">{{broker.name}}:{{broker.account.toFixed(3)}}$</div>
             <div v-for="stock in stocks" v-bind:key = stock.id class="BrokerStock">
                 <div v-if="broker.stocks[stock.id]?.count">
                   <div class="BrokerStockCard">
@@ -23,6 +23,7 @@
 <script>
 import router from "@/Router"
 import axios from "axios";
+import {mapState} from "vuex";
 
 
 const BROKERS_URL = 'http://localhost:8081/getAllBrokers'
@@ -86,7 +87,12 @@ export default {
                     - broker.stocks[stock.id]?.sum).toFixed(3)
             return !isNaN(difference) ? difference : 0
         }
-  }
+  },
+
+  computed: {
+        ...mapState(["tradingList"]),
+        ...mapState(["index"]),
+    },
 }
 
 </script>

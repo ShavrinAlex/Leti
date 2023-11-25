@@ -5,7 +5,6 @@ export default createStore({
     state() {
         return {
             tradingList: [],
-            start_index: 0,
             index: 0,
         }
     },

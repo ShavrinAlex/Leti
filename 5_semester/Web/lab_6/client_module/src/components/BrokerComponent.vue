@@ -6,7 +6,7 @@
         </div>
         <div v-if="broker" class="BrokerInfo">
             <div class="BrokerName">Broker: {{ broker.name }}</div>
-            <div class="BrokerAccount">Account: {{ (broker.account).toFixed(3) }}$</div>
+            <div class="BrokerAccount" id="BrokerAccount">Account: {{ (broker.account).toFixed(3) }}$</div>
             <div v-if="stocks" class="Date">Date: {{ stocks[0].data[stocks[0]?.data.length-1-this.$store.state.index]?.Date }}</div>
             <div v-else class="Date">Date: {{ new Date().toLocaleDateString("en-US") }}</div>
         </div>
@@ -18,15 +18,15 @@
                             <div class="StockName">{{ stock.name }}</div>
                             <div class="MainStockInfo">
                                 <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].count" class="Count">{{ broker.stocks[stock.id].count }}</div>
-                                <div class="Price">{{ stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1) }}$</div>
+                                <div class="Price" v-bind:id="stock.id+'_price'">{{ stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1) }}$</div>
                             </div>
                         </div>
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
-                        <button class="BuyButton" v-on:click="buy_stock(stock.id)">buy</button>
+                        <button class="BuyButton" v-bind:id="stock.id+'_buy_btn'" v-on:click="buy_stock(stock.id)">buy</button>
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
-                        <button class="SellButton" v-on:click="sell_stock(stock.id)">sell</button>
+                        <button class="SellButton" v-bind:id="stock.id+'_sell_btn'" v-on:click="sell_stock(stock.id)">sell</button>
                     </div>
                     <div v-if="tradingList.includes(stock.id)">
                         <div class="LastColumn">
@@ -64,13 +64,13 @@
                 </div>
                 <dialog open v-if="showBuyDialog === stock.id" class="Dialog">
                     <div class="StockName">{{ stock.id }}</div>
-                    <input type="number" v-model="count"/>
-                    <button class="confirmBuy" v-on:click="confirmBuy(stock.id)">confirm buy</button>
+                    <input v-bind:id="stock.id+'_buy_inp'" type="number" v-model="count"/>
+                    <button class="confirmBuy" v-bind:id="stock.id+'_buy_confirm_btn'" v-on:click="confirmBuy(stock.id)">confirm buy</button>
                 </dialog>
                 <dialog open v-if="showSellDialog === stock.id" class="Dialog">
                     <div class="StockName">{{ stock.id }}</div>
-                    <input type="number" min="0" v-model="count"/>
-                    <button class="confirmBuy" v-on:click="confirmSell(stock.id)">confirm sell</button>
+                    <input v-bind:id="stock.id+'_sell_inp'" type="number" min="0" v-model="count"/>
+                    <button class="confirmBuy"  v-bind:id="stock.id+'_sell_confirm_btn'" v-on:click="confirmSell(stock.id)">confirm sell</button>
                 </dialog>
             </div>
         </div>
@@ -154,9 +154,10 @@ export default {
             }
         })
     },
-
+    
     computed: {
         ...mapState(["tradingList"]),
+        ...mapState(["index"]),
     },
 
     methods: {
