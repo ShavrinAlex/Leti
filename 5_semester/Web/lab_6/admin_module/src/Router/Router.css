@@ -1,0 +1,16 @@
+.navigation_bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background: #ffeb3a;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.navigation_elem {
+   padding: 10px;
+   color: #000;
+   font-size: 25px;
+}
