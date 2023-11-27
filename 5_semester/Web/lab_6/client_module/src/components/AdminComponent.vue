@@ -6,7 +6,7 @@
         <div v-for="broker in brokers" v-bind:key = broker.id class="BrokerCard">
             <div class="MainInfo">{{broker.name}}:{{broker.account.toFixed(3)}}$</div>
             <div v-for="stock in stocks" v-bind:key = stock.id class="BrokerStock">
-                <div v-if="broker.stocks[stock.id]?.count">
+                <div v-if="broker.stocks[stock.id]?.count && this.$store.state.tradingList.includes(stock.id)">
                   <div class="BrokerStockCard">
                     <div class="StockInfo">Name: {{ stock.name }}</div>
                     <div class="StockInfo">Count: {{ broker.stocks[stock.id].count }}</div>
@@ -83,10 +83,14 @@ export default {
     },
 
     getDifference(broker, stock) {
-            let difference = (Number(stock.data[stock.data?.length-1-this.$store.state.index]?.Open.slice(1)) * broker.stocks[stock.id]?.count
-                    - broker.stocks[stock.id]?.sum).toFixed(3)
-            return !isNaN(difference) ? difference : 0
-        }
+      if (this.$store.state.tradingList.includes(stock.id)){
+        let difference = (Number(stock.data[stock.data?.length-1-this.$store.state.index]?.Open.slice(1)) * broker.stocks[stock.id]?.count
+                - broker.stocks[stock.id]?.sum).toFixed(3)
+        return !isNaN(difference) ? difference : 0
+      } else {
+        return 0;
+      }
+    }
   },
 
   computed: {

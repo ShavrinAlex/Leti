@@ -17,7 +17,7 @@
                         <div class="FirstColumn" @click="toggleGraphic(stock.id)">
                             <div class="StockName">{{ stock.name }}</div>
                             <div class="MainStockInfo">
-                                <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].count" class="Count">{{ broker.stocks[stock.id].count }}</div>
+                                <div v-if="broker.stocks[stock.id] && broker.stocks[stock.id].count" class="Count">{{ broker.stocks[stock.id].count }} шт.</div>
                                 <div class="Price" v-bind:id="stock.id+'_price'">{{ stock.data[stock.data.length-1-this.$store.state.index]?.Open.slice(1) }}$</div>
                             </div>
                         </div>
@@ -65,12 +65,16 @@
                 <dialog open v-if="showBuyDialog === stock.id" class="Dialog">
                     <div class="StockName">{{ stock.id }}</div>
                     <input v-bind:id="stock.id+'_buy_inp'" type="number" v-model="count"/>
+                    <div v-if="error" class="error">invalid value</div>
                     <button class="confirmBuy" v-bind:id="stock.id+'_buy_confirm_btn'" v-on:click="confirmBuy(stock.id)">confirm buy</button>
+                    <button class="closeDialog" v-on:click="cancleBuy()">cancle</button>
                 </dialog>
                 <dialog open v-if="showSellDialog === stock.id" class="Dialog">
                     <div class="StockName">{{ stock.id }}</div>
                     <input v-bind:id="stock.id+'_sell_inp'" type="number" min="0" v-model="count"/>
+                    <div v-if="error" class="error">invalid value</div>
                     <button class="confirmBuy"  v-bind:id="stock.id+'_sell_confirm_btn'" v-on:click="confirmSell(stock.id)">confirm sell</button>
+                    <button class="closeDialog" v-on:click="cancleSell()">cancle</button>
                 </dialog>
             </div>
         </div>
@@ -107,7 +111,8 @@ export default {
             graphichs: {},
             showBuyDialog: null,
             showSellDialog: null,
-            count: 0
+            count: 0,
+            error: false
         };
     },
 
@@ -165,20 +170,34 @@ export default {
             this.graphichs[stock_id] = !this.graphichs[stock_id]
         },
 
+        cancleBuy() {
+            this.showBuyDialog = null;
+        },
+
+        cancleSell() {
+            this.showSellDialog = null;
+        },
+
         buy_stock(stock_id) {
             this.showBuyDialog = stock_id;
             console.log(stock_id)
         },
 
         confirmBuy(stock_id) {
-            this.showBuyDialog = null;
-            const data = {
-                "index": this.$store.state.index,
-                "broker_id": this.broker.id,
-                "stock_id": stock_id,
-                "stock_count": this.count
-            };
-            this.$socket.emit("buy", JSON.stringify(data));
+            
+            if (this.count >= 0) {
+                this.error = false;
+                const data = {
+                    "index": this.$store.state.index,
+                    "broker_id": this.broker.id,
+                    "stock_id": stock_id,
+                    "stock_count": this.count
+                };
+                this.$socket.emit("buy", JSON.stringify(data));
+               // this.showBuyDialog = null;
+            } else {
+                this.error = true
+            }
         },
 
         sell_stock(stock_id) {
@@ -187,14 +206,20 @@ export default {
         },
 
         confirmSell(stock_id) {
-            this.showSellDialog = null;
-            const data = {
-                "index": this.$store.state.index,
-                "broker_id": this.broker.id,
-                "stock_id": stock_id,
-                "stock_count": this.count
-            };
-            this.$socket.emit("sell", JSON.stringify(data));
+            
+            if (this.count >= 0){
+                this.error = false;
+                const data = {
+                    "index": this.$store.state.index,
+                    "broker_id": this.broker.id,
+                    "stock_id": stock_id,
+                    "stock_count": this.count
+                };
+                this.$socket.emit("sell", JSON.stringify(data));
+                //this.showSellDialog = null;
+            } else {
+                this.error = true;
+            }
         },
 
         getDifference(stock) {
@@ -209,6 +234,9 @@ export default {
 
 
 <style>
+    .error {
+        color: red;
+    }
     .ComponentContainer {
         width: 100vw;
         height: 100vh;
