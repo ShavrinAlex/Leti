@@ -5,12 +5,11 @@ import { QueryTypes } from 'sequelize'
 
 export async function request_1() {
     /*
-    SELECT breed.ring_number, dog.dog_number, owner.surname, owner.name, owner.patronymic
-    FROM owner
-        INNER JOIN dog ON owner.passport = dog.owner_passport
-        INNER JOIN breed USING(breed_name)
-    ORDER BY breed.ring_number, dog.dog_number, owner.surname, owner.name, owner.patronymic;
+    На каком ринге выступает заданный хозяин со своей собакой?
     */
+
+    let label = 'Request 1';
+    console.time(label);
     await models.Dog.findAll(
         {
             attributes: ['dog_number'],
@@ -27,14 +26,14 @@ export async function request_1() {
                     attributes: ['ring_number'],
                 }
             ],
-            order: [
-                ['dog_number', 'ASC'],
-            ]
+            order: [['dog_number', 'ASC']],
+            limit: 10
         }
     ).then((result) => {
-        console.log('Request 1:');
+        console.timeEnd(label);
+        console.log(label, ': На каком ринге выступает заданный хозяин со своей собакой?');
         for (let dog of result) {
-            console.log(dog.breed.dataValues.ring_number, dog.dataValues.dog_number, dog.owner.dataValues.surname, dog.owner.dataValues.name)
+            console.log('ring: ', dog.breed.dataValues.ring_number, 'dog: ', dog.dataValues.dog_number, dog.owner.dataValues.surname, dog.owner.dataValues.name)
         }
     });
 }
@@ -42,66 +41,35 @@ export async function request_1() {
 
 export async function request_2(){
     /*
-    SELECT club.club_id, dog.breed_name
-        FROM club
-            INNER JOIN club_numbers USING(club_id)
-            INNER JOIN dog USING(dog_number)
-    GROUP BY club.club_id, dog.breed_name
-    ORDER BY club.club_id, dog.breed_name;
+    Какими породами представлен заданный клуб?
     */
-    await models.ClubNumber.findAll(
-        {
-            attributes: ['club_id'],
-            include: [
-                {
-                    model: models.Dog,
-                    required: true,
-                    attributes: ['breed_name']
-                }
-            ],
-            group: ['"ClubNumber"."club_id"', '"dog"."breed_name"', '"dog"."dog_number"'],
-            order: [["club_id", "ASC"]]
-        }
-    ).then((result) => {
-        for (let club_number of result){
-            console.log(club_number.club_id, club_number.dog.dataValues.breed_name);
-        }
-    })
-    /*
+
+    let label = 'Request 2';
+    console.time(label);
     await db.query(
          `SELECT club.club_id, dog.breed_name
             FROM "Clubs" AS club
                  INNER JOIN "ClubNumbers" AS club_numbers USING(club_id)
                  INNER JOIN "Dogs" AS dog USING(dog_number)
         GROUP BY club.club_id, dog.breed_name
-        ORDER BY club.club_id, dog.breed_name;`,
+        ORDER BY club.club_id, dog.breed_name
+        LIMIT 10;`,
         { type: QueryTypes.SELECT }
     ).then((result) => {
-        console.log('Request 2:');
+        console.timeEnd(label);
+        console.log(label, ': Какими породами представлен заданный клуб?');
         console.log(result);
     })
-    */
 }
 
 
 export async function request_3() {
     /*
-    WITH dog_places AS (
-	SELECT dog.breed_name, dog.dog_number, ROUND(AVG(dog_expert_estimate.estimate), 2) AS Estimate,
-            DENSE_RANK() OVER (PARTITION BY dog.breed_name ORDER BY ROUND(AVG(dog_expert_estimate.estimate), 2) DESC) AS place
-        FROM dog
-            INNER JOIN dog_expert_estimate USING(dog_number)
-        GROUP BY dog.breed_name, dog.dog_number
-        ORDER BY dog.breed_name, Estimate DESC
-    )
-    SELECT club.club_id, club.club_name, dog_places.place, COUNT(dog_places.place)
-        FROM club
-            INNER JOIN club_numbers USING(club_id)
-            INNER JOIN dog_places USING(dog_number)
-    GROUP BY club.club_id, club.club_name, dog_places.place
-    ORDER BY club.club_id, dog_places.place;
+    Какие медали и сколько заслужены клубом?
     */
 
+    let label = 'Request 3';
+    console.time(label);
     await db.query(
         `WITH dog_places AS (
             SELECT dog.breed_name, dog.dog_number, ROUND(AVG(dog_expert_estimate.estimate), 2) AS Estimate,
@@ -116,10 +84,12 @@ export async function request_3() {
                     INNER JOIN "ClubNumbers" AS club_numbers USING(club_id)
                     INNER JOIN dog_places USING(dog_number)
             GROUP BY club.club_id, club.club_name, dog_places.place
-            ORDER BY club.club_id, dog_places.place;`, 
+            ORDER BY club.club_id, dog_places.place
+            LIMIT 10;`, 
         { type: QueryTypes.SELECT }
     ).then((result) => {
-        console.log('Request 3:');
+        console.timeEnd(label)
+        console.log(label, ': Какие медали и сколько заслужены клубом?');
         console.log(result);
     });
 }
@@ -127,24 +97,23 @@ export async function request_3() {
 
 export async function request_4() {
     /*
-    SELECT dog.breed_name, expert.expert_id, expert.name, expert.surname
-        FROM dog
-            INNER JOIN dog_expert_estimate USING(dog_number)
-            INNER JOIN expert USING(expert_id)
-    GROUP BY dog.breed_name, expert.expert_id
-    ORDER BY dog.breed_name;
+    Какие эксперты обслуживают породу?
     */
 
+    let label = 'Request 4';
+    console.time(label);
     await db.query(
         `SELECT dog.breed_name, expert.expert_id, expert.name, expert.surname
            FROM "Dogs" AS dog
                 INNER JOIN "DogExpertEstimates" AS dog_expert_estimate USING(dog_number)
                 INNER JOIN "Experts" AS expert USING(expert_id)
        GROUP BY dog.breed_name, expert.expert_id
-       ORDER BY dog.breed_name;`,
+       ORDER BY dog.breed_name
+       LIMIT 10;`,
         { type: QueryTypes.SELECT }
     ).then((result) => {
-        console.log('Request 4:');
+        console.timeEnd(label);
+        console.log(label, ': Какие эксперты обслуживают породу?');
         console.log(result);
     });
 }
@@ -152,20 +121,21 @@ export async function request_4() {
 
 export async function request_5(){
     /*
-      SELECT dog.breed_name, COUNT(*)
-        FROM dog
-    GROUP BY dog.breed_name
-    ORDER BY dog.breed_name;
+    Количество участников по каждой породе?
     */
 
+    let label = 'Request 5';
+    console.time(label);
     await models.Dog.findAll(
         {
             attributes: ['breed_name', [db.fn('COUNT', db.col('dog_number')), 'count']],
             group: ['breed_name'],
-            order: [['breed_name', 'ASC']]
+            order: [['breed_name', 'ASC']],
+            limit: 10
         }
     ).then((result) => {
-        console.log('Request 5:');
+        console.timeEnd(label);
+        console.log(label, ': Количество участников по каждой породе?');
         for (let dog of result) {
             console.log(dog.dataValues.breed_name, dog.dataValues.count)
         }

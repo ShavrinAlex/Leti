@@ -1,39 +1,31 @@
 import * as models from "./models/models.js";
 import { faker } from "@faker-js/faker";
-var COUNT = 1000000;
-var UNIQUE_VALUES = uniqueValues();
+const COUNT = 100000;
+const UNIQUE_VALUES = uniqueValues();
 export async function fill_db() {
     // fill Rings
     let rings = createRings();
-    //console.log(rings)
     await models.Ring.bulkCreate(rings.map((ring) => (ring)), { returning: false });
     //fill Breeds
     let breeds = createBreeds();
-    //console.log(breeds)
     await models.Breed.bulkCreate(breeds.map((breed) => (breed)), { returning: false });
     //fill clubs
     let clubs = faker.helpers.multiple(createClub, { count: COUNT });
-    //console.log(clubs) 
     await models.Club.bulkCreate(clubs.map((club) => (club)), { returning: false });
     //fill experts
     let experts = faker.helpers.multiple(createExpert, { count: COUNT });
-    //console.log(experts)
     await models.Expert.bulkCreate(experts.map((expert) => (expert)), { returning: false });
     //fill owners
     let owners = createOwners();
-    //console.log(owners)
     await models.Owner.bulkCreate(owners.map((owner) => (owner)), { returning: false });
     //fill dogs
     let dogs = faker.helpers.multiple(createDog, { count: COUNT });
-    //console.log(dogs)
     await models.Dog.bulkCreate(dogs.map((dog) => (dog)), { returning: false });
     //fill club numbers
     let club_numbers = createClubNumbers();
-    //console.log(club_numbers)
     await models.ClubNumber.bulkCreate(club_numbers.map((club_number) => (club_number)), { returning: false });
     //fill dogs experts estimates
     let dogs_experts_estimates = createDogsExpertsEstimates();
-    //console.log(dogs_experts_estimates)
     await models.DogExpertEstimate.bulkCreate(dogs_experts_estimates.map((dog_expert_estimate) => (dog_expert_estimate)), { returning: false });
 }
 function getPassport() {
@@ -88,13 +80,6 @@ function createOwners() {
         });
     }
     return owners;
-    /*
-    return {
-        'passport': faker.finance.accountNumber({length: 4}) + ' ' + faker.finance.accountNumber({length: 6}),
-        'surname': faker.person.lastName(),
-        'name': faker.person.firstName(),
-        'patronymic': faker.person.middleName()
-    }*/
 }
 function createDog() {
     //choise owner passport
@@ -123,11 +108,6 @@ function createClubNumbers() {
         });
     }
     return club_numbers;
-    /*
-    return {
-        'dog_number': faker.number.int({min: 1, max: COUNT}),
-        'club_id': faker.number.int({min: 1, max: COUNT})
-    }*/
 }
 function createDogsExpertsEstimates() {
     let dogs_experts_estimates = [];
@@ -144,10 +124,4 @@ function createDogsExpertsEstimates() {
         });
     }
     return dogs_experts_estimates;
-    /*
-    return {
-        'dog_number': faker.number.int({min: 1, max: COUNT}),
-        'expert_id': faker.number.int({min: 1, max: COUNT}),
-        'estimate': faker.number.int({min: 0, max: 10})
-    }*/
 }

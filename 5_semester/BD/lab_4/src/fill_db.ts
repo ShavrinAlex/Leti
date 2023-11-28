@@ -1,13 +1,13 @@
 import * as models from "./models/models.js"
 import { faker } from "@faker-js/faker"
-const COUNT = 1000000;
+const COUNT = 100000;
 const UNIQUE_VALUES = uniqueValues();
 
 
 export async function fill_db() {
     // fill Rings
     let rings: any[] = createRings()
-    //console.log(rings)
+
     await models.Ring.bulkCreate(
         rings.map((ring) => (ring)), 
         { returning: false }
@@ -15,7 +15,7 @@ export async function fill_db() {
 
     //fill Breeds
     let breeds: any[] = createBreeds();
-    //console.log(breeds)
+
     await models.Breed.bulkCreate(
         breeds.map((breed) => (breed)), 
         { returning: false }
@@ -23,7 +23,7 @@ export async function fill_db() {
     
     //fill clubs
     let clubs: any[] = faker.helpers.multiple(createClub, {count: COUNT});
-    //console.log(clubs) 
+
     await models.Club.bulkCreate(
         clubs.map((club) => (club)), 
         { returning: false }
@@ -31,7 +31,7 @@ export async function fill_db() {
     
     //fill experts
     let experts: any[] = faker.helpers.multiple(createExpert, {count: COUNT});
-    //console.log(experts)
+
     await models.Expert.bulkCreate(
         experts.map((expert) => (expert)), 
         { returning: false }
@@ -39,7 +39,7 @@ export async function fill_db() {
        
     //fill owners
     let owners: any[] = createOwners();
-    //console.log(owners)
+
     await models.Owner.bulkCreate(
         owners.map((owner) => (owner)), 
         { returning: false }
@@ -47,7 +47,7 @@ export async function fill_db() {
 
     //fill dogs
     let dogs: any[] = faker.helpers.multiple(createDog, {count: COUNT}); 
-    //console.log(dogs)
+
     await models.Dog.bulkCreate(
         dogs.map((dog) => (dog)), 
         { returning: false }
@@ -55,7 +55,7 @@ export async function fill_db() {
        
     //fill club numbers
     let club_numbers: any[] = createClubNumbers();
-    //console.log(club_numbers)
+
     await models.ClubNumber.bulkCreate(
         club_numbers.map((club_number) => (club_number)), 
         { returning: false }
@@ -63,7 +63,7 @@ export async function fill_db() {
     
     //fill dogs experts estimates
     let dogs_experts_estimates: any[] = createDogsExpertsEstimates();
-    //console.log(dogs_experts_estimates)
+
     await models.DogExpertEstimate.bulkCreate(
         dogs_experts_estimates.map((dog_expert_estimate) => (dog_expert_estimate)), 
         { returning: false }
@@ -132,7 +132,6 @@ function createOwners(): any[] {
 }
 
 function createDog(): any {
-    //choise owner passport
     return {
         'owner_passport': faker.helpers.arrayElement(UNIQUE_VALUES.passports), 
         'breed_name':  faker.helpers.arrayElement(UNIQUE_VALUES.breed_names), 

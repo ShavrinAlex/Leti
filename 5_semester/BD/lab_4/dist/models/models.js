@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Table, Column, Model, PrimaryKey, AllowNull, DataType, AutoIncrement, } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AllowNull, DataType, AutoIncrement, Index, } from 'sequelize-typescript';
 import { BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
 let Owner = class Owner extends Model {
 };
@@ -17,6 +17,7 @@ __decorate([
 ], Owner.prototype, "dogs", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     AllowNull(false),
     Column(DataType.STRING(11)),
     __metadata("design:type", String)
@@ -52,6 +53,7 @@ __decorate([
 ], Ring.prototype, "experts", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     AutoIncrement,
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
@@ -72,6 +74,7 @@ __decorate([
 ], Breed.prototype, "dogs", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     AllowNull(false),
     Column(DataType.STRING(255)),
     __metadata("design:type", String)
@@ -101,6 +104,7 @@ __decorate([
 ], Dog.prototype, "dog_expert_estimates", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     AutoIncrement,
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
@@ -161,6 +165,7 @@ __decorate([
 ], Club.prototype, "club_numbers", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     AutoIncrement,
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
@@ -195,6 +200,7 @@ __decorate([
 ], Expert.prototype, "dogs_expert_estimate", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     AutoIncrement,
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
@@ -235,12 +241,14 @@ __decorate([
 ], ClubNumber.prototype, "dog", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     ForeignKey(() => Club),
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
 ], ClubNumber.prototype, "club_id", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     ForeignKey(() => Dog),
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
@@ -261,12 +269,14 @@ __decorate([
 ], DogExpertEstimate.prototype, "expert", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     ForeignKey(() => Dog),
     Column(DataType.INTEGER),
     __metadata("design:type", Number)
 ], DogExpertEstimate.prototype, "dog_number", void 0);
 __decorate([
     PrimaryKey,
+    Index,
     ForeignKey(() => Expert),
     Column(DataType.INTEGER),
     __metadata("design:type", Number)

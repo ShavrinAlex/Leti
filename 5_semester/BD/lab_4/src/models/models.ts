@@ -7,6 +7,7 @@ import {
     DataType,
     AutoIncrement,
     Default,
+    Index,
 } from 'sequelize-typescript';
 import { BelongsTo, ForeignKey, HasMany} from 'sequelize-typescript'
 
@@ -17,6 +18,7 @@ export class Owner extends Model {
     declare dogs: Dog[];
 
     @PrimaryKey
+    @Index
     @AllowNull(false)
     @Column(DataType.STRING(11))
     declare passport: string;
@@ -43,6 +45,7 @@ export class Ring extends Model {
     declare experts: Expert[];
     
     @PrimaryKey
+    @Index
     @AutoIncrement
     @Column(DataType.INTEGER)
     declare ring_number: number;
@@ -57,6 +60,7 @@ export class Breed extends Model {
     declare dogs: Dog[];
 
     @PrimaryKey
+    @Index
     @AllowNull(false)
     @Column(DataType.STRING(255))
     declare breed_name: string;
@@ -78,6 +82,7 @@ export class Dog extends Model {
     declare dog_expert_estimates: DogExpertEstimate[];
 
     @PrimaryKey
+    @Index
     @AutoIncrement
     @Column(DataType.INTEGER)
     declare dog_number: number;
@@ -124,6 +129,7 @@ export class Club extends Model {
     declare club_numbers: ClubNumber[];
 
     @PrimaryKey
+    @Index
     @AutoIncrement
     @Column(DataType.INTEGER)
     declare club_id: number;
@@ -149,6 +155,7 @@ export class Expert extends Model {
     declare dogs_expert_estimate: DogExpertEstimate[];
 
     @PrimaryKey
+    @Index
     @AutoIncrement
     @Column(DataType.INTEGER)
     declare expert_id: number;
@@ -179,11 +186,13 @@ export class ClubNumber extends Model {
     declare dog: Dog;
 
     @PrimaryKey
+    @Index
     @ForeignKey(() => Club)
     @Column(DataType.INTEGER)
     declare club_id: number;
 
     @PrimaryKey
+    @Index
     @ForeignKey(() => Dog)
     @Column(DataType.INTEGER)
     declare dog_number: number;
@@ -198,11 +207,13 @@ export class DogExpertEstimate extends Model {
     declare expert: Expert;
 
     @PrimaryKey
+    @Index
     @ForeignKey(() => Dog)
     @Column(DataType.INTEGER)
     declare dog_number: number;
 
     @PrimaryKey
+    @Index
     @ForeignKey(() => Expert)
     @Column(DataType.INTEGER)
     declare expert_id: number;
