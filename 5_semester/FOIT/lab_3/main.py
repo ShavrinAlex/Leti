@@ -94,7 +94,7 @@ def main():
     draw_amplitude(frequency, spectre_module, stop_i)
     draw_afr(frequency, H, stop_i)
 
-    print(1/H_ans)
+    print(H_ans)
 
 
 
