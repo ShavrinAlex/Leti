@@ -141,7 +141,7 @@ function createDog(): any {
         'nickname': faker.person.firstName(), 
         'age': faker.number.int({min: 1, max: 25}), 
         'vaccination_date': faker.date.recent()
-    }
+    };
 }
 
 function createClubNumbers(): any {
