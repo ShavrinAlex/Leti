@@ -115,6 +115,7 @@ __decorate([
     __metadata("design:type", String)
 ], Dog.prototype, "owner_passport", void 0);
 __decorate([
+    Index,
     ForeignKey(() => Breed),
     Column(DataType.STRING(255)),
     __metadata("design:type", String)

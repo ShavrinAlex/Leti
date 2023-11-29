@@ -1,6 +1,6 @@
 import * as models from "./models/models.js"
 import { faker } from "@faker-js/faker"
-const COUNT = 100000;
+const COUNT = 10000;
 const UNIQUE_VALUES = uniqueValues();
 
 

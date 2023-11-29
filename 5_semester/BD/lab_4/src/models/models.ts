@@ -91,6 +91,7 @@ export class Dog extends Model {
     @Column(DataType.STRING(11))
     declare owner_passport: string;
 
+    @Index
     @ForeignKey(() => Breed)
     @Column(DataType.STRING(255))
     declare breed_name: string;

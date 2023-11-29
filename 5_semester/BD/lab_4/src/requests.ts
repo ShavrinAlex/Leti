@@ -77,14 +77,14 @@ export async function request_3() {
                 FROM "Dogs" AS dog
                     INNER JOIN "DogExpertEstimates" AS dog_expert_estimate USING(dog_number)
                 GROUP BY dog.breed_name, dog.dog_number
-                ORDER BY dog.breed_name, Estimate DESC
+                ORDER BY dog.breed_name DESC
             )
             SELECT club.club_id, club.club_name, dog_places.place, COUNT(dog_places.place)
                 FROM "Clubs" AS club
                     INNER JOIN "ClubNumbers" AS club_numbers USING(club_id)
                     INNER JOIN dog_places USING(dog_number)
             GROUP BY club.club_id, club.club_name, dog_places.place
-            ORDER BY club.club_id, dog_places.place
+            ORDER BY club.club_id
             LIMIT 10;`, 
         { type: QueryTypes.SELECT }
     ).then((result) => {
