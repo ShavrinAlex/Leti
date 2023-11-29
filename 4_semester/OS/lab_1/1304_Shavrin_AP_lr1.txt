@@ -1,0 +1,689 @@
+
+Отчет по лабораторной работе №1 
+По предмету: Операционные системы
+Студент: Шаврин А.П. 
+Группа: 1304
+
+
+
+
+------------------------------------------------------------------------------------I. Подготовка к работе.---------------------------------------------------------------------------------------------
+3)
+Команды:
+alex@alex-VirtualBox:~/Leti/4 semester/OS$ > myfile.txt		//Был создан txt файл
+
+
+
+
+---------------------------------------------------------------------------II. Основы работы c командным интерфейсом.-----------------------------------------------------------------------------------
+1)
+КОМАНДА date
+	Команды:
+		date			//вывод текущей даты;
+		date -r test.txt	//вывод даты последнего изменения файла test.txt
+	
+	Вывод:
+		Чт 09 фев 2023 17:45:41 MSK
+		Ср 15 фев 2023 21:48:23 MSK
+
+КОМАНДА who	
+	Команды:
+		who			//кто находится в системе;
+		who -b 			//время последнего запуска системы
+		who -u			//список залогиненых пользователей
+	
+	Вывод:
+		alex     :0           2023-01-03 12:27 (:0)
+		загрузка системы 2023-02-15 22:56
+		alex     tty2         2023-02-15 22:56 19:00        1186 (tty2)
+	
+	
+КОМАНДА tty
+	Команды:
+		tty			//полное имя файла-терминала;
+		tty -s			//ничего не выводит, просто возвращает статус завершения
+	
+	Вывод:
+		/dev/pts/1
+		
+	
+
+КОМАНДА logname
+	Команды:
+		logname			//входное имя;
+		logname --version	//выводит версию комманды
+	
+	Вывод:
+		alex
+		logname (GNU coreutils) 8.32 ...
+	
+
+КОМАНДА uname
+	Команды:
+		uname			//имя  UNIX-системы  ("имя компьютера")
+		uname -a		//вся информация о системе
+		uname -v		//версия ядра
+		uname -i		//hardware platform
+	
+	Вывод:
+		Linux
+		Linux alex-VirtualBox 5.15.0-60-generic #66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+		#66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023
+		x86_64
+		
+
+
+
+
+2)
+КОМАНДА sleep
+	Команды:
+		sleep 5		//терминал "спал" 5 секунд 
+		sleep 10000	//терминал заснул на 10000 секунд
+		^C		//терминал прекратил выполнение предыдущей команды и вывел приглашение для ввода
+
+
+3)
+КОМАНДА man
+	Команды:
+		man date
+		man who
+		man tty
+
+Выявите общие правила построения справочников в ОС Linux (разделы и т.п.)
+Ответ:
+Все справочные разделы имеют общие подразделы:
+	- NAME - определение команды
+	- SYNOPSIS - синтаксис команды
+	- DESCRIPTION - описание флагов
+	- AUTHOR - автор команды
+	- REPORTING BUGS - где получить помощь при ошибках
+	- COPYRIGHT - лицензия
+	- SEE ALSO - дополнительная информация
+	
+В date присутствуют дополнительные разделы:
+	- EXAMPLES
+	- DATE STRING
+
+
+4)
+а)
+КОМАНДА ls
+	Команды:
+		ls		//вывод содержимого директории
+		ls -l		//вся информация о содержимом директории
+		ls -m		//разделяет запятой содержимое директории
+		ls -p		//добавляет / для директорий
+		ls -s 		//сортирует по убыванию размера файлов и выводи их размер
+
+	Вывод:
+		myfile.txt junk temp
+
+		итого 16
+		drwxrwxr-x 4 alex alex 4096 фев 9 15 10:48 junk
+		-rw-rw-r-- 1 alex alex 5382 фев  9 18:53 myfile.txt
+		drwxrwxr-x 4 alex alex 4096 фев 15 10:49 temp
+		
+		1304_Shavrin_AP_lr1.txt, eqv, file_name, file_name.c, junck, my_open, my_open.c, prog.c, temp, test.txt
+		
+		1304_Shavrin_AP_lr1.txt  file_name unck/   my_open.c  temp/ eqv  file_name.c  my_open  prog.c  test.txt
+		
+		итого 84
+		28 1304_Shavrin_AP_lr1.txt  16 file_name     4 junck     4 my_open.c   4 tempm 
+		4 eqv  4 file_name.c  16 my_open   4 prog.c   0 test.txt
+
+
+Что  будет,  если  ввести  'ls junk' ? 'ls junk temp' ?
+Ответ: 
+При наличии данных директорий произойдет вывод содержания данных деректорий (для данного теста были созданы данные директории с поддиректориями)
+1
+junk_1 junk_2
+
+2
+junk:
+	junk_1 junk_2
+	
+temp:
+	temp_1 temp_2
+
+
+b)
+КОМАНДА cat
+	Команды:
+		cat junk.txt			//происходит вывод в консоль содержимого junk 
+		cat temp.txt			//происходит вывод в консоль усодержимого temp 
+		cat junk.txt temp.txt		//роисходит последовательный вывод в консоль
+		cat -n junk.txt			//нумерует строки выводимых файлов
+		cat -A junk.txt			//выводит все символы файла включая невидимые
+
+	Вывод:
+		I'm junk
+		I'm temp
+		I'm junk
+		I'm temp
+		1	I'm junk
+		I'm junk$
+
+
+Что происходит, если cat получает несколько аргументов ? 
+Ответ:
+Происходит вывод содержимого аргументов поочередно
+
+
+c)
+КОМАНДА mv
+	Команды:
+		mv junk.txt aaa.txt	//происходит перемещения файла в текущую директорию с новым именем файла
+		ls
+		cat junk.txt
+		mv -v aaa.txt aa.txt	//выводит информацию о том что произошло
+
+	Вывод:
+		aaa.txt  junk  myfile.txt  temp  temp.txt
+		cat: junk.txt: Нет такого файла или каталога
+		переименован 'aaa.txt' -> 'aa.txt
+
+
+КОМАНДА cp
+	Команды:
+		cp aaa.txt bbb.txt		//происходит копирование в текущую дтиректорию с новым именем файла
+		ls
+		cp -l test.txt test1.txt	//создает жесткую ссылку на файл
+		cp -n test.txt aa.txt		//не перезаписывает уже существующий файл
+		cp -s aa.txt aa1.txt 		//создает символьную ссылку на файл
+		
+	Вывод:
+		aaa.txt  bbb.txt  junk  myfile.txt  temp  temp.txt
+
+
+КОМАНДА rm
+	Команды:
+		rm temp.txt junk.txt
+		rm aaa.txt bbb.txt
+		ls
+		rm -r junk	//рекурсивное удаление директории
+		rm -v aa.txt	//обьясняет что произошло
+
+	Вывод:
+		rm: невозможно удалить 'junk.txt': Нет такого файла или каталога
+		junk  myfile.txt  temp
+		
+		удалён 'aa.txt'
+
+
+5)
+КОМАНДА pwd
+	Команды:
+		pwd		//выводит полное имя вашего текущего  каталога
+
+	Вывод:
+		/home/alex/Leti/4 semester/OS
+
+Как по-вашему должно выглядеть полное имя файла prog.c?
+Ответ:
+/home/alex/Leti/4 semester/OS/prog.c
+
+Введите ' ls <имя_вашего_каталога> '  .  Как  выводимые данные соотносятся с выводом "простой" команды 'ls'?
+Ответ: 
+С помощью команды ls <имя каталога> можно получить содержимое конкретного каталога (если указать его полное имя, если указать его короткое имя, то будет выведена поддиректория в текущей имеющая такае имя), а не текущего как это делает ls
+
+Что можно сказать о содержимом каталога /bin?
+Ответ:
+Содержит множество поддиректорий и системные файлы
+
+
+КОМАНДА cd
+	Команды:
+		alex@alex-VirtualBox:~/Leti/4 semester/OS$ cd ..
+		alex@alex-VirtualBox:~/Leti/4 semester$ pwd
+		alex@alex-VirtualBox:~/Leti/4 semester$ ls
+
+	Вывод:
+		/home/alex/Leti/4 semester
+		CM
+		OS
+
+Куда будете попадать, если продолжать это до бесконечности?
+Ответ:
+На директорию выше
+
+	Команды:
+		alex@alex-VirtualBox:~/Leti/4 semester$ ls -ld /		//определил владельца каталога /
+		alex@alex-VirtualBox:~/Leti/4 semester$ ls -ld /bin		//определил владельца каталога /bin
+		alex@alex-VirtualBox:~/Leti/4 semester$ cd			//вернулся в домашний каталог используя cd без аргументов
+		alex@alex-VirtualBox:~$ cd ./Leti/4\ semester/OS		//вернулся в каталог данного предмета
+		alex@alex-VirtualBox:~Leti/4\ semester/OS$ mkdir catalog	//создал подкаталог catalog
+		alex@alex-VirtualBox:~Leti/4\ semester/OS$ cd catalog		//перешел в подкаталог
+
+	Вывод:
+		drwxr-xr-x 20 root root 4096 сен 23 20:23 /
+		lrwxrwxrwx 1 root root 7 сен 17  2021 /bin -> usr/bin
+		alex@alex-VirtualBox:~$
+		alex@alex-VirtualBox:/Leti/4\ semester/OS$
+		alex@alex-VirtualBox:/Leti/4\ semester/OS/catalog$
+
+
+Нужно ли указывать  полное маршрутное имя для перехода?
+Ответ: нет
+
+В каком случае это было бы необходимо ?
+Ответ: в случае если этот каталог находится не в данной директории
+
+	Комманды:
+		alex@alex-VirtualBox:~Leti/4\ semester/OS/catalog$ cp ../prog.c .	//файл prog.c, который лежит на директорию выше был скопирован в catalog c тем же именем
+		alex@alex-VirtualBox:~Leti/4\ semester/OS/catalog$  ls
+
+	Вывод:
+		prog.c
+
+Вернитесь в вышележащий каталог. (Сколькими способами в данном случае это можно сделать?)
+Ответ:
+Двумя, через полный путь и через ..
+
+КОМАНДА rmdir и rm
+	Комманды:
+		alex@alex-VirtualBox:~Leti/4\ semester/OS$ rmdir ./catalog
+
+	Вывод:
+		rmdir: не удалось удалить 'catalog': Каталог не пуст
+
+Каков  результат?
+Ответ:
+Не удалился, тк в данном каталоге есть файлы
+
+	Команды:
+		alex@alex-VirtualBox:~Leti/4\ semester/OS$ rm catalog/prog.c
+		alex@alex-VirtualBox:~Leti/4\ semester/OS$ rmdir catalog
+		alex@alex-VirtualBox:~Leti/4\ semester/OS$ ls
+
+	Вывод:
+		junk  myfile.txt  prog.c  temp
+
+
+6)
+Команды:
+pc		//вывод информации о запущенных процессах запущенных с терминала
+pc -A		//вывод более полной информации о запущенных процессах запущенных с терминала
+pc -g		//выводит действительно все, даже лидеры сессий
+pc -r		//выводит только запущенные процессы
+
+Вывод:
+//ps
+    PID TTY          TIME CMD
+  56911 pts/1    00:00:00 bash
+  58099 pts/1    00:00:00 ps
+ 
+//ps -g
+   PID TTY      STAT   TIME COMMAND
+   1269 tty2     Ssl+   0:00 /usr/libexec/gdm-wayland-session env GNOME_SHELL_SE
+   1275 tty2     Sl+    0:00 /usr/libexec/gnome-session-binary --session=ubuntu
+   3704 pts/0    Ss     0:00 bash
+   3759 pts/0    S+     0:00 man pwd
+   3767 pts/0    S+     0:00 pager
+   3774 pts/1    Ss     0:00 bash
+   4022 pts/1    R+     0:00 ps -g
+   
+//ps -r
+PID TTY      STAT   TIME COMMAND
+  11315 pts/1    R+     0:00 ps -r
+
+
+
+
+-------------------------------------------------------------------III. Изучение цикла подготовки и исполнения программ в ОС Linux.---------------------------------------------------------------------
+
+компилятор сс это символьная ссылка на компилятор gcc (даже отсылают к одному мануалу по команде man)
+
+Команды:
+gcc -c prog.c		//создание обьектного файла
+
+Определите, какое ему присвоено имя.
+Ответ: prog.o
+
+Команды:
+gcc prog.o -o prog	//создание исполняемого файла с именем prog
+./prog			//запуск исполняемого файла
+
+Вывод:
+Hello, everybody !
+
+Комманды:
+gcc prog.c -o hello 	//получение исполняемого  файла  с именем hello из файла с исходным текстом
+./hello			//запуск исполняемого файла
+
+Вывод:
+Hello, everybody !
+
+Команды:
+gcc my_open.c -o my_open	//создание исполняемого файла
+./my_open test.txt		//запуск исполняемого файла с передачей существующего файла
+./my_open test_1.txt		//запуск исполняемого файла с передачей не существующего файла
+./my_open 			//запуск исполняемого файла без передачи аргументов
+
+Вывод:
+./my_open: файл test.txt открыт
+./my_open: неудача при попытке открыть файл test_1.txt
+открываемый файл не указан
+
+
+Команды:
+gcc file_name.c -o file_name	//создание исполняемого файла
+gcc my_open.c -o my_open	//создание исполняемого файла
+./file_name | ./my_open
+./file_name res.txt | ./my_open
+./file_name test.txt | ./my_open
+./file_name res.txt || ./my_open
+./file_name test.txt || ./my_open
+./file_name || ./my_open
+test.txt
+./file_name || ./my_open
+res.txt 
+./file_name || ./my_open
+test.txt
+./file_name && ./my_open
+./file_name res.txt && ./my_open
+test.txt
+
+Комментарии:
+Оператор | одиночной вертикальной черты создаёт конвейер, то есть результат первой команды передаётся в качестве аргумента второй
+
+Оператор || двойной вертикальной черты выполняет вторую команду только в случае сбоя при выполнении первой команды, то есть состояние выхода первой команды равно «-1» — программа выполнена НЕ успешно, так как первая команда выполняется успешно, в терминал выводится только её результат.
+
+Оператор && будет выполнять вторую команду только в том случае, если при выполнении первой команды SUCCEEDS, т.е. состояние выхода первой команды равно «0» — программа выполнена успешно, так как первая команда выполняется успешно, в терминал выводится результат и первой и второй программы
+
+Вывод:
+открываемый файл не указан				//Вывелся рез-т обработки второго файла после передачи от первого
+./my_open: неудача при попытке открыть файл res.txt	//Вывелся рез-т обработки второго файла после передачи от первого
+./my_open: файл test.txt открыт				//Вывелся рез-т обработки второго файла после передачи от первого
+res.txt							//вывелся рез-т обработки первого файла
+test.txt						//вывелся рез-т обработки первого файла
+/my_open: неудача при попытке открыть файл res.txt	//Вывелся рез-т обработки второго файла
+./my_open: файл test.txt открыт				//Вывелся рез-т обработки второго файла
+перевод строки						//Поскольку первая программа запущена без аргумента, вторая не выполняется.
+res.txt							//Сначала вывелся результат работы первой программы, потом была выполнена вторая программа.
+./my_open: файл test.txt открыт	
+
+
+
+
+VI. Изучение команд и утилит обработки текстов.
+1) Grep - поиск по шаблону, заданному регулярным выражением
+Команды:
+ls -l /tmp | grep "^d" 		//вывод только тех строк из вывода ls -l /tmp, которые соответствуют каталогам
+
+Вывод:
+drwxr-xr-x 2 alex    alex      4096 янв  3 12:29 hsperfdata_alex
+drwxr-xr-x 3 alex    alex      4096 фев  9 18:51 loose
+drwx------ 2 alex    alex      4096 янв 29 11:43 pyright-3908-CEdonCC7uovX
+drwx------ 2 alex    alex      4096 янв 29 11:43 pyright-3908-LaoR5B7HZRSy
+drwxrwxr-x 3 alex    alex      4096 янв 29 11:43 python-languageserver-cancellation
+drwx------ 4 root    root      4096 фев  9 17:27 snap-private-tmp
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-colord.service-oPpsuF
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-ModemManager.service-llykUq
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-power-profiles-daemon.service-025CBv
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-switcheroo-control.service-rP2SND
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-logind.service-A5UFA3
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-oomd.service-2AWWQe
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-resolved.service-jTzSva
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-timesyncd.service-6Pr5bT
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-upower.service-dt7Udf
+drwx------ 2 alex    alex      4096 фев 15 10:27 tracker-extract-3-files.1000
+drwxrwxrwt 2 root    root      4096 янв  3 12:27 VMwareDnD
+
+Команды:
+ls -l /tmp | egrep \(\-x\) 		//вывод только тех строк из вывода ls -l /tmp, которые соответствуют выполняемым для всех файлам
+
+Вывод:
+drwxr-xr-x 2 alex    alex      4096 мар  1 12:05 hsperfdata_alex
+drwxr-xr-x 2 root    root      4096 мар  1 11:30 hsperfdata_root
+drwxrwxr-x 3 alex    alex      4096 мар  1 12:39 python-languageserver-cancellation
+drwx------ 3 root    root      4096 мар  1 11:26 systemd-private-6b61858d57694e7481e5582f297080a4-colord.service-xAfWC6
+drwx------ 3 root    root      4096 мар  1 11:26 systemd-private-6b61858d57694e7481e5582f297080a4-upower.service-xmwA1j
+
+
+Команды:
+ls -l /tmp | grep "root" 	//вывод только тех строк из вывода ls -l /tmp, которые принадлежат пользователю root
+
+Вывод:
+drwx------ 4 root    root      4096 фев  9 17:27 snap-private-tmp
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-colord.service-oPpsuF
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-ModemManager.service-llykUq
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-power-profiles-daemon.service-025CBv
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-switcheroo-control.service-rP2SND
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-logind.service-A5UFA3
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-oomd.service-2AWWQe
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-resolved.service-jTzSva
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-systemd-timesyncd.service-6Pr5bT
+drwx------ 3 root    root      4096 янв  3 12:27 systemd-private-5df3ee091af04b8b90e2bc0b23c7ce8e-upower.service-dt7Udf
+-rw-r--r-- 1 root    root     26392 фев 15 10:11 vboxguest-Module.symvers
+drwxrwxrwt 2 root    root      4096 янв  3 12:27 VMwareDnD
+
+Команды:
+ls -l /tmp | grep -v "root" 	//вывод только тех строк из вывода ls -l /tmp, которые не принадлежат пользователю root
+
+Вывод:
+итого 252
+-rw-rw-r-- 1 alex    alex      1261 янв  3 12:29 byteBuddyAgent728393759868818675.jar
+-rw------- 1 alex    alex         0 янв  3 12:27 gdm3-config-err-PTGh7Q
+drwxr-xr-x 2 alex    alex      4096 янв  3 12:29 hsperfdata_alex
+-rw-rw-r-- 1 alex    alex    154886 янв  3 12:29 liblz4-java-6496986527306916725.so
+-rw-rw-r-- 1 alex    alex         0 янв  3 12:29 liblz4-java-6496986527306916725.so.lck
+drwxr-xr-x 3 alex    alex      4096 фев  9 18:51 loose
+srwx------ 1 mongodb mongodb      0 янв  3 12:27 mongodb-27017.sock
+drwx------ 2 alex    alex      4096 янв 29 11:43 pyright-3908-CEdonCC7uovX
+drwx------ 2 alex    alex      4096 янв 29 11:43 pyright-3908-LaoR5B7HZRSy
+drwxrwxr-x 3 alex    alex      4096 янв 29 11:43 python-languageserver-cancellation
+drwx------ 2 alex    alex      4096 фев 15 10:27 tracker-extract-3-files.1000
+
+
+2) Cut - выборка отдельных полей из строк файла
+Команда:
+ps -A | cut -c 4-17 		//номера запущенных процессов
+
+Вывод:
+PID TTY
+1462 tty2     
+1464 tty2     
+1470 ?        
+1473 tty2  
+...
+5690 pts/0    
+...      
+6911 pts/1 
+...
+0172 pts/1    
+0173 pts/1  
+
+Команды:
+cat /etc/passwd | cut -d: -f3 	//идентификаторы пользователей,  имеющих  x-терминалы на Вашей рабочей станции
+
+Вывод:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+13
+33
+34
+38
+39
+41
+65534
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+1000
+999
+998
+127
+128
+
+Команды:
+who | cut -d: -f1		//мое входное имя в системе
+
+Вывод:
+alex
+
+3) Tr  -  преобразователь символов
+Команды:
+ls -l | tr [a-z] [A-Z]		//информация о моих файлах прописными буквами
+
+Вывод:
+итого 88
+-RWXRWXR-X 1 ALEX ALEX 15960 фев 15 11:35 HELLO
+DRWXRWXR-X 4 ALEX ALEX  4096 фев 15 10:48 JUNK
+-RW-RW-R-- 1 ALEX ALEX 16859 фев 15 12:01 MYFILE.TXT
+-RWXRWXR-X 1 ALEX ALEX 16008 фев 15 11:44 MY_OPEN
+-RW-RW-R-- 1 ALEX ALEX   374 фев 15 11:44 MY_OPEN.C
+-RWXRWXR-X 1 ALEX ALEX 15960 фев 15 11:32 PROG
+-RW-RW-R-- 1 ALEX ALEX    64 фев 15 11:29 PROG.C
+-RW-RW-R-- 1 ALEX ALEX  1512 фев 15 11:29 PROG.O
+DRWXRWXR-X 4 ALEX ALEX  4096 фев 15 10:49 TEMP
+-RW-RW-R-- 1 ALEX ALEX     0 фев 15 11:37 TEST.TXT
+
+
+4) Sort - сортировка и / или слияние файлов
+Команды:
+ls -l | sort -k 9		//отсортированные файлы в моем каталоге (ls -l) в алфавитном порядке
+
+Вывод:
+итого 88
+-rwxrwxr-x 1 alex alex 15960 фев 15 11:35 hello
+drwxrwxr-x 4 alex alex  4096 фев 15 10:48 junk
+-rw-rw-r-- 1 alex alex 16859 фев 15 12:01 myfile.txt
+-rwxrwxr-x 1 alex alex 16008 фев 15 11:44 my_open
+-rw-rw-r-- 1 alex alex   374 фев 15 11:44 my_open.c
+-rwxrwxr-x 1 alex alex 15960 фев 15 11:32 prog
+-rw-rw-r-- 1 alex alex    64 фев 15 11:29 prog.c
+-rw-rw-r-- 1 alex alex  1512 фев 15 11:29 prog.o
+drwxrwxr-x 4 alex alex  4096 фев 15 10:49 temp
+-rw-rw-r-- 1 alex alex     0 фев 15 11:37 test.txt
+
+Команды:
+ls -l | sort -n -k 5		//отсортированные файлы в моем каталоге (ls -l) в порядке увеличения размеров файлов
+
+Вывод:
+-rw-rw-r-- 1 alex alex     0 фев 15 11:37 test.txt
+итого 88
+-rw-rw-r-- 1 alex alex    64 фев 15 11:29 prog.c
+-rw-rw-r-- 1 alex alex   374 фев 15 11:44 my_open.c
+-rw-rw-r-- 1 alex alex  1512 фев 15 11:29 prog.o
+drwxrwxr-x 4 alex alex  4096 фев 15 10:48 junk
+drwxrwxr-x 4 alex alex  4096 фев 15 10:49 temp
+-rwxrwxr-x 1 alex alex 15960 фев 15 11:32 prog
+-rwxrwxr-x 1 alex alex 15960 фев 15 11:35 hello
+-rwxrwxr-x 1 alex alex 16008 фев 15 11:44 my_open
+-rw-rw-r-- 1 alex alex 16859 фев 15 12:01 myfile.txt
+
+Команды:
+ls -l | sort -n -r -k 5		//отсортированные файлы в моем каталоге (ls -l) в порядке уменьшения размеров файлов
+
+Вывод:
+-rw-rw-r-- 1 alex alex 16859 фев 15 12:01 myfile.txt
+-rwxrwxr-x 1 alex alex 16008 фев 15 11:44 my_open
+-rwxrwxr-x 1 alex alex 15960 фев 15 11:35 hello
+-rwxrwxr-x 1 alex alex 15960 фев 15 11:32 prog
+drwxrwxr-x 4 alex alex  4096 фев 15 10:49 temp
+drwxrwxr-x 4 alex alex  4096 фев 15 10:48 junk
+-rw-rw-r-- 1 alex alex  1512 фев 15 11:29 prog.o
+-rw-rw-r-- 1 alex alex   374 фев 15 11:44 my_open.c
+-rw-rw-r-- 1 alex alex    64 фев 15 11:29 prog.c
+итого 88
+-rw-rw-r-- 1 alex alex     0 фев 15 11:37 test.txt
+
+
+5) Uniq  -  выдача информации о повторяющихся строках файла
+Команды:
+ls -l /usr/bin/ | cut -c 28-35 | sort -n | uniq -D	//вывод повторяющихся размеров файлов из каталога /usr/bin
+
+Вывод:
+2
+2
+2
+...
+ 138208 
+ 138208 
+ 174512 
+ 174512 
+ 826088 
+ 826088 
+ 862976 
+ 862976 
+ 862976 
+3798008 
+3798008 
+
+
+6) Cmp  - сравнение двух файлов
+Команды:
+cmp prog.c my_open.c		//сравнение файлов исходных текстов и объектных файлов созданных С-программ
+cmp prog.o my_open.o		//сравнение файлов исходных текстов и объектных файлов созданных С-программ
+
+Вывод:
+prog.c my_open.c различаются: байт 21, строка 3
+prog.o my_open.o различаются: байт 41, строка 1
+
+
+7) Diff -  выявление различий между файлами
+Комманды:
+diff -e prog.c my_open.c > eqv
+diff -e my_open.c prog.c > eqv
+
+2,4c
+
+int main(int argc, char *argv[]){
+	char string[50];
+	string[0] = '\0';
+	scanf("%s", string);
+
+	if (string[0]){
+		if (fopen(string,"r") == NULL){
+			printf("%s: неудача при попытке открыть файл %s\n", argv[0], string);
+ 	 	} else{
+			printf("%s: файл %s открыт\n", argv[0], string);
+		}
+	} else{
+		printf("открываемый файл не указан\n");
+	}
+.
+
+2,16c
+int main(){
+	printf ("Hello, everybody ! ");
+	return 0;
+.
+
+Проанализируйте содержимое eqv.
+Ответ:
+В eqv представлены те строки второго файла, которых нет в предыдущем

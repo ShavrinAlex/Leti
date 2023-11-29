@@ -1,0 +1,1 @@
+cmd_/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.ko /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.o /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.mod.o;  true

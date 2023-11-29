@@ -1,0 +1,7 @@
+/home/alex/Leti/4_semester/OS/lab_2/catalog
+file.txt
+subcatalog
+/home/alex/Leti/4_semester/OS/lab_2/catalog
+итого 8
+----rw-r-- 1 root alex  108 мар 15 22:38 file.txt
+drwxrwxr-x 2 alex alex 4096 мар 15 12:29 subcatalog
