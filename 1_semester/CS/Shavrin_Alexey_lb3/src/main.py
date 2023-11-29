@@ -80,3 +80,4 @@ class ApartmentList(list):
         suitable_apart = list(filter(lambda apart: (floors[0] <= apart.floor <= floors[1]) and (apart.window_side in directions), self))
         for apart in suitable_apart:
             print(f'{apart.window_side}: {apart.floor}')
+
