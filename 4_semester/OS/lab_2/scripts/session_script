@@ -1,8 +1,0 @@
-#!/bin/bash
-
-log_file="session_log"
-touch $log_file
-
-script -f $log_file
-
-cat $log_file
