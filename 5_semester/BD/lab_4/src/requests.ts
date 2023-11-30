@@ -77,7 +77,7 @@ export async function request_3() {
                 FROM "Dogs" AS dog
                     INNER JOIN "DogExpertEstimates" AS dog_expert_estimate USING(dog_number)
                 GROUP BY dog.breed_name, dog.dog_number
-                ORDER BY dog.breed_name DESC
+                ORDER BY dog.breed_name, Estimate DESC
             )
             SELECT club.club_id, club.club_name, dog_places.place, COUNT(dog_places.place)
                 FROM "Clubs" AS club
@@ -98,6 +98,7 @@ export async function request_3() {
 export async function request_4() {
     /*
     Какие эксперты обслуживают породу?
+    ORDER BY dog.breed_name
     */
 
     let label = 'Request 4';
@@ -108,7 +109,7 @@ export async function request_4() {
                 INNER JOIN "DogExpertEstimates" AS dog_expert_estimate USING(dog_number)
                 INNER JOIN "Experts" AS expert USING(expert_id)
        GROUP BY dog.breed_name, expert.expert_id
-       ORDER BY dog.breed_name
+       
        LIMIT 10;`,
         { type: QueryTypes.SELECT }
     ).then((result) => {
