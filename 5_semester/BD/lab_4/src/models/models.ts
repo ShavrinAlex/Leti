@@ -161,10 +161,12 @@ export class Expert extends Model {
     @Column(DataType.INTEGER)
     declare expert_id: number;
 
+    @Index
     @AllowNull(false)
     @Column(DataType.STRING(255))
     declare surname: string;
 
+    @Index
     @AllowNull(false)
     @Column(DataType.STRING(255))
     declare name: string;

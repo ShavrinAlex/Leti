@@ -207,11 +207,13 @@ __decorate([
     __metadata("design:type", Number)
 ], Expert.prototype, "expert_id", void 0);
 __decorate([
+    Index,
     AllowNull(false),
     Column(DataType.STRING(255)),
     __metadata("design:type", String)
 ], Expert.prototype, "surname", void 0);
 __decorate([
+    Index,
     AllowNull(false),
     Column(DataType.STRING(255)),
     __metadata("design:type", String)

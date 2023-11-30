@@ -77,7 +77,6 @@ def main():
     N = 8192
     FILE_NAME = "19.txt"
 
-
     j = complex(0, 1)
     delta_f = 1 / (DELTA_T * N)
     signal = read_file(FILE_NAME)

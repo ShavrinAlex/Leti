@@ -1,1 +1,0 @@
-cmd_/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/keyboard/Module.symvers := sed 's/ko$$/o/' /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/keyboard/modules.order | scripts/mod/modpost -m -a  -o /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/keyboard/Module.symvers -e -i Module.symvers   -T -
