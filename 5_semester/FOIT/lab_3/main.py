@@ -81,7 +81,7 @@ def main():
     delta_f = 1 / (DELTA_T * N)
     signal = read_file(FILE_NAME)
 
-    spectre_module = list(map(abs, np.fft.fft(signal))) # amplitude list
+    spectrum_module = list(map(abs, np.fft.fft(signal))) # amplitude list
     frequency, stop_i = calculate_stop_i(N, delta_f) # frequency list
 
     H = [abs(calculate_h(L1, L2, C1, C2, R1, R2, R3, R4, j, omega)) for omega in frequency[1:]]
@@ -90,7 +90,7 @@ def main():
 
     time = [DELTA_T * i for i in range(N)]
     draw_signal(time, signal)
-    draw_amplitude(frequency, spectre_module, stop_i)
+    draw_amplitude(frequency, spectrum_module, stop_i)
     draw_afr(frequency, H, stop_i)
 
     print(H_ans)
