@@ -17,13 +17,13 @@ def draw_signal(time: list, signal: list) -> None:
     plt.plot(time, signal)
     plt.show()
 
-def draw_amplitude(frequency: list, spectre_module: list, stop_i: int) -> None:
+def draw_amplitude(frequency: list, spectrum_module: list, stop_i: int) -> None:
     """This function draw amplitude"""
 
     plt.title("A_вход(ω)")
     plt.xlabel("ω, рад/c")
     plt.ylabel("A_вход")
-    plt.plot(frequency[:stop_i], spectre_module[:stop_i])
+    plt.plot(frequency[:stop_i], spectrum_module[:stop_i])
     plt.show()
 
 def draw_afr(frequency: list, H: list, stop_i: int) -> None:
