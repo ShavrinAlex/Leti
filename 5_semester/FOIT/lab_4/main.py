@@ -92,6 +92,13 @@ def calculate_h(j, w):
 
     return r_output / r_input
 
+def calculate_stop_i(N, df):
+    stop_i = 0
+    for i in range(N):
+        if df * i > 20000 and stop_i == 0:
+            stop_i = i + 1
+    return stop_i
+
 
 def main():
     """This is main function"""
@@ -109,6 +116,7 @@ def main():
     input_spectrum = np.fft.fft(input_signal)
     frequency = [df * i for i in range(N)]
     H = [calculate_h(j, w) for w in frequency[1:]]
+    stop_i = calculate_stop_i(N, df)
 
     output_spectrum = [input_spectrum[i] * H[i-1] for i in range(1, N)]
     output_signal = [number.real for number in np.fft.ifft(output_spectrum)]
@@ -116,8 +124,8 @@ def main():
     time = [dt * i for i in range(N)]
     draw_signal(time=time, signal=input_signal)
     draw_signal(time=time[1:], signal=output_signal)
-    draw_amplitude(frequency=frequency, spectrum_module=list(map(abs, input_spectrum)))
-    draw_amplitude(frequency=frequency[1:], spectrum_module=list(map(abs, output_spectrum)))
+    draw_amplitude(frequency=frequency[1:stop_i], spectrum_module=list(map(abs, input_spectrum[1:stop_i])))
+    draw_amplitude(frequency=frequency[1:stop_i+1], spectrum_module=list(map(abs, output_spectrum[:stop_i])))
     draw_afr(frequency=frequency[1:], H_module=list(map(abs, H)))
 
     create_wav(signal=input_signal, filename="input_audiosignal19.wav")
