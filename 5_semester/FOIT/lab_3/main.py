@@ -17,13 +17,13 @@ def draw_signal(time: list, signal: list) -> None:
     plt.plot(time, signal)
     plt.show()
 
-def draw_amplitude(frequency: list, spectre_module: list, stop_i: int) -> None:
+def draw_amplitude(frequency: list, spectrum_module: list, stop_i: int) -> None:
     """This function draw amplitude"""
 
     plt.title("A_вход(ω)")
     plt.xlabel("ω, рад/c")
     plt.ylabel("A_вход")
-    plt.plot(frequency[:stop_i], spectre_module[:stop_i])
+    plt.plot(frequency[:stop_i], spectrum_module[:stop_i])
     plt.show()
 
 def draw_afr(frequency: list, H: list, stop_i: int) -> None:
@@ -81,8 +81,8 @@ def main():
     delta_f = 1 / (DELTA_T * N)
     signal = read_file(FILE_NAME)
 
-    spectrum_module = list(map(abs, np.fft.fft(signal))) # amplitude list
-    frequency, stop_i = calculate_stop_i(N, delta_f) # frequency list
+    spectrum_module = list(map(abs, np.fft.fft(signal)))
+    frequency, stop_i = calculate_stop_i(N, delta_f)
 
     H = [abs(calculate_h(L1, L2, C1, C2, R1, R2, R3, R4, j, omega)) for omega in frequency[1:]]
     # w2 = 20 
