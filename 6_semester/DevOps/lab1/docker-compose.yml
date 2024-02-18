@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  nginx-alpine:
+    container_name: nginx-alpine
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: alpine:3.19.1
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    command: "nginx -g 'daemon off;'"
+    volumes:
+      - ./nginx:/etc/nginx/http.d
+      - ./static_pages:/www
