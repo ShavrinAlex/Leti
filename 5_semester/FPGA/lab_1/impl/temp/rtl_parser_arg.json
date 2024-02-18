@@ -1,0 +1,29 @@
+{
+ "Device" : "GW1NSR-4C",
+ "Files" : [
+  {
+   "Path" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/another_counter.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/another_counter_testbench.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/counter.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/counter_testbench.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

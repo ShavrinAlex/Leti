@@ -1,0 +1,37 @@
+//
+//Written by GowinSynthesis
+//Product Version "V1.9.9 Beta-4 Education"
+//Thu Oct 05 15:27:11 2023
+
+//Source file index table:
+//file0 "\C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/counter.v"
+//file1 "\C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/counter_testbench.v"
+//file2 "\C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/another_counter.v"
+//file3 "\C:/Users/Pavel/Desktop/Leti/FPGA/lab_1/src/another_counter_testbench.v"
+`pragma protect begin_protected
+`pragma protect version="2.3"
+`pragma protect author="default"
+`pragma protect author_info="default"
+`pragma protect encrypt_agent="GOWIN"
+`pragma protect encrypt_agent_info="GOWIN Encrypt Version 2.3"
+
+`pragma protect encoding=(enctype="base64", line_length=76, bytes=256)
+`pragma protect key_keyowner="GOWIN",key_keyname="GWK2023-09",key_method="rsa"
+`pragma protect key_block
+JWU4AJ1vLwfmv7CaG5CRbio84Ucl1NDTaN5AWZ6Tliqe9US2kAIRuJ/+cPOgyyVfWxPSdC5qK0eu
+QiO9aHsniVk0tAIB2vX0GEL46vpfE/lROT0jau1k1dXwthGZpKt6KP06IG/A+wrfV0qvH+Zt7bwX
+J3igUdYeDX0ypPvXr+QBcYVNhH1qPBBZDJ6cdtrzTc41v5pssBrc/yOtt/4W09PEHiMwQ5O+AGdV
+r2UpzE8g+FL7x4+aVg40LuXLgSknPI+UOHbPCXj0nK8/hSPqmOmhCAH0L8VjuAWDpNZ5w6vMiIT+
+UYV9NH1E52dZms/tQr8mgfuM7ynVl3gfGJhlHA==
+
+`pragma protect encoding=(enctype="base64", line_length=76, bytes=240)
+`pragma protect data_keyowner="default-ip-vendor"
+`pragma protect data_keyname="default-ip-key"
+`pragma protect data_method="aes128-cfb"
+`pragma protect data_block
+OYCbZeRGNB12nzgkZ/X60lL4eI5YE+xLCHLkA0V9cUj13JsOTpEwnZAyffw5ZEAKWQzTJq2Du1WX
+j5SLzg1v0XXHNJY9sJCrbjdpomm4W9TKtMFvDEs9bjAlQ7/0Z+kZMHnyRai/1Zviky5EvQbekr5T
+YkWhJ5pltd/Od9Z0DXcbNSXN5Y8txPQsM2akSSxFhKGiDR4LUUZx0EzwhUDl+4Hy9ysgFBAzpnBf
+/IDKSDN2kS2KVrCptbCqC1MVg+kyHBs1lvMQ1aDz9t5EanvmVm1pHdTlSHpxFDBslFwj7sFMdP2o
+jyZCuc1fsYYDN4/P
+`pragma protect end_protected

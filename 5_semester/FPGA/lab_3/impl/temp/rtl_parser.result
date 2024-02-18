@@ -1,0 +1,20 @@
+[
+ {
+  "InstFile" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_3/src/alo.v",
+  "InstLine" : 33,
+  "InstName" : "test",
+  "ModuleFile" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_3/src/alo.v",
+  "ModuleLine" : 33,
+  "ModuleName" : "test",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_3/src/alo.v",
+    "InstLine" : 48,
+    "InstName" : "my_alo",
+    "ModuleFile" : "C:/Users/Pavel/Desktop/Leti/FPGA/lab_3/src/alo.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "alo"
+   }
+  ]
+ }
+]
