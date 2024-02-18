@@ -1,0 +1,12 @@
+-d C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\impl\gwsynthesis\lab_1.vg
+-p GW1NSR-4C-QFN48P-6
+-pn GW1NSR-LV4CQN48PC6/I5
+-cst C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\lab_1.cst
+-cfg C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\impl\pnr\device.cfg
+-bit
+-tr
+-ph
+-timing
+-cst_error
+-correct_hold 1
+-route_maxfan 23

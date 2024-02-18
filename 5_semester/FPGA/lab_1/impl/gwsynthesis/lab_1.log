@@ -1,0 +1,45 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\counter.v'
+Analyzing Verilog file 'C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\counter_testbench.v'
+Analyzing Verilog file 'C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v'
+Analyzing Verilog file 'C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v'
+Compiling module 'another_counter_testbench'("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":1)
+WARN  (EX3858) : System task 'display' is ignored for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":7)
+WARN  (EX3858) : System task 'monitor' is ignored for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":9)
+WARN  (EX2629) : Delay control is not supported for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":13)
+WARN  (EX2629) : Delay control is not supported for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":14)
+WARN  (EX2629) : Delay control is not supported for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":15)
+WARN  (EX2629) : Delay control is not supported for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":16)
+WARN  (EX2629) : Delay control is not supported for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":17)
+WARN  (EX3858) : System task 'finish' is ignored for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":17)
+WARN  (EX3780) : Using initial value of 'reset_in' since it is never assigned("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":18)
+WARN  (EX2629) : Delay control is not supported for synthesis("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":21)
+Compiling module 'another_counter'("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v":3)
+WARN  (EX3779) : 'reset' should be on the sensitivity list. Signal missing is added and assuming complete sensitivity list specified. RTL design and post-synthesis netlist simulations may differ as a result("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v":12)
+WARN  (EX3779) : 'enable' should be on the sensitivity list. Signal missing is added and assuming complete sensitivity list specified. RTL design and post-synthesis netlist simulations may differ as a result("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v":15)
+WARN  (EX3779) : 'counter' should be on the sensitivity list. Signal missing is added and assuming complete sensitivity list specified. RTL design and post-synthesis netlist simulations may differ as a result("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v":16)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v":16)
+WARN  (EX2420) : Latch inferred for net 'counter[2]'; We do not recommend the use of latches in FPGA designs, as they may lead to timing problems("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter.v":18)
+NOTE  (EX0101) : Current top module is "another_counter_testbench"
+WARN  (EX0203) : Top module "another_counter_testbench" has no ports("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":1)
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+WARN  (NL0002) : The module "another_counter" instantiated to "cnt" is swept in optimizing("C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\src\another_counter_testbench.v":29)
+[95%] Generate netlist file "C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\impl\gwsynthesis\lab_1.vg" completed
+[100%] Generate report file "C:\Users\Pavel\Desktop\Leti\FPGA\lab_1\impl\gwsynthesis\lab_1_syn.rpt.html" completed
+GowinSynthesis finish

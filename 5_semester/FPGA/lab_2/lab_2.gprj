@@ -1,0 +1,31 @@
+<?xml version="1" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW1NSR-4C" pn="GW1NSR-LV4CQN48PC6/I5">gw1nsr4c-000</Device>
+    <FileList>
+        <File path="src/d_trigger.v" type="file.verilog" enable="0"/>
+        <File path="src/d_trigger_async_reset.v" type="file.verilog" enable="0"/>
+        <File path="src/d_trigger_async_reset_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/d_trigger_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/duty_generator.v" type="file.verilog" enable="0"/>
+        <File path="src/eight_bit_adder.v" type="file.verilog" enable="0"/>
+        <File path="src/eight_bit_adder_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/frequency_divider.v" type="file.verilog" enable="0"/>
+        <File path="src/frequency_divider_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/one_bit_adder.v" type="file.verilog" enable="0"/>
+        <File path="src/one_bit_adder_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/pwm.v" type="file.verilog" enable="0"/>
+        <File path="src/pwm_button.v" type="file.verilog" enable="1"/>
+        <File path="src/pwm_button_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/pwm_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/pwm_with_module.v" type="file.verilog" enable="0"/>
+        <File path="src/pwm_with_module_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/seven_segment_indicator.v" type="file.verilog" enable="0"/>
+        <File path="src/seven_segment_indicator_switcher.v" type="file.verilog" enable="0"/>
+        <File path="src/seven_segment_indicator_switcher_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/seven_segment_indicator_testbench.v" type="file.verilog" enable="0"/>
+        <File path="src/lab_2.cst" type="file.cst" enable="1"/>
+    </FileList>
+</Project>
