@@ -1,0 +1,23 @@
+lrwxrwxrwx  1 root root           20 окт  1  2021 cc -> /etc/alternatives/cc
+lrwxrwxrwx  1 root root            5 мар 23  2022 foo2zjs-icc2ps -> psicc
+lrwxrwxrwx  1 root root            6 авг  5  2021 gcc -> gcc-11
+lrwxrwxrwx  1 root root           23 июл 19  2022 gcc-10 -> x86_64-linux-gnu-gcc-10
+lrwxrwxrwx  1 root root           23 апр 30  2022 gcc-11 -> x86_64-linux-gnu-gcc-11
+lrwxrwxrwx  1 root root            9 авг  5  2021 gcc-ar -> gcc-ar-11
+lrwxrwxrwx  1 root root           26 июл 19  2022 gcc-ar-10 -> x86_64-linux-gnu-gcc-ar-10
+lrwxrwxrwx  1 root root           26 апр 30  2022 gcc-ar-11 -> x86_64-linux-gnu-gcc-ar-11
+lrwxrwxrwx  1 root root            9 авг  5  2021 gcc-nm -> gcc-nm-11
+lrwxrwxrwx  1 root root           26 июл 19  2022 gcc-nm-10 -> x86_64-linux-gnu-gcc-nm-10
+lrwxrwxrwx  1 root root           26 апр 30  2022 gcc-nm-11 -> x86_64-linux-gnu-gcc-nm-11
+lrwxrwxrwx  1 root root           13 авг  5  2021 gcc-ranlib -> gcc-ranlib-11
+lrwxrwxrwx  1 root root           30 июл 19  2022 gcc-ranlib-10 -> x86_64-linux-gnu-gcc-ranlib-10
+lrwxrwxrwx  1 root root           30 апр 30  2022 gcc-ranlib-11 -> x86_64-linux-gnu-gcc-ranlib-11
+lrwxrwxrwx  1 root root           53 фев  5  2022 mkt1font -> ../share/texlive/texmf-dist/scripts/accfonts/mkt1font
+lrwxrwxrwx  1 root root            9 мар 22  2020 rcc -> qtchooser
+lrwxrwxrwx  1 root root           52 фев  5  2022 vpl2ovp -> ../share/texlive/texmf-dist/scripts/accfonts/vpl2ovp
+lrwxrwxrwx  1 root root           52 фев  5  2022 vpl2vpl -> ../share/texlive/texmf-dist/scripts/accfonts/vpl2vpl
+lrwxrwxrwx  1 root root            6 авг  5  2021 x86_64-linux-gnu-gcc -> gcc-11
+lrwxrwxrwx  1 root root            9 авг  5  2021 x86_64-linux-gnu-gcc-ar -> gcc-ar-11
+lrwxrwxrwx  1 root root            9 авг  5  2021 x86_64-linux-gnu-gcc-nm -> gcc-nm-11
+lrwxrwxrwx  1 root root           13 авг  5  2021 x86_64-linux-gnu-gcc-ranlib -> gcc-ranlib-11
+total 2

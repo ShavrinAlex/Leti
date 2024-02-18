@@ -1,0 +1,5 @@
+2,16c
+int main(){
+	printf ("Hello, everybody ! ");
+	return 0;
+.

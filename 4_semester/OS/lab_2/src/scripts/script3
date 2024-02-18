@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# запись искомого файла
+file_name=$1
+
+# запись всех ссылок в файл
+ls -l -R -a /bin/ | grep $file_name | grep ^l > symlinks.txt
+
+echo -n "total " >> symlinks.txt
+
+# подсчет ссылок
+wc -l symlinks.txt | cut -c 1 >> symlinks.txt
+
+echo $(cat symlinks.txt)
