@@ -1,0 +1,35 @@
+$date
+    Wed Dec  6 15:25:14 2023
+$end
+$version
+    MyHDL 0.11
+$end
+$timescale
+    1ns
+$end
+
+$scope module testbench $end
+$var real 1 ! input $end
+$var real 1 " led $end
+$scope module led_blinker0 $end
+$var real 1 ! input $end
+$var real 1 " led $end
+$upscope $end
+$upscope $end
+
+$enddefinitions $end
+$dumpvars
+s0x0 !
+s0x0 "
+$end
+#10
+s0x1 !
+s0x1 "
+#20
+s0x0 !
+s0x0 "
+#30
+#40
+s0x1 !
+s0x1 "
+#50
