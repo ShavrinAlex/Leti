@@ -1,10 +1,11 @@
 FROM alpine:3.19.1
 
-RUN apk add nginx --no-cache
-#&& \
-#	mkdir /www
+ARG USER=1001
 
-#COPY ./nginx/nginx.conf /etc/nginx/http.d/default.conf
-#COPY ./static_pages/index.html /www/
+RUN apk add --update nginx --no-cache && \
+    chown -R $USER:0 /var/lib/nginx && \
+    chown -R $USER:0 /run/nginx
 
-#CMD ["nginx", "-g", "daemon off;"]
+USER $USER
+
+CMD ["nginx", "-g", "daemon off;"]
