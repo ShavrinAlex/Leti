@@ -1,4 +1,4 @@
-FROM alpine:3.19.1
+FROM alpine:3.19.1 AS Builder
 
 WORKDIR /src
 
@@ -8,15 +8,14 @@ COPY ./src .
 RUN make
 
 
-FROM alpine:3.19.1
+FROM alpine:3.19.1 AS Launcher
 
-ARG USER=1001
 WORKDIR /src
 
-RUN apk add g++ make --no-cache \
-    && chown -R $USER:0 /src
+RUN apk add --no-cache libstdc++ && \
+    chown -R 1001:0 /src
 
 COPY --from=0 ./src .
 
-USER $USER
+USER 1001
 CMD ./snake
