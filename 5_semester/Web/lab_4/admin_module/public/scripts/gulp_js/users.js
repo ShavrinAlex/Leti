@@ -1,0 +1,1 @@
+"use strict";$(function(){$(".user_container").on("click",function(){$.get("/admin_module/users/".concat(this.id)),window.location="/admin_module/users/".concat(this.id)})});

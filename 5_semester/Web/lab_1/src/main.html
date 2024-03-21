@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./Css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <title>JavaScript Tetris</title>
+
+    <script type="module" src="./Scripts/main.js"></script>
+</head>
+
+<body>      
+    <div class="grid">
+        <canvas class="play_field" id="play_field"></canvas>
+        <div class="game_info_container">
+            <div class="game_info">
+                <h1 class="game_name">TETRIS</h1>
+                <h3 id="username"></h3>
+                <p class="game_info_row">Level: <span id="level">0</span></p>
+                <p class="game_info_row">Score: <span id="score">0</span></p>
+                <p class="game_info_row">Lines: <span id="lines">0</span></p>
+            </div>
+            <div class="next_tetromino_conteiner">
+                <h3 class="next_tetromino_text">NEXT</h3>
+                <div class="next_tetromino_grid">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <button class="play_button" id="play_button" type="button">Play</button>
+        </div>
+    </div>
+</body>
+</html>

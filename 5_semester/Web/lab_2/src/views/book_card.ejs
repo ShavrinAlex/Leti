@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<%- include("./partials/dialogs/change_book_dialog.ejs") %>
+<%- include("./partials/dialogs/take_book_dialog.ejs") %>
+
+<body>
+    <header>
+        <%- include("./partials/header.ejs") %>
+    </header>
+    
+    <div class="book_card_info_container">
+        <div class="book_card_data">
+            <div class="data_text">Название:</div>
+            <div class="card_data"><%=book.name%></div>
+        </div>
+        <div class="book_card_data">
+            <div class="data_text">Автор:</div>
+            <div class="card_data"><%=book.author%></div>
+        </div>
+        <div class="book_card_data">
+            <div class="data_text">Жанр:</div>
+            <div class="card_data"><%=book.genre%></div>
+        </div>
+        <div class="book_card_data">
+            <div class="data_text">Дата выпуска:</div>
+            <div class="card_data"><%=book.publication_date%></div>
+        </div>
+        <% if (book.state.is_in_library !== true) { %>
+            <div class="book_card_data">
+                <div class="data_text">Читатель:</div>
+                <div class="card_data"><%=book.state.reader_username%></div>
+            </div>
+            <div class="book_card_data">
+                <div class="data_text">Дата возврата:</div>
+                <div class="card_data"><%=book.state.back_date%></div>
+            </div>
+        <% } %>
+        <div class="book_card_data_description">
+            <div class="data_text">Описание:</div>
+            <div class="card_data"><%=book.description%></div>
+        </div>
+    </div>
+    
+    <div class="button_container">
+        <button class="button" onclick="return_back()">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Вернуться
+        </button>
+        <button class="button" onclick="change_book_data_dialog()">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            Изменить данные
+        </button>
+        <% if (book.state.is_in_library) { %>
+        <button class="button" onclick="take_book()">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            Взять книгу
+        </button>
+        <% } else if (book.state.reader_username) {%>
+        <button class="button" onclick="return_book(<%=book.id %>)">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Вернуть книгу
+        </button>
+        <% } %>
+    </div>
+    <footer>
+        <%- include("./partials/footer.ejs") %>
+    </footer>
+    <script>
+        function return_back(){
+            window.location = "/library"
+        }
+        function take_book() {
+            const take_book = document.getElementById("take_book")
+            take_book.show()
+        }
+
+        async function take_book_close(book_id) {
+            const take_book = document.getElementById("take_book")
+            take_book.close()
+            let date = new Date()
+            date.setDate(date.getDate() + 15)
+            let username = document.getElementById("reader_username").value
+            if (username) {
+                const book = {
+                    "change": "reader",
+                    "state": {
+                        "is_in_library": false,
+                        "is_overdue": false,
+                        "reader_username": username,
+                        "back_date": date.toJSON().slice(0, 10)
+                    }
+                }
+                try {
+                    let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                    let text_response = await response.text()
+                    console.log(text_response)
+                    window.location = `/library/${book_id}`
+                } catch (error) {
+                    console.error("Ошибка:", error)
+                }
+            }
+        }
+        async function return_book(book_id) {
+            const book = {
+                "change": "reader",
+                "state": {
+                    "is_in_library": true,
+                    "is_overdue": false,
+                    "reader_username": "",
+                    "back_date": ""
+                }
+            }
+            try {
+                let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}})
+                let text_response = await response.text()
+                console.log(text_response)
+                window.location = `/library/${book_id}`
+            } catch (error) {
+                console.error("Ошибка:", error)
+            }
+        }
+        function change_book_data_dialog() {
+            const change_book_data_dialog = document.getElementById("change_book_data_dialog")
+            change_book_data_dialog.show()
+        }
+        async function change_book_data(book_id) {
+            const change_book_data_dialog = document.getElementById("change_book_data_dialog")
+            change_book_data_dialog.close()
+            let name = document.getElementById("change_name").value
+            let author = document.getElementById("change_author").value
+            let publication_date = document.getElementById("change_date").value
+            let genre = document.getElementById("change_genre").value
+            let description = document.getElementById("change_description").value
+            if (name && author && publication_date.match(/^\d{4}-\d{2}-\d{2}$/) && description && genre) {
+                const change_book = {
+                    "change": "book",
+                    "id":  book_id,
+                    "name": name,
+                    "author": author,
+                    "publication_date": publication_date,
+                    "genre": genre,
+                    "description": description
+                }
+                try {
+                    let response = await fetch(`/library/${book_id}`, {method: "PUT", body: JSON.stringify(change_book), headers: {'Content-Type': 'application/json'}})
+                    let text_response = await response.text()
+                    console.log(text_response)
+                    window.location = `/library/${book_id}`
+                } catch (error) {
+                    console.error("Ошибка:", error)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

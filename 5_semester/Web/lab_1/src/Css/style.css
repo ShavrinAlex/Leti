@@ -1,0 +1,148 @@
+* 
+{
+    font-family: 'Press Start 2P';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body
+{
+    min-height: 100vh;
+    background: linear-gradient(90deg, #395492,  #0099c0, #3dd5a8);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.grid 
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: max-content;
+    grid-column-gap: 20px;
+    padding: 40px;
+}
+
+.play_field 
+{
+    width: 352px;
+    height: 702px;
+    border: 2px solid;
+    background-color: rgba(1, 8, 89, 0.5);
+    box-shadow: -15px 15px 20px #21265c;
+}
+
+.game_info_container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.game_name
+{
+    margin-bottom: 30px;
+    text-shadow: -3px 3px 3px #005266;
+}
+
+#username
+{
+    text-shadow: -2px 2px 2px #005266;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.game_info_row
+{
+    margin: 10px;
+}
+
+.next_tetromino_conteiner
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+}
+
+.next_tetromino_text
+{
+    padding: 5px;
+    text-shadow: -2px 2px 3px #005266;
+}
+
+.next_tetromino_grid
+{
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto);
+
+    gap: 2px;
+    padding: 2px;
+    border: 2px solid;
+    border-radius: 5px;
+
+    background-color: rgba(1, 8, 89, 0.5);
+    box-shadow: -10px 10px 20px #21265c;
+}
+
+.next_tetromino_grid>div
+{
+    --cell-size: 35px;
+    min-height: var(--cell-size);
+    min-width: var(--cell-size);
+    border-radius: 3px;
+    background-color: rgba(126, 150, 221, 0.2);
+}
+
+.next_tetromino_grid>div.I 
+{
+    background-color: #6be1ec;
+}
+
+.next_tetromino_grid>div.J 
+{
+    background-color: #5eb0f3;
+}
+
+.next_tetromino_grid>div.L 
+{
+    background-color: #f2965b;
+}
+
+.next_tetromino_grid>div.O 
+{
+    background-color: #f7e562;
+}
+
+.next_tetromino_grid>div.S 
+{
+    background-color: #7be17b;
+}
+
+.next_tetromino_grid>div.Z 
+{
+    background-color: #de5c6b;
+}
+
+.next_tetromino_grid>div.T 
+{
+    background-color: #b276f3;
+}
+  
+
+.play_button 
+{
+    background-color: #4caf50;
+    box-shadow: -5px 5px 5px #005266;
+
+    font-size: 16px;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

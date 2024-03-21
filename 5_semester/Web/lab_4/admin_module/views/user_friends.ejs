@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <link rel="stylesheet"  type="text/css" href="/../public/styles/gulp_css/users.css"/>
+    <script type="module" src="/../public/scripts/js/users.js"></script>
+</head>
+
+
+<body>
+    <div class="scrollable">
+        <% friends.forEach( (friend) => { %>
+            <div id="<%= friend.id %>" class="user_container">
+                <img src="<%= friend.avatar %>" alt="avatar"/>
+                <div><%= friend.name %></div>
+                <div><%= friend.email %></div>
+                <div><%= friend.role %></div>
+                <div><%= friend.status %></div>
+            </div>
+       <% }) %>
+    <div>
+</body>
+
+</html>

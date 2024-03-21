@@ -1,0 +1,24 @@
+<div class="dialog_window">
+    <div class="dialog_header">
+        <button class="back_btn" (click)="goBack()">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            back
+        </button>
+        <div class="companion_username">{{getCompanionParam('name')}}</div>
+        <img src="{{getCompanionParam('avatar')}}" alt="avatar">
+    </div>
+    <div class="scrollable" id="chat">
+        <div class="message_line" *ngFor = 'let message of messages'>
+            <div class="user_message" *ngIf = 'user_id == message.sender_user_id'>{{message.data}}</div>
+            <div class="companion_message" *ngIf = 'user_id != message.sender_user_id'>{{message.data}}</div>
+        </div>
+        
+    </div>
+    <div class="input_container">
+        <input placeholder="Write a message..." #MessageInput>
+        <button class="send_btn" (click)="sendMessage(MessageInput)">
+            Send
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+* 
+{
+    font-family: 'Press Start 2P';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body
+{
+    min-height: 100vh;
+    background: linear-gradient(90deg, #395492,  #0099c0, #3dd5a8);
+    display: flex; 
+    justify-content: center;
+    align-items: center
+}
+
+.authorization
+{
+    width: 800px;
+    height: 600px;
+
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    
+    
+    text-align: center;
+
+    background-color: rgba(1, 8, 89, 0.5);
+    box-shadow: -40px 40px 40px #21265c;
+
+    outline: 10px solid #ffffff;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+.preview_text
+{
+    color: #ffffff;
+    text-shadow: -5px 5px 5px #000a66;
+}
+
+.username_input
+{
+    background-color: #69cdf8;
+    color: #000a66;
+    outline: none;
+    box-shadow: -5px 5px 5px #000a66;
+    font-size: 17px;
+
+    padding-left: 10px;
+    padding-right: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    border: 0px;
+    border-radius: 5px;
+}
+
+.log_in_button
+{
+    text-align: center;
+    font-size: 22px;
+
+    color: #000a66;
+    background-color: #69cdf8;
+
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+
+    cursor: pointer;
+    box-shadow: -5px 5px 5px #000a66;
+}
+
+.log_in_button:hover
+{
+    color: #000a66;
+    background-color: #69cdf8;
+}
+
+.log_in_button:disabled
+{
+    color: #000a665b;
+    background-color: #69cdf886;
+}
+
+.log_in_button:active
+{
+    color: #000000;
+    background-color: #ffffff;
+}

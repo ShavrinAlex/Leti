@@ -1,0 +1,23 @@
+<div class="friends_container">
+    <div class="input_container">
+        <input class="friend_input" #FriendInput placeholder="Type username...">
+        <button class="add_friend_btn" (click)="addFriend(FriendInput)">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            add friend
+        </button>
+    </div>
+    <div *ngFor = 'let friend of user_friends' #FriendCard id="{{friend.id}}" class="friend_card">
+        <div class="friend_info">
+            <img src="{{friend.avatar}}" alt="avatar">
+            <div>{{friend.name}}</div>
+        </div>
+        <button (click)="goToDialog(FriendCard.id)">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            Write message
+        </button>
+        <button id="delete_friend" (click)="deleteFriend(FriendCard.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            delete
+        </button>
+    </div>
+</div>

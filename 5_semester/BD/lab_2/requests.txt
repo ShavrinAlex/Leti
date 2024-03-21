@@ -1,0 +1,43 @@
+  SELECT breed.ring_number, dog.dog_number, owner.surname, owner.name, owner.patronymic
+    FROM owner
+         INNER JOIN dog ON owner.passport = dog.owner_passport
+         INNER JOIN breed USING(breed_name)
+ORDER BY breed.ring_number, dog.dog_number, owner.surname, owner.name, owner.patronymic;
+ 
+
+  SELECT club.club_id, dog.breed_name
+    FROM club
+         INNER JOIN club_numbers USING(club_id)
+         INNER JOIN dog USING(dog_number)
+GROUP BY club.club_id, dog.breed_name
+ORDER BY club.club_id, dog.breed_name;
+
+
+WITH dog_places AS (
+	SELECT dog.breed_name, dog.dog_number, ROUND(AVG(dog_expert_estimate.estimate), 2) AS Estimate,
+		   DENSE_RANK() OVER (PARTITION BY dog.breed_name ORDER BY ROUND(AVG(dog_expert_estimate.estimate), 2) DESC) AS place
+	  FROM dog
+		   INNER JOIN dog_expert_estimate USING(dog_number)
+	GROUP BY dog.breed_name, dog.dog_number
+	ORDER BY dog.breed_name, Estimate DESC
+)
+  SELECT club.club_id, club.club_name, dog_places.place, COUNT(dog_places.place)
+    FROM club
+         INNER JOIN club_numbers USING(club_id)
+	     INNER JOIN dog_places USING(dog_number)
+GROUP BY club.club_id, club.club_name, dog_places.place
+ORDER BY club.club_id, dog_places.place;
+
+
+  SELECT dog.breed_name, expert.expert_id, expert.name, expert.surname
+    FROM dog
+         INNER JOIN dog_expert_estimate USING(dog_number)
+         INNER JOIN expert USING(expert_id)
+GROUP BY dog.breed_name, expert.expert_id
+ORDER BY dog.breed_name;
+
+
+  SELECT dog.breed_name, COUNT(*)
+    FROM dog
+GROUP BY dog.breed_name
+ORDER BY dog.breed_name;

@@ -1,0 +1,126 @@
+@elem_background_gradient: linear-gradient(135deg, #0cffd69a, #bd1cfd91);
+@shadow: #ffffff8f;
+@gray_background: #7e7e7e79;
+
+.size(@width: auto, @height: auto) {
+    width: @width;
+    height: @height;
+}
+
+.friends_container {
+    .size(auto, 100%);
+    overflow-y: scroll;
+    color: #fff;
+    padding: 0px 20px 0px 20px;
+    
+    .input_container {
+        .size(100%, auto);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 50px 10px 50px;
+        background: @gray_background;
+        border-radius: 0px 0px 20px 20px;
+        border: 2px solid #ffffff63;
+        border-top: none;
+    
+        input {
+            .size(85%, auto);
+            font-size: 20px;
+            padding: 7px;
+            border-radius: 10px;
+        }
+    
+        button {
+            i {
+                margin-right: 10px;
+            }
+            padding: 5px 10px 5px 10px;
+            color: #fff;
+            background: #00000025;
+            font-size: 18px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+    
+            &:hover {
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh @shadow;
+            }
+        }
+    }
+
+    .friend_card {
+        background-color: #74747459;
+        .size(100%, auto);
+        margin: 20px 0px 20px 0px;
+        
+        display: grid;
+        grid-template-columns:  33% 33% 33%;
+        outline: 2px solid #ffffffa9;
+        
+        border-radius: 20px;
+        padding-right: 50px;
+
+        .friend_info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 15px 20px 15px 50px;
+
+            img {
+                @avatar_size: 80px;
+                margin-right: 20px;
+                .size(@avatar_size, @avatar_size);
+                background: #000;
+                border-radius: 100%;
+                border: min(0.3vw, 0.3vh) solid #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+            }
+            div {
+                padding: 15px;
+            }
+        }
+
+        button {
+            i {
+                padding-right: 10px;
+            }
+            align-self: center;
+            justify-self: end;
+            padding: 10px 20px 10px 20px;
+            font-size: 25px;
+            border-radius: 30px;
+            background: #00000025;
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                background-image: @elem_background_gradient;
+                box-shadow: 0px 0px 2vh @shadow;
+            }
+        }
+
+        &:hover {
+            box-shadow: 0px 0px 2vh @shadow;
+            text-shadow: 0px 0px 20px @shadow;
+            background-color: rgba(157, 148, 168, 0.397);
+            img {
+                box-shadow: 0px 0px 30px @shadow;
+            }
+        }
+
+        #delete_friend {
+            &:hover{
+                background: #69121288;
+            } 
+        }
+
+    }
+}
