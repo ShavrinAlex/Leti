@@ -1,0 +1,8 @@
+FROM build:1.0.0
+
+WORKDIR /src
+
+RUN chown -R 1001:0 /src
+
+USER 1001
+CMD ./my_utility-1 
