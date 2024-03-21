@@ -1,0 +1,1 @@
+cmd_/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.mod := printf '%s\n'   timer-1.o | awk '!x[$$0]++ { print("/home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/"$$0) }' > /home/alex/Leti/4_semester/OS/lab_7/develop/kernel/timer/timer-1.mod
