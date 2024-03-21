@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  cpp-app:
+    container_name: cpp-app
+    image:  cpp-app:1.0.0
+    build:
+      context: .
+      dockerfile: DockerfileRun
+    depends_on:
+      - build
+
+  build: 
+    container_name: build
+    image:  build:1.0.0
+    build:
+      context: .
+      dockerfile: DockerfileBuild
+    depends_on:
+      - system
+    
+  system: 
+    container_name: system
+    image:  system:1.0.0
+    build:
+      context: .
+      dockerfile: DockerfileSystem
