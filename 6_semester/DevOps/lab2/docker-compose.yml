@@ -27,6 +27,8 @@ services:
     networks:
       - realworld-app-network
 
+volumes:
+  db-data:
 
 networks:
   realworld-app-network:
