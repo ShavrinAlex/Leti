@@ -11,8 +11,7 @@ COPY ./src .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-RUN chown -R 1001:0 start.sh && \
-    chmod u+x start.sh
+RUN chown -R 1001:0 start.sh
 
 USER 1001
 
