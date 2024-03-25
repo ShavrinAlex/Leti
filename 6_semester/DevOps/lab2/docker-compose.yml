@@ -23,7 +23,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./db-data:/var/lib/postgresql/data 
+      - db-data:/var/lib/postgresql/data 
     networks:
       - realworld-app-network
 
