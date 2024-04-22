@@ -1,14 +1,8 @@
-FROM alpine:3.19.1 as system
-
-RUN apk add --update --no-cache openjdk11 tzdata curl unzip bash
-
-
-
-FROM system as build
+FROM alpine:3.19 as build
 
 WORKDIR /app
 
-RUN apk add --update --no-cache maven
+RUN apk add --update --no-cache openjdk11 maven 
 
 COPY pom.xml ./
 COPY mvnw ./
@@ -19,14 +13,11 @@ COPY src ./src
 
 RUN mvn package
 
-
-
-FROM build as run
+FROM alpine:3.19 as run
 
 WORKDIR /app
 
-RUN chown -R 1001:0 /app
-
+RUN apk add --update --no-cache openjdk11 
 COPY --from=build /app/target/*.jar ./my_app.jar
 
 USER 1001
