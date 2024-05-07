@@ -1,0 +1,49 @@
+include:
+  - project: 'leti2080117/DevOps/lab7_ci'
+    ref: test
+    file: 'docker-build.yml'
+  - project: 'leti2080117/DevOps/lab7_ci'
+    ref: test
+    file: 'docker-deploy.yml'
+
+stages:
+  - build
+  - deploy
+
+build backend:
+  variables:
+    DOCKERDIR: "React-Spring-App-DevOps/spring-backend"
+    IMAGE_ID: "spring-backend"
+  extends:
+    - .docker_build_dind
+  only:
+    changes:
+      - "React-Spring-App-DevOps/spring-backend/**/*"
+  
+build frontend:
+  variables:
+    DOCKERDIR: "React-Spring-App-DevOps/react-frontend"
+    IMAGE_ID: "react-frontend"
+  extends:
+    - .docker_build_dind
+  only:
+    changes:
+      - "React-Spring-App-DevOps/react-frontend/**/*"
+
+build proxy:
+  variables:
+    DOCKERDIR: "React-Spring-App-DevOps/nginx-proxy"
+    IMAGE_ID: "nginx-proxy"
+  extends:
+    - .docker_build_dind
+  only:
+    changes:
+      - "React-Spring-App-DevOps/nginx-proxy/**/*"
+
+deploy to prod:
+  variables:
+    COMPOSEDIR: "React-Spring-App-DevOps"
+    COMPOSEFILE: "docker-compose.yaml"
+  extends:
+    - .docker_deploy_dev
+    

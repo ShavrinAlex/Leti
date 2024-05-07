@@ -1,0 +1,37 @@
+.docker_login: &docker-login
+  - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin $REGISTRY
+
+.docker_down: &docker-down
+  - docker-compose 
+      -f ${COMPOSEDIR}/${COMPOSEFILE}
+      down 
+      --remove-orphans
+
+.docker_pull: &docker-pull
+   - docker-compose 
+      -f ${COMPOSEDIR}/${COMPOSEFILE}
+      pull
+
+.docker_up: &docker-up
+  - docker-compose 
+      -f ${COMPOSEDIR}/${COMPOSEFILE}
+      up
+      -d 
+      --no-build
+
+.docker_deploy_dev:
+  stage: deploy
+  environment: production
+  variables:
+    COMPOSEDIR: "."
+    COMPOSEFILE: "docker-compose.yaml"
+    REGISTRY: ${CI_REGISTRY}
+    REGISTRY_USER: ${CI_REGISTRY_USER}
+    REGISTRY_PASSWORD: ${CI_REGISTRY_PASSWORD}
+  script:
+    - *docker-login
+    - *docker-down
+    - *docker-pull
+    - *docker-up
+  tags:
+    - dev
