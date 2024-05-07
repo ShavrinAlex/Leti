@@ -4,7 +4,6 @@ WORKDIR /build
 
 RUN apk add --update nodejs npm --no-cache
     
-
 COPY ./package.json ./package-lock.json ./
 
 RUN npm install
@@ -26,3 +25,4 @@ COPY --from=build /build/build /var/www/html
 USER 1001
 
 CMD ["nginx", "-g", "daemon off;"]
+
