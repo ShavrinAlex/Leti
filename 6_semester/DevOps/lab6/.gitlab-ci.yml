@@ -1,185 +1,37 @@
+include:
+  - project: 'leti2080117/DevOps/lab6_ci'
+    ref: test
+    file: 'docker-build.yml'
+
 stages:
-  # - lint
-  - test
   - build
-  - deploy
 
-# Lint:
-#   stage: lint
-#   script:
-#     - echo lint
-#   tags:
-#     - docker
+build backend:
+  variables:
+    DOCKERDIR: "React-Spring-App-DevOps/spring-backend"
+    IMAGE_ID: "spring-backend"
+  extends:
+    - .docker_build_dind
+  only:
+    changes:
+      - "React-Spring-App-DevOps/spring-backend/**/*"
+  
+build frontend:
+  variables:
+    DOCKERDIR: "React-Spring-App-DevOps/react-frontend"
+    IMAGE_ID: "react-frontend"
+  extends:
+    - .docker_build_dind
+  only:
+    changes:
+      - "React-Spring-App-DevOps/react-frontend/**/*"
 
-Test:
-  stage: test
-  script:
-    - echo test
-  tags:
-    - docker 
-
-
-Build nginx-proxy:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-    - docker build -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ./React-Spring-App-DevOps/nginx-proxy
-
-    # rule for master branch
-    - if [[ ${CI_COMMIT_BRANCH} == ${CI_DEFAULT_BRANCH} ]]; then
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:latest; 
-      docker push ${CI_REGISTRY_IMAGE}:latest;
-    fi
-    
-    # rule for tags
-    - if [[ -z ${CI_COMMIT_TAG} ]]; then
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG};
-    else
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}; 
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
-    fi
-  rules:
-    - exists:
-        - ./React-Spring-App-DevOps/nginx-proxy/Dockerfile
-      changes:
-        - ./React-Spring-App-DevOps/nginx-proxy/*
-      when: always
-  tags:
-    - docker
-
-
-Build react-front:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-    - docker build -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ./React-Spring-App-DevOps/react-frontend
-    
-    # rule for master branch
-    - if [[ ${CI_COMMIT_BRANCH} == ${CI_DEFAULT_BRANCH} ]]; then
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:latest; 
-      docker push ${CI_REGISTRY_IMAGE}:latest;
-    fi
-    
-    # rule for tags
-    - if [[ -z ${CI_COMMIT_TAG} ]]; then
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG};
-    else
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}; 
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
-    fi
-  rules:
-    - exists:
-        - ./React-Spring-App-DevOps/react-frontend/Dockerfile
-      changes:
-        - ./React-Spring-App-DevOps/react-frontend/*
-      when: always
-  tags:
-    - docker
-
-
-Build spring-back:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-    - docker build -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ./React-Spring-App-DevOps/spring-backend
-    
-    # rule for master branch
-    - if [[ ${CI_COMMIT_BRANCH} == ${CI_DEFAULT_BRANCH} ]]; then
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:latest; 
-      docker push ${CI_REGISTRY_IMAGE}:latest;
-    fi
-    
-    # rule for tags
-    - if [[ -z ${CI_COMMIT_TAG} ]]; then
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG};
-    else
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}; 
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
-    fi
-  rules:
-    - exists:
-        - ./React-Spring-App-DevOps/spring-backend/Dockerfile
-      changes:
-        - ./React-Spring-App-DevOps/spring-backend/*
-      when: always
-  tags:
-    - docker
-
-
-Build mysql:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-    - docker pull mysql:8.3 #-t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}
-    
-    # rule for master branch
-    - if [[ ${CI_COMMIT_BRANCH} == ${CI_DEFAULT_BRANCH} ]]; then
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:latest; 
-      docker push ${CI_REGISTRY_IMAGE}:latest;
-    fi
-    
-    # rule for tags
-    - if [[ -z ${CI_COMMIT_TAG} ]]; then
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG};
-    else
-      docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}; 
-      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
-    fi
-  rules:
-    - exists:
-        - ./React-Spring-App-DevOps/spring-backend/.env
-      changes:
-        - ./React-Spring-App-DevOps/spring-backend/.env
-      when: always
-  tags:
-    - docker
-
-
-Build:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  # variables: можжно перенести в настройки ранера
-  #   DOCKER_HOST: tcp://docker:2375
-  script:
-    - echo build
-    # docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-    # docker build -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} .
-    #
-    # rule for master branch
-    # if [[ ${CI_COMMIT_BRANCH} == ${CI_DEFAULT_BRANCH} ]]; then
-    #   docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:latest; 
-    #   docker push ${CI_REGISTRY_IMAGE}:latest;
-    # fi
-    #
-    # rule for tags
-    # if [[ -z ${CI_COMMIT_TAG} ]]; then
-    #   docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG};
-    # else
-    #   docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}; 
-    #   docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
-    # fi
-  needs:
-    - ["Test"]
-  tags:
-    - docker
-
-Deploy:
-  stage: deploy
-  script:
-    - echo deploy
-  tags:
-    - docker 
+build proxy:
+  variables:
+    DOCKERDIR: "React-Spring-App-DevOps/nginx-proxy"
+    IMAGE_ID: "nginx-proxy"
+  extends:
+    - .docker_build_dind
+  only:
+    changes:
+      - "React-Spring-App-DevOps/nginx-proxy/**/*"
