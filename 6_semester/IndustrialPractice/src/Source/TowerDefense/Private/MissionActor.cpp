@@ -18,9 +18,10 @@ void AMissionActor::BeginPlay()
 	Super::BeginPlay();
 	int index = GetWorld()->GetGameInstance<UMyGameInstance>()->currentLevelIndex;
 	tracker = GetWorld()->GetGameInstance<UMyGameInstance>()->levelsData[index].waves;
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMissionActor::TimerFunction, 3.0f, true, 0.5f);
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMissionActor::TimerFunction, 15.0f, true, 0.5f);
 }
 void AMissionActor::TimerFunction() {
+	OnWaveExpired.Broadcast();
 	tracker--;
 	if (tracker == 0) {
 		UE_LOG(LogTemp, Warning, TEXT("finish"));

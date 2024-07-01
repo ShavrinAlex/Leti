@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MissionActor.generated.h"
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWaveExpired);
 UCLASS()
 class TOWERDEFENSE_API AMissionActor : public AActor
 {
@@ -25,4 +25,6 @@ public:
 	void TimerFunction();
 
 	FTimerHandle TimerHandle;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Timer")
+	FOnWaveExpired OnWaveExpired;
 };
