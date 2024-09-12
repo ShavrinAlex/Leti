@@ -1,9 +1,0 @@
-version: '3.8'
-
-services:
-  cpp-app:
-    container_name: cpp-app
-    image:  cpp-app:1.0.0
-    build:
-      context: .
-      dockerfile: Dockerfile
