@@ -1,6 +1,0 @@
-FROM system:1.0.0
-
-WORKDIR /src
-COPY ./src .
-
-RUN gcc -o my_utility-1 my_utility-1.c
