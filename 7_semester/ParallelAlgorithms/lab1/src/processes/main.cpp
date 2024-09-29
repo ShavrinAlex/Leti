@@ -7,14 +7,6 @@
 #define RESULT_FILE "result.txt"
 
 
-void setDefaultMatricesParams(int& rowsA, int& columnsA, int& rowsB, int& columnsB, int& maxValue) {
-    rowsA = 3;
-    columnsA = rowsB = 3;
-    columnsB = 3;
-    maxValue = 10;
-}
-
-
 void processMatrixWithPipe(int unpipe, std::vector<std::vector<int>>& matrix, int process) {
     ssize_t bytes;
     for (auto& row: matrix) {
@@ -54,7 +46,7 @@ int main(){
         std::vector<std::vector<int>> matrixB = generateMatrix(rowsB, columnsB, maxValue);
         processMatrixWithPipe(unpipe_1[1], matrixA, 1);
         processMatrixWithPipe(unpipe_1[1], matrixB, 1);
-        std::cout << "matrices is generated" << std::endl;
+        // std::cout << "matrices is generated" << std::endl;
 
         close(unpipe_1[1]);
         exit(EXIT_SUCCESS);
@@ -71,7 +63,7 @@ int main(){
         processMatrixWithPipe(unpipe_1[0], matrixB, 0);
         std::vector<std::vector<int>> result = multiplyMatrices(matrixA, matrixB);
         processMatrixWithPipe(unpipe_2[1], result, 1);
-        std::cout << "matrices is multiplied" << std::endl;
+        // std::cout << "matrices is multiplied" << std::endl;
         
         close(unpipe_1[0]);
         close(unpipe_2[1]);
@@ -85,7 +77,7 @@ int main(){
         std::vector<std::vector<int>> result(rowsA, std::vector<int>(columnsB));
         processMatrixWithPipe(unpipe_2[0], result, 0);
         writeMatrixInFile(RESULT_FILE, result);
-        std::cout << "result is written" << std::endl;
+        // std::cout << "result is written" << std::endl;
 
         close(unpipe_2[0]);
         exit(EXIT_SUCCESS);
@@ -95,7 +87,9 @@ int main(){
     close(unpipe_1[1]);
     close(unpipe_2[0]);
     close(unpipe_2[1]);
-    waitpid(-1, NULL, 0);
+    waitpid(pids[0], NULL, 0);
+    waitpid(pids[1], NULL, 0);
+    waitpid(pids[2], NULL, 0);
 
     auto timer_stop = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> elapsed = timer_stop - timer_start;

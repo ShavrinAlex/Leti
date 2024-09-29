@@ -1,6 +1,14 @@
 #include "matrix_operations.hpp"
 
 
+void setDefaultMatricesParams(int& rowsA, int& columnsA, int& rowsB, int& columnsB, int& maxValue) {
+    rowsA = 1000;
+    columnsA = rowsB = 1000;
+    columnsB = 1000;
+    maxValue = 10;
+}
+
+
 std::vector<std::vector<int>> generateMatrix(const int rows, const int columns, const int maxValue) {
     std::vector<std::vector<int>> matrix(rows, std::vector<int>(columns));
 

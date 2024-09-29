@@ -1,4 +1,4 @@
-#include "../proc/matrix_operations.hpp"
+#include "../processes/matrix_operations.hpp"
 #include <thread>
 #include <chrono>
 
@@ -6,30 +6,22 @@
 #define RESULT_FILE "result.txt"
 
 
-void setDefaultMatricesParams(int& rowsA, int& columnsA, int& rowsB, int& columnsB, int& maxValue) {
-    rowsA = 3;
-    columnsA = rowsB = 3;
-    columnsB = 3;
-    maxValue = 10;
-}
-
-
-void thGenerateMatrix(std::vector<std::vector<int>>& matrixA, std::vector<std::vector<int>>& matrixB, int maxValue) {
+void thGenerateMatrices(std::vector<std::vector<int>>& matrixA, std::vector<std::vector<int>>& matrixB, int maxValue) {
     matrixA = generateMatrix(matrixA.size(), matrixA[0].size(), maxValue);
     matrixB = generateMatrix(matrixB.size(), matrixB[0].size(), maxValue);
-    std::cout << "matrices is generated" << std::endl;
+    // std::cout << "matrices is generated" << std::endl;
 }
 
 
 void thMultiplyMatrices(const std::vector<std::vector<int>>& matrixA, const std::vector<std::vector<int>>& matrixB, std::vector<std::vector<int>>& result) {
     result = multiplyMatrices(matrixA, matrixB);
-    std::cout << "matrices is multiplied" << std::endl;
+    // std::cout << "matrices is multiplied" << std::endl;
 }
 
 
 void thWriteMatrixInFile(const std::vector<std::vector<int>>& result) {
     writeMatrixInFile(RESULT_FILE, result);
-    std::cout << "matrices is written" << std::endl;
+    // std::cout << "matrices is written" << std::endl;
 }
 
 
@@ -40,7 +32,7 @@ int main(){
     
     auto timer_start = std::chrono::high_resolution_clock::now();
 
-    std::thread th1(thGenerateMatrix, std::ref(matrixA), std::ref(matrixB), maxValue);
+    std::thread th1(thGenerateMatrices, std::ref(matrixA), std::ref(matrixB), maxValue);
     th1.join();
     
     std::thread th2(thMultiplyMatrices, std::ref(matrixA), std::ref(matrixB), std::ref(result));

@@ -1,0 +1,4 @@
+.vscode
+lab1/src/processes/CMakeDir
+lab1/src/thread_1/CMakeDir
+lab1/src/thread_2/CMakeDir
