@@ -44,6 +44,8 @@ int main(){
 
         std::vector<std::vector<int>> matrixA = generateMatrix(rowsA, columnsA, maxValue);
         std::vector<std::vector<int>> matrixB = generateMatrix(rowsB, columnsB, maxValue);
+        printMatrix(matrixA);
+        printMatrix(matrixB);
         processMatrixWithPipe(unpipe_1[1], matrixA, 1);
         processMatrixWithPipe(unpipe_1[1], matrixB, 1);
         // std::cout << "matrices is generated" << std::endl;

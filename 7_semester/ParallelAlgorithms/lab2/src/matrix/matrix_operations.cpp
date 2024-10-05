@@ -1,12 +1,8 @@
 #include "matrix_operations.hpp"
-
-
-void setDefaultMatricesParams(int& rowsA, int& columnsA, int& rowsB, int& columnsB, int& maxValue) {
-    rowsA = 3;
-    columnsA = rowsB = 3;
-    columnsB = 3;
-    maxValue = 10;
-}
+#include <thread>
+#include <fstream>
+#include <random>
+#include <iostream>
 
 
 std::vector<std::vector<int>> generateMatrix(const int rows, const int columns, const int maxValue) {
@@ -41,6 +37,39 @@ std::vector<std::vector<int>> multiplyMatrices(const std::vector<std::vector<int
     }
 
     return result;
+}
+
+
+void thMultiplyMatrixBlock(const std::vector<std::vector<int>>& matrixA, const std::vector<std::vector<int>>& matrixB, std::vector<std::vector<int>>& result, std::vector<std::pair<int, int>> blockPositions) {
+    for (int i = 0; i < blockPositions.size(); i++){
+        for (int j = 0; j < matrixB.size(); j++) {
+            result[blockPositions[i].first][blockPositions[i].second] += matrixA[blockPositions[i].first][j] * matrixB[j][blockPositions[i].second];
+        }
+    }
+}
+
+
+void multiplyMatricesByBlocks(const std::vector<std::vector<int>>& matrixA, const std::vector<std::vector<int>>& matrixB, std::vector<std::vector<int>>& result, const int threadsAmount) {
+    int rowsA = matrixA.size();
+    int columnsB = matrixB[0].size();
+
+    int blockSize = std::ceil((double)rowsA * columnsB / threadsAmount);
+    std::vector<std::pair<int,int>> blockPositions;
+    std::vector<std::thread> threads;
+
+    for (int i = 0; i < rowsA; i++) {
+        for (int j = 0; j < columnsB; j++) {
+            blockPositions.push_back(std::pair(i,j));
+            if (blockPositions.size() == blockSize || (i + 1 == rowsA && j + 1 == columnsB)) {
+                threads.push_back(std::thread(thMultiplyMatrixBlock, std::ref(matrixA), std::ref(matrixB), std::ref(result), blockPositions));
+                blockPositions.clear();
+            }
+        }
+    }
+
+    for (auto& thread : threads) {
+        thread.join();
+    }
 }
 
 

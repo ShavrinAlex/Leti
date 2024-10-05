@@ -9,6 +9,8 @@
 void thGenerateMatrices(std::vector<std::vector<int>>& matrixA, std::vector<std::vector<int>>& matrixB, int maxValue) {
     matrixA = generateMatrix(matrixA.size(), matrixA[0].size(), maxValue);
     matrixB = generateMatrix(matrixB.size(), matrixB[0].size(), maxValue);
+    printMatrix(matrixA);
+    printMatrix(matrixB);
     // std::cout << "matrices is generated" << std::endl;
 }
 

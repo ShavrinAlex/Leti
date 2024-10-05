@@ -4,7 +4,7 @@
 
 
 #define RESULT_FILE "result.txt"
-#define THREADS_AMOUNT 2
+#define THREADS_AMOUNT 3
 
 
 void thMultiplyMatrixBlock(const std::vector<std::vector<int>>& matrixA, const std::vector<std::vector<int>>& matrixB, std::vector<std::vector<int>>& result, std::vector<std::pair<int, int>> blockPositions) {
