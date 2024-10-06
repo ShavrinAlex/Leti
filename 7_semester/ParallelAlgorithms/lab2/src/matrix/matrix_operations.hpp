@@ -3,12 +3,12 @@
 #include <string>
 
 
-#define ROWS_A 10
-#define COLUMNS_A 10
-#define ROWS_B 10 
-#define COLUMNS_B 10
+#define ROWS_A 240
+#define COLUMNS_A 240
+#define ROWS_B 240 
+#define COLUMNS_B 240
 #define RESULT_FILE "result.txt"
-#define THREADS_AMOUNT 2
+#define THREADS_AMOUNT 6
 #define MAX_VALUE 10
 
 
