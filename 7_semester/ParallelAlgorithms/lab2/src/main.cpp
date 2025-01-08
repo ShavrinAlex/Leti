@@ -38,13 +38,13 @@ int main(int argc, char* argv[]) {
     int producersCount, consumersCount, producerPower, consumerPower;
      
     if (argc == 5) {
-        producersCount = std::stoi(argv[1]);
-        consumersCount = std::stoi(argv[2]);   
-        producerPower = std::stoi(argv[3]);
-        consumerPower = std::stoi(argv[4]); 
+        producerPower = std::stoi(argv[1]);
+        consumerPower = std::stoi(argv[2]); 
+        producersCount = std::stoi(argv[3]);
+        consumersCount = std::stoi(argv[4]);   
     } else {
         producersCount = consumersCount = 7;
-        producerPower = consumerPower = 10;
+        producerPower = consumerPower = 100;
     }
 
     timer.start();

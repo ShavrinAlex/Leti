@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)	
-project(proc)
+project(processes)
 
 set(SOURCE_EXE main.cpp)
 set(SOURCE_LIB matrix_operations.cpp)

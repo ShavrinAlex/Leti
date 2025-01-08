@@ -1,6 +1,7 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+#include <limits>
 
 
 template <typename T>
@@ -29,6 +30,7 @@ private:
 
 public:
     explicit ThinQueue(size_t maxSize);
+    explicit ThinQueue();
 
     void push(T value);
     void pop(T& value);
@@ -42,6 +44,10 @@ ThinQueue<T>::ThinQueue(size_t maxSize) {
     this->head = std::make_unique<Node>();
     this->tail = this->head.get();
 };
+
+
+template <typename T>
+ThinQueue<T>::ThinQueue(): ThinQueue(std::numeric_limits<size_t>::max()){};
 
 
 template <typename T>
