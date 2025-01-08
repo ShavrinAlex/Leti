@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0" version="24.8.4">
+  <diagram name="Страница — 1" id="Ij1kkf9hviklarAqpzFJ">
+    <mxGraphModel dx="1210" dy="603" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="SocBy5wYR0p-WWOO3sAn-1" target="SocBy5wYR0p-WWOO3sAn-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-1" value="&lt;b&gt;Start&lt;/b&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="380" y="90" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-2" value="&lt;b&gt;End&lt;/b&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="380" y="540" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="SocBy5wYR0p-WWOO3sAn-3" target="SocBy5wYR0p-WWOO3sAn-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-3" value="&lt;div&gt;&lt;b&gt;text&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;key&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="380" y="180" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="SocBy5wYR0p-WWOO3sAn-4" target="SocBy5wYR0p-WWOO3sAn-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-4" value="&lt;div&gt;&lt;b&gt;ipad = 36...36&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;opad = 5c...5c&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="342" y="270" width="176" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="SocBy5wYR0p-WWOO3sAn-5" target="SocBy5wYR0p-WWOO3sAn-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-5" value="&lt;div&gt;&lt;b&gt;addition1 = ipad XOR key&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;entermediate = hash(concat(addition1, text))&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="265" y="350" width="330" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="SocBy5wYR0p-WWOO3sAn-6" target="SocBy5wYR0p-WWOO3sAn-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SocBy5wYR0p-WWOO3sAn-6" value="&lt;div&gt;&lt;b&gt;addition2 = opad XOR key&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;HMAC =hash(concat(addition2, entermediate))&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="262.5" y="450" width="335" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

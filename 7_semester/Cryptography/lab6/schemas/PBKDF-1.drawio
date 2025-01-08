@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0" version="24.8.4">
+  <diagram name="Страница — 1" id="SFcD2oAMma-Wa7tYLP1J">
+    <mxGraphModel dx="1210" dy="603" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8RnO5A0GvtIqhkMttuv9-2" target="8RnO5A0GvtIqhkMttuv9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-2" value="&lt;b&gt;Start&lt;/b&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="390" y="120" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-3" value="&lt;b&gt;End&lt;/b&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="390" y="600" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8RnO5A0GvtIqhkMttuv9-4" target="8RnO5A0GvtIqhkMttuv9-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-4" value="&lt;div&gt;&lt;b&gt;password&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;salt&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;N&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="390" y="210" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="8RnO5A0GvtIqhkMttuv9-5" target="8RnO5A0GvtIqhkMttuv9-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-5" value="&lt;div&gt;&lt;b&gt;result = concat(salt, password)&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="337.5" y="300" width="205" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="8RnO5A0GvtIqhkMttuv9-8" target="8RnO5A0GvtIqhkMttuv9-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="8RnO5A0GvtIqhkMttuv9-8" target="8RnO5A0GvtIqhkMttuv9-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="410" />
+              <mxPoint x="590" y="560" />
+              <mxPoint x="440" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-8" value="&lt;b&gt;for (int i = 0; i &amp;lt; N; i++)&lt;/b&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.loop_limit;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="310" y="380" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-9" value="&lt;b&gt;result&lt;/b&gt;&lt;b&gt; = hash(&lt;/b&gt;&lt;b&gt;result&lt;/b&gt;&lt;b&gt;) &lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="335" y="480" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="8RnO5A0GvtIqhkMttuv9-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8RnO5A0GvtIqhkMttuv9-9" target="8RnO5A0GvtIqhkMttuv9-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

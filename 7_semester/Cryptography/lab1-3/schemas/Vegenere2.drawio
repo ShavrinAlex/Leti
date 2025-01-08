@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" version="24.7.16">
+  <diagram name="Страница — 1" id="iZ69ik7AL_P5Ou520tT9">
+    <mxGraphModel dx="1210" dy="634" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="94nOHTLPlmDeJjtr1RqY-1" target="94nOHTLPlmDeJjtr1RqY-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-1" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Start&lt;/font&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="120" y="140" width="96" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-2" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;End&lt;/font&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="440" y="300" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="94nOHTLPlmDeJjtr1RqY-3" target="94nOHTLPlmDeJjtr1RqY-27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-3" value="&lt;div style=&quot;font-size: 21px;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;data&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 21px;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;alphabet&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 21px;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;key&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" parent="1" vertex="1">
+          <mxGeometry x="250" y="116.25" width="210" height="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="94nOHTLPlmDeJjtr1RqY-27" target="94nOHTLPlmDeJjtr1RqY-28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="250" />
+              <mxPoint x="270" y="250" />
+            </Array>
+            <mxPoint x="249" y="275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-27" value="&lt;div style=&quot;font-size: 21px;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;la = len(alphabet)&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 21px;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;lk = len(key)&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 21px;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;result = &quot;&quot;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" parent="1" vertex="1">
+          <mxGeometry x="490" y="100" width="260" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="94nOHTLPlmDeJjtr1RqY-28" target="94nOHTLPlmDeJjtr1RqY-31" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-28" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;i = 0; i &amp;lt; len(data); i++&lt;/font&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="290" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="94nOHTLPlmDeJjtr1RqY-31" target="94nOHTLPlmDeJjtr1RqY-28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="302" y="500" />
+              <mxPoint x="90" y="500" />
+              <mxPoint x="90" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-31" value="&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;new_index = alphabet.index(data[i]) + alphabet.index(key[i mod lk])&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;result += alphabet[&lt;/font&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;new_index&lt;/font&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;]&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="100" y="390" width="403" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="94nOHTLPlmDeJjtr1RqY-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="94nOHTLPlmDeJjtr1RqY-28" target="94nOHTLPlmDeJjtr1RqY-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
